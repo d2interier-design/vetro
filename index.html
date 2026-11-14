@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8">
+<title>Vetro · дашборд</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vetro">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: dark-green icon rail on the left (bottom bar on phones) + main area of soft glass cards; overview = wide left column + right "day" column */
+:root{
+  color-scheme:light;
+  --bg1:#fff6d6; --bg2:#f4f4f2; --bg3:#ececea;
+  --card:rgba(255,255,255,.86); --card2:#ffffff; --edge:rgba(0,0,0,.07); --line:#ebebe8;
+  --ink:#111111; --muted:#6f6f6b; --dim:#a8a8a3;
+  --deep:#111111; --deep2:#2b2b2b; --mint:#ffc61a; --mint2:#fff3c4; --peach:#ffd75e; --peach2:#fff1c2; --cap:#efefec;
+  --zd:#111111; --rt:#ffc61a; --on:#3e7bfa; --va:#7c3aed; --vb:#f97316;
+  --good:#1a8f62; --good2:#dcf3e8; --bad:#d9534a; --bad2:#fbe3e0; --warn:#c57a2a; --warn2:#fcecd9;
+  --f:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif; --f-acc:"Cormorant",Georgia,serif;
+  --r:22px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg2)}
+body{margin:0;min-height:100%;color:var(--ink);font-family:var(--f);font-size:14px;line-height:1.45;font-variant-numeric:tabular-nums;
+  background:radial-gradient(1100px 700px at 0% 0%,var(--bg1),transparent 60%),radial-gradient(900px 700px at 100% 100%,var(--bg3),transparent 60%),var(--bg2);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--bg1)}
+.app{display:grid;grid-template-columns:76px minmax(0,1fr);gap:20px;max-width:1400px;margin:0 auto;padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+/* rail */
+.rail{position:sticky;top:calc(20px + env(safe-area-inset-top,0px));height:calc(100vh - 40px);max-height:760px;background:var(--deep);border-radius:38px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 0;box-shadow:0 20px 40px -20px rgba(0,0,0,.55)}
+.rail .logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;letter-spacing:.02em;margin-bottom:14px}
+.rail button{position:relative;width:46px;height:46px;border:0;border-radius:50%;background:none;color:rgba(255,255,255,.62);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.rail button svg{width:21px;height:21px}
+.rail button:hover{color:#fff;background:rgba(255,255,255,.08)}
+.rail button[aria-selected="true"]{background:var(--mint);color:var(--deep)}
+.rail button[aria-selected="true"]::after{content:"";position:absolute;right:-16px;top:50%;width:6px;height:18px;margin-top:-9px;border-radius:0 6px 6px 0;background:var(--deep)}
+.rail button .tip{position:absolute;left:58px;top:50%;transform:translateY(-50%);background:var(--deep);color:#fff;font-size:12px;font-weight:600;padding:5px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+.rail button:hover .tip,.rail button:focus-visible .tip{opacity:1}
+.rail .sp{flex:1}
+button:focus-visible,select:focus-visible{outline:2px solid var(--deep2);outline-offset:2px}
+@media (max-width:760px){
+  .app{grid-template-columns:minmax(0,1fr);padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .rail{position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));top:auto;height:64px;max-height:none;flex-direction:row;justify-content:space-around;padding:0 10px;z-index:15;border-radius:32px}
+  .rail .logo,.rail .sp{display:none}
+  .rail button[aria-selected="true"]::after{display:none}
+  .rail button .tip{display:none}
+}
+main{display:grid;gap:20px;min-width:0}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
+@media (max-width:1180px){.cols{grid-template-columns:minmax(0,1fr)}}
+.col{display:grid;gap:20px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media (max-width:980px){.c3,.c4{grid-column:span 6}.c5,.c6,.c7,.c8{grid-column:span 12}}
+@media (max-width:560px){.c3,.c4{grid-column:span 12}}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.9);border-radius:var(--r);padding:20px;min-width:0;display:grid;gap:14px;align-content:start;box-shadow:0 1px 0 var(--edge),0 18px 40px -28px rgba(0,0,0,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.card header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h2{font-size:17px;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.hint{color:var(--muted);font-size:12px}
+.icon{width:30px;height:30px;border-radius:50%;background:var(--cap);display:grid;place-items:center;color:var(--deep2);flex:none}
+.icon svg{width:15px;height:15px}
+/* hero */
+.hero{background:var(--deep);color:#fff;border-radius:var(--r);padding:24px 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 24px;align-items:center;position:relative;overflow:hidden;box-shadow:0 24px 50px -30px rgba(0,0,0,.7)}
+.hero::after{content:"";position:absolute;right:-80px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,198,26,.28),transparent 65%)}
+.hero h1{font-size:clamp(22px,2.6vw,30px);font-weight:700;margin:0;letter-spacing:-.02em;line-height:1.15;position:relative;z-index:1}
+.hero h1 em{font-style:normal;background:var(--mint);color:#111;padding:0 10px;border-radius:10px;display:inline-block;line-height:1.25}
+.hero p{margin:6px 0 0;color:rgba(255,255,255,.7);font-size:13px;position:relative;z-index:1}
+.hero .ctl{display:flex;flex-direction:column;align-items:flex-end;gap:10px;position:relative;z-index:1}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.hero .ctl{align-items:flex-start}}
+.seg{display:inline-flex;background:rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.seg button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;color:rgba(255,255,255,.75);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--mint);color:#111}
+.nav{display:flex;align-items:center;gap:8px}
+.nav .lbl{font-weight:700;font-size:14px;text-align:right}
+.nav .lbl span{display:block;font-weight:500;font-size:11.5px;color:rgba(255,255,255,.65)}
+.arrow{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-size:16px}
+.arrow:disabled{opacity:.3;cursor:default}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;background:var(--peach);color:#3b1a08;border:0}
+.status{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:12px;color:var(--muted)}
+.status b{color:var(--ink)}
+.status .demo{background:var(--mint);color:#111;border-radius:999px;padding:2px 10px;font-weight:700}
+.livedot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);margin-right:6px;box-shadow:0 0 0 3px var(--good2)}
+/* kpi */
+.kpi{gap:8px}
+.kpi .top{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;font-weight:600}
+.kpi .v{font-size:clamp(26px,2.6vw,34px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.kpi .s{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.delta{display:inline-flex;align-items:center;gap:3px;font-weight:800;font-size:12px;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.up{color:var(--good);background:var(--good2)}.down{color:var(--bad);background:var(--bad2)}.flat{color:var(--muted);background:var(--cap)}
+/* split bars */
+.big{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.split{display:grid;gap:8px}
+.split .bars{display:flex;gap:6px;align-items:flex-end}
+.split .bars div{min-width:28px}
+.split .bars small{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;white-space:nowrap}
+.split .bars i{display:block;height:10px;border-radius:999px;background:var(--c)}
+.split .leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+/* capsule chart */
+.caps{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;height:210px;align-items:end;padding-top:26px}
+.cap{display:grid;grid-template-rows:1fr auto;gap:8px;height:100%;justify-items:center}
+.cap .tr{position:relative;width:min(44px,100%);height:100%;border-radius:999px;background:var(--cap);display:flex;align-items:flex-end;overflow:visible}
+.cap .tr i{display:block;width:100%;border-radius:999px;background:linear-gradient(180deg,#ffe28a,var(--rt));transition:height .6s cubic-bezier(.2,.8,.2,1)}
+.cap.max .tr i{background:linear-gradient(180deg,var(--deep2),var(--deep))}
+.cap .tag{position:absolute;left:50%;transform:translateX(-50%);background:var(--mint);color:#111;font-size:10.5px;font-weight:700;padding:3px 7px;border-radius:999px;white-space:nowrap}
+.cap span{font-size:12px;color:var(--muted);font-weight:600}
+.cap.fut .tr{background:repeating-linear-gradient(135deg,var(--cap) 0 6px,#f6f7f6 6px 12px)}
+/* chart */
+.chart{position:relative;height:270px;min-width:0}.chart.sm{height:220px}
+/* table */
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--muted);font-weight:700;font-size:12px;padding:8px 10px;white-space:nowrap}
+td{padding:11px 10px;border-top:1px solid var(--line);vertical-align:middle}
+td.n,th.n{text-align:right;white-space:nowrap}
+.mcell{display:inline-block;font-weight:700;padding:3px 9px;border-radius:9px}
+/* right column */
+.cal header .m{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;text-align:center}
+.day{border-radius:16px;padding:8px 2px;display:grid;gap:3px;justify-items:center}
+.day small{font-size:11px;color:var(--muted);font-weight:600}
+.day b{font-size:16px}
+.day .dots{display:flex;gap:2px;height:5px}
+.day .dots i{width:4px;height:4px;border-radius:50%;background:var(--deep2)}
+.day.on{background:var(--deep);color:#fff}.day.on small{color:rgba(255,255,255,.7)}.day.on .dots i{background:var(--mint)}
+.day.fut{opacity:.4}
+.day.out{visibility:hidden}
+.days .wdh{font-size:11px;color:var(--muted);font-weight:700;text-align:center}
+.caltot{grid-column:1/-1;margin-top:6px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);text-align:left}
+.caltot b{color:var(--ink)}
+.day em{font-style:normal;font-size:10px;color:var(--muted);white-space:nowrap}
+.day.on em{color:var(--mint)}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--avf,#fff);background:var(--c);flex:none;box-shadow:0 0 0 3px #fff,0 0 0 4px var(--c)}
+.av.sm{width:36px;height:36px;font-size:12px}
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 8px;text-align:center}
+.people .p{display:grid;justify-items:center;gap:6px;font-size:12px}
+.people .p b{font-size:12.5px;line-height:1.2}
+.people .p span{color:var(--muted);font-size:11.5px}
+.feed{display:grid;gap:10px}
+.fi{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:10px 12px}
+.fi .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--c2);color:var(--c)}
+.fi .ic svg{width:16px;height:16px}
+.fi b{display:block;font-size:13px}
+.fi span{font-size:11.5px;color:var(--muted)}
+.fi .go{font-size:11.5px;font-weight:700;border-radius:10px;padding:5px 11px;background:var(--mint);color:#111;white-space:nowrap;border:0;cursor:pointer;font-family:inherit}
+.tabsm{display:flex;gap:14px;font-size:13px;font-weight:600;color:var(--muted)}
+.tabsm b{color:var(--ink);border-bottom:2px solid var(--deep);padding-bottom:2px}
+.prods{display:grid;grid-auto-flow:column;grid-auto-columns:150px;gap:12px;overflow-x:auto;padding-bottom:4px}
+.pc{background:var(--card2);border:1px solid var(--line);border-radius:18px;padding:8px;display:grid;gap:6px}
+.pimg{position:relative;height:96px;border-radius:13px;background:linear-gradient(135deg,var(--mint2),#f3f3f0);display:grid;place-items:center;color:var(--deep2)}
+.pimg svg{width:40px;height:40px;opacity:.75}
+.pimg .badge{position:absolute;right:6px;top:6px;background:var(--deep);color:#fff;border-radius:999px;font-size:10.5px;font-weight:700;padding:2px 7px}
+.pc b{font-size:12px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc span{font-size:11.5px;color:var(--muted)}
+/* people tab */
+.lead{display:grid;gap:10px}
+.lr{display:grid;grid-template-columns:30px auto minmax(0,1.2fr) minmax(0,2fr) 150px;gap:12px;align-items:center}
+@media (max-width:700px){.lr{grid-template-columns:24px auto minmax(0,1fr) auto}.lr .lb{display:none}}
+.lr .rk{font-weight:800;color:var(--muted)}
+.lr .rk.t{color:var(--deep)}
+.lr .mv{font-size:10.5px;font-weight:700;margin-left:1px}.lr .mv.u{color:var(--good)}.lr .mv.d{color:var(--bad)}
+.lb{height:12px;border-radius:999px;background:var(--cap);overflow:hidden}
+.lb i{display:block;height:100%;border-radius:999px;background:var(--c)}
+.chip{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--c2);color:var(--c);white-space:nowrap}
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center}
+.vs select{width:100%;font:inherit;font-weight:600;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.vs .x{font-weight:900;color:#111;background:var(--mint);border-radius:999px;padding:5px 10px;font-size:12px}
+.vsrows{display:grid;gap:12px}
+.vsrow{display:grid;grid-template-columns:minmax(0,1fr) 110px minmax(0,1fr);gap:10px;align-items:center;font-size:13px}
+@media (max-width:560px){.vsrow{grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr)}}
+.vsrow .m{text-align:center;color:var(--muted);font-size:11.5px}.vsrow .m b{display:block;color:var(--ink);font-size:12.5px}
+.vb{display:flex;align-items:center;gap:8px}.vb.l{flex-direction:row-reverse}
+.vb i{display:block;height:12px;border-radius:999px;background:var(--c);transition:width .5s}
+.vb b{white-space:nowrap}.win{color:var(--good)}
+/* cats */
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+@media (max-width:900px){.blocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.blocks{grid-template-columns:1fr}}
+.blk{border-radius:18px;padding:16px;display:grid;gap:8px;min-width:0;background:#fff;border:1px solid var(--line)}
+.blk.lead1{background:var(--deep);color:#fff;border-color:var(--deep)}
+.blk .gt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;font-size:15px}
+.blk .gt .icon{background:var(--mint);color:#111}
+.blk b{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.blk .meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);gap:8px;flex-wrap:wrap}
+.blk.lead1 .meta{color:rgba(255,255,255,.7)}
+.blk .share{height:8px;border-radius:999px;background:var(--cap);overflow:hidden}
+.blk.lead1 .share{background:rgba(255,255,255,.15)}
+.blk .share i{display:block;height:100%;border-radius:999px;background:var(--mint)}
+.prod{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center}
+.ph{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--mint2),#f3f3f0);display:grid;place-items:center;color:var(--deep2)}
+.ph svg{width:26px;height:26px}
+.pn{min-width:0}.pn>b{display:block;font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pn span{font-size:12px;color:var(--muted)}
+.list{display:grid;gap:12px}
+/* matrix */
+.dots-line{display:flex;gap:3px;flex-wrap:nowrap;height:22px;align-items:stretch}
+.dots-line i{flex:1;border-radius:3px;background:var(--cap)}
+.dots-line i.on{background:var(--c)}
+.mxrow{display:grid;gap:6px}
+.mxrow .h{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
+.mxrow .h span{font-size:12px;color:var(--muted);font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{border:1px solid var(--line);border-radius:18px;padding:14px;text-align:left;background:#fff;color:var(--ink);font:inherit;cursor:pointer;display:grid;gap:4px}
+.tile .v{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--c,var(--ink))}
+.tile .l{font-size:12px;color:var(--muted);font-weight:600}
+.tile[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:#111}
+.tile[aria-pressed="true"] .v{color:#111}.tile[aria-pressed="true"] .l{color:#3a3a36}
+.mxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px}
+.cell{border:1px solid var(--line);border-radius:16px;padding:10px;text-align:left;background:#fff;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:6px;min-width:0}
+.cell b{font-size:12.5px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell .lc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.cell .lc i{font-style:normal;font-size:10.5px;font-weight:700;text-align:center;padding:2px 0;border-radius:6px;background:var(--bad2);color:var(--bad);white-space:nowrap}.cell .lc i.on{background:var(--cap);color:var(--ink)}
+.cell span{font-size:11px;font-weight:700;color:var(--c)}
+.loc{display:inline-flex;gap:4px;flex-wrap:wrap}
+.loc span{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--cap);white-space:nowrap}
+.loc span.zero{background:var(--bad2);color:var(--bad)}
+.act{font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;background:var(--c2);color:var(--c)}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+img.pic{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
+.loader{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg2);z-index:50}
+.loader div{display:grid;justify-items:center;gap:14px;font-weight:700}
+.loader i{width:46px;height:46px;border-radius:50%;border:5px solid var(--cap);border-top-color:var(--mint);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ptbl td{vertical-align:middle}
+.st{font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap;background:var(--c2);color:var(--c)}
+[data-art]{cursor:pointer}
+.cust{display:flex;gap:6px;align-items:center;color:#fff;font-size:12px}
+.cust input{font:inherit;font-size:12.5px;padding:5px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;color-scheme:dark}
+.seg{flex-wrap:wrap}
+.seg-l{background:var(--cap)}.seg-l button{color:var(--muted)}.seg-l button[aria-pressed="true"]{color:#111}
+.heat{overflow-x:auto;padding-bottom:4px}
+.heat .hl{display:flex;gap:3px;font-size:10px;color:var(--muted);margin-bottom:4px;width:max-content}
+.heat .hl span{width:13px;white-space:nowrap;overflow:visible}
+.heat .hg{display:flex;gap:3px;width:max-content}
+.heat .hc{display:grid;grid-template-rows:repeat(7,13px);gap:3px}
+.heat .hc i{width:13px;height:13px;border-radius:3px}
+.scale{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:6px}
+.scale i{width:11px;height:11px;border-radius:3px}
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.zone{display:grid;gap:8px;align-content:start}
+.zone .zh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:13px}.zone .zh span{color:var(--muted);font-size:12px}
+.sqs{display:flex;flex-wrap:wrap;gap:4px}
+.sqs{gap:6px}
+.sq{width:26px;height:26px;border-radius:7px;display:block;position:relative;cursor:pointer;transition:transform .1s}
+.sq:hover{transform:scale(1.25);z-index:2;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.sq.l4{background:#111}.sq.l3{background:#ffc61a}.sq.l2{background:#fff;box-shadow:inset 0 0 0 2.5px #ffc61a}.sq.l1{background:var(--bad2);box-shadow:inset 0 0 0 2.5px var(--bad)}.sq.l0{background:#ececea;width:14px;height:14px;border-radius:4px;margin:6px 0}
+.sq.lost::after{content:"";position:absolute;right:-3px;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--bad);box-shadow:0 0 0 2px #fff}
+.sq.pr::before{content:"%";position:absolute;left:-4px;bottom:-4px;width:13px;height:13px;border-radius:50%;background:var(--on);color:#fff;font-size:8.5px;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
+.sq.dim{opacity:.12}
+.sq.l5{background:#fff;box-shadow:inset 0 0 0 2.5px var(--on)}.sq.l5.wl{background:var(--bad2);box-shadow:inset 0 0 0 2.5px var(--bad)}
+.sq.nw:not(.l5){box-shadow:inset 0 -5px 0 var(--on)}
+.sq.l2.nw{box-shadow:inset 0 0 0 2.5px #ffc61a,inset 0 -5px 0 var(--on)}.sq.l1.nw{box-shadow:inset 0 0 0 2.5px var(--bad),inset 0 -5px 0 var(--on)}
+.zone2{display:grid;gap:10px;padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.zone2 .zh{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.zone2 .zh b{font-size:15px}.zone2 .zh span{color:var(--muted);font-size:12px}
+.lvrow{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;align-items:center}
+.lvrow .lvl{font-size:12px;color:var(--muted);font-weight:600}.lvrow .lvl b{color:var(--ink);margin-left:4px}
+@media (max-width:640px){.lvrow{grid-template-columns:1fr;gap:4px}}
+.aslegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);align-items:center}
+.aslegend .sq{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin:0 6px 0 2px;cursor:default;border-radius:4px}.aslegend .sq.l0{margin:0 6px 0 2px;width:12px;height:12px}
+.aslegend .sq.lost::after{width:6px;height:6px;right:-2px;top:-2px}.aslegend .sq.pr::before{width:10px;height:10px;font-size:7px;left:-3px;bottom:-3px}
+.aslegend .sq:hover{transform:none}
+#asChips{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:1100px){#asChips{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){#asChips{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gl-ticks{position:relative;height:16px;margin-left:190px;font-size:11px;color:var(--muted)}
+.gl-ticks span{position:absolute;transform:translateX(-50%)}
+.gl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:10px;align-items:center;margin-top:6px}
+.gl .gn{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gl .gt{position:relative;height:14px;background:var(--cap);border-radius:999px}
+.gl .gt i{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--deep)}
+.gl .gt i.on{background:var(--rt)}
+@media (max-width:560px){.gl{grid-template-columns:110px minmax(0,1fr)}.gl-ticks{margin-left:120px}}
+.ih{display:flex;gap:14px;align-items:flex-start}
+.ipic{width:84px;height:84px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--mint2),#f3f3f0);display:grid;place-items:center;flex:none;color:var(--deep2)}
+.ipic svg{width:40px;height:40px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;z-index:40;padding:16px}
+.modal .box{background:#fff;border-radius:22px;max-width:760px;width:100%;max-height:85vh;overflow:auto;padding:20px;display:grid;gap:12px}
+.modal .box header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.modal .x{border:0;background:var(--cap);border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer}
+.modal tr.inp td{background:var(--mint2)}
+.modal .box{max-width:900px}
+.clk{cursor:pointer;transition:transform .15s,box-shadow .15s}
+.clk:hover{transform:translateY(-2px);box-shadow:0 1px 0 var(--edge),0 22px 40px -24px rgba(0,0,0,.4)}
+.more{font-size:11px;color:var(--muted);font-weight:600}
+.cap .tag.mini{background:none;color:var(--muted);font-size:10px;font-weight:700;padding:0}
+.mk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.mk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mk div{background:var(--bg2);border-radius:14px;padding:10px 12px;display:grid;gap:2px}
+.mk small{font-size:11.5px;color:var(--muted);font-weight:600}.mk b{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.mk span{font-size:11px;color:var(--muted)}
+.back{border:0;background:var(--cap);border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;margin-right:8px}
+.ordl td{font-size:12.5px}.ordl .its{color:var(--muted);font-size:11.5px;max-width:360px}
+.ordl .its a{color:var(--ink);text-decoration:underline dotted;cursor:pointer}
+.seg-s{display:inline-flex;background:var(--cap);border-radius:999px;padding:3px}.seg-s button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;color:var(--muted);cursor:pointer}.seg-s button[aria-pressed="true"]{background:var(--mint);color:#111}
+.pgrp{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.pgrp .zh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:8px}.pgrp .zh span{color:var(--muted);font-size:12px}
+[data-mgr]{cursor:pointer}
+.people .p[data-mgr]:hover .av{transform:scale(1.08)}.av{transition:transform .15s}
+.lr[data-mgr]:hover{background:var(--bg2);border-radius:14px}.lr{padding:4px 6px}
+.refresh{border:0;background:none;color:var(--ink);font:inherit;font-size:12px;font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
+</style></head><body>
+<div class="modal" id="modal" hidden><div class="box" id="modalBox"></div></div>
+<div class="loader" id="loader"><div><i></i><span id="loadMsg">Завантажую дані з таблиці…</span></div></div>
+
+<div class="app">
+  <nav class="rail" role="tablist" id="tabs" aria-label="Розділи">
+    <div class="logo">D2</div>
+    <button role="tab" data-t="overview" aria-selected="true" aria-label="Огляд"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg><span class="tip">Огляд</span></button>
+    <button role="tab" data-t="people" aria-selected="false" aria-label="Відділи і менеджери"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.6c2.5.2 4 1.7 4.5 4.4"/></svg><span class="tip">Відділи і менеджери</span></button>
+    <button role="tab" data-t="cats" aria-selected="false" aria-label="Категорії"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9h18M5 9v10M19 9v10M8 9v5h8V9"/></svg><span class="tip">Категорії</span></button>
+    <button role="tab" data-t="matrix" aria-selected="false" aria-label="Матриця"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="5" height="5" rx="1.2"/><rect x="10" y="3" width="5" height="5" rx="1.2"/><rect x="17" y="3" width="4" height="5" rx="1.2"/><rect x="3" y="10" width="5" height="5" rx="1.2"/><rect x="10" y="10" width="5" height="5" rx="1.2"/><rect x="3" y="17" width="5" height="4" rx="1.2"/></svg><span class="tip">Матриця</span></button>
+    <button role="tab" data-t="buy" aria-selected="false" aria-label="Закупка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 4h2l2 11h11l2-8H7"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg><span class="tip">Закупка</span></button>
+    <button role="tab" data-t="assort" aria-selected="false" aria-label="Асортимент"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="4" height="4" rx="1"/><rect x="10" y="3" width="4" height="4" rx="1"/><rect x="17" y="3" width="4" height="4" rx="1"/><rect x="3" y="10" width="4" height="4" rx="1"/><rect x="10" y="10" width="4" height="4" rx="1"/><rect x="17" y="10" width="4" height="4" rx="1"/><rect x="3" y="17" width="4" height="4" rx="1"/><rect x="10" y="17" width="4" height="4" rx="1"/></svg><span class="tip">Асортимент</span></button>
+    <button role="tab" data-t="promo" aria-selected="false" aria-label="Акції"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/></svg><span class="tip">Акції</span></button>
+    <div class="sp"></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1 id="heroTitle"></h1>
+        <p id="heroSub"></p>
+      </div>
+      <div class="ctl" id="periodBox">
+        <div class="seg" id="mode"><button data-m="week" aria-pressed="true">Тиждень</button><button data-m="month" aria-pressed="false">Місяць</button><button data-m="year" aria-pressed="false">Рік</button><button data-m="all" aria-pressed="false">Весь час</button><button data-m="custom" aria-pressed="false">Період</button></div>
+        <div class="cust" id="cust" hidden><input type="date" id="cFrom" aria-label="З дати"> – <input type="date" id="cTo" aria-label="По дату"></div>
+        <div class="nav"><button class="arrow" id="prev" aria-label="Попередній період">‹</button><div class="lbl" id="plabel"></div><button class="arrow" id="next" aria-label="Наступний період">›</button></div>
+      </div>
+    </section>
+    <div class="status"><span><i class="livedot"></i>Продажі з 1С по <b id="asof"></b></span><span>Залишки 1С на <b id="stockAsOf">—</b></span><span>Дані зібрано <b id="built">—</b> · <button class="refresh" id="refresh" title="Зібрати дані з таблиці заново">⟳ оновити</button></span><span class="demo">Лише перегляд — дані в таблиці не змінюються</span></div>
+
+    <!-- ОГЛЯД -->
+    <section data-p="overview" class="cols">
+      <div class="col">
+        <div class="grid">
+          <div class="card kpi c4 clk" id="k-ord" data-open="orders" title="Натисніть — список замовлень"></div>
+          <div class="card kpi c4 clk" id="k-chk" data-open="orders-sum" title="Натисніть — замовлення від найбільшого"></div>
+          <div class="card kpi c4 clk" id="k-qty" data-open="sold" title="Натисніть — що саме продано"></div>
+          <div class="card c5">
+            <header><h2>Відділи</h2><span class="hint">частка виручки</span></header>
+            <div class="big" id="depTotal"></div>
+            <div class="split" id="split"></div>
+          </div>
+          <div class="card c7">
+            <header><h2 id="capsTitle">Продажі по днях</h2><span class="hint" id="capsHint"></span></header>
+            <div class="caps" id="caps"></div>
+          </div>
+          <div class="card c12" id="wdCard" hidden>
+            <header><h2>У які дні продається більше</h2><span class="hint">середня виручка за один день тижня в обраному періоді</span></header>
+            <div class="hint" id="wdHint"></div>
+            <div class="caps" id="wdCaps" style="height:180px"></div>
+            <div class="split"><div class="leg" id="wdDeps"></div></div>
+          </div>
+          <div class="card c12">
+            <header><h2 id="trendTitle">Динаміка</h2><div class="split"><div class="leg" id="lg1"></div></div></header>
+            <div class="chart"><canvas id="chTrend"></canvas></div>
+          </div>
+          <div class="card c12">
+            <header><h2>Місяць до місяця</h2><span class="hint">колір — зміна до попереднього місяця</span></header>
+            <div class="tbl"><table id="tMonths"></table></div>
+          </div>
+        </div>
+      </div>
+      <aside class="col">
+        <div class="card cal">
+          <header><div class="m" id="calTitle"></div><span class="hint">виручка по днях періоду</span></header>
+          <div class="days" id="days"></div>
+        </div>
+        <div class="card">
+          <header><h2>Лідери періоду <span class="more">· натисніть на людину</span></h2><span class="chip" style="--c:var(--deep2);--c2:var(--mint2)" id="mgrCount"></span></header>
+          <div class="people" id="people"></div>
+        </div>
+        <div class="card">
+          <header><h2>Хіти періоду</h2><span class="hint">за виручкою</span></header>
+          <div class="prods" id="hits"></div>
+        </div>
+        <div class="card">
+          <header><h2>Сигнали</h2><span class="hint">що зробити сьогодні</span></header>
+          <div class="tabsm"><b>Матриця</b><span>Постачальник</span><span>Закупка</span></div>
+          <div class="feed" id="feed"></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ВІДДІЛИ І МЕНЕДЖЕРИ -->
+    <section data-p="people" class="grid" hidden>
+      <div class="card c12">
+        <header><h2>Рейтинг менеджерів</h2><span class="hint">натисніть на менеджера — його статистика · стрілка — зміна місця</span></header>
+        <div class="lead" id="lead"></div>
+      </div>
+      <div class="card c7">
+        <header><h2>Один на один</h2><span class="hint">відділ з відділом або менеджер з менеджером</span></header>
+        <div class="vs"><select id="vsA" aria-label="Перший для порівняння"></select><span class="x">VS</span><select id="vsB" aria-label="Другий для порівняння"></select></div>
+        <div class="vsrows" id="vsRows"></div>
+      </div>
+      <div class="card c5">
+        <header><h2>Хто в чому сильніший</h2></header>
+        <div class="chart"><canvas id="chVsRadar"></canvas></div>
+      </div>
+    </section>
+
+    <!-- КАТЕГОРІЇ -->
+    <section data-p="cats" class="grid" hidden>
+      <div class="card c12">
+        <header><h2>Групи товарів</h2><span class="hint">виручка, частка і зміна до попереднього періоду</span></header>
+        <div class="blocks" id="blocks"></div>
+      </div>
+      <div class="card c6">
+        <header><h2>Столи і стільці по відділах</h2><div class="split"><div class="leg" id="lg2"></div></div></header>
+        <div class="chart sm"><canvas id="chCatDep"></canvas></div>
+      </div>
+      <div class="card c6">
+        <header><h2>Ростуть і падають</h2><span class="hint" id="moversHint">штуки до попереднього періоду</span></header>
+        <div class="list" id="movers"></div>
+      </div>
+      <div class="card c6"><header><h2>Топ столів</h2></header><div class="list" id="topT"></div></div>
+      <div class="card c6"><header><h2>Топ стільців</h2></header><div class="list" id="topC"></div></div>
+    </section>
+
+    <!-- МАТРИЦЯ -->
+    <section data-p="matrix" class="grid" hidden>
+      <div class="card c5">
+        <header><h2>Матриця в залі</h2><span class="hint">кожна риска — позиція</span></header>
+        <div class="grid" style="gap:16px" id="mxLines"></div>
+      </div>
+      <div class="card c7">
+        <header><h2>Стан матриці</h2><span class="hint">натисніть, щоб відфільтрувати</span></header>
+        <div class="tiles" id="tiles"></div>
+      </div>
+      <div class="card c12">
+        <header><h2>Карта позицій</h2><div class="split"><div class="leg"><span><i class="dot" style="background:var(--good)"></i>все є</span><span><i class="dot" style="background:var(--zd)"></i>перевезти</span><span><i class="dot" style="background:var(--warn)"></i>чекаємо</span><span><i class="dot" style="background:var(--bad)"></i>замовити</span><span>у картці — залишок у магазинах і на складі, червоне = 0</span></div></div></header>
+        <div class="mxgrid" id="mxgrid"></div>
+      </div>
+      <div class="card c12">
+        <header><h2 id="mxTitle">Усі позиції</h2></header>
+        <div class="tbl"><table id="tMx"></table></div>
+      </div>
+    </section>
+    <!-- ЗАКУПКА -->
+    <section data-p="buy" class="grid" hidden>
+      <div class="card kpi c3" id="b-pend"></div>
+      <div class="card kpi c3" id="b-book"></div>
+      <div class="card kpi c3" id="b-done"></div>
+      <div class="card kpi c3" id="b-marg"></div>
+      <div class="card c8">
+        <header><h2 id="buyTrendTitle">Закуплено і продано</h2><div class="split"><div class="leg"><span><i class="dot" style="background:var(--rt)"></i>замовлено у Vetro, грн</span><span><i class="dot" style="background:var(--deep)"></i>продано, грн</span></div></div></header>
+        <div class="chart"><canvas id="chBuy"></canvas></div>
+      </div>
+      <div class="card c4">
+        <header><h2>Що в закупці зараз</h2><span class="hint">за групами, $</span></header>
+        <div class="list" id="buyGroups"></div>
+      </div>
+      <div class="card c12">
+        <header><h2>Позиції в закупці</h2><span class="hint">з вкладки «🛒 Закупка»</span></header>
+        <div class="tbl"><table class="ptbl" id="tBuy"></table></div>
+      </div>
+      <div class="card c12">
+        <header><h2>Останні замовлення Vetro</h2><span class="hint">з «📜 Історії замовлень»</span></header>
+        <div class="tbl"><table id="tOrders"></table></div>
+      </div>
+    </section>
+    <!-- АСОРТИМЕНТ -->
+    <section data-p="assort" class="grid" hidden>
+      <div class="card c12">
+        <header><h2>Карта асортименту</h2><div class="seg seg-l" id="asDays"><button data-d="90" aria-pressed="true">90 дн</button><button data-d="180" aria-pressed="false">180 дн</button><button data-d="270" aria-pressed="false">270 дн</button><button data-d="360" aria-pressed="false">360 дн</button></div></header>
+        <div class="hint" id="asNote"></div>
+        <div class="tiles" id="asChips"></div>
+      </div>
+      <div class="card c12">
+        <header><h2>Кожна позиція — квадратик</h2><span class="hint">наведіть — назва, натисніть — картка товару</span></header>
+        <div class="aslegend"><span><i class="sq l4"></i>хіт групи (топ-20%)</span><span><i class="sq l3"></i>добре продається</span><span><i class="sq l2"></i>продається повільно</span><span><i class="sq l5"></i>новинка, ще без продажів</span><span><i class="sq l3 nw"></i>новинка (синя смужка)</span><span><i class="sq l1"></i>застій: є залишок, 0 продажів</span><span><i class="sq l0"></i>немає продажів і залишку</span><span><i class="sq l3 lost"></i>продається, а залишку немає</span><span><i class="sq l3 pr"></i>в акції</span></div>
+        <div class="zones" id="asGrid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))"></div>
+      </div>
+      <div class="card c6"><header><h2>Групи</h2><span class="hint">частка позицій, що продаються</span></header><div class="list" id="asZones"></div></div>
+      <div class="card c6"><header><h2 id="asListTitle">Топ</h2></header><div class="list" id="asList"></div></div>
+    </section>
+
+    <!-- АКЦІЇ -->
+    <section data-p="promo" class="grid" hidden>
+      <div class="card kpi c3" id="p-act"></div>
+      <div class="card kpi c3" id="p-done"></div>
+      <div class="card kpi c3" id="p-eff"></div>
+      <div class="card kpi c3" id="p-sum"></div>
+      <div class="card c12" id="promoStartCard"><div class="hint" id="promoStart"></div></div>
+      <div class="card c12">
+        <header><h2 id="promoChTitle">Продажі акційних позицій</h2><div class="split"><div class="leg"><span><i class="dot" style="background:var(--rt)"></i>продано в акції, шт</span><span><i class="dot" style="background:var(--deep)"></i>скільки продали б без акції (темп до неї)</span></div></div></header>
+        <div class="chart"><canvas id="chPromo"></canvas></div>
+      </div>
+      <div class="card c12"><header><h2>Зараз в акції</h2><span class="hint">від найкращих за весь час до гірших · натисніть — картка товару</span></header><div class="pgrp" id="promoAct"></div></div>
+      <div class="card c12"><header><h2>Стрічка акцій</h2><span class="hint">останні 120 днів · жовте — діє зараз</span></header><div id="promoLine"></div></div>
+      <div class="card c12"><header><h2>Результати завершених акцій</h2><span class="hint">ефект = продажі в день під час акції проти такого ж періоду до неї</span></header><div class="tbl"><table id="tPromo"></table></div></div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+let D = null, DEPS = ['ЗД','РТ','Онлайн'];
+const ICON = {
+  'Столи':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18M5 9v10M19 9v10M8 9v5h8V9"/></svg>',
+  'Стільці':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v18M8 13h9v8M8 13"/></svg>',
+  'Крісла і дивани':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v4M3 11h4v5h10v-5h4v6H3zM5 17v3M19 17v3"/></svg>',
+  'Журнальні та консолі':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18M6 10v8M18 10v8M6 14h12"/></svg>',
+  'Інше':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 12h16"/></svg>'
+};
+const SV = {
+  bag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  rcpt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg>',
+  box:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7l9-4 9 4-9 4zM3 7v10l9 4 9-4V7M12 11v10"/></svg>',
+  truck:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>',
+  cart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h2l2 11h11l2-8H7"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'
+};
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let DC = {};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = n => Math.round(n).toLocaleString('uk-UA');
+const uah = n => fmt(n) + ' ₴';
+const short = n => n >= 1e6 ? (n/1e6).toFixed(2).replace('.',',') + ' млн' : n >= 1e3 ? Math.round(n/1e3) + ' тис' : fmt(n);
+const pd = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+const dm = d => String(d.getDate()).padStart(2,'0') + '.' + String(d.getMonth()+1).padStart(2,'0');
+const addD = (d,n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+const monday = d => addD(d, -((d.getDay()+6)%7));
+const MON = ['січ','лют','бер','кві','тра','чер','лип','сер','вер','жов','лис','гру'];
+const MONF = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+const WD = ['нд','пн','вт','ср','чт','пт','сб'];
+let R = [], ASOF = new Date(), MDEP = {}, MA = {}, ART_Q = {};
+function boot(json) {
+  D = JSON.parse(json);
+  DEPS = D.deps; DC = {}; DC[DEPS[0]] = css('--zd'); DC[DEPS[1]] = css('--rt'); DC[DEPS[2]] = css('--on');
+  R = D.rows.map(r => ({d: r[0], dep: r[1], m: D.mgrs[r[2]], c: D.cats[r[3]], g: D.catGroup[r[3]], a: D.arts[r[4]], q: r[5], s: r[6], o: r[1] + '#' + r[7]}));
+  // один прохід по всіх продажах: основний відділ менеджера, суми по місяцях і днях, усі продажі позиції за весь час
+  const md = {}; MA = {}; ART_Q = {};
+  R.forEach(r => { const x = md[r.m] || (md[r.m] = {}); x[r.dep] = (x[r.dep] || 0) + r.s;
+    const mo = MA[r.d.slice(0, 7)] || (MA[r.d.slice(0, 7)] = {}), dd = +r.d.slice(8);
+    ['Разом', r.dep].forEach(k => { (mo[k] = mo[k] || new Array(32).fill(0))[dd] += r.s; });
+    ART_Q[r.a] = (ART_Q[r.a] || 0) + r.q; });
+  MDEP = {}; Object.keys(md).forEach(m => MDEP[m] = Object.keys(md[m]).sort((a, b) => md[m][b] - md[m][a])[0]);
+  promoStats.cache = null; MXI = null;
+  document.getElementById('built').textContent = D.built || '—';
+  ASOF = D.asof ? pd(D.asof) : new Date();
+  DATA0 = D.rows.length ? pd(D.rows.reduce((m, r) => r[0] < m ? r[0] : m, D.rows[0][0])) : ASOF;
+  document.getElementById('cFrom').value = iso(addD(ASOF, -29)); document.getElementById('cTo').value = iso(ASOF);
+  document.getElementById('cFrom').min = document.getElementById('cTo').min = iso(DATA0);
+  document.getElementById('asof').textContent = D.asof ? dm(ASOF) + '.' + ASOF.getFullYear() : 'немає даних';
+  document.getElementById('asof').title = D.salesNote || ''; const an = document.getElementById('asofNote'); if (an) an.remove();
+  if (D.salesNote) document.getElementById('asof').insertAdjacentHTML('afterend', '<span id="asofNote" style="color:var(--muted)"> (' + D.salesNote.split(' — ')[0] + ')</span>');
+  document.getElementById('stockAsOf').textContent = D.stockAsOf || '—';
+  document.getElementById('loader').hidden = true;
+  render();
+}
+let mode = 'week', offset = 0, tab = 'overview', mxFilter = 'all', selDay = null;
+try { const s = JSON.parse(localStorage.getItem('d2dash3') || '{}'); if (s.mode) mode = s.mode; if (s.tab) tab = s.tab; } catch (e) {}
+
+let cFrom = null, cTo = null, NOCMP = false, DATA0 = new Date(2026, 0, 1);
+function period(off) {
+  let P;
+  if (mode === 'week') {
+    const from = addD(monday(ASOF), 7*off), full = addD(from, 6), to = full > ASOF ? ASOF : full;
+    const len = Math.round((to - from) / 864e5), pf = addD(from, -7);
+    P = {from, to, full, pf, pt: addD(pf, len), label: dm(from) + '–' + dm(full),
+      sub: (to < full ? WD[from.getDay()] + '–' + WD[to.getDay()] + ' проти тих самих днів' : 'проти ' + dm(pf) + '–' + dm(addD(pf, 6)))};
+  } else if (mode === 'month') {
+    const base = new Date(ASOF.getFullYear(), ASOF.getMonth() + off, 1), full = new Date(base.getFullYear(), base.getMonth()+1, 0), to = full > ASOF ? ASOF : full;
+    const pf = new Date(base.getFullYear(), base.getMonth()-1, 1), pFull = new Date(base.getFullYear(), base.getMonth(), 0);
+    const pt = to < full ? new Date(pf.getFullYear(), pf.getMonth(), Math.min(to.getDate(), pFull.getDate())) : pFull;
+    P = {from: base, to, full, pf, pt, label: MONF[base.getMonth()] + ' ' + base.getFullYear(),
+      sub: (to < full ? '1–' + to.getDate() + ' число проти тих самих днів' : 'проти: ' + MONF[pf.getMonth()].toLowerCase())};
+  } else if (mode === 'year') {
+    const y = ASOF.getFullYear() + off, from = new Date(y, 0, 1), full = new Date(y, 11, 31), to = full > ASOF ? ASOF : full;
+    P = {from, to, full, pf: new Date(y - 1, 0, 1), pt: new Date(y - 1, to.getMonth(), to.getDate()), label: y + ' рік',
+      sub: (to < full ? '1.01–' + dm(to) + ' проти тих самих днів ' : 'проти ') + (y - 1)};
+  } else if (mode === 'all') {
+    P = {from: DATA0, to: ASOF, full: ASOF, pf: DATA0, pt: addD(DATA0, -1), label: 'Весь час', sub: 'з ' + dm(DATA0) + '.' + DATA0.getFullYear() + ' по ' + dm(ASOF) + '.' + ASOF.getFullYear()};
+  } else {
+    const from = cFrom || addD(ASOF, -29), full = cTo && cTo >= from ? cTo : ASOF, to = full > ASOF ? ASOF : full;
+    const len = Math.round((to - from) / 864e5), pt = addD(from, -1), pf = addD(pt, -len);
+    P = {from, to, full, pf, pt, label: dm(from) + '.' + from.getFullYear() + ' – ' + dm(full) + '.' + full.getFullYear(), sub: 'проти ' + dm(pf) + '–' + dm(pt)};
+  }
+  P.nocmp = mode === 'all' || P.pf < DATA0;
+  if (P.nocmp && mode !== 'all') P.sub = 'без порівняння: дані продажів є з ' + dm(DATA0) + '.' + DATA0.getFullYear();
+  P.span = Math.round((P.full - P.from) / 864e5) + 1;
+  return P;
+}
+const isoC = d => d.__i || (d.__i = iso(d));
+const inR = (r, a, b) => r.d >= isoC(a) && r.d <= isoC(b);
+function agg(rows) { const o = new Set(); let s = 0, q = 0; rows.forEach(r => { s += r.s; q += r.q; o.add(r.o); }); return {s, q, o: o.size, chk: o.size ? s / o.size : 0}; }
+function delta(cur, prev) {
+  if (NOCMP) return '';
+  if (!prev) return cur ? '<span class="delta up">нове</span>' : '<span class="delta flat">—</span>';
+  const p = (cur - prev) / prev * 100, cls = Math.abs(p) < 0.5 ? 'flat' : p > 0 ? 'up' : 'down';
+  return '<span class="delta ' + cls + '">' + (p > 0 ? '↑ +' : p < 0 ? '↓ −' : '') + Math.abs(p).toFixed(0) + '%</span>';
+}
+function countUp(el, to, f) {
+  if (RM) { el.textContent = f(to); return; }
+  const t0 = performance.now(), dur = 750;
+  const st = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = f(to * e); if (k < 1) requestAnimationFrame(st); };
+  requestAnimationFrame(st);
+}
+const charts = {};
+function chart(id, cfg) {
+  if (charts[id]) charts[id].destroy();
+  const el = document.getElementById(id); if (!el) return;
+  if (!window.Chart) { el.parentElement.innerHTML = '<div class="empty">Графік не завантажився</div>'; return; }
+  charts[id] = new Chart(el, cfg);
+}
+if (window.Chart) {
+  Chart.defaults.color = css('--muted'); Chart.defaults.font.family = 'Roboto'; Chart.defaults.font.weight = '600'; Chart.defaults.borderColor = '#ebebe8';
+  if (RM) Chart.defaults.animation = false; else { Chart.defaults.animation.duration = 700; Chart.defaults.animation.easing = 'easeOutCubic'; }
+  Object.assign(Chart.defaults.plugins.tooltip, {backgroundColor: css('--deep'), padding: 10, cornerRadius: 12, titleFont: {weight: '700'}, bodyFont: {weight: '600'}});
+}
+const grad = (c, a1, a2) => ctx => { const ch = ctx.chart, ar = ch.chartArea; if (!ar) return c; const g = ch.ctx.createLinearGradient(0, ar.top, 0, ar.bottom); g.addColorStop(0, c + a1); g.addColorStop(1, c + a2); return g; };
+const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const pic = (it, g) => it && it.p ? '<img class="pic" loading="lazy" src="' + esc(it.p) + '" alt="" onerror="this.replaceWith(document.createRange().createContextualFragment(ICON[\'' + (g || 'Інше') + '\'] || ICON[\'Інше\']))">' : (ICON[g] || ICON['Інше']);
+const phA = a => { const it = D.items[a] || {g: 'Інше'}; return '<div class="ph">' + pic(it, it.g) + '</div>'; };
+const legend = () => DEPS.map(d => '<span><i class="dot" style="background:' + DC[d] + '"></i>' + d + '</span>').join('');
+const initials = m => m.replace(/'/g, '').split(/\s+/).slice(0, 2).map(w => w[0]).reverse().join('');
+const firstName = m => m.split(/\s+/)[1] || m;
+const mainDep = m => MDEP[m] || DEPS[0];
+const shortName = n => n.replace(/^(Стілець|Стіл) обідній (розкладний |поворотний )?/, '').replace(/\s+\d+(-\d+)?x.*$/, '');
+
+function renderHero(P) {
+  const A = agg(R.filter(r => inR(r, P.from, P.to))), B = agg(R.filter(r => inR(r, P.pf, P.pt)));
+  const better = A.s >= B.s, nm = {week: 'Тиждень', month: 'Місяць', year: 'Рік', custom: 'Період'}[mode];
+  document.getElementById('heroTitle').innerHTML = NOCMP ? (mode === 'all' ? 'Продажі <em>за весь час</em>' : nm + ': <em>' + short(A.s) + ' ₴</em>') : nm + ' ' + (better ? 'йде <em>краще</em>' : 'поки <em>слабший</em>') + ', ніж попередній';
+  document.getElementById('heroSub').innerHTML = 'Виручка <b style="color:#fff;font-size:15px" id="heroRev"></b> ' + delta(A.s, B.s) + (NOCMP ? ' · ' + agg(R.filter(r => inR(r, P.from, P.to))).o + ' замовлень' : ' · було ' + uah(B.s));
+  countUp(document.getElementById('heroRev'), A.s, uah);
+  document.getElementById('plabel').innerHTML = P.label + '<span>' + P.sub + '</span>';
+}
+function renderOverview(P) {
+  const cur = R.filter(r => inR(r, P.from, P.to)), prv = R.filter(r => inR(r, P.pf, P.pt)), A = agg(cur), B = agg(prv);
+  [['k-ord', 'Замовлень', 'o', fmt, SV.rcpt], ['k-chk', 'Середній чек', 'chk', uah, SV.bag], ['k-qty', 'Продано, шт', 'q', fmt, SV.box]].forEach(k => {
+    const el = document.getElementById(k[0]);
+    el.innerHTML = '<div class="top"><span class="icon">' + k[4] + '</span>' + k[1] + '</div><div class="v"></div><div class="s">' + delta(A[k[2]], B[k[2]]) + (NOCMP ? '<span>за ' + P.label.toLowerCase() + '</span>' : '<span>було ' + k[3](B[k[2]]) + '</span>') + '</div>';
+    countUp(el.querySelector('.v'), A[k[2]], k[3]);
+  });
+  const vals = DEPS.map(d => agg(cur.filter(r => r.dep === d)).s);
+  countUp(document.getElementById('depTotal'), A.s, v => short(v) + ' ₴');
+  document.getElementById('split').innerHTML = '<div class="bars">' + DEPS.map((d, i) => '<div style="--c:' + DC[d] + ';flex:' + Math.max(vals[i], A.s * .06) + ' 1 0"><small>' + (A.s ? Math.round(vals[i] / A.s * 100) : 0) + '%</small><i></i></div>').join('') + '</div>' +
+    '<div class="leg">' + DEPS.map((d, i) => '<span><i class="dot" style="background:' + DC[d] + '"></i>' + d + ' · ' + short(vals[i]) + ' ' + delta(vals[i], agg(prv.filter(r => r.dep === d)).s) + '</span>').join('') + '</div>';
+  // capsules: days of week (week) or weeks of month (month)
+  const buckets = bucketsOf(P);
+  document.getElementById('capsTitle').textContent = 'Продажі по ' + buckets.kind;
+  const bv = buckets.map(b => agg(cur.filter(r => inR(r, b.a, b.b))).s), mx = Math.max(1, ...bv), mi = bv.indexOf(Math.max(...bv));
+  document.getElementById('capsHint').textContent = 'пік: ' + buckets[mi].l + ' · ' + short(bv[mi]) + ' ₴';
+  const caps = document.getElementById('caps');
+  caps.style.gridTemplateColumns = 'repeat(' + buckets.length + ',minmax(0,1fr))';
+  caps.innerHTML = buckets.map((b, i) => { const h = b.fut ? 0 : Math.max(4, bv[i] / mx * 100);
+    return '<div class="cap' + (i === mi && bv[i] ? ' max' : '') + (b.fut ? ' fut' : '') + '" title="' + b.l + ': ' + uah(bv[i]) + '"><div class="tr"><i style="height:0%" data-h="' + h + '"></i>' + (i === mi && bv[i] ? '<span class="tag" style="bottom:calc(' + h + '% + 6px)">' + short(bv[i]) + '</span>' : '') + '</div><span>' + b.l + '</span></div>'; }).join('');
+  // підписи на всіх стовпчиках; коли їх багато — без одиниць (одиниця в заголовку), щоб не налазили
+  const many = buckets.length > 8, unitM = mx >= 1e6, mini = v => !many ? short(v) : unitM ? (v / 1e6).toFixed(1).replace('.', ',') : String(Math.round(v / 1e3));
+  if (many) document.getElementById('capsHint').textContent += ' · підписи в ' + (unitM ? 'млн ₴' : 'тис ₴');
+  caps.querySelectorAll('.cap').forEach((c, i) => { if (i !== mi && bv[i] && !buckets[i].fut) { const h = Math.max(4, bv[i] / mx * 100); c.querySelector('.tr').insertAdjacentHTML('beforeend', '<span class="tag mini" style="bottom:calc(' + h + '% + 5px)">' + mini(bv[i]) + '</span>'); } });
+  requestAnimationFrame(() => caps.querySelectorAll('.tr i').forEach(i => i.style.height = i.dataset.h + '%'));
+  // trend
+  document.getElementById('lg1').innerHTML = legend();
+  const pts = [];
+  let tlab;
+  if (mode === 'week') { const lm = monday(P.to); for (let i = 11; i >= 0; i--) pts.push([addD(lm, -7*i), addD(lm, -7*i + 6)]); tlab = p => rng(p[0], p[1]); document.getElementById('trendTitle').textContent = 'Виручка за 12 тижнів по відділах'; }
+  else if (mode === 'month') { for (let i = 0; i <= P.from.getMonth(); i++) pts.push([new Date(P.from.getFullYear(), i, 1), new Date(P.from.getFullYear(), i + 1, 0)]); tlab = p => MON[p[0].getMonth()]; document.getElementById('trendTitle').textContent = 'Виручка по місяцях ' + P.from.getFullYear() + ' по відділах'; }
+  else { const bk = P.span <= 7 ? bucketsOf(Object.assign({}, P, {span: 8})) : bucketsOf(P); bk.forEach(b => pts.push([b.a, b.b])); tlab = p => bk.find(b => b.a === p[0]).l; document.getElementById('trendTitle').textContent = 'Виручка по ' + bk.kind + ' по відділах'; }
+  const R0 = R.filter(r => inR(r, pts[0][0], pts[pts.length - 1][1])), cell = pts.map(p => { const o = {_: 0}; R0.forEach(r => { if (inR(r, p[0], p[1])) { o[r.dep] = (o[r.dep] || 0) + r.s; o._ += r.s; } }); return o; });
+  const tot = cell.map(o => o._);
+  chart('chTrend', {type: 'bar', data: {labels: pts.map(tlab),
+    datasets: DEPS.map(d => ({label: d, data: cell.map(o => o[d] || 0), backgroundColor: DC[d], borderRadius: 0, borderWidth: {top: 2}, borderColor: '#ffffff', maxBarThickness: 34, categoryPercentage: .7}))},
+    options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, layout: {padding: {top: 20}},
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + uah(c.raw), footer: it => 'Разом: ' + uah(tot[it[0].dataIndex])}}},
+      scales: {x: {stacked: true, grid: {display: false}, border: {display: false}}, y: {stacked: true, border: {display: false}, grid: {color: '#eeeeeb'}, ticks: {callback: v => short(v)}}}},
+    plugins: [{id: 'tot', afterDatasetsDraw(ch) { const c = ch.ctx, meta = ch.getDatasetMeta(DEPS.length - 1); c.save(); c.font = '700 11px Roboto, sans-serif'; c.fillStyle = '#111'; c.textAlign = 'center';
+      meta.data.forEach((bar, i) => { let top = bar.y; for (let k = 0; k < DEPS.length; k++) { const b = ch.getDatasetMeta(k).data[i]; if (b && b.y < top) top = b.y; } if (tot[i]) c.fillText(short(tot[i]), bar.x, top - 6); }); c.restore(); }}]});
+  // month table
+  const months = Object.keys(MA).sort();
+  const sumTo = (m, k, cut) => { const a = (MA[m] || {})[k]; if (!a) return 0; let t = 0; for (let i = 1; i <= cut; i++) t += a[i]; return t; };
+  const cc = p => p == null ? 'transparent' : p >= 0 ? 'rgba(26,143,98,' + Math.min(.28, .06 + p / 300) + ')' : 'rgba(217,83,74,' + Math.min(.28, .06 + -p / 300) + ')';
+  document.getElementById('tMonths').innerHTML = '<thead><tr><th>Місяць</th><th class="n">Разом</th>' + DEPS.map(d => '<th class="n"><i class="dot" style="background:' + DC[d] + '"></i>' + d + '</th>').join('') + '</tr></thead><tbody>' +
+    months.slice().reverse().map((m, i, arr) => { const pm = arr[i + 1], cut = m === iso(ASOF).slice(0, 7) ? ASOF.getDate() : 31;
+      return '<tr><td><b>' + MONF[+m.slice(5) - 1] + '</b>' + (cut < 31 ? ' <span class="hint">1–' + cut + '</span>' : '') + '</td>' + ['Разом'].concat(DEPS).map(d => {
+        const v = sumTo(m, d, 31), p0 = pm ? sumTo(pm, d, cut) : 0, p = pm && p0 ? (v - p0) / p0 * 100 : null;
+        return '<td class="n"><span class="mcell" style="background:' + cc(p) + '">' + uah(v) + '</span> <span class="hint">' + (p == null ? '' : (p > 0 ? '+' : '−') + Math.abs(p).toFixed(0) + '%') + '</span></td>'; }).join('') + '</tr>'; }).join('') + '</tbody>';
+  renderWeekdays(P, cur);
+  renderSide(P, cur, prv);
+}
+function renderSide(P, cur, prv) {
+  // календар обраного періоду: тиждень — 7 днів, місяць — уся сітка місяця; внизу — разом, що збігається з карткою виручки
+  const byDay = {}, dayOrd = {};
+  cur.forEach(r => { byDay[r.d] = (byDay[r.d] || 0) + r.s; (dayOrd[r.d] = dayOrd[r.d] || new Set()).add(r.o); });
+  if (P.span > 31) {
+    document.getElementById('calTitle').textContent = 'Теплова карта · ' + P.label;
+    document.getElementById('days').innerHTML = '<div style="grid-column:1/-1">' + heatCal(P, byDay) + '</div><div class="caltot">Разом: <b>' + uah(agg(cur).s) + '</b> · ' + agg(cur).o + ' замовл. · чорне — найкращі дні</div>';
+  } else {
+  const first = monday(P.from), last = addD(monday(P.full), 6), days = [];
+  for (let d = new Date(first); d <= last; d = addD(d, 1)) days.push(new Date(d));
+  const inPer = d => d >= P.from && d <= P.full;
+  const vals = days.filter(inPer).map(d => byDay[iso(d)] || 0), best = Math.max(0, ...vals);
+  document.getElementById('calTitle').textContent = mode === 'week' ? 'Тиждень ' + P.label : MONF[P.from.getMonth()] + ', ' + P.from.getFullYear();
+  document.getElementById('days').innerHTML = ['пн','вт','ср','чт','пт','сб','нд'].map(w => '<small class="wdh">' + w + '</small>').join('') + days.map(d => {
+    if (!inPer(d)) return '<div class="day out"></div>';
+    const s = byDay[iso(d)] || 0, n = dayOrd[iso(d)] ? dayOrd[iso(d)].size : 0, on = s && s === best;
+    return '<div class="day' + (on ? ' on' : '') + (d > ASOF ? ' fut' : '') + '" title="' + dm(d) + ': ' + uah(s) + ', замовлень ' + n + '"><b>' + d.getDate() + '</b><div class="dots">' + '<i></i>'.repeat(Math.min(3, n)) + '</div><em>' + (s ? short(s) : '—') + '</em></div>'; }).join('') +
+    '<div class="caltot">Разом: <b>' + uah(agg(cur).s) + '</b> · ' + agg(cur).o + ' замовл.' + (best ? ' · найкращий день виділено' : '') + '</div>';
+  }
+  // leaders
+  const stat = [...new Set(R.map(r => r.m))].map(m => ({m, dep: mainDep(m), s: agg(cur.filter(r => r.m === m)).s})).filter(x => x.s).sort((a, b) => b.s - a.s);
+  const actFrom = addD(P.to, -90), team = new Set(R.filter(r => r.d >= iso(actFrom) && r.d <= iso(P.to)).map(r => r.m));
+  document.getElementById('mgrCount').textContent = stat.length + ' з ' + Math.max(team.size, stat.length) + ' менеджерів продавали';
+  document.getElementById('mgrCount').title = 'З усіх менеджерів, що мали продажі за останні 90 днів';
+  document.getElementById('people').innerHTML = stat.slice(0, 6).map((x, i) => '<div class="p" data-mgr="' + esc(x.m) + '" title="Натисніть — статистика за період"><div class="av" style="--c:' + DC[x.dep] + '">' + initials(x.m) + '</div><b>' + firstName(x.m) + '</b><span>' + short(x.s) + ' ₴ · ' + x.dep + '</span></div>').join('') || '<div class="empty">Продажів за період немає</div>';
+  // hits
+  const by = {}; cur.forEach(r => { by[r.a] = by[r.a] || {s: 0, q: 0}; by[r.a].s += r.s; by[r.a].q += r.q; });
+  document.getElementById('hits').innerHTML = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 6).map(a => { const it = D.items[a] || {n: a, g: 'Інше'};
+    return '<div class="pc" data-art="' + esc(a) + '" title="Натисніть — усі продажі позиції"><div class="pimg">' + pic(it, it.g) + '<span class="badge">' + by[a].q + ' шт</span></div><b>' + shortName(it.n) + '</b><span>' + uah(by[a].s) + '</span></div>'; }).join('') || '<div class="empty">Продажів за період немає</div>';
+  // signals from matrix
+  const L = D.matrix.map(m => Object.assign({a: m.a}, mxState(m.a)));
+  const moveZ = L.filter(x => x.cls === 'a-move' && x.miss.includes(DEPS[0])).length, moveR = L.filter(x => x.cls === 'a-move' && x.miss.includes(DEPS[1])).length;
+  const ord = L.filter(x => x.cls === 'a-order').length, wait = L.filter(x => x.cls === 'a-wait');
+  const items = [];
+  if (moveR) items.push([SV.truck, '--zd', '--mint2', 'Перевезти в ' + DEPS[1] + ': ' + moveR + ' поз.', 'є на складі']);
+  if (moveZ) items.push([SV.truck, '--zd', '--mint2', 'Перевезти в ' + DEPS[0] + ': ' + moveZ + ' поз.', 'є на складі']);
+  if (ord) items.push([SV.cart, '--bad', '--bad2', 'Замовити у Vetro: ' + ord + ' поз.', 'немає в магазині і на складі']);
+  if (wait.length) items.push([SV.clock, '--warn', '--warn2', 'Чекаємо: ' + wait.length + ' поз.', 'у броні, в дорозі або нема у Vetro']);
+  document.getElementById('feed').innerHTML = items.map(x => '<div class="fi" style="--c:var(' + x[1] + ');--c2:var(' + x[2] + ')"><span class="ic">' + x[0] + '</span><div><b>' + x[3] + '</b><span>' + x[4] + '</span></div><button class="go" data-go="matrix">Відкрити</button></div>').join('') || '<div class="empty">Усе в порядку</div>';
+}
+
+function renderPeople(P) {
+  const cur = R.filter(r => inR(r, P.from, P.to)), prv = R.filter(r => inR(r, P.pf, P.pt));
+  const stat = [...new Set(R.map(r => r.m))].map(m => ({m, dep: mainDep(m), a: agg(cur.filter(r => r.m === m)), b: agg(prv.filter(r => r.m === m))})).filter(x => x.a.s || x.b.s);
+  const pr = {}; stat.slice().sort((x, y) => y.b.s - x.b.s).forEach((x, i) => pr[x.m] = x.b.s ? i + 1 : null);
+  stat.sort((x, y) => y.a.s - x.a.s);
+  const tot = agg(cur).s, mx = Math.max(1, ...stat.map(x => x.a.s));
+  document.getElementById('lead').innerHTML = stat.map((x, i) => { const p = pr[x.m], v = p && x.a.s ? p - (i + 1) : 0;
+    return '<div class="lr" data-mgr="' + esc(x.m) + '" style="--c:' + DC[x.dep] + '"><span class="rk' + (i < 3 && x.a.s ? ' t' : '') + '">' + (x.a.s ? i + 1 : '–') + (v ? '<span class="mv ' + (v > 0 ? 'u' : 'd') + '">' + (v > 0 ? '↑' : '↓') + Math.abs(v) + '</span>' : '') + '</span>' +
+      '<div class="av sm" style="--c:' + DC[x.dep] + ';--avf:' + (x.dep === DEPS[1] ? '#111' : '#fff') + '">' + initials(x.m) + '</div><div><b>' + x.m + '</b><br><span class="hint">' + x.dep + ' · ' + x.a.o + ' замовл. · чек ' + short(x.a.chk) + '</span></div>' +
+      '<div class="lb"><i style="width:' + (x.a.s / mx * 100) + '%"></i></div><div style="text-align:right"><b>' + uah(x.a.s) + '</b><br>' + delta(x.a.s, x.b.s) + ' <span class="hint">' + (tot ? Math.round(x.a.s / tot * 100) : 0) + '%</span></div></div>'; }).join('');
+  const opts = DEPS.map(d => ['d:' + d, 'Відділ ' + d]).concat(stat.map(x => ['m:' + x.m, x.m]));
+  ['vsA', 'vsB'].forEach((id, i) => { const el = document.getElementById(id), v = el.value || (i ? 'd:РТ' : 'd:ЗД');
+    el.innerHTML = opts.map(o => '<option value="' + o[0] + '">' + o[1] + '</option>').join(''); el.value = opts.some(o => o[0] === v) ? v : opts[i][0]; });
+  renderVs(P);
+}
+function renderVs(P) {
+  const pick = v => { const t = v[0], n = v.slice(2); return r => t === 'd' ? r.dep === n : r.m === n; };
+  const A = document.getElementById('vsA').value, B = document.getElementById('vsB').value;
+  // відділ — його колір; менеджер — фіолетовий (ліворуч) / помаранчевий (праворуч), щоб пари завжди розрізнялись
+  const col = (v, i) => v.startsWith('d:') ? DC[v.slice(2)] : css(i ? '--vb' : '--va');
+  let ca = col(A, 0), cb = col(B, 1);
+  if (ca === cb) cb = [css('--vb'), css('--va'), DC[DEPS[1]], DC[DEPS[2]]].find(c => c !== ca);
+  const cur = R.filter(r => inR(r, P.from, P.to)), a = agg(cur.filter(pick(A))), b = agg(cur.filter(pick(B)));
+  const grp = (f, g) => cur.filter(f).filter(r => r.g === g).reduce((s, r) => s + r.s, 0);
+  const L = [['Виручка', a.s, b.s, uah], ['Замовлень', a.o, b.o, fmt], ['Середній чек', a.chk, b.chk, uah], ['Продано, шт', a.q, b.q, fmt], ['Столи', grp(pick(A), 'Столи'), grp(pick(B), 'Столи'), uah], ['Стільці', grp(pick(A), 'Стільці'), grp(pick(B), 'Стільці'), uah]];
+  document.getElementById('vsRows').innerHTML = L.map(l => { const m = Math.max(l[1], l[2], 1), df = l[2] && l[1] ? (l[1] - l[2]) / l[2] * 100 : null;
+    return '<div class="vsrow"><div class="vb l" style="--c:' + ca + '"><i style="width:' + (l[1] / m * 70) + '%"></i><b class="' + (l[1] > l[2] ? 'win' : '') + '">' + l[3](l[1]) + '</b></div><div class="m"><b>' + l[0] + '</b>' + (df == null ? '' : (df > 0 ? '+' : '−') + Math.abs(df).toFixed(0) + '%') + '</div><div class="vb" style="--c:' + cb + '"><i style="width:' + (l[2] / m * 70) + '%"></i><b class="' + (l[2] > l[1] ? 'win' : '') + '">' + l[3](l[2]) + '</b></div></div>'; }).join('');
+  const nm = v => v.startsWith('d:') ? 'Відділ ' + v.slice(2) : v.slice(2);
+  chart('chVsRadar', {type: 'radar', data: {labels: L.map(l => l[0]), datasets: [[A, ca, 1], [B, cb, 2]].map(z => ({label: nm(z[0]), data: L.map(l => Math.round(l[z[2]] / Math.max(l[1], l[2], 1) * 100)), borderColor: z[1], backgroundColor: z[1] + '33', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: z[1]}))},
+    options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {position: 'bottom', labels: {boxWidth: 10, boxHeight: 10, usePointStyle: true}}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + c.raw + '% від кращого'}}},
+      scales: {r: {min: 0, max: 100, ticks: {display: false, stepSize: 25}, grid: {color: '#ebe8e3'}, angleLines: {color: '#ebe8e3'}, pointLabels: {font: {size: 11, weight: '700'}}}}}});
+}
+
+function prodRow(a, right, sub) { const it = D.items[a] || {n: a, g: 'Інше'}; return '<div class="prod" data-art="' + esc(a) + '" title="Натисніть — усі продажі позиції">' + phA(a) + '<div class="pn"><b title="' + esc(it.n) + '">' + esc(shortName(it.n || a)) + '</b><span>' + (sub || (a.startsWith('name:') ? 'без артикула' : esc(a))) + '</span></div><div>' + right + '</div></div>'; }
+function renderCats(P) {
+  const cur = R.filter(r => inR(r, P.from, P.to)), prv = R.filter(r => inR(r, P.pf, P.pt)), tot = agg(cur).s || 1;
+  const GS = {'Столи': ['var(--deep)', '#fff'], 'Стільці': ['var(--peach)', '#3b1a08'], 'Крісла і дивани': ['var(--mint)', 'var(--deep)'], 'Інше': ['#e9e5df', 'var(--ink)']};
+  const gr = ['Столи', 'Стільці', 'Крісла і дивани', 'Журнальні та консолі', 'Інше'].map(g => ({g, a: agg(cur.filter(r => r.g === g)), b: agg(prv.filter(r => r.g === g))})).filter(x => x.a.s || x.b.s).sort((x, y) => y.a.s - x.a.s);
+  document.getElementById('blocks').innerHTML = gr.map((x, i) => '<div class="blk' + (i === 0 ? ' lead1' : '') + '"><div class="gt"><span>' + x.g + '</span><span class="icon">' + (ICON[x.g] || ICON['Інше']) + '</span></div><b>' + uah(x.a.s) + '</b>' +
+    '<div class="share"><i style="width:' + Math.round(x.a.s / tot * 100) + '%"></i></div><div class="meta"><span>' + Math.round(x.a.s / tot * 100) + '% виручки · ' + x.a.q + ' шт</span>' + delta(x.a.s, x.b.s) + '</div></div>').join('');
+  document.getElementById('lg2').innerHTML = legend();
+  chart('chCatDep', {type: 'bar', data: {labels: ['Столи', 'Стільці'], datasets: DEPS.map(d => ({label: d, data: ['Столи', 'Стільці'].map(g => agg(cur.filter(r => r.g === g && r.dep === d)).s), backgroundColor: DC[d], borderRadius: 0, borderWidth: {right: 2}, borderColor: '#ffffff', barThickness: 24}))},
+    options: {indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + uah(c.raw)}}}, scales: {x: {stacked: true, border: {display: false}, grid: {color: '#efede9'}, ticks: {callback: v => short(v)}}, y: {stacked: true, grid: {display: false}, border: {display: false}}}}});
+  const by = rows => { const m = {}; rows.forEach(r => { m[r.a] = m[r.a] || {s: 0, q: 0}; m[r.a].s += r.s; m[r.a].q += r.q; }); return m; };
+  const ca = by(cur), cb = by(prv);
+  const tl = (id, g) => { const t = Object.keys(ca).filter(a => (D.items[a] || {}).g === g).sort((x, y) => ca[y].s - ca[x].s).slice(0, 6);
+    document.getElementById(id).innerHTML = t.length ? t.map((a, i) => prodRow(a, '<b>' + uah(ca[a].s) + '</b>', '#' + (i + 1) + ' · ' + ca[a].q + ' шт ' + delta(ca[a].q, (cb[a] || {}).q || 0))).join('') : '<div class="empty">Продажів за період немає</div>'; };
+  tl('topT', 'Столи'); tl('topC', 'Стільці');
+  // «Ростуть і падають»: для «Весь час» (і коли попереднього періоду немає в даних) — останні N днів проти попередніх N днів
+  let ma = ca, mb = cb, mh = 'штуки: ' + P.label.toLowerCase() + ' проти попереднього періоду';
+  if (NOCMP) {
+    const avail = Math.round((ASOF - DATA0) / 864e5) + 1, w = Math.max(7, Math.min(90, Math.floor(avail / 2)));
+    const f = addD(ASOF, -(w - 1)), pt = addD(f, -1), pf = addD(pt, -(w - 1));
+    ma = by(R.filter(r => inR(r, f, ASOF))); mb = by(R.filter(r => inR(r, pf, pt)));
+    mh = 'останні ' + w + ' дн (' + dm(f) + '–' + dm(ASOF) + ') проти попередніх ' + w + ' дн';
+  }
+  document.getElementById('moversHint').textContent = mh;
+  const stk = a => { const it = D.items[a]; return it && it.s1 != null ? (it.s1 || 0) + (it.s2 || 0) + (it.sk || 0) : null; };
+  let all = [...new Set(Object.keys(ma).concat(Object.keys(mb)))].map(a => ({a, x: (ma[a] || {}).q || 0, y: (mb[a] || {}).q || 0})).map(o => Object.assign(o, {d: o.x - o.y})).filter(o => o.d);
+  if (all.some(o => Math.abs(o.d) >= 2)) all = all.filter(o => Math.abs(o.d) >= 2);              // поодинокі ±1 шт — це шум
+  const up = all.filter(o => o.d > 0).sort((p, q) => q.d - p.d || q.x - p.x).slice(0, 4), dn = all.filter(o => o.d < 0).sort((p, q) => p.d - q.d || q.y - p.y).slice(0, 4);
+  const mrow = o => { const st = stk(o.a); return prodRow(o.a, '<span class="delta ' + (o.d > 0 ? 'up' : 'down') + '">' + (o.d > 0 ? '↑ +' : '↓ −') + Math.abs(o.d) + ' шт</span>',
+    o.x + ' шт проти ' + o.y + (st === 0 ? ' · <b style="color:var(--bad)">залишку немає</b>' : st != null ? ' · залишок ' + st : '')); };
+  document.getElementById('movers').innerHTML = (up.length ? '<div class="hint"><b>Ростуть</b></div>' + up.map(mrow).join('') : '') + (dn.length ? '<div class="hint" style="margin-top:6px"><b>Падають</b> · якщо залишку немає — причина, швидше за все, в цьому</div>' + dn.map(mrow).join('') : '') || '<div class="empty">Помітних змін немає</div>';
+}
+
+const MX = () => { const o = {}; (D.matrix || []).forEach(m => o[m.a] = m); return o; };
+let MXI = null;
+function mxState(a) {
+  MXI = MXI || MX();
+  const m = MXI[a], it = Object.assign({n: a, g: 'Інше'}, D.items[a] || {}, {r: m.r, v: m.v, arr: m.arr, b: /бронь|затвердж/i.test(m.ap) ? 1 : 0});
+  const s = {}; s[DEPS[0]] = m.s1; s[DEPS[1]] = m.s2; s['Склад'] = m.sk;
+  const miss = [!(m.s1 > 0) && DEPS[0], !(m.s2 > 0) && DEPS[1]].filter(Boolean);
+  let act, cls;
+  if (!miss.length) { act = 'Все є'; cls = 'a-ok'; }
+  else if (m.sk > 0) { act = 'Перевезти в ' + miss.join(' і '); cls = 'a-move'; }
+  else if (it.b || m.r) { act = it.b ? (/бронь/i.test(m.ap) ? 'У броні' : 'Замовлено') : 'В дорозі (резерв)'; cls = 'a-wait'; }
+  else if (m.v > 0) { act = 'Замовити у Vetro'; cls = 'a-order'; }
+  else { act = 'Немає у Vetro'; cls = 'a-wait'; }
+  return {it, s, miss, act, cls, both: !miss.length, none: miss.length === 2};
+}
+const CC = {'a-ok': ['--good', '--good2'], 'a-move': ['--zd', '--mint2'], 'a-wait': ['--warn', '--warn2'], 'a-order': ['--bad', '--bad2']};
+function renderMatrix() {
+  if (!D.matrix.length) { document.getElementById('mxLines').innerHTML = '<div class="empty c12">На вкладці «🧩 Матриця» немає позицій з етапами, які контролюються.</div>'; }
+  const L = D.matrix.map(m => Object.assign({a: m.a}, mxState(m.a))), n = f => L.filter(f).length, N = L.length;
+  const line = (lbl, f, c) => '<div class="mxrow c12" style="--c:' + c + '"><div class="h">' + lbl + '<span>' + n(f) + ' з ' + N + ' · ' + (N ? Math.round(n(f) / N * 100) : 0) + '%</span></div><div class="dots-line">' + L.map(x => '<i class="' + (f(x) ? 'on' : '') + '" title="' + shortName(x.it.n) + '"></i>').join('') + '</div></div>';
+  document.getElementById('mxLines').innerHTML = line(DEPS[0], x => x.s[DEPS[0]] > 0, DC[DEPS[0]]) + line(DEPS[1], x => x.s[DEPS[1]] > 0, DC[DEPS[1]]) + line('В обох магазинах', x => x.both, css('--deep')) + line('Склад', x => x.s['Склад'] > 0, css('--on'));
+  const T = [['all', 'Позицій у матриці', N, ''], ['both', 'Є в обох магазинах', n(x => x.both), '--good'], ['noZ', 'Немає в ' + DEPS[0], n(x => x.miss.includes(DEPS[0])), '--bad'], ['noR', 'Немає в ' + DEPS[1], n(x => x.miss.includes(DEPS[1])), '--bad'],
+    ['move', 'Є на складі — перевезти', n(x => x.cls === 'a-move'), '--zd'], ['wait', 'Чекаємо: бронь, дорога', n(x => x.cls === 'a-wait'), '--warn'], ['order', 'Треба замовити у Vetro', n(x => x.cls === 'a-order'), '--bad'], ['none', 'Немає в жодному магазині', n(x => x.none), '--bad']];
+  const tiles = document.getElementById('tiles');
+  tiles.innerHTML = T.map(t => '<button class="tile" data-f="' + t[0] + '" aria-pressed="' + (mxFilter === t[0]) + '"' + (t[3] ? ' style="--c:var(' + t[3] + ')"' : '') + '><span class="v">' + t[2] + '</span><span class="l">' + t[1] + '</span></button>').join('');
+  tiles.querySelectorAll('.tile').forEach(b => b.onclick = () => { mxFilter = b.dataset.f; renderMatrix(); });
+  const F = {all: () => true, both: x => x.both, noZ: x => x.miss.includes(DEPS[0]), noR: x => x.miss.includes(DEPS[1]), move: x => x.cls === 'a-move', wait: x => x.cls === 'a-wait', order: x => x.cls === 'a-order', none: x => x.none}[mxFilter];
+  const ord = {'a-move': 0, 'a-order': 1, 'a-wait': 2, 'a-ok': 3}, model = a => (a.match(/^[A-ZА-Я]+-\d+(-\d)?/i) || [a])[0];
+  document.getElementById('mxgrid').innerHTML = L.slice().sort((x, y) => ord[x.cls] - ord[y.cls]).map(x => '<button class="cell" data-a="' + x.a + '" title="' + x.it.n + ' — ' + x.act + '" style="--c:var(' + CC[x.cls][0] + ');' + (F(x) ? '' : 'opacity:.3') + '"><b>' + model(x.a) + '</b><div class="lc"><i class="' + (x.s[DEPS[0]] > 0 ? 'on' : '') + '">' + DEPS[0] + ' ' + x.s[DEPS[0]] + '</i><i class="' + (x.s[DEPS[1]] > 0 ? 'on' : '') + '">' + DEPS[1] + ' ' + x.s[DEPS[1]] + '</i><i class="' + (x.s['Склад'] > 0 ? 'on' : '') + '">скл ' + x.s['Склад'] + '</i></div><span>' + x.act + '</span></button>').join('');
+  const rows = L.filter(F).sort((x, y) => ord[x.cls] - ord[y.cls] || x.it.g.localeCompare(y.it.g));
+  document.getElementById('mxTitle').textContent = T.find(t => t[0] === mxFilter)[1] + ' · ' + rows.length;
+  const loc = (k, v) => '<span class="' + (v > 0 ? '' : 'zero') + '">' + k + ' ' + v + '</span>';
+  document.getElementById('tMx').innerHTML = '<thead><tr><th>Позиція</th><th>Наявність</th><th class="n">У Vetro</th><th>Що зробити</th></tr></thead><tbody>' + rows.map(x =>
+    '<tr><td style="min-width:250px">' + prodRow(x.a, '', x.a) + '</td><td><div class="loc">' + loc(DEPS[0], x.s[DEPS[0]]) + loc(DEPS[1], x.s[DEPS[1]]) + '<span>склад ' + x.s['Склад'] + '</span>' + (x.it.r ? '<span>резерв ' + x.it.r + '</span>' : '') + (x.it.b ? '<span>бронь ' + x.it.b + '</span>' : '') + '</div></td>' +
+    '<td class="n"><b>' + (x.it.v || 0) + '</b>' + (x.it.arr ? '<div class="hint">надійде ' + x.it.arr + '</div>' : '') + '</td><td><span class="act" style="--c:var(' + CC[x.cls][0] + ');--c2:var(' + CC[x.cls][1] + ')">' + x.act + '</span></td></tr>').join('') + '</tbody>';
+}
+
+function renderBuy(P) {
+  const items = D.purchase || [], is = re => x => re.test(x.st);
+  const pend = items.filter(is(/затвердження/i)), book = items.filter(is(/бронь/i));
+  const sumUsd = L => L.reduce((s, x) => s + (x.sUsd || (x.ap || x.q) * x.usd || 0), 0), pcs = L => L.reduce((s, x) => s + (x.ap || x.q || 0), 0);
+  const ordIn = (a, b) => (D.orders || []).filter(o => o[1] >= iso(a) && o[1] <= iso(b) && o[6] > 0);
+  const oc = ordIn(P.from, P.to), op = ordIn(P.pf, P.pt), oSum = L => L.reduce((s, o) => s + (o[8] || 0), 0), oPcs = L => L.reduce((s, o) => s + (o[6] || 0), 0);
+  const withM = items.filter(x => x.m), mAvg = withM.length ? withM.reduce((s, x) => s + x.m, 0) / withM.length : 0;
+  const card = (id, label, v, sub, icon) => document.getElementById(id).innerHTML = '<div class="top"><span class="icon">' + icon + '</span>' + label + '</div><div class="v">' + v + '</div><div class="s">' + sub + '</div>';
+  card('b-pend', 'На затвердженні', pend.length + ' поз.', pcs(pend) + ' шт · $' + fmt(sumUsd(pend)), SV.clock);
+  card('b-book', 'У броні', book.length + ' поз.', pcs(book) + ' шт · $' + fmt(sumUsd(book)), SV.box);
+  card('b-done', 'Замовлено за період', short(oSum(oc)) + ' ₴', delta(oSum(oc), oSum(op)) + '<span>' + oPcs(oc) + ' шт</span>', SV.truck);
+  card('b-marg', 'Середня маржа в закупці', Math.round(mAvg * 100) + '%', '<span>по ' + withM.length + ' позиціях</span>', SV.bag);
+  // закуплено vs продано
+  const pts = [];
+  if (mode === 'week') { const lm = monday(P.to); for (let i = 11; i >= 0; i--) pts.push([addD(lm, -7*i), addD(lm, -7*i + 6)]); }
+  else for (let i = 0; i <= P.from.getMonth(); i++) pts.push([new Date(P.from.getFullYear(), i, 1), new Date(P.from.getFullYear(), i + 1, 0)]);
+  document.getElementById('buyTrendTitle').textContent = mode === 'week' ? 'Замовлено у Vetro і продано · 12 тижнів' : 'Замовлено у Vetro і продано · по місяцях';
+  chart('chBuy', {type: 'bar', data: {labels: pts.map(p => (mode === 'week' ? p[0].getDate() + '.' + String(p[0].getMonth() + 1).padStart(2, '0') + '–' + p[1].getDate() + '.' + String(p[1].getMonth() + 1).padStart(2, '0') : MON[p[0].getMonth()])), datasets: [
+      {label: 'Замовлено у Vetro', data: pts.map(p => oSum(ordIn(p[0], p[1]))), backgroundColor: css('--rt'), borderRadius: 6, maxBarThickness: 30, order: 2},
+      {label: 'Продано', type: 'line', data: pts.map(p => agg(R.filter(r => inR(r, p[0], p[1]))).s), borderColor: css('--deep'), backgroundColor: css('--deep'), borderWidth: 2.5, pointRadius: 3, cubicInterpolationMode: 'monotone', order: 1}]},
+    options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + uah(c.raw)}}},
+      scales: {x: {grid: {display: false}, border: {display: false}}, y: {border: {display: false}, grid: {color: '#eeeeeb'}, ticks: {callback: v => short(v)}}}}});
+  const gs = {}; items.forEach(x => { gs[x.g] = (gs[x.g] || 0) + (x.sUsd || (x.ap || x.q) * x.usd || 0); });
+  const gt = Object.values(gs).reduce((a, b) => a + b, 0) || 1;
+  document.getElementById('buyGroups').innerHTML = Object.keys(gs).sort((a, b) => gs[b] - gs[a]).map(g => '<div class="mxrow" style="--c:var(--rt)"><div class="h">' + g + '<span>$' + fmt(gs[g]) + ' · ' + Math.round(gs[g] / gt * 100) + '%</span></div><div class="lb" style="--c:var(--rt)"><i style="width:' + Math.round(gs[g] / gt * 100) + '%"></i></div></div>').join('') || '<div class="empty">У закупці зараз нічого немає</div>';
+  const STC = s => /затвердж/i.test(s) && !/на/i.test(s) ? ['--good', '--good2'] : /на затв/i.test(s) ? ['--warn', '--warn2'] : /бронь/i.test(s) ? ['--zd', '--mint2'] : /відхил/i.test(s) ? ['--bad', '--bad2'] : ['--muted', '--cap'];
+  const ordr = {'на затвердження': 0, 'бронь': 1, 'затверджено': 2, 'чернетка': 3, 'відхилено': 4};
+  document.getElementById('tBuy').innerHTML = '<thead><tr><th>Позиція</th><th>Затвердження</th><th class="n">Замовити</th><th class="n">Затверджено</th><th class="n">Сума, $</th><th class="n">Маржа</th><th class="n">У Vetro</th></tr></thead><tbody>' +
+    items.slice().sort((a, b) => (ordr[a.st.toLowerCase()] ?? 5) - (ordr[b.st.toLowerCase()] ?? 5)).map(x => { const c = STC(x.st);
+      return '<tr><td style="min-width:260px">' + prodRow(x.a, '', esc(x.a)) + '</td><td><span class="st" style="--c:var(' + c[0] + ');--c2:var(' + c[1] + ')">' + esc(x.st || '—') + '</span></td><td class="n">' + (x.q || '') + '</td><td class="n"><b>' + (x.ap || '') + '</b></td><td class="n">' + (x.sUsd ? fmt(x.sUsd) : '') + '</td><td class="n">' + (x.m ? Math.round(x.m * 100) + '%' : '') + '</td><td class="n">' + (x.v || 0) + '</td></tr>'; }).join('') + '</tbody>' || '';
+  if (!items.length) document.getElementById('tBuy').innerHTML = '<tr><td class="empty">На вкладці «🛒 Закупка» зараз немає позицій із кількістю чи статусом.</td></tr>';
+  const byNo = {}; (D.orders || []).forEach(o => { const k = o[0] || o[1]; (byNo[k] = byNo[k] || {no: o[0], d: o[1], n: 0, q: 0, s: 0, rej: 0}); if (o[6] > 0) { byNo[k].n++; byNo[k].q += o[6]; byNo[k].s += o[8] || 0; } else byNo[k].rej++; });
+  const ol = Object.values(byNo).sort((a, b) => String(b.d).localeCompare(String(a.d))).slice(0, 12);
+  document.getElementById('tOrders').innerHTML = ol.length ? '<thead><tr><th>Замовлення</th><th>Дата</th><th class="n">Позицій</th><th class="n">Штук</th><th class="n">Сума, грн</th><th class="n">Відхилено</th></tr></thead><tbody>' +
+    ol.map(o => '<tr><td><b>' + esc(o.no) + '</b></td><td>' + (/^\d{4}-/.test(o.d) ? dm(pd(o.d)) + '.' + o.d.slice(0, 4) : esc(o.d)) + '</td><td class="n">' + o.n + '</td><td class="n">' + o.q + '</td><td class="n"><b>' + uah(o.s) + '</b></td><td class="n">' + (o.rej || '') + '</td></tr>').join('') + '</tbody>' : '<tr><td class="empty">Сформованих замовлень ще немає.</td></tr>';
+  document.getElementById('heroTitle').innerHTML = 'Закупка: <em>' + pend.length + ' поз.</em> чекають затвердження';
+  document.getElementById('heroSub').innerHTML = 'на $' + fmt(sumUsd(pend)) + ' · у броні ' + book.length + ' поз. · замовлено за період ' + uah(oSum(oc));
+}
+
+// ===== загальні: періоди-корзини, нормалізація артикула =====
+const nk = a => String(a || '').toLowerCase().replace(/\s+/g, '');
+const rng = (a, b) => a.getDate() + '.' + String(a.getMonth() + 1).padStart(2, '0') + '–' + b.getDate() + '.' + String(b.getMonth() + 1).padStart(2, '0');
+function bucketsOf(P) {
+  const out = [];
+  if (P.span <= 7) { for (let i = 0; i < P.span; i++) { const d = addD(P.from, i); out.push({l: WD[d.getDay()] + (mode === 'week' ? '' : ' ' + dm(d)), a: d, b: d, fut: d > ASOF}); } out.kind = 'днях'; }
+  else if (P.span <= 62) { for (let w = monday(P.from); w <= P.full; w = addD(w, 7)) { const a0 = w < P.from ? P.from : w, b0 = addD(w, 6) > P.full ? P.full : addD(w, 6); out.push({l: rng(a0, b0), a: a0, b: b0, fut: a0 > ASOF}); } out.kind = 'тижнях'; }
+  else {
+    const multiY = P.from.getFullYear() !== P.full.getFullYear();
+    for (let m = new Date(P.from.getFullYear(), P.from.getMonth(), 1); m <= P.full; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) {
+      const e = new Date(m.getFullYear(), m.getMonth() + 1, 0), a0 = m < P.from ? P.from : m, b0 = e > P.full ? P.full : e;
+      out.push({l: MON[m.getMonth()] + (multiY ? " '" + String(m.getFullYear()).slice(2) : ''), a: a0, b: b0, fut: a0 > ASOF});
+    }
+    out.kind = 'місяцях';
+  }
+  return out;
+}
+
+// ===== у які дні продається більше =====
+function renderWeekdays(P, cur) {
+  const card = document.getElementById('wdCard');
+  card.hidden = P.span <= 7;
+  if (card.hidden) return;
+  const cnt = [0, 0, 0, 0, 0, 0, 0], sum = [0, 0, 0, 0, 0, 0, 0], dep = [...Array(7)].map(() => ({}));
+  for (let d = new Date(P.from); d <= P.to; d = addD(d, 1)) cnt[(d.getDay() + 6) % 7]++;
+  cur.forEach(r => { const i = (pd(r.d).getDay() + 6) % 7; sum[i] += r.s; dep[i][r.dep] = (dep[i][r.dep] || 0) + r.s; });
+  const avg = sum.map((s, i) => cnt[i] ? s / cnt[i] : 0), mx = Math.max(1, ...avg), best = avg.indexOf(Math.max(...avg)), worst = avg.indexOf(Math.min(...avg));
+  const all = avg.reduce((a, b) => a + b, 0) / 7 || 1, names = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'], full = ['понеділок', 'вівторок', 'середа', 'четвер', "п'ятниця", 'субота', 'неділя'];
+  document.getElementById('wdHint').innerHTML = 'найкращий день: <b>' + full[best] + '</b> · ' + short(avg[best]) + ' ₴ у середньому (' + (avg[best] >= all ? '+' : '') + Math.round((avg[best] / all - 1) * 100) + '% до середнього) · найслабший: ' + full[worst];
+  const el = document.getElementById('wdCaps');
+  el.innerHTML = avg.map((v, i) => { const h = Math.max(4, v / mx * 100), tip = names[i] + ': ' + uah(v) + ' у середньому за день (' + cnt[i] + ' дн.)\n' + DEPS.map(d => d + ': ' + uah(cnt[i] ? (dep[i][d] || 0) / cnt[i] : 0)).join('\n');
+    return '<div class="cap' + (i === best ? ' max' : '') + '" title="' + esc(tip) + '"><div class="tr"><i style="height:0%" data-h="' + h + '"></i>' + (i === best ? '<span class="tag" style="bottom:calc(' + h + '% + 6px)">' + short(v) + '</span>' : v ? '<span class="tag mini" style="bottom:calc(' + h + '% + 5px)">' + short(v) + '</span>' : '') + '</div><span>' + names[i] + '</span></div>'; }).join('');
+  requestAnimationFrame(() => el.querySelectorAll('.tr i').forEach(i => i.style.height = i.dataset.h + '%'));
+  const sp = document.getElementById('wdDeps');
+  sp.innerHTML = DEPS.map(d => { const a = names.map((_, i) => cnt[i] ? (dep[i][d] || 0) / cnt[i] : 0), b = a.indexOf(Math.max(...a)); return '<span><i class="dot" style="background:' + DC[d] + '"></i>' + d + ': пік у <b>' + full[b] + '</b></span>'; }).join('');
+}
+
+// ===== теплова карта днів (для довгих періодів) =====
+function heatCal(P, byDay) {
+  const start = monday(P.from), end = addD(monday(P.full), 6), vals = Object.values(byDay), mx = Math.max(1, ...vals);
+  let cols = '', last = -1, labels = '';
+  for (let w = new Date(start); w <= end; w = addD(w, 7)) {
+    const w6 = addD(w, 6), lab = w6.getDate() <= 7 && w6 >= P.from ? MON[w6.getMonth()] : '';
+    labels += '<span>' + lab + '</span>'; last = w.getMonth();
+    let col = '';
+    for (let k = 0; k < 7; k++) {
+      const d = addD(w, k), s = byDay[iso(d)] || 0, inP = d >= P.from && d <= P.full;
+      const a = s ? .15 + .85 * Math.sqrt(s / mx) : 0;
+      col += '<i title="' + dm(d) + ' (' + WD[d.getDay()] + '): ' + (inP ? (s ? uah(s) : 'без продажів') : 'поза періодом') + '" style="background:' + (!inP || d > ASOF ? 'transparent' : s ? 'rgba(255,198,26,' + a.toFixed(2) + ')' : '#efefec') + (s >= mx * .7 && inP ? ';background:#111' : '') + '"></i>';
+    }
+    cols += '<div class="hc">' + col + '</div>';
+  }
+  return '<div class="heat"><div class="hl">' + labels + '</div><div class="hg">' + cols + '</div></div><div class="scale">менше <i style="background:#efefec"></i><i style="background:rgba(255,198,26,.35)"></i><i style="background:rgba(255,198,26,.7)"></i><i style="background:#ffc61a"></i><i style="background:#111"></i> більше</div>';
+}
+
+// ===== акції: ефект за продажами =====
+function promoStats() {
+  if (promoStats.cache && promoStats.cache.D === D) return promoStats.cache.v;
+  const by = {}; R.forEach(r => (by[nk(r.a)] = by[nk(r.a)] || []).push(r));
+  PBY = by;
+  const v = (D.promos || []).map(p => {
+    const st = pd(p.s), en = p.e ? pd(p.e) : new Date(), endEff = en > ASOF ? ASOF : en;
+    const days = Math.max(0, Math.round((endEff - st) / 864e5) + 1), totalDays = Math.round((en - st) / 864e5) + 1;
+    const bDays = Math.min(60, Math.max(days, 1)), bFrom = addD(st, -bDays), bTo = addD(st, -1);
+    const L = by[nk(p.a)] || [];
+    const during = L.filter(r => days > 0 && inR(r, st, endEff)), before = L.filter(r => inR(r, bFrom, bTo));
+    const q = during.reduce((s, r) => s + r.q, 0), sum = during.reduce((s, r) => s + r.s, 0), bq = before.reduce((s, r) => s + r.q, 0);
+    const per = days ? q / days : 0, bper = bq / bDays, ok = days >= 7 && !/вже діяла/.test(p.note);
+    return Object.assign({}, p, {st, en: p.e ? en : null, days, totalDays, q, sum, bq, per, bper, ok, eff: ok && bper > 0 ? Math.round((per - bper) / bper * 100) : null, noData: days === 0});
+  });
+  promoStats.cache = {D, v};
+  return v;
+}
+const effPill = p => p.noData ? '<span class="delta flat">продажі ще не завантажені</span>' : p.eff != null ? '<span class="delta ' + (p.eff > 0 ? 'up' : p.eff < 0 ? 'down' : 'flat') + '">' + (p.eff > 0 ? '+' : '') + p.eff + '%</span>' : '<span class="delta flat">' + (p.ok ? (p.q ? 'нове: до акції 0' : 'без продажів') : /вже діяла/.test(p.note) ? 'початок невідомий' : 'мало даних (< 7 дн)') + '</span>';
+
+let PBY = {};
+function renderPromo(P) {
+  const S = promoStats(), act = S.filter(p => p.on), done = S.filter(p => !p.on), ev = done.filter(p => p.eff != null);
+  // продажі під час акцій у межах будь-якого відрізка [a, b] + скільки продали б без акції (темп до неї × дні)
+  const ovl = (p, a, b) => { const f = p.st > a ? p.st : a, en = p.en || ASOF, t = en < b ? en : b; return f <= t ? [f, t] : null; };
+  const inPromo = (a, b, only) => { let q = 0, s = 0, base = 0; const n = new Set();
+    S.forEach(p => { if (only && !only(p)) return; const o = ovl(p, a, b); if (!o) return; n.add(p.a);
+      (PBY[nk(p.a)] || []).forEach(r => { if (inR(r, o[0], o[1])) { q += r.q; s += r.s; } });
+      if (p.ok) base += p.bper * (Math.round((o[1] - o[0]) / 864e5) + 1); });
+    return {q, s, base, n: n.size}; };
+  const cp = inPromo(P.from, P.to), pp = inPromo(P.pf, P.pt), totS = agg(R.filter(r => inR(r, P.from, P.to))).s;
+  const avgD = act.length ? act.reduce((s, p) => s + p.d, 0) / act.length : 0;
+  const card = (id, label, v, sub, icon) => document.getElementById(id).innerHTML = '<div class="top"><span class="icon">' + icon + '</span>' + label + '</div><div class="v">' + v + '</div><div class="s">' + sub + '</div>';
+  card('p-act', 'Зараз в акції', act.length + ' поз.', '<span>середня знижка ' + Math.round(avgD) + '%</span>', SV.bag);
+  card('p-sum', 'Продано в акції за період', short(cp.s) + ' ₴', delta(cp.s, pp.s) + '<span>' + cp.q + ' шт · ' + (totS ? (cp.s / totS * 100 < 1 && cp.s ? (cp.s / totS * 100).toFixed(1).replace('.', ',') : Math.round(cp.s / totS * 100)) : 0) + '% виручки</span>', SV.rcpt);
+  const effP = cp.base > 0 ? Math.round((cp.q - cp.base) / cp.base * 100) : null;
+  card('p-eff', 'Ефект акцій за період', effP == null ? '—' : (effP > 0 ? '+' : '') + effP + '%', '<span>' + (effP == null ? 'немає з чим порівняти' : 'продано ' + cp.q + ' шт, без акції було б ≈ ' + Math.round(cp.base) + ' шт') + '</span>', SV.box);
+  card('p-done', 'Завершених акцій', done.length, '<span>з оцінкою ефекту: ' + ev.length + '</span>', SV.clock);
+  const unk = S.filter(p => /вже діяла/.test(p.note));
+  document.getElementById('promoStart').innerHTML = !(D.promos && D.promos.length) ? 'Журнал акцій почне заповнюватись при наступному оновленні фіду постачальника.' :
+    unk.length ? '⚠️ Для <b>' + unk.length + '</b> акцій початок невідомий — вони вже діяли, коли почався запис (' + dm(pd(D.promos.map(p => p.s).sort()[0])) + '). Вкажіть справжню дату на аркуші налаштувань у рядку <b>«Акції: дата початку тих, що вже діяли на старті запису»</b> і натисніть <b>🧮 Перерахувати аналітику</b>. Це потрібно один раз.'
+    : 'Запис акцій ведеться з ' + dm(pd(D.promos.map(p => p.s).sort()[0])) + '. Початок і кінець нових акцій система фіксує сама.';
+  // графік: продано в акції проти темпу без акції — по днях / тижнях / місяцях обраного періоду
+  const bk = P.span <= 7 ? bucketsOf(Object.assign({}, P, {span: 8})) : bucketsOf(P), bv = bk.map(b => b.fut ? {q: 0, base: 0} : inPromo(b.a, b.b));
+  document.getElementById('promoChTitle').textContent = 'Продажі акційних позицій по ' + bk.kind;
+  chart('chPromo', {type: 'bar', data: {labels: bk.map(b => b.l), datasets: [
+    {label: 'Продано в акції', data: bv.map(x => x.q), backgroundColor: css('--rt'), borderRadius: 6, maxBarThickness: 34, order: 2},
+    {label: 'Без акції (темп до неї)', type: 'line', data: bv.map(x => Math.round(x.base * 10) / 10), borderColor: css('--deep'), backgroundColor: css('--deep'), borderWidth: 2, borderDash: [5, 4], pointRadius: 2.5, order: 1}]},
+    options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + c.raw + ' шт', footer: it => 'Виручка в акції: ' + uah(bv[it[0].dataIndex].s || 0)}}},
+      scales: {x: {grid: {display: false}, border: {display: false}}, y: {beginAtZero: true, border: {display: false}, grid: {color: '#eeeeeb'}, ticks: {precision: 0}}}}});
+  // зараз в акції: групи (столи, стільці, далі решта), усередині — від найкращих продажів за весь час
+  const AQ = {}; Object.keys(ART_Q).forEach(a => AQ[nk(a)] = (AQ[nk(a)] || 0) + ART_Q[a]);
+  const perP = p => { const o = ovl(p, P.from, P.to); let q = 0; if (o) (PBY[nk(p.a)] || []).forEach(r => { if (inR(r, o[0], o[1])) q += r.q; }); return q; };
+  document.getElementById('promoAct').innerHTML = act.length ? GROUPS.map(g => {
+    const G = act.filter(p => ((D.items[p.a] || {}).g || 'Інше') === g).map(p => Object.assign(p, {allQ: AQ[nk(p.a)] || 0, pq: perP(p)})).sort((a, b) => b.allQ - a.allQ || b.q - a.q);
+    if (!G.length) return '';
+    return '<div><div class="zh"><b>' + g + '</b><span>' + G.length + ' поз. · за період ' + G.reduce((t, p) => t + p.pq, 0) + ' шт</span></div><div class="list">' +
+      G.map(p => prodRow(p.a, effPill(p), '−' + p.d + '% · ' + fmt(p.op) + ' → <b>' + fmt(p.p) + ' ₴</b> · з ' + dm(p.st) + '<br>за період <b>' + p.pq + ' шт</b> · в акції всього ' + p.q + ' · за весь час ' + p.allQ + ' шт')).join('') + '</div></div>'; }).join('')
+    : '<div class="empty">Зараз позицій в акції немає</div>';
+  const H = done.slice().sort((a, b) => (b.eff ?? -1e9) - (a.eff ?? -1e9));
+  document.getElementById('tPromo').innerHTML = H.length ? '<thead><tr><th>Позиція</th><th>Період</th><th class="n">Знижка</th><th class="n">Продано</th><th class="n">Шт/день</th><th class="n">До акції</th><th class="n">Ефект</th></tr></thead><tbody>' +
+    H.map(p => '<tr data-art="' + esc(p.a) + '"><td style="min-width:240px">' + prodRow(p.a, '', esc(p.a)) + '</td><td>' + dm(p.st) + '–' + (p.en ? dm(p.en) : '…') + ' <span class="hint">' + p.totalDays + ' дн</span></td><td class="n">−' + p.d + '%</td><td class="n">' + p.q + ' шт<br><span class="hint">' + short(p.sum) + ' ₴</span></td><td class="n">' + p.per.toFixed(2) + '</td><td class="n">' + p.bper.toFixed(2) + '</td><td class="n">' + effPill(p) + '</td></tr>').join('') + '</tbody>'
+    : '<tr><td class="empty">Завершених акцій ще немає — з\'являться, коли якась позиція вийде з акції.</td></tr>';
+  // стрічка часу: останні 120 днів
+  const t1 = new Date(), t0 = addD(t1, -119), span = 120, rows = S.filter(p => (p.en || t1) >= t0).sort((a, b) => b.st - a.st).slice(0, 30);
+  const x = d => Math.max(0, Math.min(100, (d - t0) / 864e5 / span * 100));
+  let ticks = ''; for (let m = new Date(t0.getFullYear(), t0.getMonth() + 1, 1); m <= t1; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) ticks += '<span style="left:' + x(m) + '%">' + MON[m.getMonth()] + '</span>';
+  document.getElementById('promoLine').innerHTML = rows.length ? '<div class="gl-ticks">' + ticks + '</div>' + rows.map(p => { const it = D.items[p.a] || {n: p.a};
+    return '<div class="gl" data-art="' + esc(p.a) + '"><span class="gn" title="' + esc(it.n) + '">' + esc(shortName(it.n || p.a)) + '</span><div class="gt"><i class="' + (p.on ? 'on' : '') + '" style="left:' + x(p.st) + '%;width:' + Math.max(1.2, x(p.en || t1) - x(p.st)) + '%" title="−' + p.d + '% · ' + dm(p.st) + '–' + (p.en ? dm(p.en) : 'діє') + '"></i></div></div>'; }).join('') : '<div class="empty">Акцій за останні 120 днів немає</div>';
+}
+
+// ===== карта асортименту =====
+let asDays = 90, asFilter = 'all';
+try { const s = JSON.parse(localStorage.getItem('d2asort') || '{}'); if (s.d) asDays = s.d; } catch (e) {}
+function renderAssort() {
+  const to = ASOF, from = addD(ASOF, -(asDays - 1)), first = DATA0, avail = Math.round((ASOF - first) / 864e5) + 1;
+  document.querySelectorAll('#asDays button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.d === asDays));
+  document.getElementById('asNote').textContent = asDays > avail ? 'Дані продажів є лише за ' + avail + ' дн (з ' + dm(first) + '.' + first.getFullYear() + ') — показано весь доступний час' : 'продажі за ' + asDays + ' дн: ' + dm(from) + '–' + dm(to);
+  const q = {}, s = {}; R.forEach(r => { if (inR(r, from, to)) { q[r.a] = (q[r.a] || 0) + r.q; s[r.a] = (s[r.a] || 0) + r.s; } });
+  const S = promoStats(), onPromo = new Set(S.filter(p => p.on).map(p => nk(p.a)));
+  // дата новинки — з мітки «🆕 Новинка з 05.10» (рік — найближчий у минулому)
+  const newDate = l => { const m = /🆕 Новинка(?: з прайсу)? з (\d{2})\.(\d{2})/.exec(l || ''); if (!m) return null; let d = new Date(ASOF.getFullYear(), +m[2] - 1, +m[1]); if (d > addD(new Date(), 1)) d = new Date(d.getFullYear() - 1, d.getMonth(), d.getDate()); return d; };
+  const L = (D.assort || []).map(a => { const it = D.items[a] || {}; const phys = (it.s1 || 0) + (it.s2 || 0) + (it.sk || 0), nd = newDate(it.l);
+    const age = nd ? Math.max(0, Math.round((ASOF - nd) / 864e5) + 1) : null;                 // скільки днів новинка є в продажу (у межах даних продажів)
+    const eff = age == null ? asDays : Math.max(14, Math.min(asDays, age));                    // новинку міряємо за її власний час, а не за все вікно
+    return {a, it, g: it.g || 'Інше', q: q[a] || 0, s: s[a] || 0, phys, isNew: /🆕/.test(it.l || ''), nd, age, rate: (q[a] || 0) / eff, promo: onPromo.has(nk(a)) || /🏷 Акція −/.test(it.l || '')}; });
+  // рівні швидкості — всередині своєї групи, за продажами в день (новинки — за днями, що вони існують)
+  const groups = [...new Set(L.map(x => x.g))].sort((a, b) => L.filter(x => x.g === b).length - L.filter(x => x.g === a).length);
+  groups.forEach(g => { const sel = L.filter(x => x.g === g && x.q > 0).sort((a, b) => b.rate - a.rate || b.q - a.q), n = sel.length;
+    sel.forEach((x, i) => { x.lv = i < Math.max(1, Math.round(n * .2)) ? 4 : i < Math.round(n * .5) ? 3 : 2; }); });
+  // новинка без продажів, яка ще не прожила все вікно, — не «застій», а окремий рядок «нові, ще без продажів»
+  L.forEach(x => { if (!x.lv) x.lv = x.isNew && (x.age == null || x.age < asDays) ? 5 : x.phys > 0 ? 1 : 0; x.stale = x.lv === 1; x.lost = x.lv >= 3 && x.lv <= 4 && x.phys === 0; x.waitLong = x.lv === 5 && x.age >= 30; });
+  const F = {all: () => true, hit: x => x.lv === 4, stale: x => x.stale, lost: x => x.lost, new: x => x.isNew, promo: x => x.promo}[asFilter];
+  const staleQ = L.filter(x => x.stale).reduce((a, x) => a + x.phys, 0), staleV = L.filter(x => x.stale).reduce((a, x) => a + x.phys * (x.it.pp || x.it.pr || 0), 0);
+  const NW = L.filter(x => x.isNew);
+  const chips = [['all', 'Усі позиції', L.length, ''], ['hit', '🔥 Хіти групи', L.filter(x => x.lv === 4).length, ''], ['stale', '💤 Застій (є залишок, 0 продажів)', L.filter(x => x.stale).length, staleQ + ' шт · ≈ ' + short(staleV) + ' ₴'],
+    ['lost', '⚠️ Продається, а залишку немає', L.filter(x => x.lost).length, 'втрачені продажі'], ['new', '🆕 Новинки', NW.length, 'продаються ' + NW.filter(x => x.q > 0).length + ' · без продажів ' + NW.filter(x => !x.q).length], ['promo', '🏷 В акції', L.filter(x => x.promo).length, '']];
+  const ch = document.getElementById('asChips');
+  ch.innerHTML = chips.map(c => '<button class="tile" data-f="' + c[0] + '" aria-pressed="' + (asFilter === c[0]) + '"><span class="v">' + c[2] + '</span><span class="l">' + c[1] + (c[3] ? '<br><b>' + c[3] + '</b>' : '') + '</span></button>').join('');
+  ch.querySelectorAll('.tile').forEach(b => b.onclick = () => { asFilter = b.dataset.f; renderAssort(); });
+  // кожна група — окремий блок, усередині рядки за рівнем продажів, щоб кольори не зливались
+  const LV = [[4, '🔥 Хіти'], [3, 'Добре продаються'], [2, 'Повільно'], [5, '🆕 Нові, ще без продажів'], [1, '💤 Застій'], [0, 'Без продажів і залишку']];
+  const GO = ['Столи', 'Стільці'];
+  groups.sort((a, b) => (GO.indexOf(a) < 0 ? 9 : GO.indexOf(a)) - (GO.indexOf(b) < 0 ? 9 : GO.indexOf(b)) || L.filter(x => x.g === b).length - L.filter(x => x.g === a).length);
+  const sqHtml = x => '<i class="sq l' + x.lv + (x.isNew ? ' nw' : '') + (x.waitLong ? ' wl' : '') + (x.lost ? ' lost' : '') + (x.promo ? ' pr' : '') + (F(x) ? '' : ' dim') + '" data-art="' + esc(x.a) + '" title="' + esc((x.it.n || x.a) + '\n' + x.a + '\n' +
+    (x.isNew ? '🆕 новинка' + (x.nd ? ' з ' + dm(x.nd) + ' (' + x.age + ' дн)' : '') + ' · ' + x.q + ' шт за цей час' : x.q + ' шт за ' + asDays + ' дн') + ' · залишок ' + x.phys + ' шт' +
+    (x.stale ? ' · ЗАСТІЙ' : '') + (x.waitLong ? ' · вже місяць без жодного продажу' : '') + (x.lost ? ' · немає залишку' : '') + (x.promo ? ' · в акції' : '')) + '"></i>';
+  document.getElementById('asGrid').innerHTML = groups.map(g => { const G = L.filter(x => x.g === g);
+    return '<div class="zone2"><div class="zh"><b>' + g + '</b><span>' + G.length + ' поз. · продаються ' + G.filter(x => x.q > 0).length + ' · застій ' + G.filter(x => x.stale).length + '</span></div>' +
+      LV.map(l => { const S2 = G.filter(x => x.lv === l[0]).sort((a, b) => l[0] === 5 ? (b.age || 0) - (a.age || 0) : b.rate - a.rate || b.phys - a.phys); if (!S2.length) return '';
+        return '<div class="lvrow"><span class="lvl">' + l[1] + '<b>' + S2.length + '</b></span><div class="sqs">' + S2.map(sqHtml).join('') + '</div></div>'; }).join('') + '</div>'; }).join('') || '<div class="empty">Немає даних з вкладки «📊 Загальна»</div>';
+  document.getElementById('asZones').innerHTML = groups.map(g => { const G = L.filter(x => x.g === g), sell = G.filter(x => x.q > 0).length, st = G.filter(x => x.stale).length, p = G.length ? Math.round(sell / G.length * 100) : 0;
+    return '<div class="mxrow"><div class="h">' + g + '<span>' + p + '% продаються' + (st ? ' · застій ' + st : '') + '</span></div><div class="lb" style="--c:var(--rt)"><i style="width:' + p + '%"></i></div></div>'; }).join('');
+  const top = L.filter(F).sort((a, b) => asFilter === 'stale' ? b.phys * (b.it.pr || 0) - a.phys * (a.it.pr || 0) : asFilter === 'new' ? (b.nd || 0) - (a.nd || 0) : b.s - a.s).slice(0, asFilter === 'new' ? 60 : 8);
+  document.getElementById('asList').innerHTML = top.map(x => prodRow(x.a, '<b>' + (asFilter === 'stale' ? x.phys + ' шт' : x.q + ' шт') + '</b>', asFilter === 'stale' ? 'залишок ' + x.phys + ' шт · 0 продажів за ' + asDays + ' дн' :
+    asFilter === 'new' ? (x.nd ? 'з ' + dm(x.nd) + ' · ' + x.age + ' дн · ' : '') + (x.q ? short(x.s) + ' ₴' : '<b style="color:' + (x.waitLong ? 'var(--bad)' : 'var(--muted)') + '">ще без продажів</b>') + ' · залишок ' + x.phys + ' шт' : short(x.s) + ' ₴ · залишок ' + x.phys + ' шт')).join('') || '<div class="empty">Немає позицій</div>';
+  document.getElementById('asListTitle').textContent = {all: 'Топ за виручкою', hit: 'Хіти', stale: 'Найбільше заморожено в застої', lost: 'Продається, а залишку немає', new: 'Новинки · від найновіших', promo: 'В акції'}[asFilter];
+  try { localStorage.setItem('d2asort', JSON.stringify({d: asDays})); } catch (e) {}
+}
+
+// ===== картка товару =====
+function showItem(a) { openModal(() => itemModal(a)); }
+function itemModal(a) {
+  const it = Object.assign({n: a, g: 'Інше'}, D.items[a] || {}), P = period(offset);
+  const L = R.filter(r => r.a === a).sort((x, y) => y.d.localeCompare(x.d)), inP = r => inR(r, P.from, P.to), tp = agg(L.filter(inP)), ta = agg(L);
+  const pr = promoStats().filter(p => nk(p.a) === nk(a));
+  const months = []; for (let m = new Date(DATA0.getFullYear(), DATA0.getMonth(), 1); m <= ASOF; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) months.push(m);
+  const mq = months.map(m => L.filter(r => r.d.startsWith(iso(m).slice(0, 7))).reduce((s, r) => s + r.q, 0));
+  const mPromo = months.map(m => { const e = new Date(m.getFullYear(), m.getMonth() + 1, 0); return pr.some(p => p.st <= e && (p.en || new Date()) >= m); });
+  const chip = (k, v) => '<span class="' + (v > 0 ? '' : 'zero') + '">' + k + ' ' + (v || 0) + '</span>';
+  const stock = it.s1 != null ? '<div class="loc">' + chip(DEPS[0], it.s1) + chip(DEPS[1], it.s2) + '<span>склад ' + (it.sk || 0) + '</span>' + (it.r ? '<span>резерв ' + it.r + '</span>' : '') + '<span>Vetro ' + (it.v >= 99 ? 'багато' : it.v || 0) + '</span></div>' : '';
+  const html = mhead('<div class="ih"><div class="ipic">' + pic(it, it.g) + '</div><div><h2>' + esc(it.n) + '</h2><div class="hint">' + (a.startsWith('name:') ? 'без артикула' : esc(a)) + (it.c ? ' · ' + esc(it.c) : '') + '</div>' +
+    (it.l ? '<div class="hint" style="margin-top:4px">' + esc(it.l) + '</div>' : '') + (it.st ? '<div style="margin-top:6px;font-size:12.5px;font-weight:700">' + esc(it.st) + '</div>' : '') + '</div></div>') +
+    stock +
+    '<div class="hint">За обраний період (' + P.label + '): <b>' + tp.q + ' шт · ' + uah(tp.s) + '</b> · за весь час: ' + ta.q + ' шт · ' + uah(ta.s) + '</div>' +
+    '<div class="chart sm"><canvas id="chItem"></canvas></div>' +
+    (pr.length ? '<div><h3 style="margin:4px 0 8px">Акції</h3><div class="list">' + pr.sort((x, y) => y.st - x.st).map(p => '<div class="prod" style="grid-template-columns:minmax(0,1fr) auto"><div class="pn"><b>−' + p.d + '% · ' + dm(p.st) + '–' + (p.en ? dm(p.en) : 'діє') + '</b><span>' + fmt(p.op) + ' → ' + fmt(p.p) + ' ₴ · продано ' + p.q + ' шт</span></div><div>' + effPill(p) + '</div></div>').join('') + '</div></div>' : '') +
+    '<div class="tbl"><table><thead><tr><th>Дата</th><th>№ замовлення</th><th>Відділ</th><th>Менеджер</th><th class="n">Шт</th><th class="n">Сума</th></tr></thead><tbody>' +
+    (L.slice(0, 40).map(r => '<tr class="' + (inP(r) ? 'inp' : '') + '"><td>' + dm(pd(r.d)) + '.' + r.d.slice(0, 4) + '</td><td>' + esc(r.o.split('#').slice(1).join('#')) + '</td><td>' + r.dep + '</td><td><a data-mgr="' + esc(r.m) + '" style="text-decoration:underline dotted">' + esc(r.m) + '</a></td><td class="n">' + r.q + '</td><td class="n">' + uah(r.s) + '</td></tr>').join('') || '<tr><td colspan="6" class="empty">Продажів немає</td></tr>') + '</tbody></table></div>';
+  return {html, after: () => chart('chItem', {type: 'bar', data: {labels: months.map(m => MON[m.getMonth()]), datasets: [{label: 'Продано, шт', data: mq, backgroundColor: mPromo.map(x => x ? css('--rt') : css('--deep')), borderRadius: 6, maxBarThickness: 26}]},
+    options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.raw + ' шт' + (mPromo[c.dataIndex] ? ' · була акція' : '')}}},
+      scales: {x: {grid: {display: false}, border: {display: false}}, y: {beginAtZero: true, border: {display: false}, grid: {color: '#eeeeeb'}, ticks: {precision: 0}}}}})};
+}
+
+// ===== вікна: стек — із замовлення можна перейти в товар чи менеджера і повернутись «‹ Назад» =====
+const MS = [];
+function openModal(fn) { MS.push(fn); drawModal(); }
+function drawModal() { const r = MS[MS.length - 1](), box = document.getElementById('modalBox'); box.innerHTML = r.html; document.getElementById('modal').hidden = false; box.scrollTop = 0; if (r.after) r.after(); }
+function backModal() { MS.pop(); MS.length ? drawModal() : closeModal(); }
+const mhead = inner => '<header><div style="display:flex;align-items:flex-start;gap:4px;min-width:0">' + (MS.length > 1 ? '<button class="back" onclick="backModal()">‹ Назад</button>' : '') + '<div style="min-width:0">' + inner + '</div></div><button class="x" onclick="closeModal()" aria-label="Закрити">×</button></header>';
+const GROUPS = ['Столи', 'Стільці', 'Крісла і дивани', 'Журнальні та консолі', 'Інше'];
+
+function ordersOf(rows) {
+  const m = {};
+  rows.forEach(r => { const o = m[r.o] || (m[r.o] = {no: r.o.split('#').slice(1).join('#'), d: r.d, dep: r.dep, mg: r.m, s: 0, q: 0, L: []}); o.s += r.s; o.q += r.q; o.L.push(r); if (r.d < o.d) o.d = r.d; });
+  return Object.values(m);
+}
+function ordersTable(list, withMgr) {
+  if (!list.length) return '<div class="empty">Замовлень немає</div>';
+  return '<div class="tbl"><table class="ordl"><thead><tr><th>Дата</th><th>№</th><th>Відділ</th>' + (withMgr ? '<th>Менеджер</th>' : '') + '<th>Що купили</th><th class="n">Шт</th><th class="n">Сума</th></tr></thead><tbody>' +
+    list.map(o => '<tr><td>' + dm(pd(o.d)) + '</td><td>' + esc(o.no || '—') + '</td><td>' + o.dep + '</td>' + (withMgr ? '<td><a data-mgr="' + esc(o.mg) + '" style="text-decoration:underline dotted">' + esc(o.mg) + '</a></td>' : '') +
+      '<td class="its">' + o.L.map(r => '<a data-art="' + esc(r.a) + '">' + esc(shortName((D.items[r.a] || {}).n || r.a)) + '</a>' + (r.q > 1 ? ' ×' + r.q : '')).join(', ') + '</td><td class="n">' + o.q + '</td><td class="n"><b>' + uah(o.s) + '</b></td></tr>').join('') + '</tbody></table></div>';
+}
+let oSort = 'd', oDep = '';
+function openList(kind) {
+  if (kind === 'sold') return openModal(soldModal);
+  oSort = kind === 'orders-sum' ? 's' : 'd'; oDep = '';
+  openModal(ordersModal);
+}
+function ordersModal() {
+  const P = period(offset), cur = R.filter(r => inR(r, P.from, P.to) && (!oDep || r.dep === oDep)), A = agg(cur);
+  const L = ordersOf(cur).sort((a, b) => oSort === 's' ? b.s - a.s : b.d.localeCompare(a.d) || b.s - a.s);
+  const seg = (id, opts, v) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (o[0] === v) + '">' + o[1] + '</button>').join('') + '</div>';
+  return {html: mhead('<h2>Замовлення · ' + P.label + '</h2><div class="hint">' + L.length + ' замовлень · ' + uah(A.s) + ' · середній чек ' + uah(A.chk) + ' · натисніть на товар або менеджера</div>') +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' + seg('oSort', [['d', 'Нові спочатку'], ['s', 'Найбільші спочатку']], oSort) + seg('oDep', [['', 'Усі']].concat(DEPS.map(d => [d, d])), oDep) + '</div>' +
+      ordersTable(L.slice(0, 400), true) + (L.length > 400 ? '<div class="hint">Показано 400 з ' + L.length + '</div>' : ''),
+    after: () => { document.getElementById('oSort').onclick = e => { const b = e.target.closest('button'); if (b) { oSort = b.dataset.v; drawModal(); } };
+      document.getElementById('oDep').onclick = e => { const b = e.target.closest('button'); if (b) { oDep = b.dataset.v; drawModal(); } }; }};
+}
+function soldModal() {
+  const P = period(offset), cur = R.filter(r => inR(r, P.from, P.to)), by = {};
+  cur.forEach(r => { const o = by[r.a] || (by[r.a] = {q: 0, s: 0}); o.q += r.q; o.s += r.s; });
+  const keys = Object.keys(by);
+  return {html: mhead('<h2>Що продано · ' + P.label + '</h2><div class="hint">' + agg(cur).q + ' шт · ' + keys.length + ' позицій · від найбільшої кількості</div>') +
+    '<div class="pgrp">' + GROUPS.map(g => { const K = keys.filter(a => ((D.items[a] || {}).g || 'Інше') === g).sort((a, b) => by[b].q - by[a].q || by[b].s - by[a].s);
+      if (!K.length) return '';
+      return '<div><div class="zh"><b>' + g + '</b><span>' + K.reduce((t, a) => t + by[a].q, 0) + ' шт · ' + short(K.reduce((t, a) => t + by[a].s, 0)) + ' ₴</span></div><div class="list">' + K.map(a => prodRow(a, '<b>' + by[a].q + ' шт</b>', uah(by[a].s))).join('') + '</div></div>'; }).join('') + '</div>'};
+}
+function showMgr(m) { openModal(() => mgrModal(m)); }
+function mgrModal(m) {
+  const P = period(offset), all = R.filter(r => inR(r, P.from, P.to)), cur = all.filter(r => r.m === m), prv = R.filter(r => r.m === m && inR(r, P.pf, P.pt));
+  const A = agg(cur), B = agg(prv), dep = mainDep(m), tot = agg(all).s;
+  const rank = [...new Set(all.map(r => r.m))].map(x => ({x, s: agg(all.filter(r => r.m === x)).s})).sort((a, b) => b.s - a.s), pos = rank.findIndex(o => o.x === m) + 1;
+  const kp = (l, k, f) => '<div><small>' + l + '</small><b>' + f(A[k]) + '</b><span>' + (NOCMP ? '&nbsp;' : 'було ' + f(B[k]) + ' ' + delta(A[k], B[k])) + '</span></div>';
+  const gr = GROUPS.map(g => { const x = cur.filter(r => r.g === g); return {g, s: x.reduce((t, r) => t + r.s, 0), q: x.reduce((t, r) => t + r.q, 0)}; }).filter(x => x.s);
+  const dv = DEPS.map(d => agg(cur.filter(r => r.dep === d)).s);
+  const by = {}; cur.forEach(r => { const o = by[r.a] || (by[r.a] = {q: 0, s: 0}); o.q += r.q; o.s += r.s; });
+  const top = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 8);
+  const ords = ordersOf(cur).sort((a, b) => b.d.localeCompare(a.d) || b.s - a.s);
+  const bk = P.span <= 7 ? bucketsOf(Object.assign({}, P, {span: 8})) : bucketsOf(P);
+  const html = mhead('<div class="ih"><div class="av" style="--c:' + DC[dep] + ';--avf:' + (dep === DEPS[1] ? '#111' : '#fff') + '">' + initials(m) + '</div><div><h2>' + esc(m) + '</h2><div class="hint">' + dep + ' · ' + P.label +
+      (pos ? ' · <b>' + pos + ' місце з ' + rank.length + '</b> · ' + (tot ? Math.round(A.s / tot * 100) : 0) + '% виручки компанії' : ' · продажів за період немає') + '</div></div></div>') +
+    '<div class="mk">' + kp('Виручка', 's', uah) + kp('Замовлень', 'o', fmt) + kp('Середній чек', 'chk', uah) + kp('Продано, шт', 'q', fmt) + '</div>' +
+    '<div><div class="hint" style="margin-bottom:6px"><b>По ' + bk.kind + '</b> · жовте — менеджер, чорна лінія — середнє на одного менеджера, що продавав</div><div class="chart sm"><canvas id="chMgr"></canvas></div></div>' +
+    '<div class="pgrp"><div><div class="zh"><b>Що продає</b><span>частка виручки</span></div><div class="list">' + (gr.map(x => '<div class="mxrow"><div class="h">' + x.g + '<span>' + uah(x.s) + ' · ' + x.q + ' шт · ' + Math.round(x.s / (A.s || 1) * 100) + '%</span></div><div class="lb" style="--c:var(--rt)"><i style="width:' + Math.round(x.s / (A.s || 1) * 100) + '%"></i></div></div>').join('') || '<div class="empty">—</div>') + '</div>' +
+    (dv.filter(Boolean).length > 1 ? '<div class="hint" style="margin-top:6px">Канали: ' + DEPS.map((d, i) => dv[i] ? d + ' ' + short(dv[i]) + ' ₴' : '').filter(Boolean).join(' · ') + '</div>' : '') + '</div>' +
+    '<div><div class="zh"><b>Топ позицій</b><span>за виручкою</span></div><div class="list">' + (top.map(a => prodRow(a, '<b>' + short(by[a].s) + ' ₴</b>', by[a].q + ' шт')).join('') || '<div class="empty">—</div>') + '</div></div></div>' +
+    '<div><div class="zh" style="display:flex;justify-content:space-between"><b>Замовлення</b><span class="hint">' + ords.length + (ords.length > 50 ? ' · показано 50 останніх' : '') + '</span></div>' + ordersTable(ords.slice(0, 50), false) + '</div>';
+  return {html, after: () => {
+    const ms = bk.map(b => cur.filter(r => inR(r, b.a, b.b)).reduce((t, r) => t + r.s, 0));
+    const avg = bk.map(b => { const x = all.filter(r => inR(r, b.a, b.b)), n = new Set(x.map(r => r.m)).size; return n ? x.reduce((t, r) => t + r.s, 0) / n : 0; });
+    chart('chMgr', {type: 'bar', data: {labels: bk.map(b => b.l), datasets: [
+      {label: m, data: ms, backgroundColor: css('--rt'), borderRadius: 6, maxBarThickness: 34, order: 2},
+      {label: 'Середнє на менеджера', type: 'line', data: avg, borderColor: css('--deep'), backgroundColor: css('--deep'), borderWidth: 2, pointRadius: 2.5, order: 1}]},
+      options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => ' ' + c.dataset.label + ': ' + uah(c.raw)}}},
+        scales: {x: {grid: {display: false}, border: {display: false}}, y: {beginAtZero: true, border: {display: false}, grid: {color: '#eeeeeb'}, ticks: {callback: v => short(v)}}}}}); }};
+}
+
+function render() {
+  if (!D) return;
+  const P = period(offset);
+  NOCMP = P.nocmp;
+  renderHero(P);
+  document.getElementById('cust').hidden = mode !== 'custom';
+  document.querySelector('#periodBox .nav').style.visibility = mode === 'all' || mode === 'custom' ? 'hidden' : 'visible';
+  document.getElementById('next').disabled = offset >= 0;
+  document.getElementById('prev').disabled = P.from <= DATA0;
+  document.querySelectorAll('#mode button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === mode));
+  document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.t === tab));
+  document.querySelectorAll('main section[data-p]').forEach(s => s.hidden = s.dataset.p !== tab);
+  document.getElementById('periodBox').hidden = tab === 'matrix' || tab === 'assort';
+  if (tab === 'overview') renderOverview(P);
+  if (tab === 'people') renderPeople(P);
+  if (tab === 'cats') renderCats(P);
+  if (tab === 'buy') renderBuy(P);
+  if (tab === 'assort') { renderAssort(); document.getElementById('heroTitle').innerHTML = 'Асортимент: <em>що продається</em>, а що лежить'; document.getElementById('heroSub').textContent = 'Швидкість продажів кожної позиції за обраний період · застій · втрачені продажі'; }
+  if (tab === 'promo') { renderPromo(P); document.getElementById('heroTitle').innerHTML = 'Акції: <em>' + promoStats().filter(p => p.on).length + ' поз.</em> зараз зі знижкою'; document.getElementById('heroSub').textContent = 'Знижки з фіду постачальника і як вони вплинули на продажі · ' + P.label; }
+  if (tab === 'matrix') { renderMatrix(); document.getElementById('heroTitle').innerHTML = 'Матриця: <em>' + D.matrix.filter(m => mxState(m.a).both).length + ' з ' + D.matrix.length + '</em> в обох магазинах'; document.getElementById('heroSub').textContent = 'Залишки 1С на ' + (D.stockAsOf || '—') + ' · що перевезти зі складу і що замовити у Vetro'; }
+  try { localStorage.setItem('d2dash3', JSON.stringify({mode, tab})); } catch (e) {}
+}
+document.getElementById('tabs').onclick = e => { const b = e.target.closest('button'); if (b) { tab = b.dataset.t; render(); window.scrollTo({top: 0}); } };
+document.getElementById('mode').onclick = e => { const b = e.target.closest('button'); if (b) { mode = b.dataset.m; offset = 0; render(); } };
+document.getElementById('prev').onclick = () => { offset--; render(); };
+document.getElementById('next').onclick = () => { offset = Math.min(0, offset + 1); render(); };
+document.getElementById('vsA').onchange = document.getElementById('vsB').onchange = () => renderVs(period(offset));
+document.addEventListener('click', e => { const g = e.target.closest('[data-go]'); if (g) { tab = g.dataset.go; render(); window.scrollTo({top: 0}); } });
+document.getElementById('mxgrid').onclick = e => { const c = e.target.closest('.cell'); if (c) { const row = [...document.querySelectorAll('#tMx tr')].find(t => t.textContent.includes(c.dataset.a)); if (row) row.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'center'}); } };
+function showSales(a) {
+  const it = D.items[a] || {n: a}, P = period(offset);
+  const L = R.filter(r => r.a === a).sort((x, y) => y.d.localeCompare(x.d));
+  const inP = r => inR(r, P.from, P.to), tp = agg(L.filter(inP)), ta = agg(L);
+  document.getElementById('modalBox').innerHTML = '<header><div><h2>' + esc(it.n) + '</h2><div class="hint">' + (a.startsWith('name:') ? 'без артикула' : esc(a)) + ' · рядки з даних продажів 1С (RAW_Продажі)</div></div><button class="x" onclick="closeModal()" aria-label="Закрити">×</button></header>' +
+    '<div class="hint">За обраний період (' + P.label + '): <b>' + tp.q + ' шт · ' + uah(tp.s) + '</b> · за весь час: ' + ta.q + ' шт · ' + uah(ta.s) + '. Рядки обраного періоду підсвічені.</div>' +
+    '<div class="tbl"><table><thead><tr><th>Дата</th><th>№ замовлення</th><th>Відділ</th><th>Менеджер</th><th class="n">Шт</th><th class="n">Сума</th></tr></thead><tbody>' +
+    (L.map(r => '<tr class="' + (inP(r) ? 'inp' : '') + '"><td>' + dm(pd(r.d)) + '.' + r.d.slice(0, 4) + '</td><td>' + esc(r.o.split('#').slice(1).join('#')) + '</td><td>' + r.dep + '</td><td>' + esc(r.m) + '</td><td class="n">' + r.q + '</td><td class="n">' + uah(r.s) + '</td></tr>').join('') || '<tr><td colspan="6" class="empty">Продажів немає</td></tr>') + '</tbody></table></div>';
+  document.getElementById('modal').hidden = false;
+}
+function closeModal() { MS.length = 0; document.getElementById('modal').hidden = true; }
+document.addEventListener('click', e => {
+  if (e.target.id === 'modal') return closeModal();
+  const el = e.target.closest('[data-art],[data-mgr],[data-open]');
+  if (!el) return;
+  if (el.dataset.art) showItem(el.dataset.art); else if (el.dataset.mgr) showMgr(el.dataset.mgr); else openList(el.dataset.open);
+});
+document.getElementById('asDays').onclick = e => { const b = e.target.closest('button'); if (b) { asDays = +b.dataset.d; renderAssort(); } };
+['cFrom', 'cTo'].forEach(id => document.getElementById(id).onchange = () => { const f = document.getElementById('cFrom').value, t = document.getElementById('cTo').value; cFrom = f ? pd(f) : null; cTo = t ? pd(t) : null; render(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+function loadErr(e) { document.getElementById('loader').hidden = false; document.getElementById('loadMsg').innerHTML = 'Не вдалося завантажити дані: ' + esc(e && e.message || e) + '<br><button onclick="location.reload()" style="margin-top:10px">Спробувати ще раз</button>'; }
+function load(force) {
+  document.getElementById('loader').hidden = false;
+  document.getElementById('loadMsg').textContent = force ? 'Збираю свіжі дані з таблиці…' : 'Завантажую дані…';
+  google.script.run.withSuccessHandler(boot).withFailureHandler(loadErr).dashData(!!force);
+}
+
+// ===== Режим додатка Vetro (сторінка на GitHub): дані з таблиці за особистим ключем, останні дані зберігаються на телефоні =====
+const IN_GAS = !!(window.google && google.script && google.script.run), APP = !IN_GAS && !window.__DEMO__;
+const LS = {get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }};
+const QS = new URLSearchParams(location.search);
+let KEY = QS.get('k') || LS.get('vk'), DEP = QS.get('a') || LS.get('va'), BOOTED = false;
+if (QS.get('k') && QS.get('a')) { LS.set('vk', KEY); LS.set('va', DEP); }
+function askKey(msg) {
+  document.getElementById('loader').hidden = false;
+  document.getElementById('loadMsg').innerHTML = (msg ? '<b>' + esc(msg) + '</b><br><br>' : '') + 'Вставте ваше особисте посилання на дашборд Vetro:<br>' +
+    '<input id="keyIn" placeholder="https://…?k=…&a=…" style="width:min(420px,80vw);margin:10px 0;padding:10px;border-radius:10px;border:1px solid #ccc;font:inherit"><br>' +
+    '<button id="keyOk" style="background:#ffc61a;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:700">Відкрити</button>';
+  document.getElementById('keyOk').onclick = () => { try { const u = new URL(document.getElementById('keyIn').value.trim()); KEY = u.searchParams.get('k'); DEP = u.searchParams.get('a'); } catch (e) { KEY = DEP = null; }
+    if (!KEY || !DEP) return askKey('Це не схоже на особисте посилання'); LS.set('vk', KEY); LS.set('va', DEP); loadApp(false); };
+}
+const dataCache = () => caches.open('vetro-data');
+async function cachedData() { try { const r = await (await dataCache()).match('./__data'); return r ? await r.text() : null; } catch (e) { return null; } }
+async function saveData(t) { try { await (await dataCache()).put('./__data', new Response(t, {headers: {'Content-Type': 'application/json'}})); } catch (e) {} }
+function stale(on, txt) { const b = document.getElementById('built'); if (b && on) b.textContent = (D && D.built || '—') + ' · ' + txt; }
+async function loadApp(force) {
+  if (!KEY || !DEP) return askKey();
+  if (!BOOTED && !force) { const c = await cachedData(); if (c) { try { boot(c); BOOTED = true; stale(true, 'оновлюю…'); } catch (e) {} } }   // миттєво — з телефону
+  if (!BOOTED) { document.getElementById('loader').hidden = false; document.getElementById('loadMsg').textContent = 'Завантажую дані…'; }
+  else if (force) stale(true, 'оновлюю…');
+  try {
+    const r = await fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + (force ? '&force=1' : '') + '&t=' + Date.now(), {cache: 'no-store'});
+    const t = await r.text();
+    if (t.trim()[0] !== '{') throw new Error('таблиця відповіла не даними. Перевірте в розгортанні: «Хто має доступ» = «Будь-хто»');
+    if (t.startsWith('{"error"')) { const j = JSON.parse(t); if (j.error === 'key') return askKey('Посилання не дійсне або доступ вимкнено'); throw new Error(j.message || j.error); }
+    boot(t); BOOTED = true; saveData(t);
+  } catch (e) { if (BOOTED) stale(true, '⚠ немає зв\'язку, показано збережені дані'); else loadErr(e); }
+}
+document.getElementById('refresh').onclick = () => { if (IN_GAS) load(true); else if (APP) loadApp(true); };
+if (IN_GAS) load(false);
+else if (window.__DEMO__) boot(window.__DEMO__);
+else {
+  loadApp(false);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && BOOTED) loadApp(false); });   // повернулись у додаток — підтягнути свіже
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script></body></html>
