@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk"><head><meta charset="utf-8">
-<title>Vetro · дашборд</title>
+<html lang="uk"><head><meta charset="utf-8"><title>Vetro у D2 · дашборд</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111111">
 <meta name="robots" content="noindex, nofollow">
@@ -8,10 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Vetro">
+<meta name="apple-mobile-web-app-title" content="Vetro у D2">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-v2.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-v2-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon-v2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
@@ -46,8 +46,10 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(
 .app{display:grid;grid-template-columns:212px minmax(0,1fr);min-height:100vh;background:linear-gradient(90deg,var(--side) 212px,transparent 212px)}
 /* бокове меню */
 .side{position:sticky;top:0;height:100vh;background:var(--side);color:#bdbcb7;padding:22px 14px;display:flex;flex-direction:column;gap:4px}
-.logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900;font-size:17px;margin:0 6px 18px}
-.logo i{width:34px;height:34px;border-radius:10px;background:var(--y);color:#111;display:grid;place-items:center;font-style:normal;font-size:14px}
+.logo{display:grid;gap:6px;color:#fff;margin:0 8px 18px}
+.logo .lk{width:100%;max-width:168px;height:auto;display:block}
+.logo span{font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#8a8984}
+.navsep{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#77766f;border-top:1px solid rgba(255,255,255,.1);margin:10px 4px 2px;padding:12px 8px 4px}
 .nav{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;font-weight:600;font-size:13.5px;border:0;background:none;color:inherit;cursor:pointer;text-align:left}
 .nav:hover{background:rgba(255,255,255,.07);color:#fff}
 .nav[aria-selected="true"]{background:var(--y);color:#111}
@@ -265,8 +267,168 @@ s{opacity:.7}
 [data-art],[data-mgr],[data-open],[data-go]{cursor:pointer}
 .loader{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:50;padding:20px;text-align:center}
 .loader div{display:grid;justify-items:center;gap:14px;font-weight:700}
+.loader .lk{width:150px;height:auto;color:var(--ink);margin-bottom:6px}
 .loader i{width:46px;height:46px;border-radius:50%;border:5px solid var(--soft);border-top-color:var(--y);animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* ===== каталог Vetro ===== */
+.modal .box.wide{max-width:1120px}
+.loader-in{display:grid;justify-items:center;gap:12px;font-weight:700}.loader-in i{width:40px;height:40px;border-radius:50%;border:5px solid var(--soft);border-top-color:var(--y);animation:spin .8s linear infinite}
+.cv-kp{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.cv-k{text-align:left;border:0;cursor:pointer;font:inherit;color:inherit}.cv-k .num{font-size:26px}
+.cv-k[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.cv-k.cv-r .num{color:var(--bad)}.cv-k.cv-y{background:var(--y2)}.cv-k.cv-y .num{color:var(--yInk)}
+.cv-top{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.cv-search{display:flex;gap:9px;align-items:center;background:var(--card);border-radius:14px;padding:0 14px;color:var(--mut);box-shadow:var(--sh);flex:1 1 320px;max-width:520px}
+.cv-search svg{width:18px;height:18px;flex:none}.cv-search input{border:0;background:none;font:inherit;font-size:14px;color:var(--ink);padding:12px 0;width:100%;outline:none}
+.cv-gr{display:flex;gap:8px;flex-wrap:wrap}
+.cv-chip{border:0;border-radius:999px;padding:8px 13px;font:inherit;font-size:12.5px;font-weight:700;background:var(--card);color:var(--mut);white-space:nowrap;cursor:pointer}
+.cv-chip i{font-style:normal;font-weight:500;opacity:.7;margin-left:5px}.cv-chip[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.cv-w{display:grid;grid-template-columns:236px minmax(0,1fr);gap:16px;align-items:start}
+.cv-r{display:grid;gap:12px;min-width:0}
+.cv-fcol{background:var(--card);border-radius:20px;padding:14px 16px;display:grid;box-shadow:var(--sh);position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;overscroll-behavior:contain}
+.cv-fh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px}.cv-fh b{font-size:15px}
+.cv-fg{display:grid;gap:6px;padding:12px 0;border-top:1px solid var(--line);justify-items:start}.cv-fg>b{font-size:13px}
+.cv-fgh{display:flex;justify-content:space-between;width:100%;font-size:13px}.cv-fgh span{color:var(--mut);font-size:12px;font-weight:700}
+.cv-tg{display:inline-flex;align-items:center;gap:8px;border:0;background:none;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;padding:3px 0}
+.cv-tg i{width:28px;height:16px;border-radius:9px;background:var(--bar);position:relative;flex:none;transition:background .15s}.cv-tg i::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:left .15s}
+.cv-tg[aria-pressed="true"] i{background:var(--good)}.cv-tg[aria-pressed="true"] i::after{left:14px}
+.cv-cbx{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;font:inherit;font-size:12.5px;color:var(--ink);cursor:pointer;padding:3px 0;text-align:left}
+.cv-cbx i{width:16px;height:16px;border-radius:5px;box-shadow:inset 0 0 0 1.5px var(--mut);flex:none;position:relative}
+.cv-cbx i.sw{border-radius:50%;box-shadow:inset 0 0 0 1px rgba(127,127,127,.4)}
+.cv-cbx[aria-pressed="true"] i{background:var(--ink);box-shadow:none}.cv-cbx[aria-pressed="true"] i::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid var(--y);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.cv-cbx[aria-pressed="true"] i.sw{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--ink)}.cv-cbx[aria-pressed="true"] i.sw::after{display:none}
+.cv-cbx span{flex:1;min-width:0}.cv-cbx em{font-style:normal;color:var(--mut);font-size:11.5px}
+.cv-lnk{border:0;background:none;font:inherit;font-size:12px;font-weight:700;color:var(--mut);text-decoration:underline;cursor:pointer;padding:0}
+.cv-rng{position:relative;height:24px;width:100%}
+.cv-rng .tr{position:absolute;top:10px;left:8px;right:8px;height:4px;border-radius:4px;background:var(--bar)}.cv-rng .tr i{position:absolute;top:0;bottom:0;background:var(--ink);border-radius:4px}
+.cv-rng input{position:absolute;inset:0;width:100%;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none;height:24px}
+.cv-rng input::-webkit-slider-runnable-track{background:none;border:0}
+.cv-rng input::-webkit-slider-thumb{pointer-events:auto;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--card);box-shadow:0 0 0 2px var(--ink);cursor:pointer}
+.cv-rng input::-moz-range-thumb{pointer-events:auto;width:16px;height:16px;border-radius:50%;background:var(--card);border:2px solid var(--ink);cursor:pointer}
+.cv-rng input::-moz-range-track{background:none}
+.cv-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.cv-bar .cv-btn{background:var(--card);box-shadow:var(--sh);padding:8px 14px}
+.cv-ach{border:0;background:var(--ink);color:var(--card);border-radius:999px;padding:6px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.cv-fl{flex:1}
+#cvSort{font:inherit;font-size:12.5px;font-weight:700;border-radius:11px;border:0;background:var(--card);color:var(--ink);padding:7px 10px;box-shadow:var(--sh)}
+.cv-vt{display:inline-flex;background:var(--card);border-radius:11px;padding:3px;gap:2px;box-shadow:var(--sh)}.cv-vt button{border:0;background:none;width:30px;height:28px;border-radius:8px;color:var(--mut);cursor:pointer;font-size:15px}.cv-vt button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.cv-card{background:var(--card);border-radius:18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;box-shadow:var(--sh);cursor:pointer;transition:transform .15s}
+.cv-card:hover{transform:translateY(-2px)}
+.cv-ph{position:relative;aspect-ratio:4/3;background:#fff;display:grid;place-items:center;overflow:hidden}
+.cv-ph img{width:100%;height:100%;object-fit:contain;display:block}
+.cv-noimg{display:grid;place-items:center;width:100%;height:100%;color:var(--mut)}.cv-noimg svg{width:40%;height:40%;max-width:60px}
+.cv-bdg{position:absolute;top:9px;left:9px;right:44px;display:flex;gap:5px;flex-wrap:wrap}
+.cv-b{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;border-radius:999px;padding:3px 8px;background:#fff;color:var(--mut);white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.cv-b::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.cv-b.g{color:var(--good)}.cv-b.w{color:var(--warn)}.cv-b.bl{color:var(--on)}.cv-b.rd{color:var(--bad)}
+.cv-b.hit{background:#111;color:#ffc61a}.cv-b.hit::before,.cv-b.nw::before,.cv-b.plain::before{display:none}.cv-b.nw{background:#3e7bfa;color:#fff}
+.cv-b.plain{background:var(--soft);color:var(--mut);box-shadow:none}.cv-b.plain.y{background:var(--y2);color:var(--yInk)}
+.cv-sale{position:absolute;bottom:9px;left:9px;background:var(--y);color:#111;font-weight:900;font-size:11.5px;border-radius:999px;padding:3px 8px}
+.cv-cmpb{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:9px;border:0;background:rgba(255,255,255,.92);color:#111;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.cv-cmpb.on{background:#111;color:#ffc61a}
+.cv-cb{padding:11px 13px 13px;display:grid;gap:3px;align-content:start}
+.cv-nm{font-weight:700;font-size:13.5px;line-height:1.3}
+.cv-art{font-family:ui-monospace,"Roboto Mono",monospace;font-size:10.5px;color:var(--mut);overflow-wrap:anywhere}
+.cv-spl{font-size:11.5px;color:var(--ink);background:var(--soft);border-radius:8px;padding:3px 7px;justify-self:start;margin-top:3px}
+.cv-pr{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 7px;margin-top:4px}.cv-pr b{font-size:16px;font-weight:900;white-space:nowrap}.cv-pr s{color:var(--mut);font-size:12px;white-space:nowrap}
+.cv-cf{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:8px;padding-top:8px;font-size:11.5px;color:var(--mut)}.cv-cf b{color:var(--ink)}
+.cv-more{justify-self:center;margin-top:4px}
+.cv-btn{border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:700;font-size:13px;background:var(--soft);color:var(--ink);cursor:pointer;display:inline-flex;gap:7px;align-items:center;justify-content:center;text-decoration:none}
+.cv-btn.dk{background:var(--ink);color:var(--card)}.cv-btn:disabled{opacity:.4;cursor:default}
+.cv-tab td{font-size:12.5px}.cv-tab tbody tr{cursor:pointer}.cv-tab tbody tr:hover td{background:var(--soft)}
+.cv-tn{display:flex;gap:10px;align-items:center;min-width:260px}.cv-tn b{display:block;font-size:12.5px}.cv-tn small{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--mut)}
+.cv-mini{width:44px;height:44px;border-radius:10px;overflow:hidden;background:#fff;flex:none;display:grid;place-items:center}.cv-mini img{width:100%;height:100%;object-fit:contain}
+.prod .ph img{width:100%;height:100%;object-fit:contain;background:#fff}
+.cv-cmpbar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:25;background:var(--card);border-radius:18px;padding:8px 10px;display:flex;gap:8px;align-items:center;box-shadow:0 14px 40px -12px rgba(0,0,0,.45)}
+.cv-cmpi{position:relative;width:44px;height:44px;border-radius:10px;overflow:hidden;background:#fff;display:grid;place-items:center}.cv-cmpi img{width:100%;height:100%;object-fit:contain}
+.cv-cmpi button{position:absolute;top:1px;right:1px;width:17px;height:17px;border-radius:50%;border:0;background:#111;color:#fff;font-size:11px;line-height:1;cursor:pointer;padding:0}
+/* вікно товару */
+.cv-mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:-6px}
+.cv-m{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+.cv-gal{display:grid;gap:10px;position:sticky;top:0}
+.cv-big{position:relative;aspect-ratio:1/1;border-radius:16px;background:#fff;overflow:hidden;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}.cv-big img{width:100%;height:100%;object-fit:contain}
+.cv-cnt{position:absolute;bottom:10px;right:10px;background:rgba(17,17,17,.7);color:#fff;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 9px}
+.cv-th{display:flex;gap:7px;overflow-x:auto;padding:2px;scrollbar-width:thin}
+.cv-th button{flex:none;width:58px;height:58px;border-radius:10px;border:0;padding:0;background:#fff;overflow:hidden;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}.cv-th img{width:100%;height:100%;object-fit:contain}
+.cv-th button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.cv-vars{display:grid;gap:6px}.cv-vars small{font-size:12px;font-weight:700;color:var(--mut)}
+.cv-sws{display:flex;gap:7px;flex-wrap:wrap}
+.cv-sw{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;padding:5px 11px 5px 5px;background:var(--card);font:inherit;font-size:12px;font-weight:600;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer}
+.cv-sw i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(127,127,127,.35)}.cv-sw em{font-style:normal;color:var(--mut);font-weight:500}
+.cv-sws .cv-sw:first-child{box-shadow:0 0 0 2px var(--ink)}
+.cv-info{display:grid;gap:13px;align-content:start;min-width:0}
+.cv-bdgs{display:flex;gap:6px;flex-wrap:wrap}.cv-bdgs .cv-b{box-shadow:none;background:var(--soft)}
+.cv-h{margin:0;font-size:21px;font-weight:900;letter-spacing:-.01em;line-height:1.2;text-wrap:balance}
+.cv-meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12px;color:var(--mut)}
+.cv-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.cv-price b{font-size:28px;font-weight:900;letter-spacing:-.02em}.cv-price s{color:var(--mut)}
+.cv-sale2{background:var(--y);color:#111;font-weight:900;font-size:12px;border-radius:999px;padding:2px 8px}
+.cv-av{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cv-av div{border-radius:14px;padding:10px 12px;display:grid;gap:1px;background:var(--soft)}
+.cv-av small{font-size:11.5px;color:var(--mut);font-weight:700}.cv-av b{font-size:18px;font-weight:900}.cv-av em{font-style:normal;font-size:11px;color:var(--mut)}
+.cv-av .g{background:var(--good2)}.cv-av .g b{color:var(--good)}.cv-av .r{background:var(--bad2)}.cv-av .r b{color:var(--bad)}.cv-av .bl{background:var(--blue2)}.cv-av .bl b{color:var(--on)}
+.cv-sales{background:var(--soft);border-radius:14px;padding:11px 13px;display:grid;gap:6px}.cv-sales b{font-size:14px}.cv-sales small{display:block;font-size:12px;color:var(--mut)}
+.cv-spk{width:100%;height:44px;display:block}
+.cv-tip{background:var(--y2);color:var(--ink);border-radius:14px;padding:11px 13px;font-size:13px;display:grid;gap:3px;line-height:1.45}.cv-tip b{font-size:11px;color:var(--yInk);text-transform:uppercase;letter-spacing:.06em}
+.cv-spec{display:grid;gap:8px}.cv-spec h3{margin:0;font-size:15px}
+.cv-sw2{display:grid;grid-template-columns:230px minmax(0,1fr);gap:12px;align-items:start}.cv-sw2.nod{grid-template-columns:1fr}
+.cv-draw{background:var(--soft);border-radius:14px;padding:8px}.cv-draw svg{width:100%;height:auto;display:block}
+.cv-sg{display:grid;gap:8px}
+.cv-sgb{background:var(--soft);border-radius:14px;padding:9px 12px}
+.cv-sgb>b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:2px}
+.cv-sgb div{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line);font-size:12.5px}.cv-sgb div:first-of-type{border-top:0}
+.cv-sgb span{color:var(--mut)}.cv-sgb strong{font-weight:600;text-align:right}.cv-sgb strong.hl{color:var(--good);font-weight:700}
+.cv-desc{background:var(--soft);border-radius:14px;padding:10px 13px;font-size:13px;line-height:1.55}.cv-desc summary{font-weight:700;cursor:pointer}.cv-desc div{margin-top:6px;color:var(--ink)}
+.cv-btns{display:flex;gap:8px;flex-wrap:wrap}
+.cv-cmpt td{vertical-align:top;font-size:12.5px}.cv-cmpt th{text-transform:none;letter-spacing:0;font-size:12.5px;color:var(--ink);white-space:normal;vertical-align:bottom;min-width:160px;cursor:pointer}
+.cv-cmph{display:block;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#fff;margin-bottom:6px}.cv-cmph img{width:100%;height:100%;object-fit:contain}
+.cv-cmpt td:first-child{color:var(--mut);white-space:nowrap}.cv-cmpt tr.df td{background:var(--y2)}.cv-cmpt tr.df td:first-child{color:var(--ink);font-weight:700}.cv-cmpt td.best{color:var(--good);font-weight:700}
+/* довідка */
+.hp-hero{background:#111;color:#fff;border-radius:22px;padding:22px 24px;display:grid;gap:12px}
+.hp-hero h2{margin:0;font-size:26px;font-weight:900;letter-spacing:-.02em}.hp-hero p{margin:4px 0 0;color:#aaa;font-size:13px}
+.hp-hero .cv-search{max-width:640px;background:#fff;color:#777}.hp-hero .cv-search input{color:#111}
+.hp-pop{display:flex;gap:7px;flex-wrap:wrap;align-items:center;font-size:12px;color:#aaa}
+.hp-pop button{border:0;background:#2a2a2a;color:#eee;border-radius:999px;padding:5px 11px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.hp-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.hp-cat{background:var(--card);border:0;border-radius:16px;padding:14px;display:grid;gap:5px;align-content:start;text-align:left;font:inherit;color:var(--ink);cursor:pointer;box-shadow:var(--sh)}
+.hp-cat i{width:34px;height:34px;border-radius:10px;background:var(--y2);color:var(--yInk);display:grid;place-items:center}.hp-cat i svg{width:18px;height:18px}
+.hp-cat b{font-size:13.5px}.hp-cat small{color:var(--mut);font-size:11.5px}
+.hp-cat.st i{background:#111;color:#ffc61a}.hp-cat.on{box-shadow:0 0 0 2px var(--ink)}
+.hp-row{display:flex;gap:11px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:13px;cursor:pointer}
+.list .hp-row:first-child{border-top:0}
+.hp-row svg{width:16px;height:16px;flex:none;color:var(--mut)}.hp-row span{flex:1;font-weight:600}.hp-row em{font-style:normal;font-size:10.5px;font-weight:700;border-radius:6px;padding:1px 6px;background:var(--soft);color:var(--mut);white-space:nowrap}.hp-row small{color:var(--mut);font-size:11.5px;white-space:nowrap}
+.hp-step{display:flex;gap:11px;align-items:flex-start;padding:8px 0;border:0;border-top:1px solid var(--line);background:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;width:100%}
+.hp-step span:last-child{display:grid;gap:1px}.hp-step b{font-size:13px}.hp-step small{color:var(--mut);font-size:12px}
+.hp-ck{width:24px;height:24px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-weight:900;box-shadow:inset 0 0 0 2px var(--bar);color:var(--mut)}.hp-ck.done{background:var(--good);box-shadow:none;color:#fff}
+.hp-faq{display:grid;gap:8px}
+.hp-q{background:var(--soft);border-radius:12px;padding:11px 14px;font-size:13px}.hp-q summary{font-weight:700;cursor:pointer}.hp-q[open]{background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.hp-q p{margin:7px 0 0;line-height:1.5}
+.hp-art{font-size:14px;line-height:1.6;display:grid;gap:8px;max-width:70ch}.hp-art p{margin:0}.hp-art ol,.hp-art ul{margin:0;padding-left:22px;display:grid;gap:5px}
+.hp-note{background:var(--soft);box-shadow:none}.hp-note div{display:grid;gap:3px}
+/* «?» біля блоків */
+.hq{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:0;background:var(--soft);color:var(--mut);font-size:11px;font-weight:900;margin-left:7px;cursor:pointer;vertical-align:2px;padding:0;font-family:inherit}
+.hq:hover{background:var(--ink);color:var(--y)}.kpi.acc .hq{background:rgba(127,127,127,.25);color:inherit}
+.hq-pop{position:fixed;z-index:45;width:320px;background:#111;color:#eee;border-radius:14px;padding:13px 40px 13px 15px;font-size:12.5px;line-height:1.5;box-shadow:0 18px 40px -12px rgba(0,0,0,.55);display:grid;gap:6px}
+.hq-pop b{color:#ffc61a}.hq-pop p{margin:0}.hq-pop .x{position:absolute;top:8px;right:8px;width:26px;height:26px;font-size:15px;background:#2a2a2a;color:#fff}.hq-pop .cv-lnk{color:#fff;justify-self:start}.hq-pop code{color:#ffc61a}
+@media (max-width:1180px){.cv-kp{grid-template-columns:repeat(3,minmax(0,1fr))}.cv-m{grid-template-columns:1fr}.cv-gal{position:static}}
+@media (max-width:760px){
+  .cv-kp{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cv-k .num{font-size:20px}.cv-kp .cv-k:first-child{grid-column:1/-1}
+  .cv-top{display:grid;gap:10px}.cv-search{max-width:none}.cv-gr{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px;padding:0 14px;scrollbar-width:none}
+  .cv-w{grid-template-columns:minmax(0,1fr)}
+  .cv-fcol{display:none;position:fixed;inset:60px 0 0 0;top:60px;z-index:35;border-radius:22px 22px 0 0;max-height:none;padding:16px 18px 100px;box-shadow:0 -20px 60px rgba(0,0,0,.4)}
+  .cv-fcol.open{display:grid;align-content:start}
+  .cv-fsb{position:fixed;left:0;right:0;bottom:0;padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px));background:var(--card);display:flex!important;gap:8px;border-top:1px solid var(--line)}.cv-fsb .cv-btn{flex:1}
+  .cv-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .cv-cb{padding:8px 10px 10px}.cv-nm{font-size:12px}.cv-card .cv-art,.cv-card .cv-spl{display:none}.cv-pr b{font-size:13.5px}.cv-cf{font-size:10.5px;margin-top:5px;padding-top:6px}.cv-cf span:last-child{display:none}
+  .cv-bdg{top:6px;left:6px;right:36px}.cv-b{font-size:9.5px;padding:2px 6px}.cv-bdg .cv-b.nw{display:none}.cv-cmpb{width:26px;height:26px;top:6px;right:6px}
+  #cvSort{flex:1}
+  .cv-cmpbar{bottom:calc(92px + env(safe-area-inset-bottom,0px));left:12px;right:12px;transform:none;justify-content:flex-end}
+  .cv-av{gap:6px}.cv-av div{padding:8px 9px}.cv-av b{font-size:15px}
+  .cv-sw2{grid-template-columns:1fr}.cv-draw{max-width:340px}
+  .cv-price b{font-size:24px}
+  .hp-hero{padding:16px}.hp-hero h2{font-size:21px}
+  .hp-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.hp-cat{padding:11px}
+  .hq-pop{left:10px!important;right:10px;bottom:calc(96px + env(safe-area-inset-bottom,0px));top:auto!important;width:auto}
+}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -444,6 +606,12 @@ s{opacity:.7}
       <div class="card ph-only" style="background:var(--soft);box-shadow:none" id="asExplain2"></div>
     </section>
 
+    <!-- КАТАЛОГ VETRO -->
+    <section data-p="catalog" hidden><div id="catBox" style="display:grid;gap:14px"></div></section>
+
+    <!-- ДОВІДКА -->
+    <section data-p="help" hidden><div id="helpBox" style="display:grid;gap:14px"></div></section>
+
     <!-- АКЦІЇ -->
     <section data-p="promo" style="display:grid;gap:14px" hidden>
       <div class="g4"><div class="card kpi acc" id="p-act"></div><div class="card kpi" id="p-sum"></div><div class="card kpi" id="p-eff"></div><div class="card kpi" id="p-done"></div></div>
@@ -472,6 +640,12 @@ const IC = {
   assort: '<path d="M5 5h3v3H5zM10.5 5h3v3h-3zM16 5h3v3h-3zM5 10.5h3v3H5zM10.5 10.5h3v3h-3zM16 10.5h3v3h-3zM5 16h3v3H5zM10.5 16h3v3h-3z"/>',
   promo: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.4"/>',
   more: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  catalog: '<path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5zM13 4h5.5c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5H13z"/>',
+  help: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.7M12 17h.01"/>',
+  doc: '<path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5"/>',
+  chart: '<path d="M4 19h16M7 16v-5M12 16V7M17 16v-8"/>',
+  chat: '<path d="M5 5h14v10H9l-4 4z"/>',
+  star: '<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.6-5-2.9-5 2.9 1.2-5.6L4 9.6 9.6 9z"/>',
   refresh: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
@@ -485,8 +659,11 @@ const GICON = {
   'Журнальні та консолі':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18M6 10v8M18 10v8M6 14h12"/></svg>',
   'Інше':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 12h16"/></svg>'
 };
-const TABS = [['overview','Огляд'],['people','Менеджери'],['cats','Категорії'],['matrix','Матриця'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції']];
-const TBAR = ['overview','people','assort','buy'];
+const TABS = [['overview','Огляд'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
+// головні розділи — на нижній панелі телефона і вгорі бокового меню; решта — у «Ще»
+const TBAR = ['overview','people','matrix','cats'];
+// знак «Vetro у D2»: D2 зліва, червона V справа (лінії D беруть колір тексту — білі в меню, чорні на світлому тлі)
+const LOGO = '<svg class="lk" viewBox="62 330 900 300" aria-hidden="true"><g transform="translate(62 380) scale(0.5549)"><path d="M8 387C3 386 0 382 0 376C0 369 2 367 10 363L17 359L151 359C247 360 286 359 289 359C290 358 296 357 302 356C311 356 328 354 328 354C328 354 330 352 333 350C335 348 339 346 342 345C346 344 348 342 351 340C353 337 355 335 358 334C365 332 382 314 390 301C391 299 394 296 396 294C400 291 400 289 401 285C401 280 402 279 406 275C410 270 410 269 411 263C411 259 413 255 414 253C422 241 421 246 421 197C421 151 421 149 416 145C412 141 411 135 411 128L411 121L406 117C401 112 401 111 401 106C401 102 400 101 396 97C394 95 390 91 389 88C385 82 364 62 358 58C356 57 352 53 350 51C346 47 346 47 340 46C335 46 332 45 329 43C319 38 318 37 307 36C301 36 233 35 156 35L16 34L11 30C2 23 1 22 1 17C1 11 3 7 7 6C11 4 348 4 359 6C364 6 369 8 373 10C377 12 382 14 384 14C393 15 396 17 401 21C404 23 406 25 407 25C408 25 410 26 413 28C415 31 419 33 422 35C425 36 429 39 432 41C442 49 463 69 463 70C463 71 464 73 467 76C469 79 471 83 473 85C474 88 476 91 477 93C481 97 482 99 483 105C484 108 486 111 487 113C491 116 492 119 495 129C496 134 498 140 500 143C502 149 503 149 503 163C503 172 503 180 504 186C506 195 506 196 504 204C503 210 503 218 503 226C503 240 501 245 497 252C495 256 494 258 492 272C492 274 490 277 489 279C488 281 485 285 483 289C481 293 479 297 477 298C476 300 474 303 473 306C472 313 471 314 467 316C466 317 463 320 462 323C458 328 442 344 438 346C437 347 433 350 431 352C420 362 414 367 408 367C407 367 404 368 402 370C397 374 392 377 388 377C387 377 383 378 379 380C366 387 376 387 184 387C90 387 10 387 8 387ZM781 365C775 362 774 359 775 351C777 342 779 338 783 336C786 335 796 335 832 335L878 335L880 337C882 339 883 340 883 351C883 361 882 362 880 364L878 367L831 367C788 367 784 366 781 365ZM784 190C780 188 776 183 776 181C776 177 783 167 791 159C796 154 801 148 803 146C804 144 811 137 817 131C825 123 829 118 831 115C832 112 834 109 836 107C838 105 840 101 841 99C842 96 844 93 845 91C849 86 851 82 851 76C851 71 850 71 843 64C836 57 836 57 832 57C828 57 827 57 825 60C823 61 820 65 818 67C816 70 814 73 813 77C810 85 809 86 799 86C784 85 782 83 782 70C782 63 783 59 787 56C788 55 790 52 791 50C793 45 801 37 806 34C808 33 811 31 813 30C818 25 823 24 834 25C847 25 854 29 866 41C879 54 882 60 882 73C882 82 882 83 878 90C875 96 873 100 873 105C872 112 872 112 867 117C859 126 855 131 853 136C852 138 849 142 847 144C843 148 841 153 842 157C842 159 842 159 859 159C873 159 877 159 878 161C884 166 884 185 878 190C877 191 868 192 832 192C791 192 788 192 784 190Z" fill="currentColor" fill-rule="evenodd"/><path d="M455 393C448 392 438 389 434 387C427 383 427 371 433 365C435 363 452 356 458 355C460 354 474 353 489 353C519 353 533 351 544 347C547 345 554 343 558 342C567 340 578 334 585 328C587 326 591 323 593 322C598 319 603 314 608 307C609 304 612 300 614 299C619 293 625 282 628 274C629 270 631 265 633 262C645 243 647 233 646 189C646 158 645 156 635 136C633 131 629 122 627 117C625 108 620 100 613 93C611 91 609 87 607 84C604 79 598 73 590 69C587 67 582 63 579 61C571 54 564 51 553 49C548 48 540 46 535 44C524 41 506 40 476 40C446 40 429 31 429 16C429 7 435 2 450 0C461 -0 587 0 600 1C610 3 625 9 634 16C636 18 641 20 645 22C650 23 652 24 655 27C658 31 667 39 672 42C679 46 691 58 696 66C699 71 704 77 708 81C712 86 714 89 716 93C717 96 719 102 721 105C723 108 725 112 726 114C728 117 730 120 731 122C735 128 735 131 737 153C738 164 739 177 740 182C742 192 742 200 739 214C738 219 737 230 737 239C736 247 735 256 734 259C733 264 725 281 720 288C719 290 717 295 716 298C715 303 713 306 707 313C703 318 698 324 696 327C692 335 683 344 675 350C671 352 666 356 663 359C652 367 650 369 645 370C642 371 638 373 635 375C627 380 613 387 609 388C605 390 593 391 569 393C550 394 464 395 455 393ZM56 352C51 349 49 345 48 339C46 332 46 97 48 91C49 86 55 80 60 79C65 77 72 80 80 88C84 92 86 94 86 98C88 107 88 333 86 337C83 343 69 354 62 354C60 354 58 353 56 352ZM57 70C51 67 48 63 49 55C49 48 51 45 56 43C67 38 82 46 82 56C82 61 75 68 68 70C62 72 62 72 57 70Z" fill="#ffc61e" fill-rule="evenodd"/></g><rect x="590" y="330" width="8" height="300" rx="4" fill="currentColor" opacity=".3"/><g transform="translate(632 392) scale(0.4024)"><path d="M376 716C370 714 368 712 362 704C359 700 356 696 355 696C353 694 346 684 344 679C343 677 341 673 338 670C336 668 332 662 330 658C328 654 325 650 324 648C322 646 320 643 319 641C316 635 311 628 307 624C306 622 303 618 301 614C299 610 295 604 293 602C291 599 288 595 287 593C284 587 277 577 275 576C274 575 271 570 269 566C267 561 263 555 260 552C258 549 254 544 253 541C251 537 247 532 245 529C242 527 239 521 236 516C234 512 231 507 229 504C226 502 224 498 223 495C221 491 218 487 215 482C210 478 208 474 207 471C206 467 204 463 200 459C196 455 192 449 191 446C190 443 186 437 183 434C180 430 176 425 175 423C174 420 171 415 169 411C166 407 162 401 160 398C155 390 143 373 137 363C134 359 130 353 128 350C124 344 117 334 105 315C102 310 97 304 96 301C94 298 91 294 89 292C88 290 83 282 77 274C72 266 65 255 62 251C59 246 56 240 55 238C54 236 52 233 51 231C47 227 42 220 40 215C39 213 37 209 35 208C31 203 26 196 24 191C23 189 21 185 18 182C16 180 12 173 9 169C7 164 3 158 2 157C1 154 0 152 0 146C0 139 1 138 6 128C9 123 13 115 14 111C15 107 17 103 18 102C22 97 29 82 31 75C32 72 34 66 36 63C38 61 40 58 40 57C40 56 41 53 43 50C44 47 46 42 47 39C47 36 50 31 52 28C54 24 57 19 59 16C63 8 74 2 84 1C94 -0 235 -0 247 1C255 2 264 5 268 9C273 13 285 31 288 38C290 41 294 47 297 50C299 53 303 59 304 62C306 65 309 69 312 72C315 75 318 81 320 85C322 89 326 95 328 98C331 101 335 106 336 109C338 112 341 117 344 120C347 124 350 129 352 133C354 137 358 143 360 146C363 149 367 154 368 157C370 160 373 166 376 169C379 173 383 179 384 182C386 185 390 191 392 194C395 197 399 203 401 208C404 212 407 218 409 221C412 223 416 229 418 234C421 238 424 244 427 246C429 248 432 254 434 258C437 262 441 269 443 271C446 274 449 280 450 283C452 286 455 292 458 295C461 298 465 303 466 307C468 310 472 316 474 319C477 322 480 327 482 331C484 334 488 340 490 343C493 346 497 352 499 356C501 360 505 365 507 368C509 371 514 378 517 383C522 394 525 396 529 395C533 394 549 372 556 357C558 352 562 346 564 343C567 340 570 334 573 330C575 325 578 321 579 320C580 319 582 315 584 312C586 308 589 302 592 299C594 295 596 290 597 288C599 286 601 283 602 282C603 280 606 276 607 272C609 269 612 264 613 262C615 260 618 255 620 251C622 246 625 241 627 239C631 233 632 227 628 221C627 219 625 215 623 213C622 211 618 206 614 202C610 197 605 191 604 188C602 184 598 179 595 175C592 172 588 166 586 162C583 157 581 153 580 152C577 150 568 138 562 129C559 125 554 118 550 114C547 110 542 104 540 100C539 97 535 92 532 89C525 81 517 70 513 63C511 60 506 54 503 50C496 42 495 38 496 27C496 16 498 13 509 7C517 2 518 1 526 0C540 -0 792 0 798 1C813 6 822 18 818 31C817 34 816 39 816 40C816 42 814 45 813 47C811 49 808 53 807 57C805 60 803 64 803 64C802 64 801 67 800 70C799 73 796 77 793 81C786 89 785 91 784 96C784 98 782 101 780 104C778 106 776 109 775 111C773 116 768 123 764 127C763 129 761 132 760 134C759 136 756 142 753 146C750 151 747 157 745 159C744 162 742 165 741 166C739 167 737 171 736 174C735 177 732 182 730 185C728 188 724 193 722 198C720 202 717 207 715 209C713 211 712 213 712 214C712 216 704 229 701 232C698 235 695 239 689 254C687 257 683 263 681 266C674 273 673 275 672 280C672 282 670 285 668 287C666 290 664 293 663 295C661 300 657 306 652 311C651 313 649 317 648 318C646 324 634 343 628 351C627 352 625 356 624 359C623 361 621 366 619 368C616 371 613 377 611 381C608 385 605 390 604 392C602 394 600 397 599 399C597 404 592 412 584 425C581 430 577 437 575 440C574 443 570 448 567 452C564 456 561 461 560 464C557 472 540 485 531 486C526 487 526 486 517 481C511 477 507 473 505 470C503 468 501 465 500 464C496 461 490 452 488 447C487 445 485 441 483 440C479 435 474 428 472 423C471 421 469 417 466 414C464 411 460 406 458 402C456 398 453 394 452 392C450 390 448 387 447 385C444 379 439 372 435 368C434 366 431 362 429 358C427 354 423 348 421 346C419 343 416 339 415 337C412 331 407 324 403 320C402 318 399 313 397 309C394 305 391 299 389 297C386 295 384 291 383 289C380 283 373 273 371 272C370 271 368 267 365 262C363 258 360 252 357 250C355 247 351 242 349 238C347 234 343 228 341 225C338 223 335 217 333 213C331 209 327 203 324 200C322 197 318 192 316 188C314 184 311 179 308 176C306 174 304 169 303 166C302 163 300 160 295 154C290 149 288 146 287 143C286 139 284 136 280 131C276 127 273 122 272 119C271 116 267 111 264 107C260 103 256 97 255 94C254 91 250 85 247 82C244 79 240 73 239 69C237 65 235 62 232 60L228 57L189 57C151 56 150 57 148 59C146 60 146 62 146 63C146 65 150 74 155 78C156 80 160 85 162 90C165 94 168 100 171 102C173 104 176 110 178 114C181 118 184 124 187 127C189 130 193 135 195 139C196 143 200 148 202 150C204 152 208 157 210 161C212 165 216 171 219 175C221 178 225 184 227 187C228 190 231 196 234 199C237 202 241 207 242 211C244 214 248 220 250 223C253 226 256 231 258 235C260 238 264 244 266 247C269 250 273 255 274 259C276 263 280 268 282 270C284 272 288 278 290 283C293 287 296 293 299 295C301 297 304 303 307 307C309 311 313 318 315 321C318 324 321 329 323 332C324 335 328 340 330 343C333 346 337 352 339 356C341 360 345 366 347 369C350 372 353 377 355 380C356 383 360 388 363 392C365 395 370 402 373 408C376 413 380 420 382 422C384 425 388 430 390 434C392 438 396 444 398 447C401 450 405 455 407 459C408 463 412 468 414 470C416 473 420 478 422 482C424 486 428 491 430 494C432 497 436 503 439 507C441 511 445 517 447 519C449 521 452 526 454 530C456 534 460 540 462 542C465 545 468 551 470 554C471 557 474 562 475 563C479 569 480 573 481 582C481 592 479 596 476 599C475 601 473 605 471 608C470 611 468 615 467 616C466 616 465 619 464 622C463 625 459 630 456 634C450 641 449 643 448 648C448 650 446 653 444 655C442 658 440 661 439 663C437 668 432 675 429 679C428 680 425 684 423 688C421 691 419 695 418 697C417 699 416 702 415 705C413 709 412 710 405 713C399 717 397 717 389 717C383 717 379 717 376 716ZM391 627C392 627 394 623 397 618C399 614 401 609 403 608C405 605 415 587 415 584C415 580 405 562 399 555C397 552 393 547 392 544C391 541 388 537 385 534C383 531 379 525 377 521C374 516 372 512 371 511C369 509 362 500 360 495C359 493 357 489 355 488C351 483 346 476 344 471C343 469 341 465 339 464C335 459 330 452 328 447C327 445 325 441 323 440C319 435 314 428 312 423C311 421 309 417 306 414C304 412 300 406 298 402C296 398 294 394 292 393C290 391 284 381 281 376C279 373 276 369 274 366C271 363 268 358 266 354C264 350 262 346 260 345C258 343 251 333 249 328C247 325 245 322 244 320C242 318 239 313 237 309C234 305 231 299 229 297C226 295 224 291 223 289C220 283 215 276 211 272C210 270 207 266 205 262C203 258 199 252 197 250C195 247 192 243 191 241C188 235 183 228 179 224C178 222 175 218 173 214C171 210 167 204 165 202C163 199 160 195 159 193C156 187 151 180 147 176C146 174 143 170 141 166C139 162 135 156 133 154C131 151 128 147 127 145C124 139 119 132 115 128C114 126 111 122 109 118C106 111 94 96 91 96C88 95 81 105 80 112C80 114 78 117 76 120C74 122 72 125 71 127C71 129 69 133 68 135C67 136 66 139 66 141C66 146 73 161 78 167C80 169 84 175 86 179C89 183 92 188 95 191C97 194 101 199 103 203C104 207 108 212 110 214C112 217 116 222 118 227C121 231 124 236 127 239C129 242 133 247 134 251C136 255 140 260 142 263C145 266 148 270 149 273C151 277 156 284 162 293C162 294 166 299 169 303C172 307 175 313 177 315C178 318 182 323 185 328C188 332 191 337 192 339C193 341 197 347 201 352C204 358 208 363 209 365C210 367 217 377 224 388C232 399 239 410 240 413C242 416 245 421 248 424C251 428 254 433 256 437C258 441 262 447 264 450C267 453 271 458 272 461C274 464 277 469 280 472C283 476 286 481 288 485C290 489 294 495 296 498C299 501 303 506 304 510C306 513 310 519 312 522C315 525 319 531 321 536C324 541 327 547 330 549C332 552 336 557 338 561C340 565 344 571 346 574C349 577 352 582 354 586C356 590 360 596 362 599C365 602 369 607 371 611C374 618 384 629 387 629C388 629 390 628 391 627ZM675 160C680 155 683 150 686 144C690 135 694 129 710 104C714 98 718 91 719 89C720 86 722 83 723 81C728 75 734 65 734 63C734 62 733 60 732 59C730 57 728 57 661 57C591 57 588 57 587 60C586 62 592 71 598 79C601 82 604 87 606 90C611 97 618 106 622 111C624 112 628 118 630 123C633 127 636 133 638 135C641 137 644 141 646 144C647 147 650 150 651 151C653 152 655 155 657 159C662 169 666 169 675 160Z" fill="#c41a17" fill-rule="evenodd"/></g></svg>';
 const GROUPS = ['Столи', 'Стільці', 'Крісла і дивани', 'Журнальні та консолі', 'Інше'];
 
 // ===== дрібниці =====
@@ -1097,7 +1274,7 @@ function renderPromo(P) {
 // ===== вікна: стек — із замовлення можна перейти в товар чи менеджера і повернутись «‹ Назад» =====
 const MS = [];
 function openModal(fn) { MS.push(fn); drawModal(); }
-function drawModal() { const r = MS[MS.length - 1](), box = $('modalBox'); box.innerHTML = r.html; $('modal').hidden = false; document.body.style.overflow = 'hidden'; box.scrollTop = 0; if (r.after) r.after(); }
+function drawModal() { const r = MS[MS.length - 1](), box = $('modalBox'); box.classList.toggle('wide', !!r.wide); box.innerHTML = r.html; $('modal').hidden = false; document.body.style.overflow = 'hidden'; box.scrollTop = 0; if (r.after) r.after(); }
 function backModal() { MS.pop(); MS.length ? drawModal() : closeModal(); }
 function closeModal() { MS.length = 0; $('modal').hidden = true; document.body.style.overflow = ''; }
 const mhead = inner => '<header><div style="display:flex;align-items:flex-start;gap:4px;min-width:0">' + (MS.length > 1 ? '<button class="back" onclick="backModal()">‹ Назад</button>' : '') + '<div style="min-width:0">' + inner + '</div></div><button class="x" onclick="closeModal()" aria-label="Закрити">×</button></header>';
@@ -1181,12 +1358,456 @@ function mgrModal(m) {
         scales: {x: {grid: {display: false}, border: {display: false}}, y: {beginAtZero: true, border: {display: false}, grid: {color: gridC()}, ticks: {callback: v => short(v)}}}}}); }};
 }
 
+// ===== КАТАЛОГ VETRO і ДОВІДКА (дані — окремим запитом, лише коли їх відкрили) =====
+let CAT = null, CATP = null, CATV = -1;
+const LAT = {'а': 'a', 'в': 'b', 'е': 'e', 'і': 'i', 'к': 'k', 'м': 'm', 'н': 'h', 'о': 'o', 'р': 'p', 'с': 'c', 'т': 't', 'у': 'y', 'х': 'x'};
+const nk2 = a => nk(a).replace(/[авеікмнорстух]/g, c => LAT[c]);
+const CGR = ['Столи', 'Стільці', 'Крісла', 'Дивани', 'Журнальні й консолі', 'Садові', 'Інше'];
+const cgrp = c => { c = String(c || '').toLowerCase();
+  if (/садов/.test(c)) return 'Садові';
+  if (/журнал|кавов|консол|вітальн/.test(c)) return 'Журнальні й консолі';
+  if (/стіл|столи/.test(c)) return 'Столи';
+  if (/стільц|стілец/.test(c)) return 'Стільці';
+  if (/крісл/.test(c)) return 'Крісла';
+  if (/диван|софа/.test(c)) return 'Дивани';
+  return 'Інше'; };
+const codeOf = n => { const m = String(n).match(/(?:^|[\s(])([A-ZА-ЯІ]{1,4}-\d{1,4}(?:-\d{1,2})?)(?=[\s,)]|$)/); if (m) return m[1];
+  const q = String(n).match(/[«"]([^»"]+)[»"]/); return q ? q[1] : ''; };
+const seriesOf = n => { const m = String(n).match(/([А-ЯІЇЄ][а-яіїєʼ']{2,})\s+[A-Z]{1,4}-\d/); return m && !/^(Керамічний|Стілець|Стіл|Консоль|Крісло|Диван)$/.test(m[1]) ? m[1] : ''; };
+const imgUrl = p => encodeURI(/^https?:/.test(p) ? p : (CAT.img || '') + p);
+const numOf = v => { const n = parseFloat(String(v || '').replace(',', '.')); return isNaN(n) ? 0 : n; };
+const cleanV = v => String(v || '').replace(/\s*\([^)]*\)/g, '').trim();
+
+function setCat(t) {
+  const j = typeof t === 'string' ? JSON.parse(t) : t;
+  if (j.error) throw new Error(j.message || j.error);
+  CAT = j; CATV = -1;
+  CAT.feed.forEach(f => { f.g = cgrp(f.c); f.s = {}; f.pr.forEach(p => { f.s[p[0]] = p[1]; }); f.code = codeOf(f.n); f.ser = seriesOf(f.n); f.col = f.s['Колір'] || ''; });
+  CAT.by = {}; CAT.feed.forEach(f => { CAT.by[f.a] = f; });
+  CAT.help = CAT.help || [];
+}
+// зв'язок фіда з нашими даними (залишки, продажі, матриця) — перераховується, коли оновились основні дані
+function catLink() {
+  if (!CAT || !D || CATV === VER) return;
+  CATV = VER;
+  const ix = {};
+  Object.keys(D.items).forEach(k => { const x = nk2(k), it = D.items[k]; if (!ix[x] || (it.s1 != null && D.items[ix[x]].s1 == null)) ix[x] = k; });
+  const lim = iso(addD(ASOF, -90)), sold = {};
+  R.forEach(r => { if (r.d < lim) return; const x = nk2(r.a), o = sold[x] || (sold[x] = {q: 0, s: 0, last: '', by: {}}); o.q += r.q; o.s += r.s; if (r.d > o.last) o.last = r.d; o.by[r.m] = (o.by[r.m] || 0) + r.q; });
+  const mx = {}; (D.matrix || []).forEach(m => { mx[nk2(m.a)] = m; });
+  CAT.feed.forEach(f => {
+    const x = nk2(f.a); f.our = ix[x] || null; const it = f.our ? D.items[f.our] : null;
+    f.sold = sold[x] || (f.our && sold[nk2(f.our)]) || {q: 0, s: 0, last: '', by: {}};
+    f.mx = mx[x] || null;
+    const hall = it ? (it.s1 || 0) + (it.s2 || 0) : 0, sk = it ? it.sk || 0 : 0, rd = it ? it.r || 0 : 0;
+    f.hall = hall; f.sk = sk; f.rd = rd; f.arr = it && it.arr || ''; f.ourP = it && it.pr || 0; f.ourPP = it && it.pp || 0;
+    f.st = hall > 0 ? ['g', 'В залі'] : sk > 0 ? ['w', 'На складі'] : rd > 0 ? ['bl', 'В дорозі ' + rd] : ['rd', 'Немає в нас'];
+    f.has = hall + sk + rd > 0;
+  });
+  const top = CAT.feed.filter(f => f.sold.q > 0).sort((a, b) => b.sold.q - a.sold.q);
+  CAT.feed.forEach(f => { f.hit = false; }); top.slice(0, Math.max(5, Math.round(top.length * 0.15))).forEach(f => { f.hit = true; });
+}
+async function fetchCat(force) {
+  const r = await fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=cat' + (force ? '&force=1' : '') + '&t=' + Date.now(), {cache: 'no-store'});
+  const t = await r.text();
+  if (t.trim()[0] !== '{') throw new Error('таблиця відповіла не даними');
+  if (t.startsWith('{"error"')) { const j = JSON.parse(t); throw new Error(j.error === 'key' ? 'посилання не дійсне' : (j.message || j.error)); }
+  try { await (await dataCache()).put('./__cat', new Response(t, {headers: {'Content-Type': 'application/json'}})); } catch (e) {}
+  return t;
+}
+function loadCat(force) {
+  if (CAT && !force) return Promise.resolve(CAT);
+  if (CATP && !force) return CATP;
+  CATP = (async () => {
+    try {
+      let t;
+      if (IN_GAS) t = await new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashCatalog(!!force));
+      else if (window.__DEMO_CAT__) t = window.__DEMO_CAT__;
+      else {
+        if (!force && !CAT) { try { const c = await (await dataCache()).match('./__cat'); if (c) { setCat(await c.text());
+          fetchCat(false).then(t2 => { setCat(t2); LAST.catalog = LAST.help = null; if (tab === 'catalog' || tab === 'help') render(); }).catch(() => {}); return CAT; } } catch (e) {} }
+        t = await fetchCat(force);
+      }
+      setCat(t); return CAT;
+    } finally { CATP = null; }
+  })();
+  return CATP;
+}
+function catWait(sec, fn) {
+  const box = $(sec);
+  box.innerHTML = '<div class="card" style="place-items:center;padding:40px"><div class="loader-in"><i></i><span>Завантажую каталог Vetro і довідку…</span></div></div>';
+  loadCat(false).then(() => { LAST[tab] = null; render(); }).catch(e => { box.innerHTML = '<div class="card"><b>Не вдалося завантажити: ' + esc(e && e.message || e) + '</b><button class="cv-btn" onclick="LAST.catalog=LAST.help=null;render()">Спробувати ще раз</button></div>'; });
+}
+
+// ---------- характеристики ----------
+const SPK = {'Максимальна довжина стільниці, см': 'Розкладений до', 'Максимальна глибина сидіння, см': 'Глибина макс.', 'Висота до сидіння, см': 'Висота сидіння', 'Механізм розкладки': 'Механізм'};
+const HL = {'Максимальна довжина стільниці, см': 1, 'Механізм розкладки': 1, 'Висота до сидіння, см': 1};
+function specRows(f) {
+  const G = {dim: [], mat: [], con: []};
+  f.pr.forEach(([k, v]) => {
+    let lbl = SPK[k] || k.replace(/,\s*(см|кг)$/, ''), val = v;
+    if (/,\s*см$/.test(k)) val = v + ' см'; else if (/,\s*кг$/.test(k)) val = v + ' кг';
+    const grp = /,\s*(см|кг)$/.test(k) ? 'dim' : /^Матеріал|^Наповнювач|^Колір/.test(k) ? 'mat' : 'con';
+    G[grp].push([lbl, val, HL[k] || /стійк/.test(v)]);
+  });
+  return G;
+}
+function specLine(f) {
+  const s = f.s, L = numOf(s['Довжина, см']), W = numOf(s['Ширина, см']), M = numOf(s['Максимальна довжина стільниці, см']), Dm = numOf(s['Діаметр, см']);
+  const p = [];
+  if (L && W) p.push((M > L ? L + '→' + M : L) + ' × ' + W + ' см'); else if (Dm) p.push('Ø ' + Dm + (M > Dm ? '→' + M : '') + ' см');
+  if (s['Висота до сидіння, см']) p.push('сидіння ' + s['Висота до сидіння, см'] + ' см');
+  const mt = s['Матеріал стільниці'] || s['Матеріал оббивки'];
+  if (mt) p.push(cleanV(mt).split('+')[0].trim());
+  if (/розклад/i.test(s['Вид'] || '') || s['Механізм розкладки']) p.push('розкладний');
+  if (/підлокітник/i.test(s['Характеристики'] || '')) p.push('підлокітники');
+  return p.slice(0, 3).join(' · ');
+}
+// креслення з розмірами фіда: стіл — зверху і збоку, стілець — збоку
+function specDraw(f) {
+  const s = f.s, L = numOf(s['Довжина, см']), W = numOf(s['Ширина, см']), M = numOf(s['Максимальна довжина стільниці, см']), Dm = numOf(s['Діаметр, см']), H = numOf(s['Висота, см']);
+  const SH = numOf(s['Висота до сидіння, см']), SD = numOf(s['Глибина сидіння, см']) || numOf(s['Максимальна глибина сидіння, см']);
+  const ar = '<defs><marker id="cvar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="var(--bad)"/></marker></defs>';
+  const dim = (x1, y1, x2, y2, t, side) => '<path d="M' + x1 + ' ' + y1 + 'L' + x2 + ' ' + y2 + '" stroke="var(--bad)" stroke-width="1.4" marker-start="url(#cvar)" marker-end="url(#cvar)"/>' +
+    (x1 === x2 ? '<text x="' + (x1 + (side === 'r' ? 7 : -7)) + '" y="' + (y1 + y2) / 2 + '" font-size="12" font-weight="700" fill="var(--bad)" text-anchor="' + (side === 'r' ? 'start' : 'end') + '" dominant-baseline="middle">' + t + '</text>'
+      : '<text x="' + (x1 + x2) / 2 + '" y="' + (y1 - 6) + '" font-size="12" font-weight="700" fill="var(--bad)" text-anchor="middle">' + t + '</text>');
+  const ln = 'stroke="var(--ink)" stroke-width="2" fill="var(--card)"';
+  const lbl = (y, t) => '<text x="8" y="' + y + '" font-size="10.5" font-weight="700" fill="var(--mut)">' + t + '</text>';
+  if ((L && W) || Dm) {
+    const big = Math.max(M || 0, L || Dm), sc = 170 / big, w = (L || Dm) * sc, h = (W || Dm) * sc, x0 = 54, y0 = 40;
+    let svg = '<svg viewBox="0 0 280 ' + (H ? 270 : 190) + '">' + ar + lbl(14, 'ЗВЕРХУ');
+    if (Dm && !L) svg += '<ellipse cx="' + (x0 + w / 2) + '" cy="' + (y0 + h / 2) + '" rx="' + w / 2 + '" ry="' + h / 2 + '" ' + ln + '/>' + (M > Dm ? '<rect x="' + x0 + '" y="' + y0 + '" width="' + M * sc + '" height="' + h + '" rx="' + h / 2 + '" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="5 4"/>' : '');
+    else svg += '<rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + h + '" rx="4" ' + ln + '/>' + (M > L ? '<rect x="' + (x0 + w) + '" y="' + y0 + '" width="' + (M - L) * sc + '" height="' + h + '" rx="4" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="5 4"/>' : '');
+    svg += dim(x0, y0 - 10, x0 + w, y0 - 10, (L || 'Ø ' + Dm) + ' см');
+    if (W && L) svg += dim(x0 - 12, y0, x0 - 12, y0 + h, W, 'l');
+    if (M > (L || Dm)) svg += dim(x0, y0 + h + 22, x0 + M * sc, y0 + h + 22, 'розкладений ' + M + ' см');
+    if (H) { const yb = y0 + h + 60; svg += lbl(yb - 8, 'ЗБОКУ') + '<rect x="' + x0 + '" y="' + yb + '" width="' + Math.min(w, 170) + '" height="7" rx="2" ' + ln + '/><path d="M' + (x0 + 14) + ' ' + (yb + 7) + 'l-5 52M' + (x0 + Math.min(w, 170) - 14) + ' ' + (yb + 7) + 'l5 52" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>' + dim(x0 + Math.min(w, 170) + 30, yb, x0 + Math.min(w, 170) + 30, yb + 59, H + ' см', 'r'); }
+    return svg + '</svg>';
+  }
+  if (SH && H) {
+    const sc = 200 / H, base = 236, seatY = base - SH * sc, topY = base - H * sc, dep = Math.max(50, (SD || 45) * sc * 1.2);
+    let svg = '<svg viewBox="0 0 280 250">' + ar + lbl(14, 'ЗБОКУ');
+    svg += '<path d="M' + (90 + dep) + ' ' + (seatY - 4) + 'L' + (96 + dep) + ' ' + topY + '" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>';
+    svg += '<rect x="90" y="' + (seatY - 7) + '" width="' + (dep + 8) + '" height="13" rx="6" ' + ln + '/><path d="M100 ' + (seatY + 6) + 'L92 ' + base + 'M' + (88 + dep) + ' ' + (seatY + 6) + 'L' + (94 + dep) + ' ' + base + '" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>';
+    svg += dim(66, seatY, 66, base, SH + ' см', 'l') + dim(130 + dep, topY, 130 + dep, base, H + ' см', 'r');
+    if (SD) svg += dim(90, seatY - 20, 90 + dep, seatY - 20, SD + ' см');
+    return svg + '</svg>';
+  }
+  return '';
+}
+
+// ---------- стан фільтрів ----------
+const CF = {g: '', q: '', vetro: false, none: false, ours: false, sale: false, fresh: false, rng: {}, fac: {}, sort: 'hit', view: 'grid', lim: 48, cmp: [], open: false};
+const FACETS = {
+  'Столи': [['Вид', 'Вид'], ['Форма', 'Форма'], ['Матеріал стільниці', 'Стільниця'], ['Матеріал основи', 'Основа'], ['Колір', 'Колір']],
+  'Стільці': [['Матеріал оббивки', 'Оббивка'], ['Матеріал основи', 'Основа'], ['Характеристики', 'Особливості'], ['Колір', 'Колір']],
+  'Крісла': [['Матеріал оббивки', 'Оббивка'], ['Матеріал основи', 'Основа'], ['Характеристики', 'Особливості'], ['Колір', 'Колір']],
+  'Дивани': [['Механізм розкладки', 'Механізм'], ['Матеріал оббивки', 'Оббивка'], ['Наповнювач сидіння', 'Наповнювач'], ['Колір', 'Колір']],
+  'Журнальні й консолі': [['Форма', 'Форма'], ['Матеріал стільниці', 'Стільниця'], ['Матеріал основи', 'Основа'], ['Колір', 'Колір']],
+  'Садові': [['Матеріал основи', 'Основа'], ['Колір', 'Колір']],
+  'Інше': [['Колір', 'Колір']],
+  '': [['Матеріал стільниці', 'Стільниця'], ['Матеріал оббивки', 'Оббивка'], ['Матеріал основи', 'Основа'], ['Колір', 'Колір']]
+};
+const RANGES = {
+  '': [['p', 'Ціна, ₴', f => f.p, 500]],
+  'Столи': [['p', 'Ціна, ₴', f => f.p, 500], ['len', 'Довжина стола, см', f => numOf(f.s['Довжина, см']) || numOf(f.s['Діаметр, см']), 5]],
+  'Стільці': [['p', 'Ціна, ₴', f => f.p, 100], ['seat', 'Висота сидіння, см', f => numOf(f.s['Висота до сидіння, см']), 1]],
+  'Крісла': [['p', 'Ціна, ₴', f => f.p, 100], ['seat', 'Висота сидіння, см', f => numOf(f.s['Висота до сидіння, см']), 1]]
+};
+const rangesOf = g => RANGES[g] || RANGES[''];
+const facV = (k, v) => { v = cleanV(v).toLowerCase(); if (k === 'Матеріал стільниці' || k === 'Колір') v = v.split('+')[0].trim(); return v; };
+const COLMAP = [['чорн|онікс|блек|графіт|антрацит', '#222'], ['біл|айворі|сніж|вайт|молоч|б\'янко', '#f4f2ee'], ['сір|грей|сив|туман|стоун|бетон', '#9a9a96'], ['капучино|латте|мокко|шоколад|коричн|горіх|каштан|гавана', '#8a6a52'],
+  ['беж|пісок|саббія|крема|сахара|тауп|макадамія|льон|кремов', '#d8c7a8'], ['зелен|смарагд|мох|форест|трав|м\'ят', '#5e7d5f'], ['мармур|травертін|калакатта', '#e6e0d6'], ['дуб|дерев', '#b98d5e'], ['син|блакит|лагуна', '#4d6f9a'], ['рож|ройбуш', '#c98a83']];
+const colHex = v => { const x = String(v).toLowerCase(); const m = COLMAP.find(c => new RegExp(c[0]).test(x)); return m ? m[1] : '#c9c8c2'; };
+const freshLim = () => iso(addD(ASOF, -30));
+function catBase(skip) {   // товари з усіма фільтрами, крім skip (для лічильників)
+  const q = CF.q.trim().toLowerCase().split(/\s+/).filter(Boolean), fl = freshLim();
+  return CAT.feed.filter(f => {
+    if (CF.g && f.g !== CF.g) return false;
+    if (q.length) { const t = (f.n + ' ' + f.a + ' ' + f.col).toLowerCase(); if (!q.every(w => t.includes(w))) return false; }
+    if (CF.vetro && !(f.q > 0)) return false;
+    if (CF.none && f.has) return false;
+    if (CF.ours && !f.has) return false;
+    if (CF.sale && !f.op) return false;
+    if (CF.fresh && !(f.fs && f.fs >= fl)) return false;
+    for (const r of rangesOf(CF.g)) { const lim = CF.rng[r[0]]; if (!lim || skip === r[0]) continue; const v = r[2](f); if (!v || v < lim[0] || v > lim[1]) return false; }
+    for (const k in CF.fac) { if (k === skip || !CF.fac[k].size) continue; if (!CF.fac[k].has(facV(k, f.s[k]))) return false; }
+    return true;
+  });
+}
+const SORTS = [['hit', 'Спершу: хіти в нас'], ['sale', 'Спершу: акції Vetro'], ['new', 'Спершу: нові у Vetro'], ['cheap', 'Спершу: дешевші'], ['exp', 'Спершу: дорожчі'], ['stock', 'Спершу: більше у Vetro']];
+function catSorted(L) {
+  const by = {hit: (a, b) => b.sold.q - a.sold.q || (b.q > 0) - (a.q > 0) || b.q - a.q, sale: (a, b) => (b.op ? 1 - b.p / b.op : 0) - (a.op ? 1 - a.p / a.op : 0), new: (a, b) => (b.fs || '').localeCompare(a.fs || ''),
+    cheap: (a, b) => a.p - b.p, exp: (a, b) => b.p - a.p, stock: (a, b) => b.q - a.q}[CF.sort];
+  return L.slice().sort(by);
+}
+const pctOf = f => f.op ? Math.round((1 - f.p / f.op) * 100) : 0;
+const vq = f => f.q > 0 ? (f.q < 10 ? ['var(--warn)', 'Vetro: ' + fmt(f.q) + ' шт'] : ['var(--good)', 'Vetro: ' + fmt(f.q) + ' шт']) : ['var(--bad)', 'немає у Vetro'];
+const cvImg = (f, cls) => f.ph.length ? '<img class="' + (cls || '') + '" loading="lazy" decoding="async" src="' + esc(imgUrl(f.ph[0])) + '" alt="" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'cv-noimg\',innerHTML:GICON[\'Інше\']}))">' : '<span class="cv-noimg">' + GICON['Інше'] + '</span>';
+function cvCard(f) {
+  const v = vq(f), on = CF.cmp.includes(f.a);
+  return '<div class="cv-card" data-cat="' + esc(f.a) + '"><div class="cv-ph">' + cvImg(f) +
+    '<div class="cv-bdg"><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span>' + (f.hit ? '<span class="cv-b hit">хіт у нас</span>' : '') + (f.fs && f.fs >= freshLim() ? '<span class="cv-b nw">нове у Vetro</span>' : '') + '</div>' +
+    (f.op ? '<span class="cv-sale">−' + pctOf(f) + '%</span>' : '') +
+    '<button class="cv-cmpb' + (on ? ' on' : '') + '" data-cmp="' + esc(f.a) + '" title="Додати до порівняння" aria-pressed="' + on + '">' + (on ? '✓' : '+') + '</button></div>' +
+    '<div class="cv-cb"><div class="cv-nm">' + esc(f.n) + '</div><div class="cv-art">' + esc(f.a) + '</div>' + (specLine(f) ? '<div class="cv-spl">' + esc(specLine(f)) + '</div>' : '') +
+    '<div class="cv-pr"><b>' + uah(f.p) + '</b>' + (f.op ? '<s>' + uah(f.op) + '</s>' : '') + '</div>' +
+    '<div class="cv-cf"><span><i class="dot" style="background:' + v[0] + ';width:7px;height:7px"></i> ' + v[1] + '</span><span>продано 90 дн: <b>' + f.sold.q + '</b></span></div></div></div>';
+}
+function cvRow(f) {
+  const s = f.s, v = vq(f);
+  return '<tr data-cat="' + esc(f.a) + '"><td><div class="cv-tn"><span class="cv-mini">' + cvImg(f) + '</span><span><b>' + esc(f.n) + '</b><small>' + esc(f.a) + '</small></span></div></td><td>' + esc(specLine(f) || '—') + '</td>' +
+    '<td>' + esc(cleanV(s['Матеріал стільниці'] || s['Матеріал оббивки'] || '—')) + '</td><td>' + esc(cleanV(s['Матеріал основи'] || '—')) + '</td>' +
+    '<td class="n"><b>' + uah(f.p) + '</b>' + (f.op ? '<br><s class="sub">' + uah(f.op) + '</s>' : '') + '</td><td class="n"><i class="dot" style="background:' + v[0] + ';width:7px;height:7px"></i> ' + fmt(f.q) + '</td><td><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span></td><td class="n">' + f.sold.q + '</td></tr>';
+}
+
+// ---------- вкладка Каталог ----------
+function renderCatalog() {
+  if (!CAT) return catWait('catBox');
+  catLink();
+  const F = CAT.feed, all = F.length, inV = F.filter(f => f.q > 0).length, ours = F.filter(f => f.has).length, sale = F.filter(f => f.op).length;
+  const hallN = F.filter(f => f.hall > 0).length, none = all - ours, noneV = F.filter(f => !f.has && f.q > 0).length;
+  const pc = F.filter(f => f.op).map(pctOf);
+  const tile = (k, cls, lbl, val, sub) => '<button class="card kpi cv-k ' + cls + '" data-cvk="' + k + '" aria-pressed="' + (k && CF[k] ? 'true' : 'false') + '"><span class="k">' + lbl + '</span><b class="num">' + val + '</b><span class="s">' + sub + '</span></button>';
+  $('catBox').innerHTML = (CAT.err ? '<div class="card" style="background:var(--bad2)"><b>' + esc(CAT.err) + '</b></div>' : '') +
+    '<div class="cv-kp">' + tile('', 'acc', 'Усього у Vetro', all, CGR.filter(g => F.some(f => f.g === g)).length + ' груп · фід ' + esc(CAT.built || '')) + tile('vetro', '', 'Є на складі Vetro', inV, 'можна привезти під замовлення') +
+      tile('ours', '', 'Є в нас', ours, hallN + ' у залі') + tile('none', 'cv-r', 'Немає в нас', none, 'з них ' + noneV + ' є у Vetro') + tile('sale', 'cv-y', 'Акція Vetro', sale, pc.length ? 'знижка ' + Math.min(...pc) + '–' + Math.max(...pc) + '%' : 'зараз немає') + '</div>' +
+    '<div class="cv-top"><div class="cv-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="cvQ" type="search" placeholder="Пошук: артикул, назва, колір" value="' + esc(CF.q) + '" aria-label="Пошук у каталозі"></div>' +
+      '<div class="cv-gr" id="cvGr"></div></div>' +
+    '<div class="cv-w"><aside class="cv-fcol" id="cvF"></aside><div class="cv-r"><div class="cv-bar" id="cvBar"></div><div id="cvList"></div></div></div>' +
+    '<div class="g2 stack1" id="cvLists"></div>';
+  cvGroups(); cvFilters(); cvResults(); cvBottom();
+}
+function cvGroups() {
+  const cnt = g => CAT.feed.filter(f => f.g === g).length;
+  $('cvGr').innerHTML = ['', ...CGR.filter(cnt)].map(g => '<button class="cv-chip" data-cvg="' + g + '" aria-pressed="' + (CF.g === g) + '">' + (g || 'Усі') + '<i>' + (g ? cnt(g) : CAT.feed.length) + '</i></button>').join('');
+}
+function cvFilters() {
+  const g = CF.g, tg = (k, l) => '<button class="cv-tg" data-cvt="' + k + '" aria-pressed="' + !!CF[k] + '"><i></i>' + l + '</button>';
+  let h = '<div class="cv-fh"><b>Фільтри</b><button class="cv-lnk" data-cvreset="1">Скинути</button></div>' +
+    '<div class="cv-fg"><b>Наявність</b>' + tg('vetro', 'Є у Vetro') + tg('ours', 'Є в нас') + tg('none', 'Немає в нас') + tg('sale', 'Акція Vetro') + tg('fresh', 'Нове у Vetro, 30 дн') + '</div>';
+  rangesOf(g).forEach(r => {
+    const vals = catBase(r[0]).map(r[2]).filter(v => v > 0); if (vals.length < 2) return;
+    const mn = Math.floor(Math.min(...vals) / r[3]) * r[3], mx = Math.ceil(Math.max(...vals) / r[3]) * r[3]; if (mn >= mx) return;
+    const cur = CF.rng[r[0]] || [mn, mx];
+    h += '<div class="cv-fg"><div class="cv-fgh"><b>' + r[1] + '</b><span id="cvRv_' + r[0] + '">' + fmt(cur[0]) + ' – ' + fmt(cur[1]) + '</span></div><div class="cv-rng" data-cvr="' + r[0] + '"><div class="tr"><i></i></div>' +
+      '<input type="range" min="' + mn + '" max="' + mx + '" step="' + r[3] + '" value="' + cur[0] + '" aria-label="' + r[1] + ' від"><input type="range" min="' + mn + '" max="' + mx + '" step="' + r[3] + '" value="' + cur[1] + '" aria-label="' + r[1] + ' до"></div></div>';
+  });
+  (FACETS[g] || FACETS['']).forEach(([k, lbl]) => {
+    const base = catBase(k), c = {}; base.forEach(f => { const v = f.s[k]; if (v) { const x = facV(k, v); c[x] = (c[x] || 0) + 1; } });
+    const vals = Object.keys(c).sort((a, b) => c[b] - c[a]); if (!vals.length) return;
+    const sel = CF.fac[k] || new Set(), open = CF['fo_' + k], show = open ? vals : vals.slice(0, 6);
+    h += '<div class="cv-fg"><b>' + lbl + '</b>' + show.map(v => '<button class="cv-cbx" data-cvf="' + esc(k) + '" data-v="' + esc(v) + '" aria-pressed="' + sel.has(v) + '">' + (k === 'Колір' ? '<i class="sw" style="background:' + colHex(v) + '"></i>' : '<i></i>') + '<span>' + esc(v) + '</span><em>' + c[v] + '</em></button>').join('') +
+      (vals.length > 6 ? '<button class="cv-lnk" data-cvmore="' + esc(k) + '">' + (open ? 'згорнути' : 'ще ' + (vals.length - 6)) + '</button>' : '') + '</div>';
+  });
+  h += '<div class="cv-fsb ph-only"><button class="cv-btn" data-cvreset="1">Скинути</button><button class="cv-btn dk" data-cvclose="1" id="cvShowN">Показати</button></div>';
+  $('cvF').innerHTML = h; $('cvF').classList.toggle('open', CF.open);
+  $('cvF').querySelectorAll('.cv-rng').forEach(cvPaint);
+}
+function cvPaint(w) { const [a, b] = w.querySelectorAll('input'), mn = +a.min, mx = +a.max, i = w.querySelector('.tr i');
+  i.style.left = ((Math.min(+a.value, +b.value) - mn) / (mx - mn) * 100) + '%'; i.style.right = (100 - (Math.max(+a.value, +b.value) - mn) / (mx - mn) * 100) + '%'; }
+function cvActive() {
+  const ch = [];
+  if (CF.q.trim()) ch.push(['q', '«' + CF.q.trim() + '»']);
+  [['vetro', 'Є у Vetro'], ['ours', 'Є в нас'], ['none', 'Немає в нас'], ['sale', 'Акція Vetro'], ['fresh', 'Нове у Vetro']].forEach(([k, l]) => { if (CF[k]) ch.push([k, l]); });
+  rangesOf(CF.g).forEach(r => { if (CF.rng[r[0]]) ch.push(['r:' + r[0], r[1].split(',')[0] + ' ' + fmt(CF.rng[r[0]][0]) + '–' + fmt(CF.rng[r[0]][1])]); });
+  Object.keys(CF.fac).forEach(k => CF.fac[k].forEach(v => ch.push(['f:' + k + ':' + v, v])));
+  return ch;
+}
+function cvResults() {
+  const L = catSorted(catBase()), act = cvActive();
+  $('cvBar').innerHTML = '<button class="cv-btn ph-only" data-cvopen="1">Фільтри' + (act.length ? ' · ' + act.length : '') + '</button>' + act.map(c => '<button class="cv-ach" data-cvx="' + esc(c[0]) + '">' + esc(c[1]) + ' ×</button>').join('') +
+    (act.length ? '<button class="cv-lnk" data-cvreset="1">Скинути все</button>' : '') + '<span class="cv-fl"></span><span class="sub">Знайдено <b style="color:var(--ink)">' + L.length + '</b></span>' +
+    '<select id="cvSort" aria-label="Сортування">' + SORTS.map(s => '<option value="' + s[0] + '"' + (CF.sort === s[0] ? ' selected' : '') + '>' + s[1] + '</option>').join('') + '</select>' +
+    '<span class="cv-vt pc-only"><button data-cvv="grid" aria-pressed="' + (CF.view === 'grid') + '" title="Плиткою">▦</button><button data-cvv="list" aria-pressed="' + (CF.view === 'list') + '" title="Списком">☰</button></span>';
+  const show = L.slice(0, CF.lim);
+  $('cvList').innerHTML = !L.length ? '<div class="card"><div class="empty">Нічого не знайдено — приберіть частину фільтрів.</div></div>' :
+    (CF.view === 'list' && innerWidth > 760 ? '<div class="card" style="padding:6px 10px"><div class="tbl"><table class="cv-tab"><thead><tr><th>Товар</th><th>Головне</th><th>Стільниця / оббивка</th><th>Основа</th><th class="n">Ціна</th><th class="n">Vetro</th><th>У нас</th><th class="n">Продано 90 дн</th></tr></thead><tbody>' + show.map(cvRow).join('') + '</tbody></table></div></div>'
+      : '<div class="cv-grid">' + show.map(cvCard).join('') + '</div>') +
+    (L.length > show.length ? '<button class="cv-btn cv-more" data-cvlim="1">Показати ще ' + Math.min(48, L.length - show.length) + ' з ' + (L.length - show.length) + '</button>' : '');
+  const sn = $('cvShowN'); if (sn) sn.textContent = 'Показати ' + L.length + ' товар' + (L.length % 10 === 1 && L.length % 100 !== 11 ? '' : L.length % 10 >= 2 && L.length % 10 <= 4 && (L.length % 100 < 10 || L.length % 100 >= 20) ? 'и' : 'ів');
+  cvCmpBar();
+}
+function cvBottom() {
+  const fl = freshLim(), fresh = CAT.feed.filter(f => f.fs && f.fs >= fl).sort((a, b) => b.fs.localeCompare(a.fs)), risk = CAT.feed.filter(f => f.hall > 0 && !(f.q > 0));
+  const row = (f, right) => '<div class="prod" data-cat="' + esc(f.a) + '"><div class="ph">' + cvImg(f) + '</div><div class="pn"><b>' + esc(f.n) + '</b><span>' + esc(f.a) + '</span></div><div class="rt">' + right + '</div></div>';
+  $('cvLists').innerHTML = '<div class="card"><div class="ch"><h3>Нове у Vetro за 30 днів</h3><span class="sub">з’явилось у фіді</span></div><div class="list">' + (fresh.slice(0, 6).map(f => row(f, '<b>' + uah(f.p) + '</b><span class="sub">з ' + dm(pd(f.fs)) + '</span>')).join('') || '<div class="empty">Нових позицій немає</div>') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>У нас у залі, а у Vetro закінчилось</h3><span class="sub">зразок не продавати без перевірки</span></div><div class="list">' + (risk.slice(0, 8).map(f => row(f, '<span class="cv-b rd">у залі ' + f.hall + ' · Vetro 0</span>')).join('') || '<div class="empty">Таких немає</div>') + '</div></div>';
+}
+function cvCmpBar() {
+  let b = $('cvCmp'); if (!b) { b = document.createElement('div'); b.id = 'cvCmp'; b.className = 'cv-cmpbar'; document.body.appendChild(b); }
+  b.hidden = !(tab === 'catalog' && CF.cmp.length);
+  b.innerHTML = CF.cmp.map(a => { const f = CAT.by[a]; return f ? '<span class="cv-cmpi">' + cvImg(f) + '<button data-cmp="' + esc(a) + '" aria-label="Прибрати">×</button></span>' : ''; }).join('') +
+    '<button class="cv-btn dk" data-cvcmp="1"' + (CF.cmp.length < 2 ? ' disabled' : '') + '>Порівняти (' + CF.cmp.length + ')</button><button class="cv-lnk" data-cvcmpclr="1">Очистити</button>';
+}
+
+// ---------- картка товару ----------
+function showCat(a) { openModal(() => catModal(a)); }
+function tipFor(f) {
+  const T = CAT.help.filter(h => h.y === 'товар');
+  const t = T.find(h => h.k && f.code && h.k.toLowerCase() === f.code.toLowerCase()) || T.find(h => h.k === f.g) || T.find(h => h.k && f.g.startsWith(h.k));
+  return t ? t.x : '';
+}
+function catModal(a) {
+  catLink();
+  const f = CAT.by[a]; if (!f) return {html: mhead('<h2>Товар не знайдено</h2>') + '<div class="empty">' + esc(a) + '</div>'};
+  const vars = CAT.feed.filter(x => x !== f && f.code && x.code === f.code), ser = f.ser ? CAT.feed.filter(x => x !== f && x.ser === f.ser && x.code !== f.code) : [];
+  const sw = x => '<button class="cv-sw" data-catm="' + esc(x.a) + '"><i style="background:' + colHex(x.col) + '"></i>' + esc(x === f ? x.col || 'цей' : (x.code !== f.code ? x.code + ' ' : '') + (x.col || x.n)) + '<em>' + (x.q > 0 ? fmt(x.q) : '0') + '</em></button>';
+  const G = specRows(f), grp = (t, rows) => rows.length ? '<div class="cv-sgb"><b>' + t + '</b>' + rows.map(r => '<div><span>' + esc(r[0]) + '</span><strong' + (r[2] ? ' class="hl"' : '') + '>' + esc(r[1]) + '</strong></div>').join('') + '</div>' : '';
+  const draw = specDraw(f), tip = tipFor(f), so = f.sold, mg = Object.keys(so.by).sort((x, y) => so.by[y] - so.by[x]).slice(0, 3);
+  // продажі по тижнях за 12 тижнів
+  const wk = []; for (let i = 11; i >= 0; i--) { const a0 = iso(addD(monday(ASOF), -7 * i)), b0 = iso(addD(monday(ASOF), -7 * i + 6)); wk.push(R.filter(r => r.d >= a0 && r.d <= b0 && (nk2(r.a) === nk2(f.a) || (f.our && nk2(r.a) === nk2(f.our)))).reduce((t, r) => t + r.q, 0)); }
+  const wmx = Math.max(1, ...wk), spk = '<svg class="cv-spk" viewBox="0 0 240 44" preserveAspectRatio="none">' + wk.map((v, i) => '<rect x="' + (i * 20 + 2) + '" y="' + (42 - v / wmx * 36) + '" width="16" height="' + Math.max(1.5, v / wmx * 36) + '" rx="1" fill="' + (i === 11 ? 'var(--y)' : 'var(--bar)') + '"><title>' + v + ' шт</title></rect>').join('') + '</svg>';
+  const pics = f.ph.length ? f.ph : [];
+  const html = '<div class="cv-mhead">' + (MS.length > 1 ? '<button class="back" onclick="backModal()">‹ Назад</button>' : '<span></span>') + '<button class="x" onclick="closeModal()" aria-label="Закрити">×</button></div>' +
+    '<div class="cv-m"><div class="cv-gal"><div class="cv-big">' + (pics.length ? '<img id="cvBig" src="' + esc(imgUrl(pics[0])) + '" alt="' + esc(f.n) + '">' : '<span class="cv-noimg">' + GICON['Інше'] + '</span>') + (pics.length > 1 ? '<span class="cv-cnt" id="cvCnt">1 / ' + pics.length + '</span>' : '') + '</div>' +
+      (pics.length > 1 ? '<div class="cv-th">' + pics.map((p, i) => '<button data-cvpic="' + i + '" aria-pressed="' + (i === 0) + '"><img loading="lazy" src="' + esc(imgUrl(p)) + '" alt=""></button>').join('') + '</div>' : '') +
+      (vars.length ? '<div class="cv-vars"><small>Кольори цієї моделі</small><div class="cv-sws">' + [f, ...vars].map(sw).join('') + '</div></div>' : '') +
+      (ser.length ? '<div class="cv-vars"><small>Та сама серія «' + esc(f.ser) + '», інший розмір</small><div class="cv-sws">' + ser.slice(0, 8).map(sw).join('') + '</div></div>' : '') + '</div>' +
+    '<div class="cv-info"><div class="cv-bdgs"><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span>' + (f.op ? '<span class="cv-b plain y">Акція Vetro −' + pctOf(f) + '%</span>' : '') + '<span class="cv-b plain">' + esc(f.c) + '</span>' + (f.mx ? '<span class="cv-b plain">у матриці: ' + esc(f.mx.stage) + '</span>' : '') + '</div>' +
+      '<h2 class="cv-h">' + esc(f.n) + '</h2><div class="cv-meta"><span class="cv-art">' + esc(f.a) + '</span><button class="cv-lnk" data-cvcopy="' + esc(f.a) + '">Копіювати артикул</button>' + (f.fs ? '<span>у фіді Vetro з ' + dm(pd(f.fs)) + '.' + f.fs.slice(0, 4) + '</span>' : '') + '</div>' +
+      '<div class="cv-price"><b>' + uah(f.p) + '</b>' + (f.op ? '<s>' + uah(f.op) + '</s><span class="cv-sale2">−' + pctOf(f) + '%</span>' : '') + '</div>' +
+      (f.ourP && Math.abs(f.ourP - f.p) > f.p * 0.01 ? '<div class="sub">Наша ціна в таблиці: <b style="color:var(--ink)">' + uah(f.ourPP || f.ourP) + '</b>' + (f.ourPP ? ' (акційна, звичайна ' + uah(f.ourP) + ')' : '') + '</div>' : '') +
+      '<div class="cv-av"><div class="' + (f.q > 0 ? 'g' : 'r') + '"><small>Склад Vetro</small><b>' + (f.q > 0 ? fmt(f.q) + ' шт' : 'немає') + '</b><em>' + (f.q > 0 ? 'можна замовити' : 'запропонуйте інший колір') + '</em></div>' +
+        '<div><small>У нас</small><b>' + (f.hall + f.sk) + ' шт</b><em>' + DEPS[0] + ' ' + ((D.items[f.our] || {}).s1 || 0) + ' · ' + DEPS[1] + ' ' + ((D.items[f.our] || {}).s2 || 0) + ' · склад ' + f.sk + '</em></div>' +
+        '<div class="' + (f.rd ? 'bl' : '') + '"><small>В дорозі</small><b>' + f.rd + ' шт</b><em>' + (f.rd ? (f.arr ? 'прибуде ' + esc(f.arr) : 'дата невідома') : '—') + '</em></div></div>' +
+      '<div class="cv-sales"><div><b>' + (so.q ? so.q + ' шт за 90 днів · ' + uah(so.s) : 'За 90 днів не продавали') + '</b><small>' + (so.last ? 'Останній продаж ' + dm(pd(so.last)) + (mg.length ? ' · продають: ' + mg.map(m => esc(m.split(' ')[0]) + ' ' + so.by[m]).join(', ') : '') : 'по тижнях за 12 тижнів') + '</small></div>' + spk +
+        (f.our && R.some(r => r.a === f.our) ? '<button class="cv-lnk" data-art="' + esc(f.our) + '">Усі продажі в нас →</button>' : '') + '</div>' +
+      (tip ? '<div class="cv-tip"><b>Підказка продавцю</b>' + esc(tip) + '</div>' : '') +
+      '<div class="cv-spec"><div class="ch"><h3>Характеристики</h3><span class="sub">з фіда Vetro</span></div><div class="cv-sw2' + (draw ? '' : ' nod') + '">' + (draw ? '<div class="cv-draw">' + draw + '</div>' : '') +
+        '<div class="cv-sg">' + grp('Розміри', G.dim) + grp('Матеріали', G.mat) + grp('Конструкція', G.con) + '</div></div></div>' +
+      (f.d ? '<details class="cv-desc"><summary>Опис</summary><div>' + esc(f.d).replace(/\n/g, '<br>') + '</div></details>' : '') +
+      '<div class="cv-btns">' + (f.u ? '<a class="cv-btn dk" href="https://vetro.com.ua' + esc(f.u) + '" target="_blank" rel="noopener">Відкрити на vetro.com.ua ↗</a>' : '') +
+        (f.d ? '<button class="cv-btn" data-cvdesc="' + esc(f.a) + '">Скопіювати опис для клієнта</button>' : '') + (f.mx ? '<button class="cv-btn" data-go="matrix">Показати в матриці</button>' : '') +
+        '<button class="cv-btn" data-cmp="' + esc(f.a) + '">' + (CF.cmp.includes(f.a) ? '✓ У порівнянні' : '+ До порівняння') + '</button></div></div></div>';
+  return {html, wide: true};
+}
+function cmpModal() {
+  const L = CF.cmp.map(a => CAT.by[a]).filter(Boolean);
+  const keys = []; L.forEach(f => f.pr.forEach(p => { if (!keys.includes(p[0])) keys.push(p[0]); }));
+  const rows = [['Ціна', f => uah(f.p) + (f.op ? ' <s class="sub">' + uah(f.op) + '</s>' : '')], ['Склад Vetro', f => f.q > 0 ? fmt(f.q) + ' шт' : 'немає'], ['У нас', f => f.st[1]], ['Продано за 90 днів', f => f.sold.q + ' шт'],
+    ...keys.map(k => [SPK[k] || k.replace(/,\s*(см|кг)$/, ''), f => f.s[k] ? esc(f.s[k]) + (/,\s*см$/.test(k) ? ' см' : /,\s*кг$/.test(k) ? ' кг' : '') : '—'])];
+  const minP = Math.min(...L.map(f => f.p));
+  const html = mhead('<h2>Порівняння</h2><div class="sub">жовтим — рядки, де товари відрізняються</div>') + '<div class="tbl"><table class="cv-cmpt"><thead><tr><th></th>' + L.map(f => '<th data-catm="' + esc(f.a) + '"><span class="cv-cmph">' + cvImg(f) + '</span>' + esc(f.n) + '</th>').join('') + '</tr></thead><tbody>' +
+    rows.map(([l, fn]) => { const v = L.map(fn); const df = new Set(v).size > 1; return '<tr class="' + (df ? 'df' : '') + '"><td>' + l + '</td>' + v.map((x, i) => '<td' + (l === 'Ціна' && L[i].p === minP && df ? ' class="best"' : '') + '>' + x + '</td>').join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+  return {html, wide: true};
+}
+
+// ---------- Довідка ----------
+const HF = {q: '', sec: ''};
+function fmtText(x) {
+  const out = []; let ol = null, ul = null;
+  const flush = () => { if (ol) { out.push('<ol>' + ol.join('') + '</ol>'); ol = null; } if (ul) { out.push('<ul>' + ul.join('') + '</ul>'); ul = null; } };
+  String(x || '').split(/\n/).forEach(l => { l = l.trim(); if (!l) return;
+    let m;
+    if ((m = l.match(/^\d+[.)]\s+(.*)$/))) { if (ul) flush(); (ol = ol || []).push('<li>' + esc(m[1]) + '</li>'); return; }
+    if ((m = l.match(/^[•\-–]\s+(.*)$/))) { if (ol) flush(); (ul = ul || []).push('<li>' + esc(m[1]) + '</li>'); return; }
+    flush();
+    if ((m = l.match(/^(Лайфхак|Підказка|Важливо):\s*(.*)$/i))) out.push('<div class="cv-tip"><b>' + esc(m[1]) + '</b>' + esc(m[2]) + '</div>');
+    else out.push('<p>' + esc(l) + '</p>'); });
+  flush(); return out.join('');
+}
+const hpMin = x => Math.max(1, Math.round(String(x).split(/\s+/).length / 160)) + ' хв';
+const HSEC_IC = {'Як читати дашборд': 'overview', 'Цифри й розрахунки': 'chart', 'Матриця і закупка': 'matrix', 'Товари Vetro': 'catalog', 'Скрипти й лайфхаки': 'chat', 'Перший тиждень': 'star', 'Часті запитання': 'help'};
+function showArt(i) { openModal(() => { const h = CAT.help[i]; return {html: mhead('<div class="sub">' + esc(h.s) + ' · ' + hpMin(h.x) + '</div><h2>' + esc(h.t) + '</h2>') + '<div class="hp-art">' + fmtText(h.x) + '</div>' +
+  (CAT.help.some((o, j) => j !== i && o.s === h.s && o.y === 'стаття') ? '<div class="card" style="background:var(--soft);box-shadow:none"><b>Ще в розділі «' + esc(h.s) + '»</b><div class="list">' + CAT.help.map((o, j) => j !== i && o.s === h.s && o.y === 'стаття' ? '<div class="hp-row" data-hart="' + j + '">' + ic('doc') + '<span>' + esc(o.t) + '</span></div>' : '').join('') + '</div></div>' : '')}; }); }
+function renderHelp() {
+  if (!CAT) return catWait('helpBox');
+  const H = CAT.help.map((h, i) => Object.assign({i}, h)), arts = H.filter(h => h.y === 'стаття'), faq = H.filter(h => h.y === 'питання'), steps = H.filter(h => h.y === 'крок');
+  const secs = []; arts.forEach(h => { if (!secs.includes(h.s)) secs.push(h.s); });
+  let done = {}; try { done = JSON.parse(LS.get('d2steps') || '{}'); } catch (e) {}
+  const nd = steps.filter(s => done[s.t]).length;
+  const q = HF.q.trim().toLowerCase().split(/\s+/).filter(Boolean), match = h => q.every(w => (h.t + ' ' + h.x + ' ' + h.s).toLowerCase().includes(w));
+  const artRow = h => '<div class="hp-row" data-hart="' + h.i + '">' + ic('doc') + '<span>' + esc(h.t) + '</span><em>' + esc(h.s) + '</em><small>' + hpMin(h.x) + '</small></div>';
+  const list = q.length ? H.filter(h => h.y !== 'підказка' && match(h)) : HF.sec ? arts.filter(h => h.s === HF.sec) : (arts.filter(h => h.pop).length ? arts.filter(h => h.pop) : arts);
+  $('helpBox').innerHTML = '<div class="hp-hero"><div><h2>Чим допомогти?</h2><p>Пояснення до кожної цифри, часті запитання, підказки продавцям і старт для новачка.</p></div>' +
+      '<div class="cv-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="hpQ" type="search" placeholder="Напишіть питання, наприклад «що таке застій»" value="' + esc(HF.q) + '" aria-label="Пошук у довідці"></div>' +
+      '<div class="hp-pop">Часто шукають:' + H.filter(h => h.pop).slice(0, 6).map(h => '<button data-hart="' + h.i + '">' + esc(h.t) + '</button>').join('') + '</div></div>' +
+    '<div class="hp-cats">' + secs.map(s => '<button class="hp-cat' + (HF.sec === s ? ' on' : '') + '" data-hsec="' + esc(s) + '"><i>' + ic(HSEC_IC[s] || 'doc') + '</i><b>' + esc(s) + '</b><small>' + arts.filter(h => h.s === s).length + ' статей</small></button>').join('') +
+      (steps.length ? '<button class="hp-cat st" data-hjump="hpSteps"><i>' + ic('star') + '</i><b>Перший тиждень</b><small>' + steps.length + ' кроків для стажера</small></button>' : '') +
+      (faq.length ? '<button class="hp-cat" data-hjump="hpFaq"><i>' + ic('help') + '</i><b>Часті запитання</b><small>' + faq.length + ' питань</small></button>' : '') + '</div>' +
+    '<div class="g21"><div class="card"><div class="ch"><h3>' + (q.length ? 'Знайдено: ' + list.length : HF.sec ? esc(HF.sec) : 'Популярні статті') + '</h3>' + (HF.sec || q.length ? '<button class="all" data-hsec="">Усі розділи</button>' : '<span class="sub">натисніть, щоб прочитати</span>') + '</div><div class="list">' +
+        (list.map(h => h.y === 'питання' ? '<details class="hp-q"><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>' : h.y === 'крок' ? '<div class="hp-row" data-hjump="hpSteps">' + ic('star') + '<span>' + esc(h.t) + '</span><em>Перший тиждень</em></div>' : artRow(h)).join('') || '<div class="empty">Нічого не знайдено. Спробуйте інше слово або напишіть питання ЗД — відповідь додамо сюди.</div>') + '</div></div>' +
+      (steps.length ? '<div class="card" id="hpSteps"><div class="ch"><h3>Перший тиждень стажера</h3><span class="sub">' + nd + ' з ' + steps.length + '</span></div><div class="bar"><i style="width:' + (nd / steps.length * 100) + '%"></i></div>' +
+        steps.map((s, i) => '<button class="hp-step" data-hstep="' + esc(s.t) + '"><span class="hp-ck' + (done[s.t] ? ' done' : '') + '">' + (done[s.t] ? '✓' : i + 1) + '</span><span><b>' + esc(s.t) + '</b><small>' + esc(s.x) + '</small></span></button>').join('') + '<div class="sub">Галочки зберігаються на цьому пристрої</div></div>' : '<div></div>') + '</div>' +
+    (faq.length ? '<div class="card" id="hpFaq"><div class="ch"><h3>Часті запитання</h3><span class="sub">' + faq.length + ' питань</span></div><div class="hp-faq">' + faq.map((h, i) => '<details class="hp-q"' + (i === 0 ? ' open' : '') + '><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>').join('') + '</div></div>' : '') +
+    '<div class="card hp-note"><div><b>Чогось не вистачає?</b><span class="sub">Тексти Довідки ведуться на аркуші «📚 Довідка» в таблиці — ЗД дописує статті, питання й підказки, і вони з’являються тут (до 30 хв або після «⟳ оновити»).</span></div></div>';
+}
+
+// ---------- підказки «?» біля блоків ----------
+const HINTS = [['#k-rev .k', 'kpi.rev'], ['#k-ord .k', 'kpi.ord'], ['#k-chk .k', 'kpi.chk'], ['#k-qty .k', 'kpi.qty'], ['h3:Рейтинг менеджерів', 'people.rank'], ['h3:Ростуть і падають', 'cats.movers'],
+  ['h3:Матриця в залі', 'mx.lines'], ['h3:Стан матриці', 'mx.tiles'], ['h3:Де зараз позиції', 'buy.funnel'], ['h3:Кожна позиція — квадратик', 'as.grid'], ['#promoChTitle', 'promo.chart']];
+function addHints() {
+  const h3 = [...document.querySelectorAll('main section h3')];
+  HINTS.forEach(([sel, key]) => {
+    const el = sel.startsWith('h3:') ? h3.find(x => x.textContent.trim().startsWith(sel.slice(3))) : document.querySelector(sel);
+    if (el && !el.querySelector('.hq')) el.insertAdjacentHTML('beforeend', '<button class="hq" data-hq="' + key + '" aria-label="Що це?">?</button>');
+  });
+}
+function showHint(btn) {
+  let p = $('hintPop'); if (!p) { p = document.createElement('div'); p.id = 'hintPop'; p.className = 'hq-pop'; document.body.appendChild(p); }
+  const put = html => { p.innerHTML = html; p.hidden = false;
+    if (innerWidth > 760) { const r = btn.getBoundingClientRect(); p.style.left = Math.min(innerWidth - 340, Math.max(10, r.left - 20)) + 'px'; p.style.top = (r.bottom + 8) + 'px'; } else { p.style.left = p.style.top = ''; } };
+  put('<b>Завантажую підказку…</b>');
+  loadCat(false).then(() => {
+    const k = btn.dataset.hq, h = CAT.help.find(x => x.y === 'підказка' && x.k === k), art = CAT.help.findIndex(x => x.y === 'стаття' && x.k === k);
+    put(h ? '<b>' + esc(h.t) + '</b><p>' + esc(h.x) + '</p>' + (art >= 0 ? '<button class="cv-lnk" data-hart="' + art + '">Детальніше в Довідці →</button>' : '') + '<button class="x" data-hqx="1" aria-label="Закрити">×</button>'
+      : '<b>Підказку ще не додано</b><p>Її можна дописати на аркуші «📚 Довідка»: тип «підказка», ключ <code>' + esc(k) + '</code>.</p><button class="x" data-hqx="1" aria-label="Закрити">×</button>');
+  }).catch(e => put('<b>Не вдалося завантажити</b><p>' + esc(e && e.message || e) + '</p><button class="x" data-hqx="1">×</button>'));
+}
+document.addEventListener('click', e => {
+  const hq = e.target.closest('.hq'); if (hq) { e.stopPropagation(); e.preventDefault(); return showHint(hq); }
+  const hp = $('hintPop'); if (hp && !hp.hidden && (!e.target.closest('#hintPop') || e.target.closest('[data-hqx]'))) { hp.hidden = true; if (e.target.closest('[data-hqx]')) return; }
+  const t = e.target;
+  const ha = t.closest('[data-hart]'); if (ha) { e.stopPropagation(); if (hp) hp.hidden = true; return showArt(+ha.dataset.hart); }
+  const cm = t.closest('[data-cmp]'); if (cm) { e.stopPropagation(); const a = cm.dataset.cmp, i = CF.cmp.indexOf(a); if (i >= 0) CF.cmp.splice(i, 1); else { if (CF.cmp.length >= 3) CF.cmp.shift(); CF.cmp.push(a); }
+    if (MS.length && !cm.closest('.cv-cmpbar')) drawModal(); if (tab === 'catalog') cvResults(); else cvCmpBar(); return; }
+  if (t.closest('[data-cvcmp]')) { e.stopPropagation(); return openModal(cmpModal); }
+  if (t.closest('[data-cvcmpclr]')) { CF.cmp = []; return cvResults(); }
+  const cc = t.closest('[data-catm]'); if (cc) { e.stopPropagation(); return showCat(cc.dataset.catm); }
+  const cd = t.closest('[data-cat]'); if (cd && !t.closest('[data-cmp]')) { e.stopPropagation(); return showCat(cd.dataset.cat); }
+  const pc = t.closest('[data-cvpic]'); if (pc) { const i = +pc.dataset.cvpic, img = $('cvBig'); if (img) { img.src = pc.querySelector('img').src; } document.querySelectorAll('[data-cvpic]').forEach(b => b.setAttribute('aria-pressed', b === pc)); const n = $('cvCnt'); if (n) n.textContent = (i + 1) + ' / ' + document.querySelectorAll('[data-cvpic]').length; return; }
+  const cp = t.closest('[data-cvcopy]'); if (cp) { navigator.clipboard && navigator.clipboard.writeText(cp.dataset.cvcopy).then(() => { cp.textContent = '✓ Скопійовано'; }).catch(() => {}); return; }
+  const cds = t.closest('[data-cvdesc]'); if (cds) { const f = CAT.by[cds.dataset.cvdesc]; const s = f.n + '\n' + uah(f.p) + '\n\n' + f.d + '\n\n' + f.pr.map(p => p[0].replace(/,\s*(см|кг)$/, '') + ': ' + p[1] + (/,\s*см$/.test(p[0]) ? ' см' : /,\s*кг$/.test(p[0]) ? ' кг' : '')).join('\n');
+    navigator.clipboard && navigator.clipboard.writeText(s).then(() => { cds.textContent = '✓ Опис скопійовано'; }).catch(() => {}); return; }
+  // фільтри каталогу
+  const k = t.closest('[data-cvk]'); if (k) { const key = k.dataset.cvk; if (key) { CF[key] = !CF[key]; if (key === 'none' && CF.none) CF.ours = false; if (key === 'ours' && CF.ours) CF.none = false; } else { cvReset(); } CF.lim = 48; return renderCatalog(); }
+  const g = t.closest('[data-cvg]'); if (g) { CF.g = g.dataset.cvg; CF.rng = {}; CF.fac = {}; CF.lim = 48; cvGroups(); cvFilters(); return cvResults(); }
+  const tg = t.closest('[data-cvt]'); if (tg) { const key = tg.dataset.cvt; CF[key] = !CF[key]; if (key === 'none' && CF.none) CF.ours = false; if (key === 'ours' && CF.ours) CF.none = false; CF.lim = 48; cvFilters(); return cvResults(); }
+  const fb = t.closest('[data-cvf]'); if (fb) { const key = fb.dataset.cvf, v = fb.dataset.v, s = CF.fac[key] || (CF.fac[key] = new Set()); s.has(v) ? s.delete(v) : s.add(v); CF.lim = 48; cvFilters(); return cvResults(); }
+  const mo = t.closest('[data-cvmore]'); if (mo) { CF['fo_' + mo.dataset.cvmore] = !CF['fo_' + mo.dataset.cvmore]; return cvFilters(); }
+  if (t.closest('[data-cvreset]')) { cvReset(); cvFilters(); return cvResults(); }
+  const x = t.closest('[data-cvx]'); if (x) { const v = x.dataset.cvx; if (v === 'q') { CF.q = ''; const qi = $('cvQ'); if (qi) qi.value = ''; } else if (v.startsWith('r:')) delete CF.rng[v.slice(2)]; else if (v.startsWith('f:')) { const [, key, ...val] = v.split(':'); CF.fac[key] && CF.fac[key].delete(val.join(':')); } else CF[v] = false; cvFilters(); return cvResults(); }
+  const vv = t.closest('[data-cvv]'); if (vv) { CF.view = vv.dataset.cvv; return cvResults(); }
+  if (t.closest('[data-cvlim]')) { CF.lim += 48; return cvResults(); }
+  if (t.closest('[data-cvopen]')) { CF.open = true; $('cvF').classList.add('open'); document.body.style.overflow = 'hidden'; return; }
+  if (t.closest('[data-cvclose]') || t.id === 'cvF') { CF.open = false; $('cvF').classList.remove('open'); document.body.style.overflow = ''; return; }
+  // довідка
+  const hs = t.closest('[data-hsec]'); if (hs) { HF.sec = hs.dataset.hsec; if (!HF.sec) HF.q = ''; return renderHelp(); }
+  const hj = t.closest('[data-hjump]'); if (hj) { const el = $(hj.dataset.hjump); if (el) el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}); return; }
+  const st = t.closest('[data-hstep]'); if (st) { let d = {}; try { d = JSON.parse(LS.get('d2steps') || '{}'); } catch (er) {} d[st.dataset.hstep] = !d[st.dataset.hstep]; LS.set('d2steps', JSON.stringify(d)); return renderHelp(); }
+}, true);
+function cvReset() { Object.assign(CF, {q: '', vetro: false, none: false, ours: false, sale: false, fresh: false, rng: {}, fac: {}, lim: 48}); const qi = $('cvQ'); if (qi) qi.value = ''; }
+let cvT;
+document.addEventListener('input', e => {
+  if (e.target.id === 'cvQ') { clearTimeout(cvT); cvT = setTimeout(() => { CF.q = e.target.value; CF.lim = 48; cvResults(); }, 200); return; }
+  if (e.target.id === 'hpQ') { clearTimeout(cvT); const pos = e.target.selectionStart; cvT = setTimeout(() => { HF.q = e.target.value; HF.sec = ''; renderHelp(); const q = $('hpQ'); q.focus(); try { q.setSelectionRange(pos, pos); } catch (er) {} }, 250); return; }
+  const w = e.target.closest('.cv-rng'); if (w) { const [a, b] = w.querySelectorAll('input'); let lo = Math.min(+a.value, +b.value), hi = Math.max(+a.value, +b.value);
+    const full = lo <= +a.min && hi >= +a.max; if (full) delete CF.rng[w.dataset.cvr]; else CF.rng[w.dataset.cvr] = [lo, hi];
+    cvPaint(w); const lab = $('cvRv_' + w.dataset.cvr); if (lab) lab.textContent = fmt(lo) + ' – ' + fmt(hi);
+    clearTimeout(cvT); cvT = setTimeout(() => { CF.lim = 48; cvResults(); }, 150); }
+});
+document.addEventListener('change', e => { if (e.target.id === 'cvSort') { CF.sort = e.target.value; cvResults(); } });
+
 // ===== оболонка: меню, періоди, вкладки =====
 const MODES = [['week','Тиждень'],['month','Місяць'],['year','Рік'],['all','Весь час'],['custom','Період']];
-$('tabs').innerHTML = '<div class="logo"><i>D2</i>Vetro</div>' + TABS.map(t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>').join('') +
+const navBtn = t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>';
+$('tabs').innerHTML = '<div class="logo">' + LOGO + '<span>VETRO у D2</span></div>' + TABS.filter(t => TBAR.includes(t[0])).map(navBtn).join('') +
+  '<div class="navsep">Ще</div>' + TABS.filter(t => !TBAR.includes(t[0])).map(navBtn).join('') +
   '<div class="sp"></div><button class="themeBtn" type="button"></button><div class="ro">Лише перегляд — дані в таблиці не змінюються</div>';
 $('tabbar').innerHTML = TBAR.map(t => '<button data-t="' + t + '" aria-selected="false"><i>' + ic(t) + '</i>' + TABS.find(x => x[0] === t)[1] + '</button>').join('') + '<button data-more="1" aria-selected="false"><i>' + ic('more') + '</i>Ще</button>';
 $('moreIn').innerHTML = TABS.filter(t => !TBAR.includes(t[0])).map(t => '<button class="nav" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>').join('') + '<button class="themeBtn" type="button" style="color:var(--ink);border-color:var(--line)"></button><div class="sub" style="padding:4px 12px">Лише перегляд — дані в таблиці не змінюються</div>';
+$('loader').firstElementChild.insertAdjacentHTML('afterbegin', LOGO);
 $('mode').innerHTML = $('chips').innerHTML = MODES.map(m => '<button data-m="' + m[0] + '" aria-pressed="false">' + m[1] + '</button>').join('');
 $('mRefresh').innerHTML = ic('refresh');
 let LAST = {};
@@ -1203,13 +1824,15 @@ function render() {
   document.querySelectorAll('[data-t]').forEach(b => b.setAttribute('aria-selected', b.dataset.t === tab));
   const moreSel = !TBAR.includes(tab); document.querySelector('#tabbar [data-more]').setAttribute('aria-selected', moreSel);
   document.querySelectorAll('main section[data-p]').forEach(s => s.hidden = s.dataset.p !== tab);
-  $('periodBox').hidden = tab === 'matrix' || tab === 'assort';
+  $('periodBox').hidden = tab === 'matrix' || tab === 'assort' || tab === 'catalog' || tab === 'help';
   // вкладка перемальовується лише тоді, коли змінився період або дані — перемикання між вкладками миттєве
   const key = [VER, mode, offset, cFrom && +cFrom, cTo && +cTo, document.documentElement.className].join('|');
   if (LAST[tab] !== key) {
     LAST[tab] = key;
-    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix})[tab](P);
+    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp})[tab](P);
   }
+  addHints();
+  const cb = $('cvCmp'); if (cb) cb.hidden = !(tab === 'catalog' && CF.cmp.length);
   try { localStorage.setItem('d2dash3', JSON.stringify({mode, tab})); } catch (e) {}
 }
 function goTab(t) { if (!t) return; tab = t; $('more').hidden = true; render(); window.scrollTo({top: 0}); }
@@ -1233,7 +1856,7 @@ $('salesM').onclick = e => { const b = e.target.closest('button'); if (b) { sale
 $('yearSel').onclick = e => { const b = e.target.closest('button'); if (b) { YEAR = +b.dataset.y; renderYear(); } };
 $('asDays').onclick = e => { const b = e.target.closest('button'); if (b) { asDays = +b.dataset.d; renderAssort(); } };
 ['cFrom', 'cTo'].forEach(id => $(id).onchange = () => { const f = $('cFrom').value, t = $('cTo').value; cFrom = f ? pd(f) : null; cTo = t ? pd(t) : null; render(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); $('more').hidden = true; } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); $('more').hidden = true; const hp = $('hintPop'); if (hp) hp.hidden = true; const cf = $('cvF'); if (cf && CF.open) { CF.open = false; cf.classList.remove('open'); document.body.style.overflow = ''; } } });
 applyTheme(false);
 
 // ===== завантаження даних: у таблиці (Apps Script) або в додатку Vetro (GitHub, особистий ключ) =====
@@ -1272,7 +1895,8 @@ async function loadApp(force) {
     boot(t); BOOTED = true; saveData(t);
   } catch (e) { if (BOOTED) stale('⚠ немає зв\'язку, показано збережені дані'); else loadErr(e); }
 }
-$('refresh').onclick = $('mRefresh').onclick = () => { if (IN_GAS) load(true); else if (APP) loadApp(true); };
+$('refresh').onclick = $('mRefresh').onclick = () => { if (IN_GAS) load(true); else if (APP) loadApp(true);
+  if (CAT && (tab === 'catalog' || tab === 'help')) loadCat(true).then(() => { LAST.catalog = LAST.help = null; render(); }).catch(() => {}); };
 if (IN_GAS) load(false);
 else if (window.__DEMO__) boot(window.__DEMO__);
 else {

@@ -1,6 +1,6 @@
 // Vetro: оболонка додатка зберігається на телефоні — відкривається миттєво і без зв'язку. Дані з таблиці сюди не потрапляють (їх зберігає сама сторінка).
-const V = 'vetro-shell-v1';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
+const V = 'vetro-shell-v2';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-v2-192.png', './icon-v2-512.png', './apple-touch-icon-v2.png', './favicon-v2.png'];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(V).then(c => c.addAll(SHELL))); });
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('vetro-shell') && k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
