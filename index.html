@@ -407,8 +407,51 @@ s{opacity:.7}
 /* «?» біля блоків */
 .hq{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:0;background:var(--soft);color:var(--mut);font-size:11px;font-weight:900;margin-left:7px;cursor:pointer;vertical-align:2px;padding:0;font-family:inherit}
 .hq:hover{background:var(--ink);color:var(--y)}.kpi.acc .hq{background:rgba(127,127,127,.25);color:inherit}
-.hq-pop{position:fixed;z-index:45;width:320px;background:#111;color:#eee;border-radius:14px;padding:13px 40px 13px 15px;font-size:12.5px;line-height:1.5;box-shadow:0 18px 40px -12px rgba(0,0,0,.55);display:grid;gap:6px}
-.hq-pop b{color:#ffc61a}.hq-pop p{margin:0}.hq-pop .x{position:absolute;top:8px;right:8px;width:26px;height:26px;font-size:15px;background:#2a2a2a;color:#fff}.hq-pop .cv-lnk{color:#fff;justify-self:start}.hq-pop code{color:#ffc61a}
+.hq-pop{position:fixed;z-index:45;width:380px;max-height:calc(100vh - 24px);overflow:auto;background:var(--card);color:var(--ink);border-radius:18px;padding:16px 16px 14px;font-size:13px;line-height:1.5;box-shadow:0 22px 50px -14px rgba(0,0,0,.45),0 0 0 1px var(--line);display:grid;gap:10px}
+.hq-pop .hq-t{font-size:15px;font-weight:900;padding-right:34px}.hq-pop .x{position:absolute;top:10px;right:10px;width:28px;height:28px;font-size:16px}
+.hq-txt{display:grid;gap:5px}.hq-txt p{margin:0}.hq-pop code{background:var(--soft);border-radius:5px;padding:0 4px}
+.hq-ana{background:var(--bg);border-radius:14px;padding:12px;pointer-events:none}
+.hq-leg{margin:0;padding:0;list-style:none;counter-reset:hq;display:grid;gap:4px;font-size:12.5px}
+.hq-leg li{counter-increment:hq;display:grid;grid-template-columns:20px 1fr;gap:6px;align-items:start}
+.hq-leg li::before{content:counter(hq);width:18px;height:18px;border-radius:50%;background:var(--y);color:#111;font-size:10.5px;font-weight:900;display:grid;place-items:center;margin-top:1px}
+.mk{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--y);color:#111;font-size:10px;font-weight:900;font-style:normal;flex:none;box-shadow:0 0 0 2px var(--card);vertical-align:middle;margin:0 2px}
+.a-card{background:var(--card);border-radius:12px;padding:10px 12px;display:grid;gap:7px;font-size:12px;box-shadow:var(--sh)}
+.a-flex{display:flex;align-items:center;gap:8px}
+.a-lbl{font-size:11px;font-weight:700;color:var(--mut)}.a-big{font-size:20px;font-weight:900;display:flex;align-items:center;gap:4px}
+.a-line{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.a-fl{flex:1}
+.a-sub{font-size:11px;color:var(--mut)}
+.a-pill{font-size:10.5px;font-weight:800;border-radius:999px;padding:1px 7px;background:var(--soft)}.a-pill.up{background:var(--good2);color:var(--good)}.a-pill.dn{background:var(--bad2);color:var(--bad)}.a-pill.wt{background:var(--warn2,#fcecd9);color:var(--warn)}.a-pill.mv{background:var(--ink);color:var(--card)}
+.a-spk{width:90px;height:26px}
+.a-tab{font-size:11px;font-weight:700;color:var(--mut);padding-bottom:2px}.a-tab.on{color:var(--ink);box-shadow:inset 0 -2px var(--y)}
+.a-seg{display:inline-flex;background:var(--soft);border-radius:8px;padding:2px;font-size:10px}.a-seg b,.a-seg span{padding:2px 6px;border-radius:6px}.a-seg b{background:var(--y);color:#111}
+.a-tag{background:#111;color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:1px 6px}
+.a-bars{display:flex;align-items:flex-end;gap:5px;height:56px}.a-bars i{flex:1;background:var(--bar);border-radius:4px 4px 2px 2px;min-height:3px}.a-bars i.hi,.a-bars i.y{background:var(--y)}.a-bars i.fut{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+.a-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.a-cal span{border-radius:8px;padding:5px 2px;display:grid;justify-items:center;position:relative;background:var(--soft)}
+.a-cal span b{font-size:12px}.a-cal span small{font-size:9px;color:var(--mut)}.a-cal .best{background:#111;color:#fff}.a-cal .best small{color:var(--y)}.a-cal .l3{background:var(--y)}.a-cal .l2{background:var(--y2)}.a-cal .fut{background:none;color:var(--mut)}
+.a-cal .mk{position:absolute;top:-7px;right:-5px}
+.a-donut{width:64px;height:64px;transform:rotate(-90deg)}.a-legv{display:grid;gap:3px;font-size:11px}.a-legv span{display:flex;align-items:center;gap:5px}.a-legv i{width:8px;height:8px;border-radius:50%}
+.a-row{display:flex;align-items:center;gap:8px}.a-mid{flex:1;min-width:0;display:grid;gap:1px}.a-mid small,.a-r small{font-size:10.5px;color:var(--mut)}.a-r{display:grid;justify-items:end;gap:2px}
+.a-img{width:30px;height:30px;border-radius:8px;background:var(--soft);flex:none}
+.a-av{width:26px;height:26px;border-radius:50%;background:var(--on);color:#fff;font-size:9.5px;font-weight:900;display:grid;place-items:center;flex:none}.a-av.dk{background:#111}
+.a-meter{height:5px;border-radius:5px;background:var(--soft);overflow:hidden}.a-meter i{display:block;height:100%;background:var(--on)}
+.a-wide{width:100%;height:auto}.a-tbl{display:grid;grid-template-columns:auto auto auto;gap:3px 10px;font-size:11px;align-items:center;justify-content:start}
+.a-ord{display:grid;gap:3px}.a-stack{display:flex;height:16px;border-radius:6px;overflow:hidden}.a-stack i{display:grid;place-items:center;font-size:9.5px;font-weight:800;font-style:normal;color:#fff}
+.a-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}
+.a-th{min-width:30px;height:30px;padding:0 4px;border-radius:9px;background:var(--soft);display:grid;place-items:center;font-weight:900;font-size:11px;flex:none}.a-th.mv{background:#111;color:#fff}.a-th.no{background:var(--bad);color:#fff}
+.a-link{font-size:11px;font-weight:700;color:var(--mut)}.a-place{font-weight:900;font-size:14px;width:18px;text-align:center}
+.a-mir{display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;font-size:10.5px;color:var(--mut)}.a-mir div{height:9px;display:flex}.a-mir div:nth-child(2){justify-content:flex-end}
+.a-mir i{display:block;height:100%;background:var(--zd);border-radius:4px 0 0 4px}.a-mir b{display:block;height:100%;background:var(--on);border-radius:0 4px 4px 0}
+.a-ticks{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;height:18px}.a-ticks i{background:var(--soft);border-radius:2px}.a-ticks i.on{background:var(--zd)}
+.a-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.a-tiles span{border-radius:9px;padding:6px;background:var(--soft);display:grid;box-shadow:inset 3px 0 var(--c,transparent)}.a-tiles b{font-size:14px}.a-tiles small{font-size:9.5px;color:var(--mut)}.a-tiles .on{box-shadow:inset 3px 0 var(--c),0 0 0 2px var(--ink)}
+.a-dt{font-size:11px;font-weight:800;background:var(--soft);border-radius:7px;padding:3px 6px}
+.a-cell{border-radius:10px;padding:8px 10px;box-shadow:inset 3px 0 var(--c),0 0 0 1px var(--line);display:grid;gap:4px}.a-act{font-size:10.5px;font-weight:800}
+.a-fun{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}.a-fun span{background:var(--soft);padding:6px 4px;font-size:10px;color:var(--mut);text-align:center;clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%,12% 50%)}.a-fun b{font-size:14px;color:var(--ink)}
+.a-fun span:first-child{clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);background:var(--bad2)}
+.a-sq{display:flex;align-items:center;gap:3px;flex-wrap:wrap}.a-sq i{width:18px;height:18px;border-radius:4px;background:var(--soft)}.a-sq i.l4{background:#111}.a-sq i.l3{background:var(--y)}.a-sq i.l2{background:var(--y2)}.a-sq i.l5{background:#bcd6ff}.a-sq i.l1{background:var(--bad2);box-shadow:inset 0 0 0 2px var(--bad)}.a-sq i.l0{width:10px;height:10px;background:var(--bar)}
+.a-tl{position:relative;height:14px;background:var(--soft);border-radius:7px}.a-tl i{position:absolute;top:2px;bottom:2px;background:var(--bar);border-radius:5px}.a-tl i.now{background:var(--y)}
+/* «Розмір, см» у картці товару */
+.cv-size{display:grid;gap:6px;background:var(--soft);border-radius:14px;padding:10px 13px}.cv-size>b{font-size:12.5px}
+.cv-size>div{display:flex;flex-wrap:wrap;gap:6px 18px}.cv-size span{display:inline-flex;align-items:center;gap:6px}.cv-size svg{width:36px;height:30px;flex:none}.cv-size em{font-style:normal;font-size:15px;font-weight:800}
 @media (max-width:1180px){.cv-kp{grid-template-columns:repeat(3,minmax(0,1fr))}.cv-m{grid-template-columns:1fr}.cv-gal{position:static}}
 @media (max-width:760px){
   .cv-kp{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cv-k .num{font-size:20px}.cv-kp .cv-k:first-child{grid-column:1/-1}
@@ -427,7 +470,7 @@ s{opacity:.7}
   .cv-price b{font-size:24px}
   .hp-hero{padding:16px}.hp-hero h2{font-size:21px}
   .hp-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.hp-cat{padding:11px}
-  .hq-pop{left:10px!important;right:10px;bottom:calc(96px + env(safe-area-inset-bottom,0px));top:auto!important;width:auto}
+  .hq-pop{left:10px!important;right:10px;bottom:calc(96px + env(safe-area-inset-bottom,0px));top:auto!important;width:auto;max-height:70vh}
 }
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
@@ -721,6 +764,7 @@ function boot(json) {
   $('loader').hidden = true;
   applyTheme(false);
   render();
+  setTimeout(() => { if (!HELP) loadHelp(false).catch(() => {}); }, 2500);   // довідка для «?» — заздалегідь, у фоні
 }
 
 // ===== тема =====
@@ -1366,8 +1410,8 @@ const CGR = ['Столи', 'Стільці', 'Крісла', 'Дивани', 'Ж
 const cgrp = c => { c = String(c || '').toLowerCase();
   if (/садов/.test(c)) return 'Садові';
   if (/журнал|кавов|консол|вітальн/.test(c)) return 'Журнальні й консолі';
+  if (/стільц|стілец/.test(c)) return 'Стільці';      // «стільці» містять «стіл» — тому спершу стільці
   if (/стіл|столи/.test(c)) return 'Столи';
-  if (/стільц|стілец/.test(c)) return 'Стільці';
   if (/крісл/.test(c)) return 'Крісла';
   if (/диван|софа/.test(c)) return 'Дивани';
   return 'Інше'; };
@@ -1384,8 +1428,11 @@ function setCat(t) {
   CAT = j; CATV = -1;
   CAT.feed.forEach(f => { f.g = cgrp(f.c); f.s = {}; f.pr.forEach(p => { f.s[p[0]] = p[1]; }); f.code = codeOf(f.n); f.ser = seriesOf(f.n); f.col = f.s['Колір'] || ''; });
   CAT.by = {}; CAT.feed.forEach(f => { CAT.by[f.a] = f; });
-  CAT.help = CAT.help || [];
+  // «вперше у фіді» почали записувати не з першого дня — найраніша дата означає «було ще до початку запису», а не новинку
+  const fs = CAT.feed.map(f => f.fs).filter(Boolean).sort();
+  CAT.fs0 = fs.length ? iso(addD(pd(fs[0]), 3)) : '';
 }
+const isFresh = f => !!(f.fs && f.fs > CAT.fs0 && f.fs >= freshLim());
 // зв'язок фіда з нашими даними (залишки, продажі, матриця) — перераховується, коли оновились основні дані
 function catLink() {
   if (!CAT || !D || CATV === VER) return;
@@ -1404,8 +1451,9 @@ function catLink() {
     f.st = hall > 0 ? ['g', 'В залі'] : sk > 0 ? ['w', 'На складі'] : rd > 0 ? ['bl', 'В дорозі ' + rd] : ['rd', 'Немає в нас'];
     f.has = hall + sk + rd > 0;
   });
-  const top = CAT.feed.filter(f => f.sold.q > 0).sort((a, b) => b.sold.q - a.sold.q);
-  CAT.feed.forEach(f => { f.hit = false; }); top.slice(0, Math.max(5, Math.round(top.length * 0.15))).forEach(f => { f.hit = true; });
+  // хіти — окремо в кожній групі: стільці продаються штуками по 4, тому загальний рейтинг «з'їдав» би столи
+  const byG = {}; CAT.feed.forEach(f => { f.rk = 1e9; f.hit = false; if (f.sold.q > 0) (byG[f.g] = byG[f.g] || []).push(f); });
+  Object.keys(byG).forEach(g => { const L = byG[g].sort((a, b) => b.sold.q - a.sold.q || b.sold.s - a.sold.s), n = Math.max(3, Math.ceil(L.length * 0.2)); L.forEach((f, i) => { f.rk = i; f.hit = i < n; }); });
 }
 async function fetchCat(force) {
   const r = await fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=cat' + (force ? '&force=1' : '') + '&t=' + Date.now(), {cache: 'no-store'});
@@ -1415,17 +1463,22 @@ async function fetchCat(force) {
   try { await (await dataCache()).put('./__cat', new Response(t, {headers: {'Content-Type': 'application/json'}})); } catch (e) {}
   return t;
 }
+function gasCat(force) { return new Promise((ok, no) => google.script.run.withSuccessHandler(t => { LS.set('d2cat', t); ok(t); }).withFailureHandler(no).dashCatalog(!!force)); }
 function loadCat(force) {
   if (CAT && !force) return Promise.resolve(CAT);
   if (CATP && !force) return CATP;
   CATP = (async () => {
     try {
       let t;
-      if (IN_GAS) t = await new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashCatalog(!!force));
+      if (IN_GAS) {
+        if (!force && !CAT) { const c = LS.get('d2cat'); if (c) { try { setCat(c);
+          gasCat(false).then(t2 => { setCat(t2); LAST.catalog = null; if (tab === 'catalog') render(); }).catch(() => {}); return CAT; } catch (e) {} } }
+        t = await gasCat(force);
+      }
       else if (window.__DEMO_CAT__) t = window.__DEMO_CAT__;
       else {
         if (!force && !CAT) { try { const c = await (await dataCache()).match('./__cat'); if (c) { setCat(await c.text());
-          fetchCat(false).then(t2 => { setCat(t2); LAST.catalog = LAST.help = null; if (tab === 'catalog' || tab === 'help') render(); }).catch(() => {}); return CAT; } } catch (e) {} }
+          fetchCat(false).then(t2 => { setCat(t2); LAST.catalog = null; if (tab === 'catalog') render(); }).catch(() => {}); return CAT; } } catch (e) {} }
         t = await fetchCat(force);
       }
       setCat(t); return CAT;
@@ -1433,11 +1486,36 @@ function loadCat(force) {
   })();
   return CATP;
 }
-function catWait(sec, fn) {
+function catWait(sec, what) {
   const box = $(sec);
-  box.innerHTML = '<div class="card" style="place-items:center;padding:40px"><div class="loader-in"><i></i><span>Завантажую каталог Vetro і довідку…</span></div></div>';
-  loadCat(false).then(() => { LAST[tab] = null; render(); }).catch(e => { box.innerHTML = '<div class="card"><b>Не вдалося завантажити: ' + esc(e && e.message || e) + '</b><button class="cv-btn" onclick="LAST.catalog=LAST.help=null;render()">Спробувати ще раз</button></div>'; });
+  box.innerHTML = '<div class="card" style="place-items:center;padding:40px"><div class="loader-in"><i></i><span>' + (what === 'help' ? 'Завантажую довідку…' : 'Завантажую каталог Vetro… Перший раз — до хвилини, далі відкривається одразу.') + '</span></div></div>';
+  (what === 'help' ? loadHelp(false) : loadCat(false)).then(() => { LAST[tab] = null; render(); }).catch(e => { box.innerHTML = '<div class="card"><b>Не вдалося завантажити: ' + esc(e && e.message || e) + '</b><button class="cv-btn" onclick="LAST.catalog=LAST.help=null;render()">Спробувати ще раз</button></div>'; });
 }
+// ---------- Довідка: окремо, маленька, з копією на пристрої ----------
+let HELP = null, HELPP = null;
+function setHelp(t) { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); HELP = j.help || []; }
+async function fetchHelp(force) {
+  if (IN_GAS) return await new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashHelp(!!force));
+  if (window.__DEMO_HELP__) return window.__DEMO_HELP__;
+  const r = await fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=help' + (force ? '&force=1' : '') + '&t=' + Date.now(), {cache: 'no-store'});
+  const t = await r.text();
+  if (t.trim()[0] !== '{') throw new Error('таблиця відповіла не даними');
+  if (t.startsWith('{"error"')) { const j = JSON.parse(t); throw new Error(j.error === 'key' ? 'посилання не дійсне' : (j.message || j.error)); }
+  return t;
+}
+function loadHelp(force) {
+  if (HELP && !force) return Promise.resolve(HELP);
+  if (HELPP && !force) return HELPP;
+  HELPP = (async () => {
+    try {
+      if (!force && !HELP) { const c = LS.get('d2help'); if (c) { try { setHelp(c); bgHelp(); return HELP; } catch (e) {} } }
+      const t = await fetchHelp(force); setHelp(t); LS.set('d2help', t); bgHelp.done = 1; return HELP;
+    } finally { HELPP = null; }
+  })();
+  return HELPP;
+}
+function bgHelp() { if (bgHelp.done) return; bgHelp.done = 1;
+  fetchHelp(false).then(t => { setHelp(t); LS.set('d2help', t); if (tab === 'help') { LAST.help = null; render(); } }).catch(() => { bgHelp.done = 0; }); }
 
 // ---------- характеристики ----------
 const SPK = {'Максимальна довжина стільниці, см': 'Розкладений до', 'Максимальна глибина сидіння, см': 'Глибина макс.', 'Висота до сидіння, см': 'Висота сидіння', 'Механізм розкладки': 'Механізм'};
@@ -1463,39 +1541,47 @@ function specLine(f) {
   if (/підлокітник/i.test(s['Характеристики'] || '')) p.push('підлокітники');
   return p.slice(0, 3).join(' · ');
 }
-// креслення з розмірами фіда: стіл — зверху і збоку, стілець — збоку
-function specDraw(f) {
-  const s = f.s, L = numOf(s['Довжина, см']), W = numOf(s['Ширина, см']), M = numOf(s['Максимальна довжина стільниці, см']), Dm = numOf(s['Діаметр, см']), H = numOf(s['Висота, см']);
-  const SH = numOf(s['Висота до сидіння, см']), SD = numOf(s['Глибина сидіння, см']) || numOf(s['Максимальна глибина сидіння, см']);
-  const ar = '<defs><marker id="cvar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" fill="var(--bad)"/></marker></defs>';
-  const dim = (x1, y1, x2, y2, t, side) => '<path d="M' + x1 + ' ' + y1 + 'L' + x2 + ' ' + y2 + '" stroke="var(--bad)" stroke-width="1.4" marker-start="url(#cvar)" marker-end="url(#cvar)"/>' +
-    (x1 === x2 ? '<text x="' + (x1 + (side === 'r' ? 7 : -7)) + '" y="' + (y1 + y2) / 2 + '" font-size="12" font-weight="700" fill="var(--bad)" text-anchor="' + (side === 'r' ? 'start' : 'end') + '" dominant-baseline="middle">' + t + '</text>'
-      : '<text x="' + (x1 + x2) / 2 + '" y="' + (y1 - 6) + '" font-size="12" font-weight="700" fill="var(--bad)" text-anchor="middle">' + t + '</text>');
-  const ln = 'stroke="var(--ink)" stroke-width="2" fill="var(--card)"';
-  const lbl = (y, t) => '<text x="8" y="' + y + '" font-size="10.5" font-weight="700" fill="var(--mut)">' + t + '</text>';
-  if ((L && W) || Dm) {
-    const big = Math.max(M || 0, L || Dm), sc = 170 / big, w = (L || Dm) * sc, h = (W || Dm) * sc, x0 = 54, y0 = 40;
-    let svg = '<svg viewBox="0 0 280 ' + (H ? 270 : 190) + '">' + ar + lbl(14, 'ЗВЕРХУ');
-    if (Dm && !L) svg += '<ellipse cx="' + (x0 + w / 2) + '" cy="' + (y0 + h / 2) + '" rx="' + w / 2 + '" ry="' + h / 2 + '" ' + ln + '/>' + (M > Dm ? '<rect x="' + x0 + '" y="' + y0 + '" width="' + M * sc + '" height="' + h + '" rx="' + h / 2 + '" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="5 4"/>' : '');
-    else svg += '<rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + h + '" rx="4" ' + ln + '/>' + (M > L ? '<rect x="' + (x0 + w) + '" y="' + y0 + '" width="' + (M - L) * sc + '" height="' + h + '" rx="4" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="5 4"/>' : '');
-    svg += dim(x0, y0 - 10, x0 + w, y0 - 10, (L || 'Ø ' + Dm) + ' см');
-    if (W && L) svg += dim(x0 - 12, y0, x0 - 12, y0 + h, W, 'l');
-    if (M > (L || Dm)) svg += dim(x0, y0 + h + 22, x0 + M * sc, y0 + h + 22, 'розкладений ' + M + ' см');
-    if (H) { const yb = y0 + h + 60; svg += lbl(yb - 8, 'ЗБОКУ') + '<rect x="' + x0 + '" y="' + yb + '" width="' + Math.min(w, 170) + '" height="7" rx="2" ' + ln + '/><path d="M' + (x0 + 14) + ' ' + (yb + 7) + 'l-5 52M' + (x0 + Math.min(w, 170) - 14) + ' ' + (yb + 7) + 'l5 52" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>' + dim(x0 + Math.min(w, 170) + 30, yb, x0 + Math.min(w, 170) + 30, yb + 59, H + ' см', 'r'); }
-    return svg + '</svg>';
+// «Розмір, см» — піктограми як на сайті Vetro: що саме міряли, показано червоним
+const SZ = (() => {
+  const g = 'stroke="var(--mut)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"', r = 'stroke="var(--bad)" stroke-width="2.4" fill="none" stroke-linecap="round"', rf = 'fill="none" stroke="var(--bad)" stroke-width="1.8"';
+  const sv = b => '<svg viewBox="0 0 36 30" aria-hidden="true">' + b + '</svg>';
+  const chair = '<path d="M12 3v24M12 17h14M26 17v10" ' + g + '/>';
+  const seat = '<rect x="8" y="7" width="20" height="17" rx="3" ' + g + '/><path d="M8 7h20" stroke="var(--mut)" stroke-width="3.2"/>';
+  return {
+    len: sv('<rect x="5" y="8" width="26" height="15" rx="1.5" ' + g + '/><path d="M5 8h26" ' + r + '/>'),
+    wid: sv('<rect x="5" y="8" width="26" height="15" rx="1.5" ' + g + '/><path d="M31 8v15" ' + r + '/>'),
+    extS: sv('<rect x="10" y="8" width="16" height="15" rx="1" ' + g + '/><rect x="3" y="8" width="5" height="15" rx="1" ' + rf + '/><rect x="28" y="8" width="5" height="15" rx="1" ' + rf + '/>'),
+    extC: sv('<rect x="3" y="8" width="12" height="15" rx="1" ' + g + '/><rect x="21" y="8" width="12" height="15" rx="1" ' + g + '/><rect x="16" y="8" width="4" height="15" rx="1" ' + rf + '/>'),
+    ovl: sv('<rect x="4" y="8" width="28" height="15" rx="7.5" ' + g + '/><path d="M4 15.5h28" ' + r + '/>'),
+    dia: sv('<circle cx="18" cy="15" r="11" ' + g + '/><path d="M7 15h22" ' + r + '/>'),
+    diaX: sv('<path d="M15 4a11 11 0 0 0 0 22M21 4a11 11 0 0 1 0 22M15 4h6M15 26h6" ' + g + '/><path d="M15.5 4v22M20.5 4v22" ' + r + '/>'),
+    hgt: sv('<path d="M5 7h26M8 7v19" ' + g + '/><path d="M28 7v19" ' + r + '/>'),
+    cH: sv(chair + '<path d="M31 3v24" ' + r + '/>'),
+    cS: sv(chair.replace('M26 17v10', '') + '<path d="M26 17v10" ' + r + '/>'),
+    cD: sv(chair.replace('M12 17h14', 'M12 17h0') + '<path d="M12 17h14" ' + r + '/>'),
+    cA: sv(chair + '<path d="M12 11h11M23 11v6" ' + r + '/>'),
+    sW: sv(seat + '<path d="M8 24h20" ' + r + '/>'),
+    sD: sv(seat + '<path d="M28 7v17" ' + r + '/>'),
+    sofW: sv('<rect x="4" y="9" width="28" height="9" rx="3" ' + g + '/><rect x="2" y="15" width="32" height="8" rx="3" ' + g + '/><path d="M2 26h32" ' + r + '/>'),
+    sofH: sv('<rect x="6" y="9" width="22" height="9" rx="3" ' + g + '/><rect x="4" y="15" width="26" height="8" rx="3" ' + g + '/><path d="M33 9v15" ' + r + '/>')
+  };
+})();
+function sizeRow(f) {
+  const s = f.s, n = k => numOf(s[k]), L = n('Довжина, см'), W = n('Ширина, см'), M = n('Максимальна довжина стільниці, см'), Dm = n('Діаметр, см'), H = n('Висота, см');
+  const side = /боков/i.test(s['Механізм розкладки'] || ''), oval = /овал/i.test(s['Форма'] || ''), out = [];
+  const add = (ic0, v, t) => { if (v) out.push('<span title="' + t + '">' + SZ[ic0] + '<em>' + fmt(v) + '</em></span>'); };
+  if (f.g === 'Столи' || f.g === 'Журнальні й консолі' || ((L || Dm) && !n('Висота до сидіння, см'))) {
+    if (Dm && !L) { add('dia', Dm, 'Діаметр'); if (M > Dm) add(side ? 'extS' : 'diaX', M, 'Розкладений' + (side ? ' (бокові вставки)' : ' (вставка по центру)')); }
+    else { add(oval ? 'ovl' : 'len', L, 'Довжина'); if (M > L) add(side ? 'extS' : 'extC', M, 'Розкладений' + (side ? ' (бокові вставки, по ' + fmt((M - L) / 2) + ' см з кожного боку)' : ' (вставка ' + fmt(M - L) + ' см по центру)')); add('wid', W, 'Ширина'); }
+    add('hgt', H, 'Висота');
+  } else if (f.g === 'Дивани') {
+    add('sofW', n('Ширина дивану, см') || W, 'Ширина'); add('sofH', n('Висота дивану, см') || H, 'Висота'); add('cS', n('Висота посадки дивана, см'), 'Висота посадки'); add('sD', n('Глибина посадки дивана, см') || n('Максимальна глибина дивана, см'), 'Глибина посадки');
+  } else {
+    add('cH', H || n('Висота крісла, см'), 'Висота'); add('cS', n('Висота до сидіння, см'), 'Висота сидіння'); add('cA', n('Висота до підлокітників, см'), 'Висота до підлокітників');
+    add('cD', n('Максимальна глибина сидіння, см'), 'Глибина'); add('sW', n('Ширина сидіння, см'), 'Ширина сидіння'); add('sD', n('Глибина сидіння, см'), 'Глибина сидіння');
   }
-  if (SH && H) {
-    const sc = 200 / H, base = 236, seatY = base - SH * sc, topY = base - H * sc, dep = Math.max(50, (SD || 45) * sc * 1.2);
-    let svg = '<svg viewBox="0 0 280 250">' + ar + lbl(14, 'ЗБОКУ');
-    svg += '<path d="M' + (90 + dep) + ' ' + (seatY - 4) + 'L' + (96 + dep) + ' ' + topY + '" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>';
-    svg += '<rect x="90" y="' + (seatY - 7) + '" width="' + (dep + 8) + '" height="13" rx="6" ' + ln + '/><path d="M100 ' + (seatY + 6) + 'L92 ' + base + 'M' + (88 + dep) + ' ' + (seatY + 6) + 'L' + (94 + dep) + ' ' + base + '" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>';
-    svg += dim(66, seatY, 66, base, SH + ' см', 'l') + dim(130 + dep, topY, 130 + dep, base, H + ' см', 'r');
-    if (SD) svg += dim(90, seatY - 20, 90 + dep, seatY - 20, SD + ' см');
-    return svg + '</svg>';
-  }
-  return '';
+  return out.length ? '<div class="cv-size"><b>Розмір, см:</b><div>' + out.join('') + '</div></div>' : '';
 }
-
 // ---------- стан фільтрів ----------
 const CF = {g: '', q: '', vetro: false, none: false, ours: false, sale: false, fresh: false, rng: {}, fac: {}, sort: 'hit', view: 'grid', lim: 48, cmp: [], open: false};
 const FACETS = {
@@ -1521,7 +1607,7 @@ const COLMAP = [['чорн|онікс|блек|графіт|антрацит', '
 const colHex = v => { const x = String(v).toLowerCase(); const m = COLMAP.find(c => new RegExp(c[0]).test(x)); return m ? m[1] : '#c9c8c2'; };
 const freshLim = () => iso(addD(ASOF, -30));
 function catBase(skip) {   // товари з усіма фільтрами, крім skip (для лічильників)
-  const q = CF.q.trim().toLowerCase().split(/\s+/).filter(Boolean), fl = freshLim();
+  const q = CF.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return CAT.feed.filter(f => {
     if (CF.g && f.g !== CF.g) return false;
     if (q.length) { const t = (f.n + ' ' + f.a + ' ' + f.col).toLowerCase(); if (!q.every(w => t.includes(w))) return false; }
@@ -1529,15 +1615,16 @@ function catBase(skip) {   // товари з усіма фільтрами, к�
     if (CF.none && f.has) return false;
     if (CF.ours && !f.has) return false;
     if (CF.sale && !f.op) return false;
-    if (CF.fresh && !(f.fs && f.fs >= fl)) return false;
+    if (CF.fresh && !isFresh(f)) return false;
     for (const r of rangesOf(CF.g)) { const lim = CF.rng[r[0]]; if (!lim || skip === r[0]) continue; const v = r[2](f); if (!v || v < lim[0] || v > lim[1]) return false; }
     for (const k in CF.fac) { if (k === skip || !CF.fac[k].size) continue; if (!CF.fac[k].has(facV(k, f.s[k]))) return false; }
     return true;
   });
 }
-const SORTS = [['hit', 'Спершу: хіти в нас'], ['sale', 'Спершу: акції Vetro'], ['new', 'Спершу: нові у Vetro'], ['cheap', 'Спершу: дешевші'], ['exp', 'Спершу: дорожчі'], ['stock', 'Спершу: більше у Vetro']];
+const SORTS = [['hit', 'Спершу: хіти (по групах)'], ['sale', 'Спершу: акції Vetro'], ['new', 'Спершу: нові у Vetro'], ['cheap', 'Спершу: дешевші'], ['exp', 'Спершу: дорожчі'], ['stock', 'Спершу: більше у Vetro']];
 function catSorted(L) {
-  const by = {hit: (a, b) => b.sold.q - a.sold.q || (b.q > 0) - (a.q > 0) || b.q - a.q, sale: (a, b) => (b.op ? 1 - b.p / b.op : 0) - (a.op ? 1 - a.p / a.op : 0), new: (a, b) => (b.fs || '').localeCompare(a.fs || ''),
+  const gi = f => { const i = CGR.indexOf(f.g); return i < 0 ? 99 : i; };
+  const by = {hit: (a, b) => (a.rk - b.rk) || (a.rk < 1e9 ? gi(a) - gi(b) : (b.has - a.has) || ((b.q > 0) - (a.q > 0)) || gi(a) - gi(b) || b.q - a.q), sale: (a, b) => (b.op ? 1 - b.p / b.op : 0) - (a.op ? 1 - a.p / a.op : 0), new: (a, b) => (b.fs || '').localeCompare(a.fs || ''),
     cheap: (a, b) => a.p - b.p, exp: (a, b) => b.p - a.p, stock: (a, b) => b.q - a.q}[CF.sort];
   return L.slice().sort(by);
 }
@@ -1547,7 +1634,7 @@ const cvImg = (f, cls) => f.ph.length ? '<img class="' + (cls || '') + '" loadin
 function cvCard(f) {
   const v = vq(f), on = CF.cmp.includes(f.a);
   return '<div class="cv-card" data-cat="' + esc(f.a) + '"><div class="cv-ph">' + cvImg(f) +
-    '<div class="cv-bdg"><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span>' + (f.hit ? '<span class="cv-b hit">хіт у нас</span>' : '') + (f.fs && f.fs >= freshLim() ? '<span class="cv-b nw">нове у Vetro</span>' : '') + '</div>' +
+    '<div class="cv-bdg"><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span>' + (f.hit ? '<span class="cv-b hit" title="місце серед групи «' + f.g + '» за продажами в нас за 90 днів">хіт №' + (f.rk + 1) + '</span>' : '') + (isFresh(f) ? '<span class="cv-b nw">нове у Vetro</span>' : '') + '</div>' +
     (f.op ? '<span class="cv-sale">−' + pctOf(f) + '%</span>' : '') +
     '<button class="cv-cmpb' + (on ? ' on' : '') + '" data-cmp="' + esc(f.a) + '" title="Додати до порівняння" aria-pressed="' + on + '">' + (on ? '✓' : '+') + '</button></div>' +
     '<div class="cv-cb"><div class="cv-nm">' + esc(f.n) + '</div><div class="cv-art">' + esc(f.a) + '</div>' + (specLine(f) ? '<div class="cv-spl">' + esc(specLine(f)) + '</div>' : '') +
@@ -1629,7 +1716,7 @@ function cvResults() {
   cvCmpBar();
 }
 function cvBottom() {
-  const fl = freshLim(), fresh = CAT.feed.filter(f => f.fs && f.fs >= fl).sort((a, b) => b.fs.localeCompare(a.fs)), risk = CAT.feed.filter(f => f.hall > 0 && !(f.q > 0));
+  const fresh = CAT.feed.filter(isFresh).sort((a, b) => b.fs.localeCompare(a.fs)), risk = CAT.feed.filter(f => f.hall > 0 && !(f.q > 0));
   const row = (f, right) => '<div class="prod" data-cat="' + esc(f.a) + '"><div class="ph">' + cvImg(f) + '</div><div class="pn"><b>' + esc(f.n) + '</b><span>' + esc(f.a) + '</span></div><div class="rt">' + right + '</div></div>';
   $('cvLists').innerHTML = '<div class="card"><div class="ch"><h3>Нове у Vetro за 30 днів</h3><span class="sub">з’явилось у фіді</span></div><div class="list">' + (fresh.slice(0, 6).map(f => row(f, '<b>' + uah(f.p) + '</b><span class="sub">з ' + dm(pd(f.fs)) + '</span>')).join('') || '<div class="empty">Нових позицій немає</div>') + '</div></div>' +
     '<div class="card"><div class="ch"><h3>У нас у залі, а у Vetro закінчилось</h3><span class="sub">зразок не продавати без перевірки</span></div><div class="list">' + (risk.slice(0, 8).map(f => row(f, '<span class="cv-b rd">у залі ' + f.hall + ' · Vetro 0</span>')).join('') || '<div class="empty">Таких немає</div>') + '</div></div>';
@@ -1642,9 +1729,9 @@ function cvCmpBar() {
 }
 
 // ---------- картка товару ----------
-function showCat(a) { openModal(() => catModal(a)); }
+function showCat(a) { openModal(() => catModal(a)); if (!HELP) loadHelp(false).then(() => { if (MS.length && document.querySelector('.cv-m')) drawModal(); }).catch(() => {}); }
 function tipFor(f) {
-  const T = CAT.help.filter(h => h.y === 'товар');
+  const T = (HELP || []).filter(h => h.y === 'товар');
   const t = T.find(h => h.k && f.code && h.k.toLowerCase() === f.code.toLowerCase()) || T.find(h => h.k === f.g) || T.find(h => h.k && f.g.startsWith(h.k));
   return t ? t.x : '';
 }
@@ -1654,7 +1741,7 @@ function catModal(a) {
   const vars = CAT.feed.filter(x => x !== f && f.code && x.code === f.code), ser = f.ser ? CAT.feed.filter(x => x !== f && x.ser === f.ser && x.code !== f.code) : [];
   const sw = x => '<button class="cv-sw" data-catm="' + esc(x.a) + '"><i style="background:' + colHex(x.col) + '"></i>' + esc(x === f ? x.col || 'цей' : (x.code !== f.code ? x.code + ' ' : '') + (x.col || x.n)) + '<em>' + (x.q > 0 ? fmt(x.q) : '0') + '</em></button>';
   const G = specRows(f), grp = (t, rows) => rows.length ? '<div class="cv-sgb"><b>' + t + '</b>' + rows.map(r => '<div><span>' + esc(r[0]) + '</span><strong' + (r[2] ? ' class="hl"' : '') + '>' + esc(r[1]) + '</strong></div>').join('') + '</div>' : '';
-  const draw = specDraw(f), tip = tipFor(f), so = f.sold, mg = Object.keys(so.by).sort((x, y) => so.by[y] - so.by[x]).slice(0, 3);
+  const tip = tipFor(f), so = f.sold, mg = Object.keys(so.by).sort((x, y) => so.by[y] - so.by[x]).slice(0, 3);
   // продажі по тижнях за 12 тижнів
   const wk = []; for (let i = 11; i >= 0; i--) { const a0 = iso(addD(monday(ASOF), -7 * i)), b0 = iso(addD(monday(ASOF), -7 * i + 6)); wk.push(R.filter(r => r.d >= a0 && r.d <= b0 && (nk2(r.a) === nk2(f.a) || (f.our && nk2(r.a) === nk2(f.our)))).reduce((t, r) => t + r.q, 0)); }
   const wmx = Math.max(1, ...wk), spk = '<svg class="cv-spk" viewBox="0 0 240 44" preserveAspectRatio="none">' + wk.map((v, i) => '<rect x="' + (i * 20 + 2) + '" y="' + (42 - v / wmx * 36) + '" width="16" height="' + Math.max(1.5, v / wmx * 36) + '" rx="1" fill="' + (i === 11 ? 'var(--y)' : 'var(--bar)') + '"><title>' + v + ' шт</title></rect>').join('') + '</svg>';
@@ -1665,7 +1752,7 @@ function catModal(a) {
       (vars.length ? '<div class="cv-vars"><small>Кольори цієї моделі</small><div class="cv-sws">' + [f, ...vars].map(sw).join('') + '</div></div>' : '') +
       (ser.length ? '<div class="cv-vars"><small>Та сама серія «' + esc(f.ser) + '», інший розмір</small><div class="cv-sws">' + ser.slice(0, 8).map(sw).join('') + '</div></div>' : '') + '</div>' +
     '<div class="cv-info"><div class="cv-bdgs"><span class="cv-b ' + f.st[0] + '">' + f.st[1] + '</span>' + (f.op ? '<span class="cv-b plain y">Акція Vetro −' + pctOf(f) + '%</span>' : '') + '<span class="cv-b plain">' + esc(f.c) + '</span>' + (f.mx ? '<span class="cv-b plain">у матриці: ' + esc(f.mx.stage) + '</span>' : '') + '</div>' +
-      '<h2 class="cv-h">' + esc(f.n) + '</h2><div class="cv-meta"><span class="cv-art">' + esc(f.a) + '</span><button class="cv-lnk" data-cvcopy="' + esc(f.a) + '">Копіювати артикул</button>' + (f.fs ? '<span>у фіді Vetro з ' + dm(pd(f.fs)) + '.' + f.fs.slice(0, 4) + '</span>' : '') + '</div>' +
+      '<h2 class="cv-h">' + esc(f.n) + '</h2><div class="cv-meta"><span class="cv-art">' + esc(f.a) + '</span><button class="cv-lnk" data-cvcopy="' + esc(f.a) + '">Копіювати артикул</button>' + (f.fs && f.fs > CAT.fs0 ? '<span>у фіді Vetro з ' + dm(pd(f.fs)) + '.' + f.fs.slice(0, 4) + '</span>' : '') + '</div>' +
       '<div class="cv-price"><b>' + uah(f.p) + '</b>' + (f.op ? '<s>' + uah(f.op) + '</s><span class="cv-sale2">−' + pctOf(f) + '%</span>' : '') + '</div>' +
       (f.ourP && Math.abs(f.ourP - f.p) > f.p * 0.01 ? '<div class="sub">Наша ціна в таблиці: <b style="color:var(--ink)">' + uah(f.ourPP || f.ourP) + '</b>' + (f.ourPP ? ' (акційна, звичайна ' + uah(f.ourP) + ')' : '') + '</div>' : '') +
       '<div class="cv-av"><div class="' + (f.q > 0 ? 'g' : 'r') + '"><small>Склад Vetro</small><b>' + (f.q > 0 ? fmt(f.q) + ' шт' : 'немає') + '</b><em>' + (f.q > 0 ? 'можна замовити' : 'запропонуйте інший колір') + '</em></div>' +
@@ -1674,8 +1761,8 @@ function catModal(a) {
       '<div class="cv-sales"><div><b>' + (so.q ? so.q + ' шт за 90 днів · ' + uah(so.s) : 'За 90 днів не продавали') + '</b><small>' + (so.last ? 'Останній продаж ' + dm(pd(so.last)) + (mg.length ? ' · продають: ' + mg.map(m => esc(m.split(' ')[0]) + ' ' + so.by[m]).join(', ') : '') : 'по тижнях за 12 тижнів') + '</small></div>' + spk +
         (f.our && R.some(r => r.a === f.our) ? '<button class="cv-lnk" data-art="' + esc(f.our) + '">Усі продажі в нас →</button>' : '') + '</div>' +
       (tip ? '<div class="cv-tip"><b>Підказка продавцю</b>' + esc(tip) + '</div>' : '') +
-      '<div class="cv-spec"><div class="ch"><h3>Характеристики</h3><span class="sub">з фіда Vetro</span></div><div class="cv-sw2' + (draw ? '' : ' nod') + '">' + (draw ? '<div class="cv-draw">' + draw + '</div>' : '') +
-        '<div class="cv-sg">' + grp('Розміри', G.dim) + grp('Матеріали', G.mat) + grp('Конструкція', G.con) + '</div></div></div>' +
+      '<div class="cv-spec"><div class="ch"><h3>Характеристики</h3><span class="sub">з фіда Vetro</span></div>' + sizeRow(f) +
+        '<div class="cv-sg">' + grp('Розміри', G.dim) + grp('Матеріали', G.mat) + grp('Конструкція', G.con) + '</div></div>' +
       (f.d ? '<details class="cv-desc"><summary>Опис</summary><div>' + esc(f.d).replace(/\n/g, '<br>') + '</div></details>' : '') +
       '<div class="cv-btns">' + (f.u ? '<a class="cv-btn dk" href="https://vetro.com.ua' + esc(f.u) + '" target="_blank" rel="noopener">Відкрити на vetro.com.ua ↗</a>' : '') +
         (f.d ? '<button class="cv-btn" data-cvdesc="' + esc(f.a) + '">Скопіювати опис для клієнта</button>' : '') + (f.mx ? '<button class="cv-btn" data-go="matrix">Показати в матриці</button>' : '') +
@@ -1708,52 +1795,115 @@ function fmtText(x) {
   flush(); return out.join('');
 }
 const hpMin = x => Math.max(1, Math.round(String(x).split(/\s+/).length / 160)) + ' хв';
-const HSEC_IC = {'Як читати дашборд': 'overview', 'Цифри й розрахунки': 'chart', 'Матриця і закупка': 'matrix', 'Товари Vetro': 'catalog', 'Скрипти й лайфхаки': 'chat', 'Перший тиждень': 'star', 'Часті запитання': 'help'};
-function showArt(i) { openModal(() => { const h = CAT.help[i]; return {html: mhead('<div class="sub">' + esc(h.s) + ' · ' + hpMin(h.x) + '</div><h2>' + esc(h.t) + '</h2>') + '<div class="hp-art">' + fmtText(h.x) + '</div>' +
-  (CAT.help.some((o, j) => j !== i && o.s === h.s && o.y === 'стаття') ? '<div class="card" style="background:var(--soft);box-shadow:none"><b>Ще в розділі «' + esc(h.s) + '»</b><div class="list">' + CAT.help.map((o, j) => j !== i && o.s === h.s && o.y === 'стаття' ? '<div class="hp-row" data-hart="' + j + '">' + ic('doc') + '<span>' + esc(o.t) + '</span></div>' : '').join('') + '</div></div>' : '')}; }); }
+const HSEC_IC = {'Як читати дашборд': 'overview', 'Цифри й розрахунки': 'chart', 'Матриця і закупка': 'matrix', 'Товари Vetro': 'catalog', 'Скрипти й лайфхаки': 'chat', 'Часті запитання': 'help'};
+function showArt(i) { openModal(() => { const H = HELP || [], h = H[i]; if (!h) return {html: mhead('<h2>Статтю не знайдено</h2>')};
+  const more = H.map((o, j) => j !== i && o.s === h.s && o.y === 'стаття' ? '<div class="hp-row" data-hart="' + j + '">' + ic('doc') + '<span>' + esc(o.t) + '</span></div>' : '').join('');
+  return {html: mhead('<div class="sub">' + esc(h.s) + ' · ' + hpMin(h.x) + '</div><h2>' + esc(h.t) + '</h2>') + '<div class="hp-art">' + fmtText(h.x) + '</div>' +
+    (ANAT[h.k] ? '<div class="hq-ana">' + ANAT[h.k][0] + '</div><ol class="hq-leg">' + ANAT[h.k][1].map(x => '<li>' + x + '</li>').join('') + '</ol>' : '') +
+    (more ? '<div class="card" style="background:var(--soft);box-shadow:none"><b>Ще в розділі «' + esc(h.s) + '»</b><div class="list">' + more + '</div></div>' : '')}; }); }
 function renderHelp() {
-  if (!CAT) return catWait('helpBox');
-  const H = CAT.help.map((h, i) => Object.assign({i}, h)), arts = H.filter(h => h.y === 'стаття'), faq = H.filter(h => h.y === 'питання'), steps = H.filter(h => h.y === 'крок');
+  if (!HELP) return catWait('helpBox', 'help');
+  const H = HELP.map((h, i) => Object.assign({i}, h)), arts = H.filter(h => h.y === 'стаття'), faq = H.filter(h => h.y === 'питання'), hints = H.filter(h => h.y === 'підказка');
   const secs = []; arts.forEach(h => { if (!secs.includes(h.s)) secs.push(h.s); });
-  let done = {}; try { done = JSON.parse(LS.get('d2steps') || '{}'); } catch (e) {}
-  const nd = steps.filter(s => done[s.t]).length;
   const q = HF.q.trim().toLowerCase().split(/\s+/).filter(Boolean), match = h => q.every(w => (h.t + ' ' + h.x + ' ' + h.s).toLowerCase().includes(w));
-  const artRow = h => '<div class="hp-row" data-hart="' + h.i + '">' + ic('doc') + '<span>' + esc(h.t) + '</span><em>' + esc(h.s) + '</em><small>' + hpMin(h.x) + '</small></div>';
-  const list = q.length ? H.filter(h => h.y !== 'підказка' && match(h)) : HF.sec ? arts.filter(h => h.s === HF.sec) : (arts.filter(h => h.pop).length ? arts.filter(h => h.pop) : arts);
-  $('helpBox').innerHTML = '<div class="hp-hero"><div><h2>Чим допомогти?</h2><p>Пояснення до кожної цифри, часті запитання, підказки продавцям і старт для новачка.</p></div>' +
-      '<div class="cv-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="hpQ" type="search" placeholder="Напишіть питання, наприклад «що таке застій»" value="' + esc(HF.q) + '" aria-label="Пошук у довідці"></div>' +
-      '<div class="hp-pop">Часто шукають:' + H.filter(h => h.pop).slice(0, 6).map(h => '<button data-hart="' + h.i + '">' + esc(h.t) + '</button>').join('') + '</div></div>' +
+  const artRow = h => '<div class="hp-row" data-hart="' + h.i + '">' + ic(h.y === 'підказка' ? 'help' : 'doc') + '<span>' + esc(h.t) + '</span><em>' + esc(h.y === 'підказка' ? 'Що на екрані' : h.s) + '</em><small>' + hpMin(h.x) + '</small></div>';
+  const list = q.length ? H.filter(h => h.y !== 'товар' && h.y !== 'крок' && match(h)) : HF.sec === '__hints' ? hints : HF.sec ? arts.filter(h => h.s === HF.sec) : (arts.filter(h => h.pop).length ? arts.filter(h => h.pop) : arts);
+  $('helpBox').innerHTML = '<div class="hp-hero"><div><h2>Чим допомогти?</h2><p>Пояснення до кожного блоку, часті запитання, як обрати стіл і стільці, підказки продавцям.</p></div>' +
+      '<div class="cv-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="hpQ" type="search" placeholder="Напишіть питання, наприклад «застій» або «висота стільця»" value="' + esc(HF.q) + '" aria-label="Пошук у довідці"></div>' +
+      '<div class="hp-pop">Часто шукають:' + H.filter(h => h.pop).slice(0, 7).map(h => '<button data-hart="' + h.i + '">' + esc(h.t) + '</button>').join('') + '</div></div>' +
     '<div class="hp-cats">' + secs.map(s => '<button class="hp-cat' + (HF.sec === s ? ' on' : '') + '" data-hsec="' + esc(s) + '"><i>' + ic(HSEC_IC[s] || 'doc') + '</i><b>' + esc(s) + '</b><small>' + arts.filter(h => h.s === s).length + ' статей</small></button>').join('') +
-      (steps.length ? '<button class="hp-cat st" data-hjump="hpSteps"><i>' + ic('star') + '</i><b>Перший тиждень</b><small>' + steps.length + ' кроків для стажера</small></button>' : '') +
-      (faq.length ? '<button class="hp-cat" data-hjump="hpFaq"><i>' + ic('help') + '</i><b>Часті запитання</b><small>' + faq.length + ' питань</small></button>' : '') + '</div>' +
-    '<div class="g21"><div class="card"><div class="ch"><h3>' + (q.length ? 'Знайдено: ' + list.length : HF.sec ? esc(HF.sec) : 'Популярні статті') + '</h3>' + (HF.sec || q.length ? '<button class="all" data-hsec="">Усі розділи</button>' : '<span class="sub">натисніть, щоб прочитати</span>') + '</div><div class="list">' +
-        (list.map(h => h.y === 'питання' ? '<details class="hp-q"><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>' : h.y === 'крок' ? '<div class="hp-row" data-hjump="hpSteps">' + ic('star') + '<span>' + esc(h.t) + '</span><em>Перший тиждень</em></div>' : artRow(h)).join('') || '<div class="empty">Нічого не знайдено. Спробуйте інше слово або напишіть питання ЗД — відповідь додамо сюди.</div>') + '</div></div>' +
-      (steps.length ? '<div class="card" id="hpSteps"><div class="ch"><h3>Перший тиждень стажера</h3><span class="sub">' + nd + ' з ' + steps.length + '</span></div><div class="bar"><i style="width:' + (nd / steps.length * 100) + '%"></i></div>' +
-        steps.map((s, i) => '<button class="hp-step" data-hstep="' + esc(s.t) + '"><span class="hp-ck' + (done[s.t] ? ' done' : '') + '">' + (done[s.t] ? '✓' : i + 1) + '</span><span><b>' + esc(s.t) + '</b><small>' + esc(s.x) + '</small></span></button>').join('') + '<div class="sub">Галочки зберігаються на цьому пристрої</div></div>' : '<div></div>') + '</div>' +
-    (faq.length ? '<div class="card" id="hpFaq"><div class="ch"><h3>Часті запитання</h3><span class="sub">' + faq.length + ' питань</span></div><div class="hp-faq">' + faq.map((h, i) => '<details class="hp-q"' + (i === 0 ? ' open' : '') + '><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>').join('') + '</div></div>' : '') +
-    '<div class="card hp-note"><div><b>Чогось не вистачає?</b><span class="sub">Тексти Довідки ведуться на аркуші «📚 Довідка» в таблиці — ЗД дописує статті, питання й підказки, і вони з’являються тут (до 30 хв або після «⟳ оновити»).</span></div></div>';
+      (hints.length ? '<button class="hp-cat st' + (HF.sec === '__hints' ? ' on' : '') + '" data-hsec="__hints"><i>' + ic('help') + '</i><b>Що на екрані</b><small>' + hints.length + ' блоків зі схемами</small></button>' : '') +
+      (faq.length ? '<button class="hp-cat" data-hjump="hpFaq"><i>' + ic('chat') + '</i><b>Часті запитання</b><small>' + faq.length + ' питань</small></button>' : '') + '</div>' +
+    '<div class="g21"><div class="card"><div class="ch"><h3>' + (q.length ? 'Знайдено: ' + list.length : HF.sec === '__hints' ? 'Що на екрані: блоки дашборда' : HF.sec ? esc(HF.sec) : 'Популярні статті') + '</h3>' + (HF.sec || q.length ? '<button class="all" data-hsec="">Усі розділи</button>' : '<span class="sub">натисніть, щоб прочитати</span>') + '</div><div class="list">' +
+        (list.map(h => h.y === 'питання' ? '<details class="hp-q"><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>' : artRow(h)).join('') || '<div class="empty">Нічого не знайдено. Спробуйте інше слово або напишіть питання ЗД — відповідь додамо сюди.</div>') + '</div></div>' +
+      (faq.length ? '<div class="card" id="hpFaq"><div class="ch"><h3>Часті запитання</h3><span class="sub">' + faq.length + '</span></div><div class="hp-faq">' + faq.map((h, i) => '<details class="hp-q"' + (i === 0 ? ' open' : '') + '><summary>' + esc(h.t) + '</summary>' + fmtText(h.x) + '</details>').join('') + '</div></div>' : '<div></div>') + '</div>' +
+    '<div class="card hp-note"><div><b>Чогось не вистачає?</b><span class="sub">Тексти Довідки ведуться на аркуші «📚 Довідка» в таблиці — ЗД дописує статті, питання й підказки, і вони з’являються тут (до 10 хв або після «⟳ оновити»).</span></div></div>';
 }
 
-// ---------- підказки «?» біля блоків ----------
-const HINTS = [['#k-rev .k', 'kpi.rev'], ['#k-ord .k', 'kpi.ord'], ['#k-chk .k', 'kpi.chk'], ['#k-qty .k', 'kpi.qty'], ['h3:Рейтинг менеджерів', 'people.rank'], ['h3:Ростуть і падають', 'cats.movers'],
-  ['h3:Матриця в залі', 'mx.lines'], ['h3:Стан матриці', 'mx.tiles'], ['h3:Де зараз позиції', 'buy.funnel'], ['h3:Кожна позиція — квадратик', 'as.grid'], ['#promoChTitle', 'promo.chart']];
+// ---------- підказки «?»: схема блоку з номерами + пояснення ----------
+const mk = n => '<i class="mk">' + n + '</i>';
+const aRow = (l, m, r) => '<div class="a-row">' + l + '<div class="a-mid">' + m + '</div>' + r + '</div>';
+const aImg = '<span class="a-img"></span>';
+const aBars = (v, hi, cls) => '<div class="a-bars">' + v.map((x, i) => '<i style="height:' + x + '%"' + (i === hi ? ' class="hi"' : cls && cls[i] ? ' class="' + cls[i] + '"' : '') + '></i>').join('') + '</div>';
+const KPI_ANA = (lbl, val, was) => ['<div class="a-card"><span class="a-lbl">' + lbl + '</span><b class="a-big">' + val + mk(1) + '</b><div class="a-line"><span class="a-pill up">↑ +28%</span>' + mk(2) + '<span class="a-sub">було ' + was + '</span>' + mk(3) + '</div><svg class="a-spk" viewBox="0 0 90 26"><path d="M0 22L15 20L30 21L45 15L60 16L75 8L90 4" fill="none" stroke="var(--y)" stroke-width="2.5"/></svg>' + mk(4) + '</div>',
+  ['значення за обраний період', 'зміна проти такого ж відрізка раніше: зелена — краще, червона — гірше', 'скільки було тоді', 'як змінювалось усередині періоду']];
+const ANAT = {
+  'kpi.rev': KPI_ANA('Виручка', '937 891 ₴', '731 045 ₴'), 'kpi.ord': KPI_ANA('Замовлень', '15', '11'), 'kpi.chk': KPI_ANA('Середній чек', '62 526 ₴', '66 459 ₴'), 'kpi.qty': KPI_ANA('Продано, шт', '48', '39'),
+  'ov.sales': ['<div class="a-card"><div class="a-line"><span class="a-tab on">Виручка</span><span class="a-tab">Замовлення</span><span class="a-tab">Штуки</span>' + mk(1) + '<span class="a-fl"></span><span class="a-seg"><b>По днях</b><span>По тижнях</span></span>' + mk(2) + '</div><div class="a-line"><span class="a-tag">419 тис · пн</span>' + mk(3) + '</div>' + aBars([95, 30, 8, 3, 60, 35, 6], 0, {6: 'fut'}) + '<div class="a-line"><span class="a-fl"></span>' + mk(4) + '</div></div>',
+    ['що показати: виручку, кількість замовлень або штуки', 'крок графіка: кожен день або кожен тиждень', 'чорна плашка — найкращий стовпчик і його значення', 'блідий стовпчик — день, який ще не настав']],
+  'ov.cal': ['<div class="a-card"><div class="a-cal">' + [['9', '419', 'best'], ['10', '96', 'l2'], ['11', '16', 'l1'], ['12', '3', 'l1'], ['13', '262', 'l3'], ['14', '142', 'l2'], ['15', '', 'fut']].map((d, i) => '<span class="' + d[2] + '"><b>' + d[0] + '</b><small>' + d[1] + '</small>' + (i === 0 ? mk(1) : i === 4 ? mk(2) : i === 5 ? mk(3) : '') + '</span>').join('') + '</div></div>',
+    ['чорна клітинка — найкращий день періоду', 'чим жовтіша клітинка — тим більше продали', 'під числом — виручка за день у тисячах ₴']],
+  'ov.deps': ['<div class="a-card a-flex"><svg viewBox="0 0 60 60" class="a-donut"><circle r="22" cx="30" cy="30" fill="none" stroke="var(--zd)" stroke-width="9" stroke-dasharray="70 200"/><circle r="22" cx="30" cy="30" fill="none" stroke="var(--rt)" stroke-width="9" stroke-dasharray="45 200" stroke-dashoffset="-70"/><circle r="22" cx="30" cy="30" fill="none" stroke="var(--on)" stroke-width="9" stroke-dasharray="23 200" stroke-dashoffset="-115"/></svg>' + mk(1) +
+    '<div class="a-legv"><span><i style="background:var(--zd)"></i>ЗД <b>512 тис</b></span><span><i style="background:var(--rt)"></i>РТ <b>301 тис</b></span><span><i style="background:var(--on)"></i>Онлайн <b>125 тис</b></span></div>' + mk(2) + '</div>', ['коло — частка кожного відділу, у центрі — загальна сума', 'сума кожного відділу за період']],
+  'ov.top': ['<div class="a-card">' + aRow(aImg + mk(1), '<b>Стіл Лунаріо TML-1321</b><small>Столи · 4 шт</small>' + mk(2), '<div class="a-r"><b>161 070 ₴</b>' + mk(3) + '<span class="a-pill up">+200%</span>' + mk(4) + '</div>') + '</div>',
+    ['фото товару — натисніть рядок, відкриється картка з продажами', 'назва, група і скільки штук продано', 'виручка за період', 'зміна проти попереднього періоду («нове» — раніше не продавався)']],
+  'ov.leaders': ['<div class="a-card">' + aRow('<span class="a-av">МТ</span>' + mk(1), '<b>Марія Ткач</b><div class="a-meter"><i style="width:100%"></i></div>' + mk(2), '<div class="a-r"><b>432 тис</b><small>Онлайн</small>' + mk(3) + '</div>') + aRow('<span class="a-av dk">ОК</span>', '<b>Олена Коваль</b><div class="a-meter"><i style="width:88%"></i></div>', '<div class="a-r"><b>398 тис</b><small>ЗД</small></div>') + '</div>',
+    ['менеджер — натисніть, відкриється статистика', 'смужка — виручка порівняно з першим місцем', 'виручка і відділ']],
+  'ov.year': ['<div class="a-card"><svg viewBox="0 0 200 60" class="a-wide"><path d="M0 50L30 42L60 40L90 30L120 34L150 22L180 18" fill="none" stroke="var(--y)" stroke-width="3"/><path d="M0 52L30 48L60 46L90 40L120 42L150 36L180 30L200 28" fill="none" stroke="var(--mut)" stroke-width="2" stroke-dasharray="4 3"/></svg>' + mk(1) + '<div class="a-tbl"><span>Жов</span><b>1,2 млн</b><span class="a-pill up">+14%</span><span>Лис</span><b>0,9 млн</b><span class="a-pill dn">−6%</span></div>' + mk(2) + '</div>',
+    ['лінії — виручка по місяцях за кожен рік: видно сезонність', 'таблиця — сума місяця і зміна до минулого року']],
+  'ov.orders': ['<div class="a-card"><div class="a-ord"><div class="a-line"><b>14.11</b><span class="a-pill">ЗД</span>' + mk(1) + '<span class="a-fl"></span><b>48 200 ₴</b>' + mk(2) + '</div><small>Олена Коваль · стіл + 4 стільці</small>' + mk(3) + '</div></div>',
+    ['дата і відділ', 'сума замовлення', 'менеджер і що купили — натисніть, відкриється повний склад']],
+  'ov.stock': ['<div class="a-card"><div class="a-stack"><i style="width:62%;background:var(--good)"></i><i style="width:23%;background:var(--y)"></i><i style="width:15%;background:var(--bad)"></i></div><div class="a-line">' + mk(1) + '<span class="a-sub">3+ шт</span>' + mk(2) + '<span class="a-sub">1–2 шт</span>' + mk(3) + '<span class="a-sub">немає</span></div></div>',
+    ['в наявності 3 шт і більше', 'закінчується — 1–2 шт', 'немає залишку — ризик втратити продажі']],
+  'ov.wd': ['<div class="a-card">' + aBars([40, 55, 50, 62, 70, 95, 35], 5) + '<div class="a-line"><span class="a-sub">пн вт ср чт пт <b>сб</b> нд</span>' + mk(1) + '</div><div class="a-line"><span class="a-sub"><i class="a-dot" style="background:var(--zd)"></i>ЗД: пік у суботу</span>' + mk(2) + '</div></div>',
+    ['середня виручка за один такий день тижня; найвищий — найсильніший день', 'у який день пік у кожного відділу']],
+  'ov.signals': ['<div class="a-card">' + aRow('<span class="a-th mv">3</span>' + mk(1), '<b>Перевезти в РТ</b><small>є на складі</small>' + mk(2), '<span class="a-link">Матриця →</span>' + mk(3)) + aRow('<span class="a-th no">2</span>', '<b>Замовити у Vetro</b><small>немає в магазині і на складі</small>', '') + '</div>',
+    ['скільки позицій матриці', 'що з ними зробити', 'перейти в Матрицю до цих позицій']],
+  'people.rank': ['<div class="a-card">' + aRow('<span class="a-place">1</span><span class="a-pill up">↑2</span>' + mk(1), '<b>Марія Ткач</b><div class="a-meter"><i style="width:100%"></i></div>' + mk(2), '<div class="a-r"><b>432 тис</b><span class="a-pill up">+18%</span>' + mk(3) + '</div>') + '</div>',
+    ['місце і на скільки позицій воно змінилось', 'смужка — виручка порівняно з першим місцем', 'виручка і її зміна — натисніть рядок, відкриється статистика']],
+  'people.vs': ['<div class="a-card"><div class="a-mir"><span>Виручка</span><div><i style="width:70%"></i></div><div><b style="width:45%"></b></div></div><div class="a-mir"><span>Чек</span><div><i style="width:50%"></i></div><div><b style="width:62%"></b></div></div><div class="a-line">' + mk(1) + '<span class="a-sub">перший учасник</span><span class="a-fl"></span><span class="a-sub">другий</span>' + mk(2) + '</div></div>',
+    ['смужка вліво — перший учасник', 'смужка вправо — другий; довша — у кого більше']],
+  'people.radar': ['<div class="a-card a-flex"><svg viewBox="0 0 80 70" class="a-donut"><polygon points="40,5 75,30 62,65 18,65 5,30" fill="none" stroke="var(--line)"/><polygon points="40,15 65,30 55,55 25,58 15,32" fill="var(--zd)" fill-opacity=".2" stroke="var(--zd)" stroke-width="2"/><polygon points="40,25 70,32 50,48 30,50 22,30" fill="var(--on)" fill-opacity=".2" stroke="var(--on)" stroke-width="2"/></svg>' + mk(1) + '</div>',
+    ['кути — групи товарів; чим далі від центру, тим більше продажів у групі; кольори — два учасники']],
+  'cats.who': ['<div class="a-card"><div class="a-line"><b>Столи</b></div><div class="a-stack"><i style="width:52%;background:var(--zd);color:var(--zdInk)">52%</i><i style="width:30%;background:var(--rt);color:#111">30%</i><i style="width:18%;background:var(--on)"></i></div><div class="a-line">' + mk(1) + '<span class="a-sub">частка ЗД</span>' + mk(2) + '<span class="a-sub">РТ</span>' + mk(3) + '<span class="a-sub">Онлайн</span></div></div>',
+    ['частка виручки групи, яку продав ЗД', 'частка РТ', 'частка Онлайн']],
+  'cats.movers': ['<div class="a-card">' + aRow(aImg, '<b>Стілець S-120 сірий</b><small>12 шт · було 6</small>', '<span class="a-pill up">+6 шт</span>' + mk(1)) + aRow(aImg, '<b>Стіл TM-88</b><small>1 шт · було 5</small>', '<span class="a-pill dn">−4 шт</span>' + mk(2)) + '</div>',
+    ['ростуть — продали більше штук, ніж у попередньому періоді', 'падають — продали менше: перевірте залишок, викладку і ціну']],
+  'cats.top': ['<div class="a-card">' + aRow('<span class="a-place">1</span>' + mk(1), '<b>Стіл Лунаріо TML-1321</b><small>4 шт · було 2 · <span style="color:var(--bad)">залишку немає</span></small>' + mk(2), '<div class="a-r"><b>161 тис</b><span class="a-pill up">+100%</span>' + mk(3) + '</div>') + '</div>',
+    ['місце в групі за виручкою', 'штуки, скільки було раніше і залишок', 'виручка і зміна']],
+  'mx.lines': ['<div class="a-card"><div class="a-line"><b>ЗД</b><span class="a-fl"></span><span class="a-sub">14 з 20 · 70%</span>' + mk(2) + '</div><div class="a-ticks">' + [1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0].map(x => '<i' + (x ? ' class="on"' : '') + '></i>').join('') + '</div>' + mk(1) + '</div>',
+    ['кожна риска — одна позиція матриці: зафарбована — є, сіра — немає', 'скільки позицій є і який це відсоток']],
+  'mx.tiles': ['<div class="a-card"><div class="a-tiles"><span><b>20</b><small>позицій</small></span><span class="on" style="--c:var(--good)"><b>12</b><small>в обох</small></span><span style="--c:var(--ink)"><b>3</b><small>перевезти</small></span><span style="--c:var(--bad)"><b>2</b><small>замовити</small></span></div><div class="a-line">' + mk(1) + '<span class="a-sub">число позицій у стані</span>' + mk(2) + '<span class="a-sub">обрана плитка — фільтр таблиці</span></div></div>',
+    ['скільки позицій у кожному стані', 'натисніть плитку — таблиця нижче покаже лише ці позиції']],
+  'mx.road': ['<div class="a-card">' + aRow('<span class="a-dt">21.11</span>' + mk(1), '<b>Стіл Савона TM-240</b><small>TM-240-savona</small>' + mk(2), '<span class="a-pill wt">2 шт</span>' + mk(3)) + '</div>', ['коли прибуде (якщо дата відома)', 'що саме', 'скільки штук']],
+  'mx.move': ['<div class="a-card">' + aRow('<span class="a-th">3 шт</span>' + mk(1), '<b>Стілець S-120 сірий велюр</b><small>S-120-grey-velvet</small>', '<span class="a-pill mv">→ РТ</span>' + mk(2)) + '</div>', ['скільки є на нашому складі', 'у який магазин везти']],
+  'mx.map': ['<div class="a-card"><div class="a-cell" style="--c:var(--ink)"><b>Стілець S-120</b>' + mk(1) + '<div class="a-line"><span class="a-sub">ЗД 1</span><span class="a-sub" style="color:var(--bad)">РТ 0</span><span class="a-sub">скл 2</span>' + mk(2) + '</div><span class="a-act">Перевезти в РТ</span>' + mk(3) + '</div></div>',
+    ['колір рамки — стан позиції', 'залишки: ЗД, РТ, склад; червоне — 0', 'що зробити']],
+  'buy.funnel': ['<div class="a-card"><div class="a-fun"><span>Треба<br><b>8</b></span><span>На затв.<br><b>3</b></span><span>Затв.<br><b>5</b></span><span>В дорозі<br><b>6</b></span></div><div class="a-line">' + mk(1) + mk(2) + mk(3) + mk(4) + '</div></div>',
+    ['треба замовити — бракує в матриці', 'на затвердженні у «🛒 Закупці»', 'затверджено — готово до замовлення', 'в дорозі — резерв у Vetro']],
+  'buy.trend': ['<div class="a-card">' + aBars([60, 40, 80, 50, 70], -1, {0: 'y', 2: 'y', 4: 'y'}) + '<div class="a-line">' + mk(1) + '<span class="a-sub">жовте — замовили у Vetro</span>' + mk(2) + '<span class="a-sub">темне — продали</span></div></div>', ['скільки замовили у Vetro', 'скільки продали за той самий час']],
+  'as.grid': ['<div class="a-card"><div class="a-sq"><i class="l4"></i>' + mk(1) + '<i class="l3"></i>' + mk(2) + '<i class="l2"></i>' + mk(3) + '<i class="l5"></i>' + mk(4) + '<i class="l1"></i>' + mk(5) + '<i class="l0"></i>' + mk(6) + '</div></div>',
+    ['хіт групи — верхні 20%', 'добре продається', 'повільно', 'новинка без продажів', 'застій: є залишок, немає продажів', 'ні продажів, ні залишку']],
+  'as.zones': ['<div class="a-card"><div class="a-line"><b>Стільці</b><span class="a-fl"></span><span class="a-sub">64% продаються</span>' + mk(1) + '</div><div class="a-meter"><i style="width:64%"></i></div></div>', ['частка позицій групи, що мали продажі за період']],
+  'as.stale': ['<div class="a-card">' + aRow(aImg, '<b>Стіл TM-85 онікс</b><small>2 шт на залишку · 0 продажів</small>' + mk(1), '<b>36 800 ₴</b>' + mk(2)) + '</div>', ['скільки лежить і що продажів немає', 'скільки грошей заморожено']],
+  'promo.chart': ['<div class="a-card">' + aBars([30, 55, 70, 60], -1, {0: 'y', 1: 'y', 2: 'y', 3: 'y'}) + '<svg viewBox="0 0 200 20" class="a-wide" style="margin-top:-30px;position:relative"><path d="M0 14H200" stroke="var(--ink)" stroke-width="2" stroke-dasharray="5 4"/></svg><div class="a-line">' + mk(1) + '<span class="a-sub">продали в акції</span>' + mk(2) + '<span class="a-sub">продали б без акції</span></div></div>',
+    ['скільки штук продали під час акції', 'скільки продали б без неї — середні продажі до акції']],
+  'promo.line': ['<div class="a-card"><div class="a-tl"><i style="left:5%;width:30%"></i><i class="now" style="left:55%;width:45%"></i></div><div class="a-line">' + mk(1) + '<span class="a-sub">завершена акція</span>' + mk(2) + '<span class="a-sub">діє зараз</span></div></div>', ['смужка — період акції на шкалі 120 днів', 'жовта — діє зараз']]
+};
+['buy.groups', 'buy.arr', 'promo.act', 'promo.done', 'ov.orders'].forEach(k => { if (!ANAT[k]) ANAT[k] = null; });
+const HINTS = [['#k-rev .k', 'kpi.rev'], ['#k-ord .k', 'kpi.ord'], ['#k-chk .k', 'kpi.chk'], ['#k-qty .k', 'kpi.qty'], ['#calTitle', 'ov.cal'], ['#yearTitle', 'ov.year'], ['#promoChTitle', 'promo.chart'], ['#buyTrendTitle', 'buy.trend']];
+const HINT_H3 = {'Продажі': 'ov.sales', 'Відділи': 'ov.deps', 'Топ товарів': 'ov.top', 'Лідери': 'ov.leaders', 'Останні замовлення': 'ov.orders', 'Стан складу': 'ov.stock', 'У які дні продається більше': 'ov.wd', 'Сигнали': 'ov.signals',
+  'Рейтинг менеджерів': 'people.rank', 'Один на один': 'people.vs', 'Хто в чому сильніший': 'people.radar', 'Хто що продає': 'cats.who', 'Ростуть і падають': 'cats.movers', 'Топ столів': 'cats.top', 'Топ стільців': 'cats.top',
+  'Матриця в залі': 'mx.lines', 'Стан матриці': 'mx.tiles', 'Товар в дорозі': 'mx.road', 'Є на складі — перевезти': 'mx.move', 'Карта позицій': 'mx.map', 'Де зараз позиції': 'buy.funnel', 'Що в закупці зараз': 'buy.groups', 'Очікувані надходження': 'buy.arr',
+  'Кожна позиція — квадратик': 'as.grid', 'Групи': 'as.zones', '💤 Застій: де гроші лежать': 'as.stale', 'Зараз в акції': 'promo.act', 'Стрічка акцій': 'promo.line', 'Результати завершених акцій': 'promo.done'};
 function addHints() {
-  const h3 = [...document.querySelectorAll('main section h3')];
-  HINTS.forEach(([sel, key]) => {
-    const el = sel.startsWith('h3:') ? h3.find(x => x.textContent.trim().startsWith(sel.slice(3))) : document.querySelector(sel);
-    if (el && !el.querySelector('.hq')) el.insertAdjacentHTML('beforeend', '<button class="hq" data-hq="' + key + '" aria-label="Що це?">?</button>');
-  });
+  const put = (el, key) => { if (el && !el.querySelector('.hq')) el.insertAdjacentHTML('beforeend', '<button class="hq" data-hq="' + key + '" aria-label="Що це?">?</button>'); };
+  HINTS.forEach(([sel, key]) => put(document.querySelector(sel), key));
+  document.querySelectorAll('main section:not([hidden]) h3').forEach(x => { const t = (x.firstChild && x.firstChild.nodeType === 3 ? x.firstChild.textContent : x.textContent).trim(); if (HINT_H3[t]) put(x, HINT_H3[t]); });
 }
 function showHint(btn) {
   let p = $('hintPop'); if (!p) { p = document.createElement('div'); p.id = 'hintPop'; p.className = 'hq-pop'; document.body.appendChild(p); }
-  const put = html => { p.innerHTML = html; p.hidden = false;
-    if (innerWidth > 760) { const r = btn.getBoundingClientRect(); p.style.left = Math.min(innerWidth - 340, Math.max(10, r.left - 20)) + 'px'; p.style.top = (r.bottom + 8) + 'px'; } else { p.style.left = p.style.top = ''; } };
-  put('<b>Завантажую підказку…</b>');
-  loadCat(false).then(() => {
-    const k = btn.dataset.hq, h = CAT.help.find(x => x.y === 'підказка' && x.k === k), art = CAT.help.findIndex(x => x.y === 'стаття' && x.k === k);
-    put(h ? '<b>' + esc(h.t) + '</b><p>' + esc(h.x) + '</p>' + (art >= 0 ? '<button class="cv-lnk" data-hart="' + art + '">Детальніше в Довідці →</button>' : '') + '<button class="x" data-hqx="1" aria-label="Закрити">×</button>'
-      : '<b>Підказку ще не додано</b><p>Її можна дописати на аркуші «📚 Довідка»: тип «підказка», ключ <code>' + esc(k) + '</code>.</p><button class="x" data-hqx="1" aria-label="Закрити">×</button>');
-  }).catch(e => put('<b>Не вдалося завантажити</b><p>' + esc(e && e.message || e) + '</p><button class="x" data-hqx="1">×</button>'));
+  const k = btn.dataset.hq, A = ANAT[k];
+  const put = (title, body) => { p.innerHTML = '<button class="x" data-hqx="1" aria-label="Закрити">×</button><b class="hq-t">' + title + '</b>' +
+      (A ? '<div class="hq-ana">' + A[0] + '</div><ol class="hq-leg">' + A[1].map(x => '<li>' + x + '</li>').join('') + '</ol>' : '') + body;
+    p.hidden = false;
+    if (innerWidth > 760) { const r = btn.getBoundingClientRect(), w = 380; p.style.left = Math.min(innerWidth - w - 12, Math.max(12, r.left - 30)) + 'px';
+      const top = r.bottom + 8; p.style.top = Math.max(12, Math.min(top, innerHeight - p.offsetHeight - 12)) + 'px'; } else { p.style.left = p.style.top = ''; } };
+  const show = () => { const H = HELP || [], h = H.find(x => x.y === 'підказка' && x.k === k), art = H.findIndex(x => x.y === 'стаття' && x.k === k);
+    put(esc(h ? h.t : (btn.parentElement.firstChild.textContent || 'Що це')), h ? '<div class="hq-txt">' + fmtText(h.x) + '</div>' + (art >= 0 ? '<button class="cv-lnk" data-hart="' + art + '">Детальніше в Довідці →</button>' : '')
+      : (HELP ? '<p class="hq-txt">Текст підказки ще не додано — його можна дописати на аркуші «📚 Довідка»: тип «підказка», ключ <code>' + esc(k) + '</code>.</p>' : '<p class="hq-txt">Завантажую пояснення…</p>')); };
+  show();
+  if (!HELP) loadHelp(false).then(() => { if (!p.hidden) show(); }).catch(e => { if (!p.hidden) put('Не вдалося завантажити', '<p class="hq-txt">' + esc(e && e.message || e) + '</p>'); });
 }
 document.addEventListener('click', e => {
   const hq = e.target.closest('.hq'); if (hq) { e.stopPropagation(); e.preventDefault(); return showHint(hq); }
@@ -1785,7 +1935,6 @@ document.addEventListener('click', e => {
   // довідка
   const hs = t.closest('[data-hsec]'); if (hs) { HF.sec = hs.dataset.hsec; if (!HF.sec) HF.q = ''; return renderHelp(); }
   const hj = t.closest('[data-hjump]'); if (hj) { const el = $(hj.dataset.hjump); if (el) el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block: 'start'}); return; }
-  const st = t.closest('[data-hstep]'); if (st) { let d = {}; try { d = JSON.parse(LS.get('d2steps') || '{}'); } catch (er) {} d[st.dataset.hstep] = !d[st.dataset.hstep]; LS.set('d2steps', JSON.stringify(d)); return renderHelp(); }
 }, true);
 function cvReset() { Object.assign(CF, {q: '', vetro: false, none: false, ours: false, sale: false, fresh: false, rng: {}, fac: {}, lim: 48}); const qi = $('cvQ'); if (qi) qi.value = ''; }
 let cvT;
@@ -1896,7 +2045,8 @@ async function loadApp(force) {
   } catch (e) { if (BOOTED) stale('⚠ немає зв\'язку, показано збережені дані'); else loadErr(e); }
 }
 $('refresh').onclick = $('mRefresh').onclick = () => { if (IN_GAS) load(true); else if (APP) loadApp(true);
-  if (CAT && (tab === 'catalog' || tab === 'help')) loadCat(true).then(() => { LAST.catalog = LAST.help = null; render(); }).catch(() => {}); };
+  if (CAT && tab === 'catalog') loadCat(true).then(() => { LAST.catalog = null; render(); }).catch(() => {});
+  if (tab === 'help' || HELP) loadHelp(true).then(() => { LAST.help = null; if (tab === 'help') render(); }).catch(() => {}); };
 if (IN_GAS) load(false);
 else if (window.__DEMO__) boot(window.__DEMO__);
 else {
