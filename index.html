@@ -472,6 +472,34 @@ s{opacity:.7}
   .hp-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.hp-cat{padding:11px}
   .hq-pop{left:10px!important;right:10px;bottom:calc(96px + env(safe-area-inset-bottom,0px));top:auto!important;width:auto;max-height:70vh}
 }
+/* ===== вкладка магазину ===== */
+.st-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.st-head h2{margin:0;font-size:24px;font-weight:900;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}.st-head h2 svg{width:24px;height:24px}
+.st-head p{margin:3px 0 0}
+.st-kp .kpi{min-width:0}
+.st-plan{grid-column:1/-1;display:grid;gap:5px;margin-top:6px;padding-top:8px;border-top:1px solid rgba(127,127,127,.25)}
+.st-pl{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:700;gap:8px}.st-pl b{font-size:15px}
+.st-pls{font-size:11.5px;opacity:.85}
+.st-meter{height:7px;border-radius:7px;background:rgba(127,127,127,.25);overflow:hidden}.st-meter i{display:block;height:100%;background:var(--y);border-radius:7px}
+.kpi:not(.acc) .st-meter{background:var(--soft)}
+.st-chart{min-height:220px}.st-chart svg{width:100%;display:block}
+.st-dash{display:inline-block;width:16px;height:0;border-top:2px dashed var(--warn)}
+.st-sub{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin-top:6px}
+.st-wd{width:100%;max-width:340px;height:auto;display:block}
+.st-wk{width:100%}.st-wk tr.cur td{background:var(--y2)}
+.st-cov{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}.st-cov>b{font-size:34px;font-weight:900;letter-spacing:-.03em}
+.st-ticks{display:flex;gap:2px;height:20px}.st-ticks i{flex:1;border-radius:2px;background:var(--bar);min-width:2px}
+.st-ticks i.ok{background:var(--good)}.st-ticks i.mv{background:var(--ink)}.st-ticks i.rt{background:var(--y)}.st-ticks i.wt{background:var(--warn)}.st-ticks i.no{background:var(--bad)}
+.st-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.st-tile{border-radius:12px;padding:9px 10px;background:var(--soft);display:grid;box-shadow:inset 3px 0 var(--c)}.st-tile b{font-size:19px;font-weight:900}.st-tile span{font-size:11px;color:var(--mut)}
+.st-tile.ok{--c:var(--good)}.st-tile.mv{--c:var(--ink)}.st-tile.rt{--c:var(--y)}.st-tile.wt{--c:var(--warn)}.st-tile.no{--c:var(--bad)}
+.sa{display:inline-block;font-size:11px;font-weight:800;border-radius:8px;padding:3px 8px;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.sa.ok{background:var(--good2);color:var(--good)}.sa.mv{background:var(--ink);color:var(--card)}.sa.rt{background:var(--y);color:#111}.sa.wt{background:var(--warn2,#fcecd9);color:var(--warn)}.sa.no{background:var(--bad2);color:var(--bad)}
+.prod .rt .sa+.sub{display:block;text-align:right;font-size:11px}
+.st-big{display:flex;gap:24px;flex-wrap:wrap}.st-big b{font-size:26px;font-weight:900;letter-spacing:-.02em}
+.st-stk{display:grid;gap:7px}.st-stk .r{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12.5px}.st-stk .r .st-meter{height:10px;background:var(--soft)}.st-stk .r b{font-size:12.5px;white-space:nowrap}
+.st-chips{display:flex;gap:6px;flex-wrap:wrap}.st-chips button{border:0;font:inherit;font-size:12px;font-weight:600;background:var(--soft);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+@media (max-width:760px){.st-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.st-stk .r{grid-template-columns:100px minmax(0,1fr) auto}.st-head h2{font-size:20px}.sa{max-width:150px;white-space:normal}}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -649,6 +677,9 @@ s{opacity:.7}
       <div class="card ph-only" style="background:var(--soft);box-shadow:none" id="asExplain2"></div>
     </section>
 
+    <!-- МАГАЗИН (одна сторінка для обох: s1 / s2) -->
+    <section data-p="store" hidden><div id="storeBox" style="display:grid;gap:14px"></div></section>
+
     <!-- КАТАЛОГ VETRO -->
     <section data-p="catalog" hidden><div id="catBox" style="display:grid;gap:14px"></div></section>
 
@@ -690,6 +721,9 @@ const IC = {
   chat: '<path d="M5 5h14v10H9l-4 4z"/>',
   star: '<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.6-5-2.9-5 2.9 1.2-5.6L4 9.6 9.6 9z"/>',
   refresh: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',
+  store: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
+  s1: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
+  s2: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   auto: '<circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/>'
@@ -702,7 +736,7 @@ const GICON = {
   'Журнальні та консолі':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18M6 10v8M18 10v8M6 14h12"/></svg>',
   'Інше':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 12h16"/></svg>'
 };
-const TABS = [['overview','Огляд'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
+const TABS = [['overview','Огляд'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['s1','Магазин 1'],['s2','Магазин 2'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
 // головні розділи — на нижній панелі телефона і вгорі бокового меню; решта — у «Ще»
 const TBAR = ['overview','people','matrix','cats'];
 // знак «Vetro у D2»: D2 зліва, червона V справа (лінії D беруть колір тексту — білі в меню, чорні на світлому тлі)
@@ -761,6 +795,9 @@ function boot(json) {
   if (D.salesNote) $('asof').insertAdjacentHTML('afterend', '<span id="asofNote"> (' + esc(D.salesNote.split(' — ')[0]) + ')</span>');
   $('stockAsOf').textContent = D.stockAsOf || '—';
   if (!YEAR) YEAR = ASOF.getFullYear();
+  STORES.forEach((s, i) => { const t = TABS.find(x => x[0] === s); if (t) t[1] = (D.stores && D.stores[i]) || DEPS[i] || t[1]; });
+  buildNav();
+  if (!boot.started) { boot.started = 1; const st = startTabOf(D.me && D.me.start); if (st) tab = st; }   // стартова вкладка за особистим посиланням
   $('loader').hidden = true;
   applyTheme(false);
   render();
@@ -1402,6 +1439,174 @@ function mgrModal(m) {
         scales: {x: {grid: {display: false}, border: {display: false}}, y: {beginAtZero: true, border: {display: false}, grid: {color: gridC()}, ticks: {callback: v => short(v)}}}}}); }};
 }
 
+// ===== МАГАЗИН: окрема сторінка для кожного магазину (продажі, менеджери, зал, що перемістити, залишок, застій) =====
+let STB = 'w', STX = null, STXV = -1;
+const stName = si => (D.stores && D.stores[si]) || DEPS[si];
+// продажі по магазинах: остання дата продажу і продажі за 90 днів для кожного товару
+function stStats() {
+  if (STX && STXV === VER) return STX;
+  STXV = VER; STX = {};
+  const lim = iso(addD(ASOF, -90));
+  DEPS.forEach(d => { STX[d] = {}; });
+  STX.all = {};
+  R.forEach(r => {
+    [r.dep, 'all'].forEach(k => { const m = STX[k]; if (!m) return; const o = m[r.a] || (m[r.a] = {q: 0, s: 0, last: ''}); if (r.d > o.last) o.last = r.d; if (r.d >= lim) { o.q += r.q; o.s += r.s; } });
+  });
+  return STX;
+}
+const daysSince = d => d ? Math.round((ASOF - pd(d)) / 864e5) : null;
+const stHere = (it, si) => (si ? it.s2 : it.s1) || 0;
+const stPrice = it => it.pp || it.pr || 0;
+const chipS = (t, c) => '<span class="sa ' + c + '">' + esc(t) + '</span>';
+
+function stPlan(si) {
+  const key = iso(ASOF).slice(0, 7), p = D.plan && D.plan[key] && D.plan[key][si];
+  if (!p) return '';
+  const dep = DEPS[si], from = key + '-01', fact = R.reduce((t, r) => t + (r.dep === dep && r.d >= from && r.d <= iso(ASOF) ? r.s : 0), 0);
+  const last = new Date(ASOF.getFullYear(), ASOF.getMonth() + 1, 0).getDate(), left = Math.max(0, p - fact), dl = last - ASOF.getDate(), pct = Math.round(fact / p * 100);
+  return '<div class="st-plan"><div class="st-pl"><span>План ' + MONF[ASOF.getMonth()].toLowerCase() + ' · ' + short(p) + ' ₴</span><b>' + pct + '%</b></div><div class="st-meter"><i style="width:' + Math.min(100, pct) + '%"></i></div>' +
+    '<span class="st-pls">' + (left <= 0 ? 'План виконано' + (pct > 100 ? ', +' + short(fact - p) + ' ₴ понад план' : '') : dl > 0 ? 'Треба ще ' + short(left) + ' ₴ — це ~' + short(left / dl) + ' ₴ на день (' + dl + ' дн.)' : 'Місяць завершується: не вистачило ' + short(left) + ' ₴') + '</span></div>';
+}
+// графік магазину: дні / тижні / місяці + пунктир — цей самий магазин рік тому
+function stChart(si) {
+  const dep = DEPS[si], B = [];
+  if (STB === 'd') for (let i = 29; i >= 0; i--) { const d = addD(ASOF, -i); B.push({a: d, b: d, l: dm(d), ly: [addD(d, -364), addD(d, -364)]}); }
+  else if (STB === 'w') for (let i = 14; i >= 0; i--) { const a = addD(monday(ASOF), -7 * i), b = addD(a, 6); B.push({a, b: b > ASOF ? ASOF : b, l: dm(a), ly: [addD(a, -364), addD(b > ASOF ? ASOF : b, -364)], part: b > ASOF}); }
+  else for (let i = 11; i >= 0; i--) { const a = new Date(ASOF.getFullYear(), ASOF.getMonth() - i, 1), e = new Date(a.getFullYear(), a.getMonth() + 1, 0), b = e > ASOF ? ASOF : e;
+    B.push({a, b, l: MON[a.getMonth()], ly: [new Date(a.getFullYear() - 1, a.getMonth(), 1), new Date(b.getFullYear() - 1, b.getMonth(), b.getDate())], part: e > ASOF}); }
+  const sum = (a, b) => R.reduce((t, r) => t + (r.dep === dep && r.d >= iso(a) && r.d <= iso(b) ? r.s : 0), 0);
+  const v = B.map(x => sum(x.a, x.b)), ly = B.map(x => x.ly[0] < DATA0 ? null : sum(x.ly[0], x.ly[1]));
+  return {B, v, ly};
+}
+function stChartSvg(W, data) {
+  const {B, v, ly} = data, H = 220, top = 28, base = H - 22, n = v.length, gap = n > 20 ? 3 : 7, bw = Math.max(4, (W - 36 - gap * (n - 1)) / n);
+  const mx = Math.max(1, ...v, ...ly.filter(x => x != null)), y = x => base - x / mx * (base - top), x0 = 36;
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" height="' + H + '" role="img" aria-label="Продажі магазину">';
+  [0, .5, 1].forEach(f => { const yy = base - f * (base - top); s += '<line x1="' + x0 + '" x2="' + W + '" y1="' + yy + '" y2="' + yy + '" stroke="var(--line)"/><text x="' + (x0 - 5) + '" y="' + (yy + 3) + '" font-size="10" fill="var(--mut)" text-anchor="end">' + (f ? short(mx * f).replace(' тис', 'т').replace(' млн', 'м') : '0') + '</text>'; });
+  const step = Math.ceil(n / Math.max(1, (W - x0) / 44));
+  v.forEach((val, i) => { const x = x0 + i * (bw + gap), h = Math.max(val ? 3 : 1, val / mx * (base - top)), last = i === n - 1;
+    s += '<rect x="' + x + '" y="' + (base - h) + '" width="' + bw + '" height="' + h + '" rx="' + Math.min(5, bw / 2) + '" fill="' + (last ? 'var(--y)' : 'var(--ink)') + '"><title>' + esc(B[i].l) + ': ' + uah(val) + (ly[i] != null ? ' · рік тому ' + uah(ly[i]) : '') + '</title></rect>';
+    if (i % step === 0 || last) s += '<text x="' + (x + bw / 2) + '" y="' + (H - 6) + '" font-size="10" fill="var(--mut)" text-anchor="middle">' + esc(B[i].l) + '</text>';
+    if (last && val) { const cx = Math.min(W - 34, x + bw / 2), t = short(val); s += '<rect x="' + (cx - 30) + '" y="' + (base - h - 24) + '" width="60" height="18" rx="9" fill="var(--ink)"/><text x="' + cx + '" y="' + (base - h - 11) + '" font-size="10.5" font-weight="700" fill="var(--card)" text-anchor="middle">' + esc(t) + '</text>'; } });
+  const pts = ly.map((val, i) => val == null ? null : [x0 + i * (bw + gap) + bw / 2, y(val)]);
+  let d = '', pen = false; pts.forEach(p => { if (!p) { pen = false; return; } d += (pen ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); pen = true; });
+  if (d) s += '<path d="' + d + '" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="5 4"/>';
+  return s + '</svg>';
+}
+
+function renderStore(si, P) {
+  const dep = DEPS[si], other = DEPS[1 - si], name = stName(si), X = stStats(), H = X[dep] || {}, O = X[other] || {}, AL = X.all;
+  const cur = R.filter(r => r.dep === dep && inR(r, P.from, P.to)), prv = R.filter(r => r.dep === dep && inR(r, P.pf, P.pt)), A = agg(cur), B = agg(prv);
+  const tot = agg(R.filter(r => inR(r, P.from, P.to))).s || 1;
+  const kpi = (lbl, val, f, prev, extra, cls) => '<div class="card kpi ' + (cls || '') + '"><span class="k">' + lbl + '</span><b class="num">' + f(val) + '</b><span class="s">' + delta(val, prev) + '<span>' + (NOCMP ? '' : 'було ' + f(prev)) + '</span></span>' + (extra || '') + '</div>';
+  // менеджери магазину
+  const mg = {}; cur.forEach(r => { const o = mg[r.m] || (mg[r.m] = {s: 0, o: new Set()}); o.s += r.s; o.o.add(r.o); });
+  const mp = {}; prv.forEach(r => { mp[r.m] = (mp[r.m] || 0) + r.s; });
+  const ML = Object.keys(mg).map(m => ({m, s: mg[m].s, o: mg[m].o.size, p: mp[m] || 0})).sort((a, b) => b.s - a.s), mtop = ML.length ? ML[0].s : 1;
+  // дні тижня (за період; для короткого — останні 90 днів)
+  const wdFrom = P.span >= 28 ? P.from : addD(ASOF, -89), wdTo = P.span >= 28 ? P.to : ASOF, wS = new Array(7).fill(0), wN = new Array(7).fill(0);
+  for (let d = new Date(wdFrom); d <= wdTo; d = addD(d, 1)) wN[d.getDay()]++;
+  R.forEach(r => { if (r.dep === dep && inR(r, wdFrom, wdTo)) wS[pd(r.d).getDay()] += r.s; });
+  const ord = [1, 2, 3, 4, 5, 6, 0], wAvg = ord.map(i => wN[i] ? wS[i] / wN[i] : 0), wMx = Math.max(1, ...wAvg), best = wAvg.indexOf(Math.max(...wAvg)), worst = wAvg.indexOf(Math.min(...wAvg));
+  const wdSvg = '<svg viewBox="0 0 300 86" class="st-wd">' + wAvg.map((v, i) => '<rect x="' + (i * 43 + 4) + '" y="' + (66 - v / wMx * 56) + '" width="34" height="' + Math.max(2, v / wMx * 56) + '" rx="5" fill="' + (i === best ? 'var(--y)' : 'var(--bar)') + '"><title>' + WD[ord[i]] + ': ' + uah(v) + ' в середньому</title></rect><text x="' + (i * 43 + 21) + '" y="80" font-size="10.5" fill="var(--mut)" text-anchor="middle">' + WD[ord[i]] + '</text>').join('') + '</svg>';
+  // тижні: ми і рік тому
+  const wkRows = []; for (let i = 0; i < 6; i++) { const a = addD(monday(ASOF), -7 * i), b0 = addD(a, 6), b = b0 > ASOF ? ASOF : b0, ss = (x, y) => R.reduce((t, r) => t + (r.dep === dep && r.d >= iso(x) && r.d <= iso(y) ? r.s : 0), 0);
+    const v = ss(a, b), lyA = addD(a, -364), ly = lyA < DATA0 ? null : ss(lyA, addD(b, -364)); wkRows.push({a, b0, v, ly, part: b0 > ASOF}); }
+  // топ магазину
+  const by = {}, byP = {}; cur.forEach(r => { const o = by[r.a] || (by[r.a] = {s: 0, q: 0}); o.s += r.s; o.q += r.q; }); prv.forEach(r => { byP[r.a] = (byP[r.a] || 0) + r.s; });
+  const TOP = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 6);
+  // матриця в цьому залі
+  const MX = (D.matrix || []).map(m => { const here = si ? m.s2 : m.s1, oth = si ? m.s1 : m.s2; let act, cls;
+    if (here > 0) { act = 'стоїть · ' + here + ' шт'; cls = 'ok'; }
+    else if (m.sk > 0) { act = 'зі складу · є ' + m.sk; cls = 'mv'; }
+    else if (oth >= 2) { act = 'з ' + other + ' 1 шт (там ' + oth + ')'; cls = 'rt'; }
+    else if (/бронь|затвердж/i.test(m.ap || '') || m.r > 0) { act = m.r > 0 ? 'в дорозі' + (m.arr ? ' · ' + m.arr : '') : (/бронь/i.test(m.ap) ? 'у броні' : 'замовлено'); cls = 'wt'; }
+    else if (m.v > 0) { act = 'замовити у Vetro · є ' + m.v; cls = 'no'; }
+    else { act = 'немає у Vetro'; cls = 'wt'; }
+    return {m, here, oth, act, cls}; });
+  const cnt = c => MX.filter(x => x.cls === c).length, mOk = cnt('ok'), mAll = MX.length || 1;
+  const order = {mv: 0, rt: 1, no: 2, wt: 3, ok: 4};
+  const MISS = MX.filter(x => x.cls !== 'ok').sort((a, b) => order[a.cls] - order[b.cls]);
+  // що перемістити
+  const inMx = new Set((D.matrix || []).map(m => m.a));
+  const bring = [];
+  MX.filter(x => x.cls === 'mv').forEach(x => bring.push({a: x.m.a, how: 'склад → ' + dep, q: Math.min(x.m.sk, 2) + ' шт', why: 'у матриці, у залі 0 · на складі ' + x.m.sk, c: 'mv'}));
+  MX.filter(x => x.cls === 'rt').forEach(x => bring.push({a: x.m.a, how: other + ' → ' + dep, q: '1 шт', why: 'у матриці, у залі 0 · у ' + other + ' ' + x.oth + ' шт', c: 'rt'}));
+  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it || inMx.has(a)) return; const h = H[a];
+    if (h && h.q >= 3 && stHere(it, si) <= 1 && (it.sk || 0) > 0) bring.push({a, how: 'склад → ' + dep, q: Math.min(it.sk, 2) + ' шт', why: 'продано тут ' + h.q + ' шт за 90 днів, у залі ' + stHere(it, si), c: 'mv'}); });
+  const give = [];
+  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it || !(stHere(it, si) > 0)) return; const h = H[a], o = O[a], ds = daysSince(h && h.last);
+    const idle = !h || !h.last || ds >= 90;
+    if (!idle) return;
+    if (o && o.q >= 1 && !((si ? it.s1 : it.s2) > 0)) give.push({a, how: dep + ' → ' + other, q: '1 шт', why: (h && h.last ? ds + ' дн. без продажу тут' : 'тут не продавався') + ' · у ' + other + ' продали ' + o.q + ' за 90 днів', c: 'rt'});
+    else if (!inMx.has(a) && !(AL[a] && daysSince(AL[a].last) < 120)) give.push({a, how: dep + ' → склад', q: stHere(it, si) + ' шт', why: 'не в матриці · ' + (AL[a] && AL[a].last ? daysSince(AL[a].last) + ' дн. без продажу в компанії' : 'продажів не було'), c: 'mv'}); });
+  // залишок у залі
+  const G = {}; let sq = 0, sv = 0, stale = [];
+  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const q = stHere(it, si); if (!(q > 0)) return; const val = q * stPrice(it);
+    sq += q; sv += val; const g = G[it.g] || (G[it.g] = {q: 0, v: 0, sold: 0}); g.q += q; g.v += val;
+    const h = H[a], ds = daysSince(h && h.last); if (!h || !h.last || ds >= 90) stale.push({a, q, val, ds}); });
+  Object.keys(H).forEach(a => { const it = D.items[a]; if (it && G[it.g]) G[it.g].sold += H[a].s; });
+  const sold90 = Object.values(H).reduce((t, o) => t + o.s, 0), mos = v => { const per = v.sold / 3; return per > 0 ? (v.v / per).toFixed(1).replace('.', ',') + ' міс' : '—'; };
+  const GL = Object.keys(G).sort((a, b) => G[b].v - G[a].v), gMx = Math.max(1, ...GL.map(g => G[g].v));
+  stale.sort((a, b) => b.val - a.val); const frozen = stale.reduce((t, x) => t + x.val, 0);
+  // продається в іншому магазині, а тут немає
+  const OPP = Object.keys(O).filter(a => O[a].q >= 2 && D.items[a] && !(stHere(D.items[a], si) > 0)).sort((a, b) => O[b].q - O[a].q).slice(0, 6).map(a => { const it = D.items[a];
+    return {a, why: other + ' продав ' + O[a].q + ' шт за 90 днів', where: it.sk > 0 ? ['на складі ' + it.sk, 'mv'] : (it.v > 0 ? ['у Vetro ' + it.v, 'ok'] : ['ніде немає', 'wt'])}; });
+  // новинки й акції в залі
+  const NEW = (D.assort || []).filter(a => { const it = D.items[a]; return it && stHere(it, si) > 0 && /новинк/i.test(it.l || ''); });
+  const PRO = (D.promos || []).filter(p => p.on && D.items[p.a] && stHere(D.items[p.a], si) > 0);
+  const LO = ordersOf(R.filter(r => r.dep === dep && r.d >= iso(addD(ASOF, -45)))).sort((a, b) => b.d.localeCompare(a.d)).slice(0, 5);
+  const row = (a, right, sub) => prodRow(a, right, esc(sub));
+  const mvRow = x => row(x.a, chipS(x.how, x.c) + '<span class="sub">' + x.q + '</span>', x.why);
+
+  $('storeBox').innerHTML =
+    '<div class="st-head"><p class="sub">Сторінка магазину ' + esc(name) + ' · ' + (D.me && D.me.n ? 'ви увійшли як ' + esc(D.me.n) : 'усе про зал на одній сторінці') + '</p>' +
+      '<div class="seg-s st-sw">' + [0, 1].map(i => '<button data-t="s' + (i + 1) + '" aria-pressed="' + (i === si) + '">' + esc(DEPS[i]) + '</button>').join('') + '</div></div>' +
+    '<div class="g5 st-kp">' + kpi('Виручка', A.s, uah, B.s, stPlan(si), 'acc') + kpi('Замовлень', A.o, fmt, B.o) + kpi('Середній чек', A.chk, uah, B.chk) + kpi('Продано, шт', A.q, fmt, B.q) +
+      '<div class="card kpi"><span class="k">Частка в компанії</span><b class="num">' + Math.round(A.s / tot * 100) + '%</b><span class="s">за ' + esc(P.label) + '</span></div></div>' +
+    '<div class="g21"><div class="card"><div class="ch"><h3>Продажі магазину</h3><div class="seg-s" id="stBy">' + [['d', 'Дні'], ['w', 'Тижні'], ['m', 'Місяці']].map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (STB === o[0]) + '">' + o[1] + '</button>').join('') + '</div></div>' +
+        '<div class="leg"><span><i class="dot" style="background:var(--ink)"></i>' + esc(dep) + '</span><span><i class="dot" style="background:var(--y)"></i>поточн' + (STB === 'm' ? 'ий місяць' : STB === 'w' ? 'ий тиждень' : 'ий день') + '</span><span><i class="st-dash"></i>' + esc(dep) + ' рік тому</span></div><div id="stChart" class="st-chart"></div></div>' +
+      '<div class="card"><div class="ch"><h3>Менеджери магазину</h3><span class="sub">' + esc(P.label) + '</span></div><div class="list">' +
+        (ML.map((x, i) => '<div class="mrow" style="grid-template-columns:22px 38px minmax(0,1fr) auto" data-mgr="' + esc(x.m) + '"><span class="num1' + (i < 3 ? ' t' : '') + '" style="font-size:12px">' + (i + 1) + '</span><span class="av" style="' + avStyle(dep) + '">' + esc(initials(x.m)) + '</span><div style="min-width:0;display:grid;gap:4px"><b style="font-size:13px">' + esc(x.m) + '</b><div class="bar" style="--c:' + DC[dep] + '"><i style="width:' + (x.s / mtop * 100) + '%"></i></div><span class="sub">' + x.o + ' замовл. · чек ' + short(x.s / Math.max(1, x.o)) + '</span></div><div class="rt"><b>' + short(x.s) + '</b>' + delta(x.s, x.p) + '</div></div>').join('') || '<div class="empty">Продажів немає</div>') + '</div>' +
+        '<div class="st-sub">Дні тижня · ' + (P.span >= 28 ? 'за період' : 'останні 90 днів') + '</div>' + wdSvg + '<div class="sub">Найсильніший день — <b style="color:var(--ink)">' + ['понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота', 'неділя'][best] + '</b>, найслабший — ' + ['понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота', 'неділя'][worst] + '</div></div></div>' +
+    '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Тижні: ми і рік тому</h3><span class="sub">виручка ' + esc(dep) + '</span></div><div class="tbl"><table class="st-wk"><thead><tr><th>Тиждень</th><th class="n">' + esc(dep) + '</th><th class="n">Рік тому</th><th class="n">Зміна</th></tr></thead><tbody>' +
+        wkRows.map(w => '<tr' + (w.part ? ' class="cur"' : '') + '><td>' + dm(w.a) + '–' + dm(w.b0) + (w.part ? ' · неповний' : '') + '</td><td class="n"><b>' + short(w.v) + '</b></td><td class="n">' + (w.ly == null ? '—' : short(w.ly)) + '</td><td class="n">' + (w.ly == null || w.part ? '' : delta(w.v, w.ly)) + '</td></tr>').join('') + '</tbody></table></div></div>' +
+      '<div class="card"><div class="ch"><h3>Топ магазину</h3><span class="sub">' + esc(P.label) + ', за виручкою</span></div><div class="list">' +
+        (TOP.map(a => row(a, '<b>' + short(by[a].s) + '</b>' + delta(by[a].s, byP[a] || 0), (D.items[a] || {}).g + ' · ' + by[a].q + ' шт')).join('') || '<div class="empty">Продажів немає</div>') + '</div></div></div>' +
+    '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Матриця в цьому залі</h3><span class="sub">' + MX.length + ' позицій мають стояти</span></div>' +
+        '<div class="st-cov"><b>' + Math.round(mOk / mAll * 100) + '%</b><div><div class="st-ticks">' + MX.map(x => '<i class="' + x.cls + '" title="' + esc(fullName(x.m.a)) + ': ' + esc(x.act) + '"></i>').join('') + '</div><span class="sub">' + mOk + ' з ' + MX.length + ' стоять у залі</span></div></div>' +
+        '<div class="st-tiles">' + [['ok', 'стоять', mOk], ['mv', 'зі складу', cnt('mv')], ['rt', 'з ' + other, cnt('rt')], ['wt', 'чекаємо', cnt('wt')], ['no', 'замовити', cnt('no')]].map(t => '<div class="st-tile ' + t[0] + '"><b>' + t[2] + '</b><span>' + t[1] + '</span></div>').join('') + '</div>' +
+        '<div class="st-sub">Чого бракує в залі</div><div class="list">' + (MISS.slice(0, 10).map(x => row(x.m.a, chipS(x.act, x.cls), x.m.a)).join('') || '<div class="empty">Усе з матриці стоїть у залі 👍</div>') + '</div>' +
+        (MISS.length > 10 ? '<button class="all" data-go="matrix">Ще ' + (MISS.length - 10) + ' — у Матриці →</button>' : '') + '</div>' +
+      '<div class="card"><div class="ch"><h3>Що перемістити</h3><span class="sub">список для логіста</span></div>' +
+        '<div class="st-sub">Привезти в ' + esc(dep) + '</div><div class="list">' + (bring.slice(0, 8).map(mvRow).join('') || '<div class="empty">Нічого не треба везти</div>') + '</div>' +
+        '<div class="st-sub">Забрати з ' + esc(dep) + '</div><div class="list">' + (give.slice(0, 8).map(mvRow).join('') || '<div class="empty">Нічого забирати не треба</div>') + '</div></div></div>' +
+    '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Залишок у залі</h3><span class="sub">за ціною з таблиці</span></div>' +
+        '<div class="st-big"><b>' + fmt(sq) + ' шт</b><b>' + short(sv) + ' ₴</b></div><div class="st-stk">' +
+        GL.map(g => '<div class="r"><span>' + esc(g) + '</span><div class="st-meter"><i style="width:' + (G[g].v / gMx * 100) + '%;background:var(--ink)"></i></div><b>' + short(G[g].v) + ' · ' + G[g].q + ' шт</b></div>').join('') + '</div>' +
+        '<div class="st-sub">Оборот залу</div><div class="sub">За 90 днів магазин продав на <b style="color:var(--ink)">' + short(sold90) + ' ₴</b>' + (sold90 > 0 ? ' — залишку в залі вистачить приблизно на <b style="color:var(--ink)">' + (sv / (sold90 / 3)).toFixed(1).replace('.', ',') + ' міс</b>. ' + GL.slice(0, 3).map(g => esc(g) + ' — ' + mos(G[g])).join(', ') + '.' : '.') + '</div></div>' +
+      '<div class="card"><div class="ch"><h3>💤 Застій у залі</h3><span class="sub">90+ днів без продажу тут</span></div><div class="list">' +
+        (stale.slice(0, 7).map(x => row(x.a, '<b>' + short(x.val) + ' ₴</b>', (x.ds != null ? x.ds + ' дн. без продажу' : 'тут не продавався') + ' · ' + x.q + ' шт')).join('') || '<div class="empty">Застою немає</div>') + '</div>' +
+        (stale.length ? '<div class="sub">Разом заморожено <b style="color:var(--ink)">' + short(frozen) + ' ₴</b> у ' + stale.length + ' позиціях — кандидати на акцію, переставлення або переміщення</div>' : '') + '</div></div>' +
+    '<div class="g2 stack1"><div class="card"><div class="ch"><h3 id="stOppT">🔎 Продається в ' + esc(other) + ', а в ' + esc(dep) + ' немає</h3><span class="sub">за 90 днів</span></div><div class="list">' +
+        (OPP.map(x => row(x.a, chipS(x.where[0], x.where[1]), x.why)).join('') || '<div class="empty">Таких позицій немає</div>') + '</div></div>' +
+      '<div class="card"><div class="ch"><h3>Новинки й акції в залі</h3></div>' +
+        '<div class="st-sub">Новинки, що стоять у ' + esc(dep) + ' · ' + NEW.length + '</div><div class="st-chips">' + (NEW.slice(0, 12).map(a => '<button data-art="' + esc(a) + '">' + esc(shortName((D.items[a] || {}).n || a)) + '</button>').join('') || '<span class="sub">немає</span>') + '</div>' +
+        '<div class="st-sub">Діють акції · ' + PRO.length + ' позицій у залі</div><div class="st-chips">' + (PRO.slice(0, 12).map(p => '<button data-art="' + esc(p.a) + '">' + esc(shortName((D.items[p.a] || {}).n || p.a)) + '</button>').join('') || '<span class="sub">немає</span>') + '</div>' +
+        '<div class="st-sub">Останні замовлення магазину</div>' + ordersTable(LO, true) + '</div></div>';
+  const data = stChart(si);
+  svgDraw('stChart', W => stChartSvg(W, data));
+  $('stBy').onclick = e => { const b = e.target.closest('button'); if (b) { STB = b.dataset.v; LAST[tab] = null; render(); } };
+}
+// стартова вкладка за особистим посиланням (колонка «Стартова вкладка» на аркуші доступу)
+function startTabOf(txt) {
+  const t = String(txt || '').trim().toLowerCase(); if (!t) return '';
+  if (DEPS[0] && t === DEPS[0].toLowerCase() || (D.stores && D.stores[0] && t === D.stores[0].toLowerCase())) return 's1';
+  if (DEPS[1] && t === DEPS[1].toLowerCase() || (D.stores && D.stores[1] && t === D.stores[1].toLowerCase())) return 's2';
+  const f = TABS.find(x => x[1].toLowerCase() === t); return f ? f[0] : '';
+}
+document.addEventListener('click', e => { const b = e.target.closest('.st-sw [data-t]'); if (b) { e.stopPropagation(); goTab(b.dataset.t); } }, true);
+
 // ===== КАТАЛОГ VETRO і ДОВІДКА (дані — окремим запитом, лише коли їх відкрили) =====
 let CAT = null, CATP = null, CATV = -1;
 const LAT = {'а': 'a', 'в': 'b', 'е': 'e', 'і': 'i', 'к': 'k', 'м': 'm', 'н': 'h', 'о': 'o', 'р': 'p', 'с': 'c', 'т': 't', 'у': 'y', 'х': 'x'};
@@ -1881,11 +2086,12 @@ const ANAT = {
   'promo.line': ['<div class="a-card"><div class="a-tl"><i style="left:5%;width:30%"></i><i class="now" style="left:55%;width:45%"></i></div><div class="a-line">' + mk(1) + '<span class="a-sub">завершена акція</span>' + mk(2) + '<span class="a-sub">діє зараз</span></div></div>', ['смужка — період акції на шкалі 120 днів', 'жовта — діє зараз']]
 };
 ['buy.groups', 'buy.arr', 'promo.act', 'promo.done', 'ov.orders'].forEach(k => { if (!ANAT[k]) ANAT[k] = null; });
-const HINTS = [['#k-rev .k', 'kpi.rev'], ['#k-ord .k', 'kpi.ord'], ['#k-chk .k', 'kpi.chk'], ['#k-qty .k', 'kpi.qty'], ['#calTitle', 'ov.cal'], ['#yearTitle', 'ov.year'], ['#promoChTitle', 'promo.chart'], ['#buyTrendTitle', 'buy.trend']];
+const HINTS = [['#k-rev .k', 'kpi.rev'], ['#k-ord .k', 'kpi.ord'], ['#k-chk .k', 'kpi.chk'], ['#k-qty .k', 'kpi.qty'], ['#calTitle', 'ov.cal'], ['#yearTitle', 'ov.year'], ['#promoChTitle', 'promo.chart'], ['#buyTrendTitle', 'buy.trend'], ['#stOppT', 'st.opp']];
 const HINT_H3 = {'Продажі': 'ov.sales', 'Відділи': 'ov.deps', 'Топ товарів': 'ov.top', 'Лідери': 'ov.leaders', 'Останні замовлення': 'ov.orders', 'Стан складу': 'ov.stock', 'У які дні продається більше': 'ov.wd', 'Сигнали': 'ov.signals',
   'Рейтинг менеджерів': 'people.rank', 'Один на один': 'people.vs', 'Хто в чому сильніший': 'people.radar', 'Хто що продає': 'cats.who', 'Ростуть і падають': 'cats.movers', 'Топ столів': 'cats.top', 'Топ стільців': 'cats.top',
   'Матриця в залі': 'mx.lines', 'Стан матриці': 'mx.tiles', 'Товар в дорозі': 'mx.road', 'Є на складі — перевезти': 'mx.move', 'Карта позицій': 'mx.map', 'Де зараз позиції': 'buy.funnel', 'Що в закупці зараз': 'buy.groups', 'Очікувані надходження': 'buy.arr',
-  'Кожна позиція — квадратик': 'as.grid', 'Групи': 'as.zones', '💤 Застій: де гроші лежать': 'as.stale', 'Зараз в акції': 'promo.act', 'Стрічка акцій': 'promo.line', 'Результати завершених акцій': 'promo.done'};
+  'Кожна позиція — квадратик': 'as.grid', 'Групи': 'as.zones', '💤 Застій: де гроші лежать': 'as.stale', 'Зараз в акції': 'promo.act', 'Стрічка акцій': 'promo.line', 'Результати завершених акцій': 'promo.done',
+  'Продажі магазину': 'st.sales', 'Менеджери магазину': 'st.mgr', 'Тижні: ми і рік тому': 'st.weeks', 'Топ магазину': 'st.top', 'Матриця в цьому залі': 'st.mx', 'Що перемістити': 'st.move', 'Залишок у залі': 'st.stock', '💤 Застій у залі': 'st.stale', 'Новинки й акції в залі': 'st.new'};
 function addHints() {
   const put = (el, key) => { if (el && !el.querySelector('.hq')) el.insertAdjacentHTML('beforeend', '<button class="hq" data-hq="' + key + '" aria-label="Що це?">?</button>'); };
   HINTS.forEach(([sel, key]) => put(document.querySelector(sel), key));
@@ -1950,12 +2156,18 @@ document.addEventListener('change', e => { if (e.target.id === 'cvSort') { CF.so
 
 // ===== оболонка: меню, періоди, вкладки =====
 const MODES = [['week','Тиждень'],['month','Місяць'],['year','Рік'],['all','Весь час'],['custom','Період']];
-const navBtn = t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>';
-$('tabs').innerHTML = '<div class="logo">' + LOGO + '<span>VETRO у D2</span></div>' + TABS.filter(t => TBAR.includes(t[0])).map(navBtn).join('') +
-  '<div class="navsep">Ще</div>' + TABS.filter(t => !TBAR.includes(t[0])).map(navBtn).join('') +
-  '<div class="sp"></div><button class="themeBtn" type="button"></button><div class="ro">Лише перегляд — дані в таблиці не змінюються</div>';
-$('tabbar').innerHTML = TBAR.map(t => '<button data-t="' + t + '" aria-selected="false"><i>' + ic(t) + '</i>' + TABS.find(x => x[0] === t)[1] + '</button>').join('') + '<button data-more="1" aria-selected="false"><i>' + ic('more') + '</i>Ще</button>';
-$('moreIn').innerHTML = TABS.filter(t => !TBAR.includes(t[0])).map(t => '<button class="nav" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>').join('') + '<button class="themeBtn" type="button" style="color:var(--ink);border-color:var(--line)"></button><div class="sub" style="padding:4px 12px">Лише перегляд — дані в таблиці не змінюються</div>';
+const navBtn = t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + esc(t[1]) + '</button>';
+const STORES = ['s1', 's2'];
+function buildNav() {
+  $('tabs').innerHTML = '<div class="logo">' + LOGO + '<span>VETRO у D2</span></div>' + TABS.filter(t => TBAR.includes(t[0])).map(navBtn).join('') +
+    '<div class="navsep">Магазини</div>' + TABS.filter(t => STORES.includes(t[0])).map(navBtn).join('') +
+    '<div class="navsep">Ще</div>' + TABS.filter(t => !TBAR.includes(t[0]) && !STORES.includes(t[0])).map(navBtn).join('') +
+    '<div class="sp"></div><button class="themeBtn" type="button"></button><div class="ro">Лише перегляд — дані в таблиці не змінюються</div>';
+  $('tabbar').innerHTML = TBAR.map(t => '<button data-t="' + t + '" aria-selected="false"><i>' + ic(t) + '</i>' + TABS.find(x => x[0] === t)[1] + '</button>').join('') + '<button data-more="1" aria-selected="false"><i>' + ic('more') + '</i>Ще</button>';
+  $('moreIn').innerHTML = TABS.filter(t => !TBAR.includes(t[0])).map(t => '<button class="nav" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + t[1] + '</button>').join('') + '<button class="themeBtn" type="button" style="color:var(--ink);border-color:var(--line)"></button><div class="sub" style="padding:4px 12px">Лише перегляд — дані в таблиці не змінюються</div>';
+  applyTheme(false);
+}
+buildNav();
 $('loader').firstElementChild.insertAdjacentHTML('afterbegin', LOGO);
 $('mode').innerHTML = $('chips').innerHTML = MODES.map(m => '<button data-m="' + m[0] + '" aria-pressed="false">' + m[1] + '</button>').join('');
 $('mRefresh').innerHTML = ic('refresh');
@@ -1972,13 +2184,14 @@ function render() {
   document.querySelectorAll('#mode button,#chips button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === mode));
   document.querySelectorAll('[data-t]').forEach(b => b.setAttribute('aria-selected', b.dataset.t === tab));
   const moreSel = !TBAR.includes(tab); document.querySelector('#tabbar [data-more]').setAttribute('aria-selected', moreSel);
-  document.querySelectorAll('main section[data-p]').forEach(s => s.hidden = s.dataset.p !== tab);
+  const sec = tab === 's1' || tab === 's2' ? 'store' : tab;
+  document.querySelectorAll('main section[data-p]').forEach(s => s.hidden = s.dataset.p !== sec);
   $('periodBox').hidden = tab === 'matrix' || tab === 'assort' || tab === 'catalog' || tab === 'help';
   // вкладка перемальовується лише тоді, коли змінився період або дані — перемикання між вкладками миттєве
   const key = [VER, mode, offset, cFrom && +cFrom, cTo && +cTo, document.documentElement.className].join('|');
   if (LAST[tab] !== key) {
     LAST[tab] = key;
-    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp})[tab](P);
+    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp, s1: P0 => renderStore(0, P0), s2: P0 => renderStore(1, P0)})[tab](P);
   }
   addHints();
   const cb = $('cvCmp'); if (cb) cb.hidden = !(tab === 'catalog' && CF.cmp.length);
