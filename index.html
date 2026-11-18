@@ -490,9 +490,10 @@ s{opacity:.7}
 .st-cov{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}.st-cov>b{font-size:34px;font-weight:900;letter-spacing:-.03em}
 .st-ticks{display:flex;gap:2px;height:20px}.st-ticks i{flex:1;border-radius:2px;background:var(--bar);min-width:2px}
 .st-ticks i.ok{background:var(--good)}.st-ticks i.mv{background:var(--ink)}.st-ticks i.rt{background:var(--y)}.st-ticks i.wt{background:var(--warn)}.st-ticks i.no{background:var(--bad)}
-.st-tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.st-tiles{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .st-tile{border:0;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:12px;padding:9px 10px;background:var(--soft);display:grid;box-shadow:inset 3px 0 var(--c)}.st-tile[aria-pressed="true"]{box-shadow:inset 3px 0 var(--c),0 0 0 2px var(--ink)}.st-tile.all{--c:var(--mut)}
 .st-mxl{max-height:560px;overflow:auto}.st-tile b{font-size:19px;font-weight:900}.st-tile span{font-size:11px;color:var(--mut)}
+.st-tile.cs{--c:var(--on)}.st-ticks i.cs{background:var(--on)}.sa.cs{background:var(--blue2,#e3ebff);color:var(--on)}
 .st-tile.ok{--c:var(--good)}.st-tile.mv{--c:var(--ink)}.st-tile.rt{--c:var(--y)}.st-tile.wt{--c:var(--warn)}.st-tile.no{--c:var(--bad)}
 .sa{display:inline-block;font-size:11px;font-weight:800;border-radius:8px;padding:3px 8px;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}
 .sa.ok{background:var(--good2);color:var(--good)}.sa.mv{background:var(--ink);color:var(--card)}.sa.rt{background:var(--y);color:#111}.sa.wt{background:var(--warn2,#fcecd9);color:var(--warn)}.sa.no{background:var(--bad2);color:var(--bad)}
@@ -501,6 +502,14 @@ s{opacity:.7}
 .st-stk{display:grid;gap:7px}.st-stk .r{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12.5px}.st-stk .r .st-meter{height:10px;background:var(--soft)}.st-stk .r b{font-size:12.5px;white-space:nowrap}
 .st-chips{display:flex;gap:6px;flex-wrap:wrap}.st-chips button{border:0;font:inherit;font-size:12px;font-weight:600;background:var(--soft);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
 @media (max-width:760px){.st-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.st-mxl{max-height:none}.st-stk .r{grid-template-columns:100px minmax(0,1fr) auto}.st-head h2{font-size:20px}.sa{max-width:150px;white-space:normal}}
+.st-move{gap:14px;padding:20px 22px}
+.st-mv2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 40px}
+.st-mv2>div+div:not(.list){border-left:1px solid var(--line);padding-left:40px}.st-cl>.list+.list{border-left:1px solid var(--line);padding-left:40px}
+.st-move .list{gap:0}.st-move .prod+.prod{border-top:1px solid var(--line)}.st-move .prod{padding:10px 0;grid-template-columns:44px minmax(0,1fr) auto;gap:14px}
+.st-move .prod .rt{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.st-move .st-sub{margin:4px 0 8px}
+.st-cons{border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:760px){.st-mv2{grid-template-columns:minmax(0,1fr);gap:18px}.st-mv2>div+div:not(.list),.st-cl>.list+.list{border-left:0;padding-left:0}.st-move{padding:16px}}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -1534,32 +1543,42 @@ function renderStore(si, P) {
   const by = {}, byP = {}; cur.forEach(r => { const o = by[r.a] || (by[r.a] = {s: 0, q: 0}); o.s += r.s; o.q += r.q; }); prv.forEach(r => { byP[r.a] = (byP[r.a] || 0) + r.s; });
   const TOP = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 6);
   // матриця в цьому залі — кожна позиція: що зробити, щоб вона стояла
-  const MX = (D.matrix || []).map(m => { const it = D.items[m.a] || {}, set = isSet(it), here = si ? m.s2 : m.s1, oth = si ? m.s1 : m.s2, need = set ? 2 : 1; let act, cls, q = 0;
-    if (here > 0) { act = 'стоїть · ' + here + ' шт'; cls = 'ok'; }
-    else if (m.sk > 0) { q = Math.min(m.sk, need); act = 'перевезти зі складу ' + q + ' шт'; cls = 'mv'; }
-    else if (oth >= (set ? SET + need : 2)) { q = need; act = 'перевезти з ' + other + ' ' + q + ' шт'; cls = 'rt'; }
+  const MX = (D.matrix || []).map(m => { const it = D.items[m.a] || {}, set = isSet(it), here = si ? m.s2 : m.s1, oth = si ? m.s1 : m.s2; let act, cls, q = 0;
+    if (here > 0) { act = 'стоїть · ' + here + ' шт' + (set && here < SET ? ' (не комплект)' : ''); cls = 'ok'; }
+    else if (set && m.sk >= SET) { q = SET; act = 'перевезти зі складу 4 шт (комплект)'; cls = 'mv'; }
+    else if (set && m.sk > 0) { q = m.sk; act = 'розглянути: на складі лише ' + m.sk + ' шт'; cls = 'cs'; }
+    else if (!set && m.sk > 0) { q = 1; act = 'перевезти зі складу 1 шт'; cls = 'mv'; }
+    else if (oth >= (set ? SET * 2 : 2)) { q = set ? SET : 1; act = 'перевезти з ' + other + ' ' + q + ' шт'; cls = 'rt'; }
     else if (/бронь|затвердж/i.test(m.ap || '') || m.r > 0) { act = m.r > 0 ? 'в дорозі' + (m.arr ? ' · ' + m.arr : '') : (/бронь/i.test(m.ap) ? 'у броні' : 'замовлено'); cls = 'wt'; }
     else if (m.v > 0) { act = 'замовити у Vetro'; cls = 'no'; }
     else { act = oth > 0 ? 'немає у Vetro · є в ' + other + ' ' + oth : 'немає ніде'; cls = 'wt'; }
     return {m, it, set, here, oth, act, cls, q}; });
   const cnt = c => MX.filter(x => x.cls === c).length, mOk = cnt('ok'), mAll = MX.length || 1;
-  const order = {mv: 0, rt: 1, no: 2, wt: 3, ok: 4};
+  const order = {mv: 0, rt: 1, cs: 2, no: 3, wt: 4, ok: 5};
   const MXL = MX.filter(x => STMX === 'all' ? true : STMX === 'miss' ? x.cls !== 'ok' : x.cls === STMX).sort((a, b) => order[a.cls] - order[b.cls] || fullName(a.m.a).localeCompare(fullName(b.m.a)));
   const mxSub = x => 'етап: ' + esc(x.m.stage || '—') + ' · ' + esc(dep) + ' ' + x.here + ' · ' + esc(other) + ' ' + x.oth + ' · склад ' + (x.m.sk || 0) + ' · Vetro ' + (x.m.v || 0);
   // що перемістити (з урахуванням комплектів: обідні стільці — по 4, не по одному)
   const inMx = new Set((D.matrix || []).map(m => m.a));
-  const bring = [], give = [], seen = new Set();
-  MX.filter(x => x.cls === 'mv' || x.cls === 'rt').forEach(x => { seen.add(x.m.a); bring.push({a: x.m.a, how: (x.cls === 'mv' ? 'склад' : other) + ' → ' + dep, q: x.q + ' шт', why: 'у матриці, у залі 0 · ' + (x.cls === 'mv' ? 'на складі ' + x.m.sk : 'у ' + other + ' ' + x.oth + ' шт'), c: x.cls}); });
+  const bring = [], give = [], cons = [], seen = new Set();
+  MX.filter(x => x.cls === 'mv' || x.cls === 'rt').forEach(x => { seen.add(x.m.a); bring.push({a: x.m.a, how: (x.cls === 'mv' ? 'склад' : other) + ' → ' + dep, q: x.q + ' шт', why: 'у матриці, у залі 0 · ' + (x.cls === 'mv' ? 'на складі ' + x.m.sk : 'у ' + other + ' ' + x.oth + ' шт') + (x.set ? ' · комплект 4 шт' : ''), c: x.cls}); });
+  // обідні стільці: комплект 4 шт — якщо в залі чи на складі лише 1–3, пропонуємо розглянути, звідки добрати
+  const addFrom = (sk, oth, need, v) => [sk > 0 ? 'склад ' + Math.min(sk, need) : '', oth > SET ? other + ' ' + Math.min(oth - SET, need) : '', v > 0 ? 'Vetro (є ' + v + ')' : ''].filter(Boolean).join(' / ');
+  MX.forEach(x => { if (!x.set) return; const sk = x.m.sk || 0;
+    if (x.cls === 'cs') { const need = SET - sk; seen.add(x.m.a); cons.push({a: x.m.a, how: 'до 4 шт', q: 'склад ' + sk, why: 'у залі 0, на складі ' + sk + ' — добрати ' + need + ': ' + (addFrom(0, x.oth, need, x.m.v) || 'ніде немає'), c: 'cs'}); }
+    else if (x.cls === 'ok' && x.here < SET) { const need = SET - x.here; seen.add(x.m.a); cons.push({a: x.m.a, how: 'до 4 шт', q: 'у залі ' + x.here, why: 'у залі ' + x.here + ' шт — добрати ' + need + ': ' + (addFrom(sk, x.oth, need, x.m.v) || 'ніде немає'), c: 'cs'}); } });
   (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const here = stHere(it, si), oth = (si ? it.s1 : it.s2) || 0, sk = it.sk || 0, set = isSet(it), h0 = H[a], o0 = O[a];
     // комплект розкидано по магазинах: збираємо в одному (туди, де продається краще; при рівності — де більше)
-    if (set && here > 0 && here < SET && oth > 0 && oth < SET && here + oth >= 3 && sk < SET) {
+    if (set && !seen.has(a) && here > 0 && here < SET && oth > 0 && oth < SET && here + oth >= 3 && sk < SET) {
       const mine = (h0 ? h0.q : 0) * 10 + here, theirs = (o0 ? o0.q : 0) * 10 + oth;
       if (mine >= theirs) bring.push({a, how: other + ' → ' + dep, q: oth + ' шт', why: 'зібрати комплект: тут ' + here + ', у ' + other + ' ' + oth + ' → буде ' + (here + oth) + ' шт', c: 'rt'});
       else give.push({a, how: dep + ' → ' + other, q: here + ' шт', why: 'зібрати комплект: тут ' + here + ', у ' + other + ' ' + oth + ' → там буде ' + (here + oth) + ' шт', c: 'rt'});
       return;
     }
     // добре продається тут, а в залі майже немає — зі складу
-    if (!seen.has(a) && !inMx.has(a) && h0 && h0.q >= 3 && here <= (set ? 1 : 0) && sk > 0) { const q = Math.min(sk, set ? 2 : 1); bring.push({a, how: 'склад → ' + dep, q: q + ' шт', why: 'продано тут ' + h0.q + ' шт за 90 днів, у залі ' + here, c: 'mv'}); return; }
+    if (!seen.has(a) && !inMx.has(a) && h0 && h0.q >= (set ? SET : 3) && here === 0 && sk > 0) {
+      if (!set || sk >= SET) bring.push({a, how: 'склад → ' + dep, q: (set ? SET : 1) + ' шт', why: 'продано тут ' + h0.q + ' шт за 90 днів, у залі 0' + (set ? ' · комплект 4 шт' : ''), c: 'mv'});
+      else cons.push({a, how: 'до 4 шт', q: 'склад ' + sk, why: 'продано тут ' + h0.q + ' шт за 90 днів, у залі 0, на складі лише ' + sk, c: 'cs'});
+      return; }
     if (!(here > 0)) return;
     const ds = daysSince(h0 && h0.last), idle = !h0 || !h0.last || ds >= 90;
     if (!idle) return;
@@ -1568,8 +1587,9 @@ function renderStore(si, P) {
     if (o0 && o0.q >= (set ? SET : 1) && (set ? here >= SET && oth < SET : oth === 0)) { give.push({a, how: dep + ' → ' + other, q: here + ' шт', why: idleT + ' · у ' + other + ' продали ' + o0.q + ' шт за 90 днів', c: 'rt'}); return; }
     if (!inMx.has(a) && !(AL[a] && daysSince(AL[a].last) < 120)) give.push({a, how: dep + ' → склад', q: here + ' шт', why: 'не в матриці · ' + (AL[a] && AL[a].last ? daysSince(AL[a].last) + ' дн. без продажу в компанії' : 'продажів не було'), c: 'mv'}); });
   // залишок у залі
-  const G = {}; let sq = 0, sv = 0, stale = [];
+  const G = {}, noP = []; let sq = 0, sv = 0, stale = [];
   (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const q = stHere(it, si); if (!(q > 0)) return; const val = q * stPrice(it);
+    if (!stPrice(it)) noP.push(a);
     sq += q; sv += val; const g = G[it.g] || (G[it.g] = {q: 0, v: 0, sold: 0}); g.q += q; g.v += val;
     const h = H[a], ds = daysSince(h && h.last); if (!h || !h.last || ds >= 90) stale.push({a, q, val, ds}); });
   Object.keys(H).forEach(a => { const it = D.items[a]; if (it && G[it.g]) G[it.g].sold += H[a].s; });
@@ -1604,18 +1624,20 @@ function renderStore(si, P) {
         (TOP.map(a => row(a, '<b>' + short(by[a].s) + '</b>' + delta(by[a].s, byP[a] || 0), (D.items[a] || {}).g + ' · ' + by[a].q + ' шт')).join('') || '<div class="empty">Продажів немає</div>') + '</div></div></div>' +
     '<div class="card"><div class="ch"><h3>Матриця в цьому залі</h3><span class="sub">' + MX.length + ' позицій мають стояти в ' + esc(dep) + '</span></div>' +
         '<div class="st-cov"><b>' + Math.round(mOk / mAll * 100) + '%</b><div><div class="st-ticks">' + MX.map(x => '<i class="' + x.cls + '" title="' + esc(fullName(x.m.a)) + ': ' + esc(x.act) + '"></i>').join('') + '</div><span class="sub">' + mOk + ' з ' + MX.length + ' стоять у залі</span></div></div>' +
-        '<div class="st-tiles">' + [['all', 'усі позиції', MX.length], ['ok', 'стоять у залі', mOk], ['mv', 'перевезти зі складу', cnt('mv')], ['rt', 'перевезти з ' + other, cnt('rt')], ['no', 'замовити у Vetro', cnt('no')], ['wt', 'чекаємо / немає', cnt('wt')]].map(t => '<button class="st-tile ' + t[0] + '" data-stmx="' + t[0] + '" aria-pressed="' + (STMX === t[0]) + '"><b>' + t[2] + '</b><span>' + t[1] + '</span></button>').join('') + '</div>' +
+        '<div class="st-tiles">' + [['all', 'усі позиції', MX.length], ['ok', 'стоять у залі', mOk], ['mv', 'перевезти зі складу', cnt('mv')], ['rt', 'перевезти з ' + other, cnt('rt')], ['cs', 'розглянути (не комплект)', cnt('cs')], ['no', 'замовити у Vetro', cnt('no')], ['wt', 'чекаємо / немає', cnt('wt')]].map(t => '<button class="st-tile ' + t[0] + '" data-stmx="' + t[0] + '" aria-pressed="' + (STMX === t[0]) + '"><b>' + t[2] + '</b><span>' + t[1] + '</span></button>').join('') + '</div>' +
         '<div class="list st-mxl">' + (MXL.map(x => prodRow(x.m.a, chipS(x.act, x.cls), mxSub(x))).join('') || '<div class="empty">Немає позицій у цьому стані</div>') + '</div></div>' +
     '<div style="display:grid">' +
-      '<div class="card"><div class="ch"><h3>Що перемістити</h3><span class="sub">список для логіста</span></div>' +
-        '<div class="g2 stack1"><div><div class="st-sub">Привезти в ' + esc(dep) + ' · ' + bring.length + '</div><div class="list">' + (bring.slice(0, 12).map(mvRow).join('') || '<div class="empty">Нічого не треба везти</div>') + '</div>' + (bring.length > 12 ? '<div class="sub">ще ' + (bring.length - 12) + ' — у фільтрі «перевезти» в матриці вище</div>' : '') + '</div>' +
-        '<div><div class="st-sub">Забрати з ' + esc(dep) + ' · ' + give.length + '</div><div class="list">' + (give.slice(0, 12).map(mvRow).join('') || '<div class="empty">Нічого забирати не треба</div>') + '</div>' + (give.length > 12 ? '<div class="sub">і ще ' + (give.length - 12) + '</div>' : '') + '</div></div></div></div>' +
+      '<div class="card st-move"><div class="ch"><h3>Що перемістити</h3><span class="sub">список для логіста</span></div>' +
+        '<div class="st-mv2"><div><div class="st-sub">Привезти в ' + esc(dep) + ' · ' + bring.length + '</div><div class="list">' + (bring.slice(0, 12).map(mvRow).join('') || '<div class="empty">Нічого не треба везти</div>') + '</div>' + (bring.length > 12 ? '<div class="sub">ще ' + (bring.length - 12) + ' — у фільтрі «перевезти» в матриці вище</div>' : '') + '</div>' +
+        '<div><div class="st-sub">Забрати з ' + esc(dep) + ' · ' + give.length + '</div><div class="list">' + (give.slice(0, 12).map(mvRow).join('') || '<div class="empty">Нічого забирати не треба</div>') + '</div>' + (give.length > 12 ? '<div class="sub">і ще ' + (give.length - 12) + '</div>' : '') + '</div></div>' +
+        (cons.length ? '<div class="st-cons"><div class="st-sub">Розглянути: доповнити обідні стільці до комплекту 4 шт · ' + cons.length + '</div><div class="st-mv2 st-cl"><div class="list">' + cons.slice(0, Math.ceil(Math.min(cons.length, 12) / 2)).map(mvRow).join('') + '</div><div class="list">' + cons.slice(Math.ceil(Math.min(cons.length, 12) / 2), 12).map(mvRow).join('') + '</div></div>' + (cons.length > 12 ? '<div class="sub">і ще ' + (cons.length - 12) + '</div>' : '') + '</div>' : '') + '</div></div>' +
     '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Залишок у залі</h3><span class="sub">за ціною з таблиці</span></div>' +
         '<div class="st-big"><b>' + fmt(sq) + ' шт</b><b>' + short(sv) + ' ₴</b></div><div class="st-stk">' +
-        GL.map(g => '<div class="r"><span>' + esc(g) + '</span><div class="st-meter"><i style="width:' + (G[g].v / gMx * 100) + '%;background:var(--ink)"></i></div><b>' + short(G[g].v) + ' · ' + G[g].q + ' шт</b></div>').join('') + '</div>' +
+        GL.map(g => '<div class="r"><span>' + esc(g) + '</span><div class="st-meter"><i style="width:' + (G[g].v / gMx * 100) + '%;background:var(--ink)"></i></div><b>' + (G[g].v ? short(G[g].v) : '<span class="sub">без ціни</span>') + ' · ' + G[g].q + ' шт</b></div>').join('') + '</div>' +
+        (noP.length ? '<div class="sub">' + noP.length + ' позиці' + (noP.length === 1 ? 'я' : noP.length < 5 ? 'ї' : 'й') + ' (' + noP.reduce((t, a) => t + stHere(D.items[a], si), 0) + ' шт) без ціни в таблиці «📊 Загальна» — їх вартість не врахована: ' + noP.slice(0, 4).map(a => '<a data-art="' + esc(a) + '">' + esc(shortName((D.items[a] || {}).n || a)) + '</a>').join(', ') + (noP.length > 4 ? '…' : '') + '</div>' : '') +
         '<div class="st-sub">Оборот залу</div><div class="sub">За 90 днів магазин продав на <b style="color:var(--ink)">' + short(sold90) + ' ₴</b>' + (sold90 > 0 ? ' — залишку в залі вистачить приблизно на <b style="color:var(--ink)">' + (sv / (sold90 / 3)).toFixed(1).replace('.', ',') + ' міс</b>. ' + GL.slice(0, 3).map(g => esc(g) + ' — ' + mos(G[g])).join(', ') + '.' : '.') + '</div></div>' +
       '<div class="card"><div class="ch"><h3>💤 Застій у залі</h3><span class="sub">90+ днів без продажу тут</span></div><div class="list">' +
-        (stale.slice(0, 7).map(x => row(x.a, '<b>' + short(x.val) + ' ₴</b>', (x.ds != null ? x.ds + ' дн. без продажу' : 'тут не продавався') + ' · ' + x.q + ' шт')).join('') || '<div class="empty">Застою немає</div>') + '</div>' +
+        (stale.slice(0, 7).map(x => row(x.a, x.val ? '<b>' + short(x.val) + ' ₴</b>' : '<span class="sub">без ціни</span>', (x.ds != null ? x.ds + ' дн. без продажу' : 'тут не продавався') + ' · ' + x.q + ' шт')).join('') || '<div class="empty">Застою немає</div>') + '</div>' +
         (stale.length ? '<div class="sub">Разом заморожено <b style="color:var(--ink)">' + short(frozen) + ' ₴</b> у ' + stale.length + ' позиціях — кандидати на акцію, переставлення або переміщення</div>' : '') + '</div></div>' +
     '<div class="g2 stack1"><div class="card"><div class="ch"><h3 id="stOppT">🔎 Продається в ' + esc(other) + ', а в ' + esc(dep) + ' немає</h3><span class="sub">за 90 днів</span></div><div class="list">' +
         (OPP.map(x => row(x.a, chipS(x.where[0], x.where[1]), x.why)).join('') || '<div class="empty">Таких позицій немає</div>') + '</div></div>' +
