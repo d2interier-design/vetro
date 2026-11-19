@@ -510,6 +510,34 @@ s{opacity:.7}
 .st-move .st-sub{margin:4px 0 8px}
 .st-cons{border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:760px){.st-mv2{grid-template-columns:minmax(0,1fr);gap:18px}.st-mv2>div+div:not(.list),.st-cl>.list+.list{border-left:0;padding-left:0}.st-move{padding:16px}}
+/* застій: підсумок і «показати всі» */
+.st-tot{display:flex;gap:6px 16px;align-items:baseline;flex-wrap:wrap;padding:10px 12px;border-radius:12px;background:var(--bad2)}.st-tot b{font-size:17px;font-weight:900;color:var(--bad)}.st-tot .sub{flex-basis:100%}
+.st-more{border:0;font:inherit;font-size:12.5px;font-weight:700;background:var(--soft);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer;margin-top:6px;justify-self:start}
+.sa.nt{background:var(--soft);color:var(--mut)}
+/* ===== вкладка «Роздріб» ===== */
+.rt-kl{display:flex;gap:4px 12px;flex-wrap:wrap;font-size:12px;opacity:.85}.rt-kl b{font-weight:800}
+.rt-wk th.rt-g{text-align:center;border-bottom:1px solid var(--line)}.rt-wk td:nth-child(2),.rt-wk td:nth-child(5),.rt-wk td:nth-child(8){border-left:1px solid var(--line)}
+.rt-cov{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rt-cv{border:0;font:inherit;color:inherit;text-align:left;background:var(--soft);border-radius:12px;padding:12px 14px;display:grid;gap:6px;cursor:pointer}div.rt-cv{cursor:default}
+.rt-cv>b{font-size:28px;font-weight:900;letter-spacing:-.02em}.rt-cv>span{font-size:12px;color:var(--mut)}.rt-cv .st-meter{background:var(--card)}
+.rt-mv3{grid-template-columns:repeat(3,minmax(0,1fr))}.rt-mv3>div+div{border-left:1px solid var(--line);padding-left:28px}.rt-mv3{gap:20px 28px}
+.rt-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rt-stk{display:grid;gap:6px;background:var(--soft);border-radius:12px;padding:12px}.rt-stk .st-big b{font-size:20px}
+.rt-ml{max-height:420px;overflow:auto}
+@media (max-width:760px){.rt-cov{grid-template-columns:1fr}.rt-mv3{grid-template-columns:minmax(0,1fr)}.rt-mv3>div+div{border-left:0;padding-left:0}.rt-two{grid-template-columns:1fr}.rt-ml{max-height:none}}
+/* курси Vetro на «Закупці» */
+.rates{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start}
+.rt-rate{display:grid;gap:2px;padding:10px 0}.rt-rate+.rt-rate{border-top:1px solid var(--line)}.rt-rate .k{font-size:12px;color:var(--mut);font-weight:700}.rt-rate b{font-size:28px;font-weight:900;letter-spacing:-.02em}
+.rates-ch svg{width:100%;display:block}
+.rt-imp{background:var(--soft);border-radius:12px;padding:12px 14px;display:grid;gap:6px;font-size:13px}.rt-imp b.big{font-size:22px;font-weight:900}
+@media (max-width:760px){.rates{grid-template-columns:1fr}}
+/* асортимент: детальна таблиця */
+.as-det table{width:100%}.as-det th[data-asort]{cursor:pointer;white-space:nowrap}.as-det th[data-asort].on{color:var(--ink)}.as-det th[data-asort].on::after{content:' ↓'}
+.as-det td{vertical-align:middle}.as-det .pn2{display:flex;gap:10px;align-items:center;min-width:240px}.as-det .pn2 b{font-size:13px;display:block}.as-det .pn2 .sub{font-size:11.5px}
+.as-det td.n{white-space:nowrap}.as-det .z0{color:var(--mut);opacity:.5}
+.as-tot{display:flex;gap:6px 18px;flex-wrap:wrap;align-items:baseline}.as-tot b{font-size:18px;font-weight:900}
+.as-card .sa{max-width:none}
+.astiles{grid-template-columns:repeat(7,minmax(0,1fr))}
+.as-det .sa{white-space:normal;max-width:210px;line-height:1.3}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -657,6 +685,7 @@ s{opacity:.7}
     <!-- ЗАКУПКА -->
     <section data-p="buy" style="display:grid;gap:14px" hidden>
       <div class="g4"><div class="card kpi acc" id="b-pend"></div><div class="card kpi" id="b-book"></div><div class="card kpi" id="b-done"></div><div class="card kpi" id="b-marg"></div></div>
+      <div class="card"><div class="ch"><h3>Курси Vetro</h3><span class="sub" id="ratesSub"></span></div><div class="rates" id="rates"></div></div>
       <div class="card"><div class="ch"><h3>Де зараз позиції</h3><span class="sub">від «треба» до «в дорозі»</span></div><div class="funnel" id="funnel"></div></div>
       <div class="g21">
         <div class="card"><div class="ch"><h3 id="buyTrendTitle">Закуплено і продано</h3><div class="leg"><span><i class="dot" style="background:var(--y)"></i>замовлено у Vetro</span><span><i class="dot" style="background:var(--ink)"></i>продано</span></div></div><div class="chart"><canvas id="chBuy"></canvas></div></div>
@@ -676,12 +705,15 @@ s{opacity:.7}
       <div class="card">
         <div class="ch"><h3>Кожна позиція — квадратик</h3><div class="seg" id="asDays"><button data-d="90" aria-pressed="true">90 дн</button><button data-d="180" aria-pressed="false">180</button><button data-d="270" aria-pressed="false">270</button><button data-d="360" aria-pressed="false">360</button></div></div>
         <div class="sub" id="asNote"></div>
-        <div class="aslegend"><span><i class="sq l4"></i>хіт групи (топ-20%)</span><span><i class="sq l3"></i>добре продається</span><span><i class="sq l2"></i>повільно</span><span><i class="sq l5"></i>новинка, ще без продажів</span><span><i class="sq l1"></i>застій: є залишок, 0 продажів</span><span><i class="sq l0"></i>немає продажів і залишку</span><span><i class="sq l3 lost"></i>продається, а залишку немає</span><span><i class="sq l3 pr"></i>в акції</span><span><i class="sq l3 nw"></i>новинка, що вже продається</span></div>
+        <div class="aslegend"><span><i class="sq l4"></i>хіт групи (топ-20%)</span><span><i class="sq l3"></i>добре продається</span><span><i class="sq l2"></i>повільно</span><span><i class="sq l5"></i>ще без продажів: новинка або щойно привезена</span><span><i class="sq l1"></i>застій: є залишок, 0 продажів, лежить давно</span><span><i class="sq l0"></i>немає продажів і залишку</span><span><i class="sq l3 lost"></i>продається, а залишку немає</span><span><i class="sq l3 pr"></i>в акції</span><span><i class="sq l3 nw"></i>новинка, що вже продається</span></div>
         <div class="zones" id="asGrid"></div>
       </div>
+      <div class="card as-det"><div class="ch"><h3 id="asDetT">Усі позиції · детально</h3><div class="seg-s" id="asSort"></div></div>
+        <div class="as-tot" id="asTot"></div>
+        <div class="tbl pc-only"><table id="asTbl"></table></div><div class="list ph-only" id="asCards"></div><div id="asMore"></div></div>
       <div class="g3">
         <div class="card"><div class="ch"><h3>Групи</h3><span class="sub">частка позицій, що продаються</span></div><div class="list" id="asZones"></div></div>
-        <div class="card"><div class="ch"><h3 id="asListTitle">Топ за виручкою</h3></div><div class="list" id="asList"></div></div>
+        <div class="card"><div class="ch"><h3>⏳ Новинки ще без продажів</h3><span class="sub" id="asNosN"></span></div><div class="list" id="asNos"></div></div>
         <div class="card"><div class="ch"><h3>💤 Застій: де гроші лежать</h3><span class="sub" id="asStaleN"></span></div><div class="list" id="asStale"></div></div>
       </div>
       <div class="card ph-only" style="background:var(--soft);box-shadow:none" id="asExplain2"></div>
@@ -689,6 +721,9 @@ s{opacity:.7}
 
     <!-- МАГАЗИН (одна сторінка для обох: s1 / s2) -->
     <section data-p="store" hidden><div id="storeBox" style="display:grid;gap:14px"></div></section>
+
+    <!-- РОЗДРІБ (обидва магазини разом) -->
+    <section data-p="retail" hidden><div id="retailBox" style="display:grid;gap:14px"></div></section>
 
     <!-- КАТАЛОГ VETRO -->
     <section data-p="catalog" hidden><div id="catBox" style="display:grid;gap:14px"></div></section>
@@ -734,6 +769,7 @@ const IC = {
   store: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
   s1: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
   s2: '<path d="M4 10l1.5-5h13L20 10M4 10v10h16V10M4 10h16M9 20v-5h6v5"/>',
+  retail: '<path d="M2.5 11l1.2-4.5h7.6L12.5 11M2.5 11v8.5h10V11M2.5 11h10M11.5 11l1.2-4.5h7.6l1.2 4.5M21.5 11v8.5h-9M6 19.5v-4h3v4M16 19.5v-4h3v4"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
   moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   auto: '<circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/>'
@@ -746,7 +782,7 @@ const GICON = {
   'Журнальні та консолі':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18M6 10v8M18 10v8M6 14h12"/></svg>',
   'Інше':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 12h16"/></svg>'
 };
-const TABS = [['overview','Огляд'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['s1','Магазин 1'],['s2','Магазин 2'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
+const TABS = [['overview','Огляд'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['retail','Роздріб'],['s1','Магазин 1'],['s2','Магазин 2'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
 // головні розділи — на нижній панелі телефона і вгорі бокового меню; решта — у «Ще»
 const TBAR = ['overview','people','matrix','cats'];
 // знак «Vetro у D2»: D2 зліва, червона V справа (лінії D беруть колір тексту — білі в меню, чорні на світлому тлі)
@@ -805,7 +841,7 @@ function boot(json) {
   if (D.salesNote) $('asof').insertAdjacentHTML('afterend', '<span id="asofNote"> (' + esc(D.salesNote.split(' — ')[0]) + ')</span>');
   $('stockAsOf').textContent = D.stockAsOf || '—';
   if (!YEAR) YEAR = ASOF.getFullYear();
-  STORES.forEach((s, i) => { const t = TABS.find(x => x[0] === s); if (t) t[1] = (D.stores && D.stores[i]) || DEPS[i] || t[1]; });
+  ['s1', 's2'].forEach((s, i) => { const t = TABS.find(x => x[0] === s); if (t) t[1] = (D.stores && D.stores[i]) || DEPS[i] || t[1]; });
   buildNav();
   if (!boot.started) { boot.started = 1; const st = startTabOf(D.me && D.me.start); if (st) tab = st; }   // стартова вкладка за особистим посиланням
   $('loader').hidden = true;
@@ -1220,6 +1256,39 @@ function renderMatrix() {
 }
 
 // ===== ЗАКУПКА =====
+// ===== КУРСИ VETRO (історія з аркуша «💱 Історія курсів») =====
+function renderRates(usdNow) {
+  const H = (D.rates || []).slice(), cu = D.rateUsd || 0, cr = D.rateRrp || 0;
+  if (!H.length && (cu || cr)) H.push([iso(TODAY0()), cu, cr]);
+  const f2 = v => v ? v.toFixed(2).replace('.', ',') : '—';
+  // для кожного курсу: з якої дати діє і яким був попередній
+  const info = k => { const v = H.length ? H[H.length - 1][k] : (k === 1 ? cu : cr); let i = H.length - 1; while (i > 0 && H[i - 1][k] === v) i--;
+    const prev = i > 0 ? H[i - 1][k] : null; return {v, since: H[i] ? pd(H[i][0]) : null, prev, d: prev ? v - prev : 0, p: prev ? (v - prev) / prev * 100 : 0}; };
+  const U = info(1), RR = info(2);
+  const dTxt = x => x.prev == null ? '<span class="sub">попереднього значення ще немає</span>' : '<span class="delta ' + (x.d > 0 ? 'down' : x.d < 0 ? 'up' : 'flat') + '">' + (x.d > 0 ? '↑ +' : x.d < 0 ? '↓ −' : '') + f2(Math.abs(x.d)) + ' ₴ (' + (x.p > 0 ? '+' : x.p < 0 ? '−' : '') + Math.abs(x.p).toFixed(1).replace('.', ',') + '%)</span><span class="sub"> було ' + f2(x.prev) + '</span>';
+  const card = (t, x) => '<div class="rt-rate"><span class="k">' + t + '</span><b>' + f2(x.v) + ' ₴</b><span class="sub">' + (x.since ? 'діє з ' + dm(x.since) + '.' + x.since.getFullYear() : '') + '</span><div>' + dTxt(x) + '</div></div>';
+  const uahNow = usdNow * (U.v || 0), diff = U.prev != null ? usdNow * U.d : 0;
+  $('rates').innerHTML = '<div>' + card('Курс закупки ($ → ₴)', U) + card('Курс РРЦ ($ → ₴)', RR) + '</div>' +
+    '<div><div class="leg"><span><i class="dot" style="background:var(--ink)"></i>закупки</span><span><i class="dot" style="background:var(--y)"></i>РРЦ</span></div><div id="ratesCh" class="rates-ch"></div>' +
+      (H.length < 2 ? '<div class="sub">Історія почала записуватись ' + (H[0] ? dm(pd(H[0][0])) : 'сьогодні') + ': графік наповниться, коли курс зміниться. Минулі курси можна дописати вручну на аркуші «💱 Історія курсів».</div>' : '') + '</div>' +
+    '<div class="rt-imp"><span class="k" style="font-weight:700">Що це означає для закупки</span>' +
+      '<span>Поточна закупка (на затвердженні, затверджено, бронь): <b>$' + fmt(usdNow) + '</b> ≈ <b>' + uah(uahNow) + '</b> за курсом ' + f2(U.v) + '</span>' +
+      (U.prev != null && usdNow ? '<b class="big" style="color:' + (diff > 0 ? 'var(--bad)' : 'var(--good)') + '">' + (diff > 0 ? '+' : '−') + uah(Math.abs(diff)) + '</b><span class="sub">стільки ' + (diff > 0 ? 'дорожче' : 'дешевше') + ' коштує та сама закупка після останньої зміни курсу (' + (U.d > 0 ? '+' : '−') + f2(Math.abs(U.d)) + ' ₴ за $)</span>' : '<span class="sub">Вплив зміни курсу з’явиться після першої зміни.</span>') +
+      (RR.prev != null ? '<span class="sub">РРЦ у гривнях після зміни курсу РРЦ: ' + (RR.p > 0 ? '+' : '−') + Math.abs(RR.p).toFixed(1).replace('.', ',') + '% до ціни на ценниках</span>' : '') + '</div>';
+  $('ratesSub').textContent = H.length ? 'записів в історії: ' + H.length : '';
+  svgDraw('ratesCh', W => {
+    const Hh = 150, top = 14, base = Hh - 20, x0 = 38; if (!H.length) return '<svg viewBox="0 0 ' + W + ' ' + Hh + '"></svg>';
+    const t0 = +pd(H[0][0]), t1 = Math.max(+TODAY0(), t0 + 864e5 * 7), vals = H.flatMap(r => [r[1], r[2]]).filter(Boolean);
+    let lo = Math.min(...vals), hi = Math.max(...vals); const pad = Math.max(.3, (hi - lo) * .15); lo -= pad; hi += pad;
+    const X = t => x0 + (t - t0) / (t1 - t0) * (W - x0 - 8), Y = v => base - (v - lo) / (hi - lo) * (base - top);
+    let s = '<svg viewBox="0 0 ' + W + ' ' + Hh + '" height="' + Hh + '">';
+    [lo + pad, (lo + hi) / 2, hi - pad].forEach(v => { s += '<line x1="' + x0 + '" x2="' + W + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="var(--line)"/><text x="' + (x0 - 4) + '" y="' + (Y(v) + 3) + '" font-size="10" fill="var(--mut)" text-anchor="end">' + v.toFixed(1).replace('.', ',') + '</text>'; });
+    [[1, 'var(--ink)'], [2, 'var(--y)']].forEach(([k, c]) => { let d = '', pv = null; H.forEach(r => { if (!r[k]) return; const x = X(+pd(r[0])).toFixed(1); d += pv == null ? 'M' + x + ' ' + Y(r[k]).toFixed(1) : 'H' + x + 'V' + Y(r[k]).toFixed(1); pv = r[k]; });
+      if (pv != null) { d += 'H' + X(t1).toFixed(1); s += '<path d="' + d + '" fill="none" stroke="' + c + '" stroke-width="2.4"/>'; }
+      H.forEach(r => { if (r[k]) s += '<circle cx="' + X(+pd(r[0])).toFixed(1) + '" cy="' + Y(r[k]).toFixed(1) + '" r="3" fill="' + c + '"><title>' + dm(pd(r[0])) + ': ' + f2(r[k]) + ' ₴</title></circle>'; }); });
+    s += '<text x="' + x0 + '" y="' + (Hh - 5) + '" font-size="10" fill="var(--mut)">' + dm(pd(H[0][0])) + '</text><text x="' + W + '" y="' + (Hh - 5) + '" font-size="10" fill="var(--mut)" text-anchor="end">сьогодні</text>';
+    return s + '</svg>'; });
+}
 function renderBuy(P) {
   const items = D.purchase || [], is = re => x => re.test(x.st);
   const pend = items.filter(is(/затвердження/i)), book = items.filter(is(/бронь/i)), appr = items.filter(x => /затверджено/i.test(x.st));
@@ -1231,6 +1300,7 @@ function renderBuy(P) {
   card('b-pend', 'На затвердженні', pend.length + ' поз.', '<b style="color:inherit">$' + fmt(sumUsd(pend)) + '</b><span>' + pcs(pend) + ' шт · чекають рішення</span>');
   card('b-book', 'Бронь у Vetro', book.length + ' поз.', '<b>$' + fmt(sumUsd(book)) + '</b><span>' + pcs(book) + ' шт</span>');
   card('b-done', 'Замовлено за період', short(oSum(oc)) + ' ₴', delta(oSum(oc), oSum(op)) + '<span>' + oPcs(oc) + ' шт</span>');
+  renderRates(sumUsd(pend.concat(appr, book)));
   card('b-marg', 'Середня маржа', Math.round(mAvg * 100) + '%', '<span>по ' + withM.length + ' позиціях у закупці</span>');
   // де зараз позиції
   const mxL = (D.matrix || []).map(m => mxState(m.a)), need = mxL.filter(x => x.cls === 'a-order').length, road = Object.keys(D.items).filter(a => D.items[a].r > 0).length;
@@ -1266,46 +1336,86 @@ function renderBuy(P) {
 }
 
 // ===== АСОРТИМЕНТ =====
-let asDays = 90, asFilter = 'all';
+let asDays = 90, asFilter = 'all', asSort = '';
 try { const s = JSON.parse(localStorage.getItem('d2asort') || '{}'); if (s.d) asDays = s.d; } catch (e) {}
-const AS_EXPLAIN = '<b>Що показує ця вкладка</b><span class="sub" style="font-size:13px;line-height:1.5">Усі позиції з вкладки «📊 Загальна»: <b style="color:var(--ink)">весь актуальний асортимент Vetro з фіду постачальника</b> (і те, що ми ніколи не брали) <b style="color:var(--ink)">плюс позиції, яких у фіді вже немає, але вони є у нас</b> — на залишку, в дорозі чи в прайсі як новинки. Для кожної видно, чи продається вона в нас за обраний час і чи є залишок. Хіти — топ-20% своєї групи за швидкістю продажів; новинки міряються за днями з появи; застій — є залишок, але 0 продажів.</span>';
+const AS_EXPLAIN = '<b>Що показує ця вкладка</b><span class="sub" style="font-size:13px;line-height:1.5">Усі позиції з вкладки «📊 Загальна»: <b style="color:var(--ink)">весь актуальний асортимент Vetro з фіду постачальника</b> (і те, що ми ніколи не брали) <b style="color:var(--ink)">плюс позиції, яких у фіді вже немає, але вони є у нас</b> — на залишку, в дорозі чи в прайсі як новинки. Для кожної видно, чи продається вона в нас за обраний час і чи є залишок. Хіти — топ-20% своєї групи за швидкістю продажів. <b style="color:var(--ink)">Застій</b> — є залишок, 0 продажів за обраний час, це не новинка і товар лежить на залишку довше за поріг з налаштувань. Новинки й щойно привезене без продажів — окремо, «ще без продажів». Натисніть плитку — під квадратиками буде детальна таблиця з рекомендаціями.</span>';
 function renderAssort() {
   $('asExplain').innerHTML = $('asExplain2').innerHTML = AS_EXPLAIN;
-  const to = ASOF, from = addD(ASOF, -(asDays - 1)), avail = Math.round((ASOF - DATA0) / 864e5) + 1;
+  const to = ASOF, from = addD(ASOF, -(asDays - 1)), avail = Math.round((ASOF - DATA0) / 864e5) + 1, SC = SCFG();
   document.querySelectorAll('#asDays button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.d === asDays));
-  $('asNote').textContent = asDays > avail ? 'Дані продажів є лише за ' + avail + ' дн (з ' + dm(DATA0) + '.' + DATA0.getFullYear() + ') — показано весь доступний час' : 'продажі за ' + asDays + ' дн: ' + dm(from) + '–' + dm(to) + ' · залишки на ' + (D.stockAsOf || '—');
+  $('asNote').textContent = (asDays > avail ? 'Дані продажів є лише за ' + avail + ' дн (з ' + dm(DATA0) + '.' + DATA0.getFullYear() + ') — показано весь доступний час' : 'продажі за ' + asDays + ' дн: ' + dm(from) + '–' + dm(to) + ' · залишки на ' + (D.stockAsOf || '—')) +
+    ' · застій: 0 продажів за ' + asDays + ' дн, не новинка, на залишку ' + SC.min + '+ дн';
   const q = {}, s = {}; R.forEach(r => { if (inR(r, from, to)) { q[r.a] = (q[r.a] || 0) + r.q; s[r.a] = (s[r.a] || 0) + r.s; } });
-  const onPromo = new Set(promoStats().filter(p => p.on).map(p => nk(p.a)));
-  const newDate = l => { const m = /🆕 Новинка(?: з прайсу)? з (\d{2})\.(\d{2})/.exec(l || ''); if (!m) return null; let d = new Date(ASOF.getFullYear(), +m[2] - 1, +m[1]); if (d > addD(new Date(), 1)) d = new Date(d.getFullYear() - 1, d.getMonth(), d.getDate()); return d; };
-  const L = (D.assort || []).map(a => { const it = D.items[a] || {}; const phys = (it.s1 || 0) + (it.s2 || 0) + (it.sk || 0), nd = newDate(it.l);
-    const age = nd ? Math.max(0, Math.round((ASOF - nd) / 864e5) + 1) : null, eff = age == null ? asDays : Math.max(14, Math.min(asDays, age));
-    return {a, it, g: it.g || 'Інше', q: q[a] || 0, s: s[a] || 0, phys, isNew: /🆕/.test(it.l || ''), nd, age, rate: (q[a] || 0) / eff, promo: onPromo.has(nk(a)) || /🏷 Акція −/.test(it.l || '')}; });
+  const X = stStats(), onPromo = new Set(promoStats().filter(p => p.on).map(p => nk(p.a)));
+  const inBuy = new Set((D.purchase || []).filter(p => (p.ap || p.q) > 0 && !/відхил/i.test(p.st || '')).map(p => p.a));
+  const L = (D.assort || []).map(a => { const it = D.items[a] || {}; const phys = (it.s1 || 0) + (it.s2 || 0) + (it.sk || 0), nd = newDateOf(it), locs = locsOf(it);
+    const age = nd ? Math.max(0, Math.round((ASOF - nd) / 864e5) + 1) : null, eff = age == null ? asDays : Math.max(14, Math.min(asDays, age)), last = X.all[a] && X.all[a].last;
+    return {a, it, g: it.g || 'Інше', q: q[a] || 0, s: s[a] || 0, phys, isNew: isNovelty(it), nd, age, rate: (q[a] || 0) / eff, promo: onPromo.has(nk(a)) || /🏷 Акція −/.test(it.l || ''),
+      locs, sc: sinceOf(a, locs), last, ds: daysSince(last), kind: q[a] ? '' : staleKind(a, it, {last: q[a] ? iso(ASOF) : ''}, locs, asDays), val: phys * stPrice(it)}; });
   const groups = GROUPS.filter(g => L.some(x => x.g === g)).concat([...new Set(L.map(x => x.g))].filter(g => !GROUPS.includes(g)));
   groups.forEach(g => { const sel = L.filter(x => x.g === g && x.q > 0).sort((a, b) => b.rate - a.rate || b.q - a.q), n = sel.length;
     sel.forEach((x, i) => { x.lv = i < Math.max(1, Math.round(n * .2)) ? 4 : i < Math.round(n * .5) ? 3 : 2; }); });
-  L.forEach(x => { if (!x.lv) x.lv = x.isNew && (x.age == null || x.age < asDays) ? 5 : x.phys > 0 ? 1 : 0; x.stale = x.lv === 1; x.lost = x.lv >= 3 && x.lv <= 4 && x.phys === 0; x.waitLong = x.lv === 5 && x.age >= 30; });
-  const F = {all: () => true, hit: x => x.lv === 4, stale: x => x.stale, lost: x => x.lost, new: x => x.isNew, promo: x => x.promo}[asFilter];
-  const val = x => x.phys * (x.it.pp || x.it.pr || 0), ST = L.filter(x => x.stale), NW = L.filter(x => x.isNew);
-  const chips = [['all', 'Усі позиції', L.length, 'весь асортимент Vetro + наші', ''], ['hit', '🔥 Хіти', L.filter(x => x.lv === 4).length, 'топ-20% у своїй групі', 'var(--ink)'], ['stale', '💤 Застій', ST.length, ST.reduce((a, x) => a + x.phys, 0) + ' шт · ≈ ' + short(ST.reduce((a, x) => a + val(x), 0)) + ' ₴', 'var(--bad)'],
+  L.forEach(x => { if (!x.lv) x.lv = x.kind === 'stale' ? 1 : x.kind || (x.isNew && !x.phys) ? 5 : 0;
+    x.stale = x.lv === 1; x.nos = x.lv === 5; x.lost = x.lv >= 3 && x.lv <= 4 && x.phys === 0;
+    x.waitLong = x.nos && ((x.age || 0) >= 30 || (x.sc.days || 0) >= 30); });
+  const FL = {all: () => true, hit: x => x.lv === 4, stale: x => x.stale, nos: x => x.nos, lost: x => x.lost, new: x => x.isNew, promo: x => x.promo}, F = FL[asFilter] || FL.all;
+  const ST = L.filter(x => x.stale), NW = L.filter(x => x.isNew), NS = L.filter(x => x.nos);
+  const chips = [['all', 'Усі позиції', L.length, 'весь асортимент Vetro + наші', ''], ['hit', '🔥 Хіти', L.filter(x => x.lv === 4).length, 'топ-20% у своїй групі', 'var(--ink)'], ['stale', '💤 Застій', ST.length, ST.reduce((a, x) => a + x.phys, 0) + ' шт · ≈ ' + short(ST.reduce((a, x) => a + x.val, 0)) + ' ₴', 'var(--bad)'],
+    ['nos', '⏳ Ще без продажів', NS.length, 'новинки й щойно привезене', 'var(--on)'],
     ['new', '🆕 Новинки', NW.length, 'продаються ' + NW.filter(x => x.q > 0).length + ' · без продажів ' + NW.filter(x => !x.q).length, 'var(--on)'], ['lost', 'Немає залишку', L.filter(x => x.lost).length, 'а продається — втрачені продажі', 'var(--bad)'], ['promo', '🏷 В акції', L.filter(x => x.promo).length, '', 'var(--on)']];
   $('asChips').innerHTML = chips.map(c => '<button class="mtile" data-f="' + c[0] + '" aria-pressed="' + (asFilter === c[0]) + '" style="' + (c[4] ? '--c:' + c[4] : '') + '"><small>' + c[1] + '</small><b>' + c[2] + '</b>' + (c[3] ? '<small style="font-weight:500">' + c[3] + '</small>' : '') + '</button>').join('');
-  $('asChips').querySelectorAll('.mtile').forEach(b => b.onclick = () => { asFilter = b.dataset.f; renderAssort(); });
-  const LV = [[4, '🔥 Хіти'], [3, 'Добре продаються'], [2, 'Повільно'], [5, '🆕 Нові, ще без продажів'], [1, '💤 Застій'], [0, 'Без продажів і залишку']];
+  $('asChips').querySelectorAll('.mtile').forEach(b => b.onclick = () => { asFilter = b.dataset.f; asSort = ''; STSHOW.as = false; renderAssort(); });
+  const LV = [[4, '🔥 Хіти'], [3, 'Добре продаються'], [2, 'Повільно'], [5, '⏳ Ще без продажів'], [1, '💤 Застій'], [0, 'Без продажів і залишку']];
   const sqHtml = x => '<i class="sq l' + x.lv + (x.isNew ? ' nw' : '') + (x.waitLong ? ' wl' : '') + (x.lost ? ' lost' : '') + (x.promo ? ' pr' : '') + (F(x) ? '' : ' dim') + '" data-art="' + esc(x.a) + '" title="' + esc((x.it.n || x.a) + '\n' + x.a + '\n' +
-    (x.isNew ? '🆕 новинка' + (x.nd ? ' з ' + dm(x.nd) + ' (' + x.age + ' дн)' : '') + ' · ' + x.q + ' шт за цей час' : x.q + ' шт за ' + asDays + ' дн') + ' · залишок ' + x.phys + ' шт' + (x.stale ? ' · ЗАСТІЙ' : '') + (x.waitLong ? ' · вже місяць без жодного продажу' : '') + (x.lost ? ' · немає залишку' : '') + (x.promo ? ' · в акції' : '')) + '"></i>';
+    (x.isNew ? '🆕 новинка' + (x.nd ? ' з ' + dm(x.nd) + ' (' + x.age + ' дн)' : '') + ' · ' + x.q + ' шт за цей час' : x.q + ' шт за ' + asDays + ' дн') + ' · залишок ' + x.phys + ' шт' + (x.phys ? ' · на залишку з ' + sinceTxt(x.sc) : '') + (x.stale ? ' · ЗАСТІЙ' : '') + (x.kind === 'fresh' ? ' · щойно приїхала' : '') + (x.waitLong ? ' · вже місяць без жодного продажу' : '') + (x.lost ? ' · немає залишку' : '') + (x.promo ? ' · в акції' : '')) + '"></i>';
   $('asGrid').innerHTML = groups.map(g => { const G = L.filter(x => x.g === g);
     return '<div class="zone2"><div class="zh"><b>' + g + '</b><span class="sub">' + G.length + ' поз. · продаються ' + G.filter(x => x.q > 0).length + ' · застій ' + G.filter(x => x.stale).length + '</span></div>' +
-      LV.map(l => { const S2 = G.filter(x => x.lv === l[0]).sort((a, b) => l[0] === 5 ? (b.age || 0) - (a.age || 0) : b.rate - a.rate || b.phys - a.phys); if (!S2.length) return '';
+      LV.map(l => { const S2 = G.filter(x => x.lv === l[0]).sort((a, b) => l[0] === 5 ? (b.age || b.sc.days || 0) - (a.age || a.sc.days || 0) : b.rate - a.rate || b.phys - a.phys); if (!S2.length) return '';
         return '<div class="lvrow"><span class="lvl">' + l[1] + '<b>' + S2.length + '</b></span><div class="sqs">' + S2.map(sqHtml).join('') + '</div></div>'; }).join('') + '</div>'; }).join('') || '<div class="empty">Немає даних з вкладки «📊 Загальна»</div>';
   $('asZones').innerHTML = groups.map(g => { const G = L.filter(x => x.g === g), p = G.length ? Math.round(G.filter(x => x.q > 0).length / G.length * 100) : 0;
-    return '<div style="display:grid;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + g + '</span><b>' + p + '%</b></div><div class="bar"><i style="width:' + p + '%"></i></div><span class="sub">' + G.length + ' поз. · застій ' + G.filter(x => x.stale).length + ' · нових без продажів ' + G.filter(x => x.lv === 5).length + '</span></div>'; }).join('');
-  const top = L.filter(F).sort((a, b) => asFilter === 'stale' ? val(b) - val(a) : asFilter === 'new' ? (b.nd || 0) - (a.nd || 0) : b.s - a.s).slice(0, asFilter === 'new' ? 60 : 8);
-  $('asList').innerHTML = top.map((x, i) => prodRow(x.a, '<b>' + (asFilter === 'stale' ? x.phys + ' шт' : short(x.s)) + '</b>', asFilter === 'stale' ? 'залишок ' + x.phys + ' шт · 0 продажів за ' + asDays + ' дн' :
-    asFilter === 'new' ? (x.nd ? 'з ' + dm(x.nd) + ' · ' + x.age + ' дн · ' : '') + (x.q ? x.q + ' шт' : '<b style="color:' + (x.waitLong ? 'var(--bad)' : 'var(--mut)') + '">ще без продажів</b>') + ' · залишок ' + x.phys : x.q + ' шт · ' + (x.phys ? 'залишок ' + x.phys : '<span class="warn">залишку немає</span>'))).join('') || '<div class="empty">Немає позицій</div>';
-  $('asListTitle').textContent = {all: 'Топ за виручкою', hit: 'Хіти', stale: 'Застій', lost: 'Продається, а залишку немає', new: 'Новинки · від найновіших', promo: 'В акції'}[asFilter];
-  const stl = ST.slice().sort((a, b) => val(b) - val(a));
-  $('asStaleN').textContent = ST.length + ' поз. · ≈ ' + short(ST.reduce((a, x) => a + val(x), 0)) + ' ₴';
-  $('asStale').innerHTML = stl.slice(0, 6).map(x => '<div class="prod" data-art="' + esc(x.a) + '"><span class="th" style="background:var(--bad2);color:var(--bad)">' + x.phys + '</span><div class="pn"><b>' + esc(shortName(x.it.n || x.a)) + '</b><span>' + x.g + ' · 0 продажів за ' + asDays + ' дн</span></div><div class="rt"><b>' + short(val(x)) + '</b><span class="sub">в залишку</span></div></div>').join('') || '<div class="empty">Застою немає</div>';
+    return '<div style="display:grid;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + g + '</span><b>' + p + '%</b></div><div class="bar"><i style="width:' + p + '%"></i></div><span class="sub">' + G.length + ' поз. · застій ' + G.filter(x => x.stale).length + ' · ще без продажів ' + G.filter(x => x.nos).length + '</span></div>'; }).join('');
+  // рекомендація для позиції
+  const Z = [DEPS[0], DEPS[1]];
+  const rec = x => { const it = x.it, h = Z.map(z => (X[z] || {})[x.a]), st = [it.s1 || 0, it.s2 || 0], set = isSet(it), min = set ? SET : 1;
+    if (x.lost) return [it.v > 0 ? 'дозамовити · у Vetro є ' + (it.v >= 99 ? 'багато' : it.v) : 'дозамовити · у Vetro немає', 'no'];
+    for (let i = 0; i < 2; i++) { const j = 1 - i; if (st[i] >= min && !(h[i] && h[i].q) && h[j] && h[j].q >= min && st[j] < min && (x.stale || x.lv <= 2)) return ['перемістити ' + Z[i] + ' → ' + Z[j] + ': там продали ' + h[j].q + ' шт', 'rt']; }
+    if (x.stale) { const nb = inBuy.has(x.a) ? ' · не дозамовляти' : '';
+      if (!st[0] && !st[1]) return ['виставити в зал — на складі не продасться' + nb, 'mv'];
+      if (x.promo) return ['вже в акції — посилити знижку або переставити' + nb, 'wt'];
+      if (x.sc.old || x.sc.days >= 180) return ['акція / розпродаж' + nb, 'no'];
+      return ['переставити в залі на видне місце' + nb, 'wt']; }
+    if (x.nos) return x.waitLong ? ['переставити на видне місце, розповісти менеджерам', 'wt'] : ['чекаємо перших продажів', 'cs'];
+    if (x.lv === 4) return !x.phys ? ['терміново дозамовити', 'no'] : x.phys < (set ? SET : 2) ? ['дозамовити — закінчується', 'wt'] : ['тримати в наявності', 'ok'];
+    if (x.lv === 3) return x.phys < min ? ['дозамовити', 'wt'] : ['продається добре', 'ok'];
+    if (x.lv === 2) return ['повільно — не дозамовляти багато', 'nt'];
+    return x.isNew ? ['новинка — ще не привезли', 'nt'] : ['ні продажів, ні залишку', 'nt']; };
+  // детальна таблиця вибраної плитки
+  const DEF = {all: 's', hit: 's', stale: 'v', nos: 'd', new: 'd', lost: 's', promo: 's'}, so = asSort || DEF[asFilter] || 's';
+  const key = {v: x => x.val, d: x => x.nos || x.isNew ? (x.age || x.sc.days || 0) : (x.ds == null ? 1e6 : x.ds), q: x => x.q, s: x => x.s, n: x => x.phys};
+  const DL = L.filter(F).sort((a, b) => key[so](b) - key[so](a) || b.val - a.val);
+  const TT = {all: 'Усі позиції', hit: '🔥 Хіти', stale: '💤 Застій', nos: '⏳ Ще без продажів', new: '🆕 Новинки', lost: 'Продається, а залишку немає', promo: '🏷 В акції'}[asFilter] || 'Усі позиції';
+  $('asDetT').textContent = TT + ' · детально';
+  $('asSort').innerHTML = [['v', 'Сума ₴'], ['d', 'Днів'], ['q', 'Продано'], ['n', 'Залишок']].map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (so === o[0]) + '">' + o[1] + '</button>').join('');
+  $('asTot').innerHTML = '<b>' + DL.length + ' поз.</b><b>' + fmt(DL.reduce((t, x) => t + x.phys, 0)) + ' шт</b><b>' + short(DL.reduce((t, x) => t + x.val, 0)) + ' ₴</b><span class="sub">на залишку · продано за ' + asDays + ' дн: ' + DL.reduce((t, x) => t + x.q, 0) + ' шт · ' + short(DL.reduce((t, x) => t + x.s, 0)) + ' ₴</span>';
+  const lim = 60, VL = STSHOW.as ? DL : DL.slice(0, lim), z = v => v ? '<b>' + v + '</b>' : '<span class="z0">0</span>';
+  const lastT = x => x.last ? dm(pd(x.last)) + ' · ' + x.ds + ' дн' : 'не продавався';
+  const marks = x => [x.isNew ? '🆕' + (x.age != null ? ' ' + x.age + ' дн' : '') : '', x.promo ? '🏷 акція' : '', x.kind === 'fresh' ? 'щойно приїхала' : ''].filter(Boolean).join(' · ');
+  const th = (k, t) => '<th class="n' + (k === so ? ' on' : '') + '" data-asort="' + k + '">' + t + '</th>';
+  $('asTbl').innerHTML = DL.length ? '<thead><tr><th>Позиція</th><th class="n">' + esc(Z[0]) + '</th><th class="n">' + esc(Z[1]) + '</th><th class="n">Склад</th>' + th('n', 'Разом') + th('v', 'Сума') + th('q', 'Продано') + th('d', 'Ост. продаж') + '<th>На залишку з</th><th>Рекомендація</th></tr></thead><tbody>' +
+    VL.map(x => { const r = rec(x); return '<tr data-art="' + esc(x.a) + '"><td><div class="pn2">' + phA(x.a) + '<div><b>' + esc(shortName(x.it.n || x.a)) + '</b><span class="sub">' + esc(x.a) + ' · ' + esc(x.g) + (marks(x) ? ' · ' + marks(x) : '') + '</span></div></div></td>' +
+      '<td class="n">' + z(x.it.s1 || 0) + '</td><td class="n">' + z(x.it.s2 || 0) + '</td><td class="n">' + z(x.it.sk || 0) + '</td><td class="n"><b>' + x.phys + '</b></td><td class="n">' + (x.val ? short(x.val) : x.phys ? '<span class="sub">без ціни</span>' : '—') + '</td>' +
+      '<td class="n">' + (x.q ? x.q + ' шт<div class="sub">' + short(x.s) + ' ₴</div>' : '<span class="z0">0</span>') + '</td><td class="n sub">' + lastT(x) + '</td><td class="sub">' + (x.phys ? sinceTxt(x.sc) : '—') + '</td><td>' + chipS(r[0], r[1]) + '</td></tr>'; }).join('') + '</tbody>'
+    : '<tr><td class="empty">Немає позицій</td></tr>';
+  $('asCards').innerHTML = VL.map(x => { const r = rec(x); return '<div class="pcard as-card" data-art="' + esc(x.a) + '"><div class="t"><div style="display:flex;gap:10px;min-width:0">' + phA(x.a) + '<div style="min-width:0"><div class="nm2">' + esc(shortName(x.it.n || x.a)) + '</div><div class="sub">' + esc(x.g) + (marks(x) ? ' · ' + marks(x) : '') + '</div></div></div><b>' + (x.val ? short(x.val) + ' ₴' : '') + '</b></div>' +
+    '<div class="sub">' + esc(Z[0]) + ' ' + (x.it.s1 || 0) + ' · ' + esc(Z[1]) + ' ' + (x.it.s2 || 0) + ' · склад ' + (x.it.sk || 0) + ' · продано ' + x.q + ' шт · ' + lastT(x) + (x.phys ? ' · з ' + sinceTxt(x.sc) : '') + '</div>' + chipS(r[0], r[1]) + '</div>'; }).join('') || '<div class="empty">Немає позицій</div>';
+  $('asMore').innerHTML = DL.length > lim ? '<button class="st-more" data-stall="as">' + (STSHOW.as ? 'Згорнути' : 'Показати всі ' + DL.length) + '</button>' : '';
+  // новинки ще без продажів і застій — короткі списки праворуч
+  const nsl = NS.slice().sort((a, b) => (b.age || b.sc.days || 0) - (a.age || a.sc.days || 0));
+  $('asNosN').textContent = NS.length + ' поз. · у ' + NS.filter(x => x.waitLong).length + ' вже 30+ дн';
+  $('asNos').innerHTML = nsl.slice(0, 6).map(x => prodRow(x.a, chipS(x.isNew ? 'новинка' : 'щойно приїхала', x.waitLong ? 'wt' : 'cs'), (x.age != null ? 'з ' + dm(x.nd) + ' · ' + x.age + ' дн' : x.sc.d ? 'на залишку з ' + dm(x.sc.d) + ' · ' + x.sc.days + ' дн' : '') + ' · залишок ' + x.phys)).join('') || '<div class="empty">Немає</div>';
+  const stl = ST.slice().sort((a, b) => b.val - a.val);
+  $('asStaleN').textContent = ST.length + ' поз. · ≈ ' + short(ST.reduce((a, x) => a + x.val, 0)) + ' ₴';
+  $('asStale').innerHTML = stl.slice(0, 6).map(x => '<div class="prod" data-art="' + esc(x.a) + '"><span class="th" style="background:var(--bad2);color:var(--bad)">' + x.phys + '</span><div class="pn"><b>' + esc(shortName(x.it.n || x.a)) + '</b><span>' + x.g + ' · 0 продажів за ' + asDays + ' дн · з ' + esc(sinceTxt(x.sc)) + '</span></div><div class="rt"><b>' + short(x.val) + '</b><span class="sub">в залишку</span></div></div>').join('') || '<div class="empty">Застою немає</div>';
   try { localStorage.setItem('d2asort', JSON.stringify({d: asDays})); } catch (e) {}
 }
 
@@ -1455,7 +1565,8 @@ function mgrModal(m) {
 }
 
 // ===== МАГАЗИН: окрема сторінка для кожного магазину (продажі, менеджери, зал, що перемістити, залишок, застій) =====
-let STB = 'w', STC = 'w', STMX = 'all', STX = null, STXV = -1;
+let STB = 'w', STC = 'w', STMX = 'all', STX = null, STXV = -1, RTB = 'w', RTC = 'w';
+const stB = () => STB;
 // обідні стільці (і обідні крісла) продаються комплектом по 4 — їх не возимо по одному; барні — поштучно
 const isSet = it => { const t = ((it && it.c) || '') + ' ' + ((it && it.n) || ''); return !/барн/i.test(t) && (/стільц|стілец/i.test(t) || /обідн\S*\s+крісл/i.test(t)); };
 const SET = 4;
@@ -1477,18 +1588,60 @@ const daysSince = d => d ? Math.round((ASOF - pd(d)) / 864e5) : null;
 const stHere = (it, si) => (si ? it.s2 : it.s1) || 0;
 const stPrice = it => it.pp || it.pr || 0;
 const chipS = (t, c) => '<span class="sa ' + c + '">' + esc(t) + '</span>';
+// ===== ЗАСТІЙ: одне правило для всіх вкладок =====
+// застій = є залишок · 0 продажів за N днів · не новинка · на залишку довше M днів (N, M — «⚙️ Налаштування»)
+const SCFG = () => Object.assign({days: 90, min: 60, newDays: 90}, D.stale || {});
+const TODAY0 = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+function newDateOf(it) { const m = /🆕 Новинка(?: з прайсу)? з (\d{2})\.(\d{2})/.exec((it && it.l) || ''); if (!m) return null;
+  let d = new Date(ASOF.getFullYear(), +m[2] - 1, +m[1]); if (d > addD(new Date(), 1)) d = new Date(d.getFullYear() - 1, d.getMonth(), d.getDate()); return d; }
+function isNovelty(it) { if (!/🆕/.test((it && it.l) || '')) return false; const nd = newDateOf(it); return !nd || (TODAY0() - nd) / 864e5 < SCFG().newDays; }
+// з якої дати товар на залишку (locs: 0 — магазин 1, 1 — магазин 2, 2 — склад); old — лежав до початку запису (дата невідома)
+function sinceOf(a, locs) {
+  const S = D.since && D.since[a]; let best = null, old = !D.since;
+  locs.forEach(i => { const v = S && S[i]; if (!v || v === '-') old = true; else { const d = pd(v); if (!best || d < best) best = d; } });
+  if (old || !best) return {old: true, d: null, days: null};
+  return {old: false, d: best, days: Math.max(0, Math.round((TODAY0() - best) / 864e5))};
+}
+const locsOf = it => [0, 1, 2].filter(i => ((i === 0 ? it.s1 : i === 1 ? it.s2 : it.sk) || 0) > 0);
+const sinceTxt = sc => sc.old ? (D.sinceStart ? 'давно (до ' + dm(pd(D.sinceStart)) + ')' : 'давно') : dm(sc.d) + ' (' + sc.days + ' дн)';
+// h — продажі ({last}); повертає '' (продається / немає залишку), 'stale' — застій, 'new' — новинка без продажів, 'fresh' — щойно приїхала
+function staleKind(a, it, h, locs, days) {
+  if (!locs.length) return '';
+  const N = days || SCFG().days, ds = daysSince(h && h.last);
+  if (h && h.last && ds < N) return '';
+  if (isNovelty(it)) return 'new';
+  const sc = sinceOf(a, locs);
+  return !sc.old && sc.days < SCFG().min ? 'fresh' : 'stale';
+}
+// залишок і застій залу: по групах, сума, застій, новинки ще без продажів
+function stStock(si) {
+  const dep = DEPS[si], H = stStats()[dep] || {}, G = {}, noP = [], stale = [], nos = []; let sq = 0, sv = 0;
+  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const q = stHere(it, si); if (!(q > 0)) return; const val = q * stPrice(it);
+    if (!stPrice(it)) noP.push(a);
+    sq += q; sv += val; const g = G[it.g] || (G[it.g] = {q: 0, v: 0, sold: 0}); g.q += q; g.v += val;
+    const h = H[a], k = staleKind(a, it, h, [si]), sc = sinceOf(a, [si]), x = {a, q, val, ds: daysSince(h && h.last), sc, k, st: dep};
+    if (k === 'stale') stale.push(x); else if (k) nos.push(x); });
+  Object.keys(H).forEach(a => { const it = D.items[a]; if (it && G[it.g]) G[it.g].sold += H[a].s; });
+  stale.sort((a, b) => b.val - a.val); nos.sort((a, b) => (a.sc.days ?? 1e9) - (b.sc.days ?? 1e9));
+  const sold90 = Object.values(H).reduce((t, o) => t + o.s, 0);
+  return {G, noP, sq, sv, stale, nos, sold90, frozen: stale.reduce((t, x) => t + x.val, 0), staleQ: stale.reduce((t, x) => t + x.q, 0)};
+}
+const STSHOW = {};   // «показати всі» в списках застою
+const showAll = (id, L, lim, fn) => (STSHOW[id] ? L : L.slice(0, lim)).map(fn).join('') + (L.length > lim ? '<button class="st-more" data-stall="' + id + '">' + (STSHOW[id] ? 'Згорнути' : 'Показати всі ' + L.length) + '</button>' : '');
+const staleSub = x => (x.ds != null ? x.ds + ' дн. без продажу' : 'не продавався') + ' · ' + x.q + ' шт · на залишку з ' + sinceTxt(x.sc);
+const nosSub = x => (x.k === 'new' ? '🆕 новинка' : 'приїхала ' + (x.sc.d ? dm(x.sc.d) : '')) + (x.sc.days != null ? ' · ' + x.sc.days + ' дн у залі' : '') + ' · ' + x.q + ' шт';
 
 function stPlan(si) {
-  const key = iso(ASOF).slice(0, 7), p = D.plan && D.plan[key] && D.plan[key][si];
+  const ix = [].concat(si), key = iso(ASOF).slice(0, 7), pl = D.plan && D.plan[key], p = pl ? ix.reduce((t, i) => t + (+pl[i] || 0), 0) : 0;
   if (!p) return '';
-  const dep = DEPS[si], from = key + '-01', fact = R.reduce((t, r) => t + (r.dep === dep && r.d >= from && r.d <= iso(ASOF) ? r.s : 0), 0);
+  const deps = ix.map(i => DEPS[i]), from = key + '-01', fact = R.reduce((t, r) => t + (deps.includes(r.dep) && r.d >= from && r.d <= iso(ASOF) ? r.s : 0), 0);
   const last = new Date(ASOF.getFullYear(), ASOF.getMonth() + 1, 0).getDate(), left = Math.max(0, p - fact), dl = last - ASOF.getDate(), pct = Math.round(fact / p * 100);
   return '<div class="st-plan"><div class="st-pl"><span>План ' + MONF[ASOF.getMonth()].toLowerCase() + ' · ' + short(p) + ' ₴</span><b>' + pct + '%</b></div><div class="st-meter"><i style="width:' + Math.min(100, pct) + '%"></i></div>' +
     '<span class="st-pls">' + (left <= 0 ? 'План виконано' + (pct > 100 ? ', +' + short(fact - p) + ' ₴ понад план' : '') : dl > 0 ? 'Треба ще ' + short(left) + ' ₴ — це ~' + short(left / dl) + ' ₴ на день (' + dl + ' дн.)' : 'Місяць завершується: не вистачило ' + short(left) + ' ₴') + '</span></div>';
 }
 // графік магазину: дні / тижні / місяці + пунктир — цей самий магазин рік тому
-function stChart(si) {
-  const dep = DEPS[si], B = [];
+function stChart(si, by) {
+  const dep = DEPS[si], B = [], STB = by || stB();
   if (STB === 'd') for (let i = (innerWidth < 600 ? 13 : 29); i >= 0; i--) { const d = addD(ASOF, -i); B.push({a: d, b: d, l: dm(d), ly: [addD(d, -364), addD(d, -364)]}); }
   else if (STB === 'w') for (let i = 14; i >= 0; i--) { const a = addD(monday(ASOF), -7 * i), b = addD(a, 6); B.push({a, b: b > ASOF ? ASOF : b, l: dm(a), ly: [addD(a, -364), addD(b > ASOF ? ASOF : b, -364)], part: b > ASOF}); }
   else for (let i = 11; i >= 0; i--) { const a = new Date(ASOF.getFullYear(), ASOF.getMonth() - i, 1), e = new Date(a.getFullYear(), a.getMonth() + 1, 0), b = e > ASOF ? ASOF : e;
@@ -1513,35 +1666,22 @@ function stChartSvg(W, data) {
   return s + '</svg>';
 }
 
-function renderStore(si, P) {
-  const dep = DEPS[si], other = DEPS[1 - si], name = stName(si), X = stStats(), H = X[dep] || {}, O = X[other] || {}, AL = X.all;
-  const cur = R.filter(r => r.dep === dep && inR(r, P.from, P.to)), prv = R.filter(r => r.dep === dep && inR(r, P.pf, P.pt)), A = agg(cur), B = agg(prv);
-  const tot = agg(R.filter(r => inR(r, P.from, P.to))).s || 1;
-  const kpi = (lbl, val, f, prev, extra, cls) => '<div class="card kpi ' + (cls || '') + '"><span class="k">' + lbl + '</span><b class="num">' + f(val) + '</b><span class="s">' + delta(val, prev) + '<span>' + (NOCMP ? '' : 'було ' + f(prev)) + '</span></span>' + (extra || '') + '</div>';
-  // менеджери магазину
-  const mg = {}; cur.forEach(r => { const o = mg[r.m] || (mg[r.m] = {s: 0, o: new Set()}); o.s += r.s; o.o.add(r.o); });
-  const mp = {}; prv.forEach(r => { mp[r.m] = (mp[r.m] || 0) + r.s; });
-  const ML = Object.keys(mg).map(m => ({m, s: mg[m].s, o: mg[m].o.size, p: mp[m] || 0})).sort((a, b) => b.s - a.s), mtop = ML.length ? ML[0].s : 1;
-  // дні тижня (за період; для короткого — останні 90 днів)
-  const wdFrom = P.span >= 28 ? P.from : addD(ASOF, -89), wdTo = P.span >= 28 ? P.to : ASOF, wS = new Array(7).fill(0), wN = new Array(7).fill(0);
-  for (let d = new Date(wdFrom); d <= wdTo; d = addD(d, 1)) wN[d.getDay()]++;
-  R.forEach(r => { if (r.dep === dep && inR(r, wdFrom, wdTo)) wS[pd(r.d).getDay()] += r.s; });
-  const ord = [1, 2, 3, 4, 5, 6, 0], wAvg = ord.map(i => wN[i] ? wS[i] / wN[i] : 0), wMx = Math.max(1, ...wAvg), best = wAvg.indexOf(Math.max(...wAvg)), worst = wAvg.indexOf(Math.min(...wAvg));
-  const wdSvg = '<svg viewBox="0 0 300 86" class="st-wd">' + wAvg.map((v, i) => '<rect x="' + (i * 43 + 4) + '" y="' + (66 - v / wMx * 56) + '" width="34" height="' + Math.max(2, v / wMx * 56) + '" rx="5" fill="' + (i === best ? 'var(--y)' : 'var(--bar)') + '"><title>' + WD[ord[i]] + ': ' + uah(v) + ' в середньому</title></rect><text x="' + (i * 43 + 21) + '" y="80" font-size="10.5" fill="var(--mut)" text-anchor="middle">' + WD[ord[i]] + '</text>').join('') + '</svg>';
-  // порівняння: місяць тому і рік тому (тижні або місяці; неповний поточний — ті самі дні)
-  const ssum = (x, y) => x < DATA0 ? null : R.reduce((t, r) => t + (r.dep === dep && r.d >= iso(x) && r.d <= iso(y) ? r.s : 0), 0);
+const stDl = (v, p) => p == null ? '<span class="sub">—</span>' : (NOCMP ? '' : '') + (() => { if (!p) return v ? '<span class="delta up">нове</span>' : '<span class="delta flat">—</span>'; const x = (v - p) / p * 100, c = Math.abs(x) < 0.5 ? 'flat' : x > 0 ? 'up' : 'down'; return '<span class="delta ' + c + '">' + (x > 0 ? '↑ +' : x < 0 ? '↓ −' : '') + Math.abs(x).toFixed(0) + '%</span>'; })();
+// порівняння: місяць тому і рік тому (тижні або місяці; неповний поточний — ті самі дні) для одного чи кількох відділів
+function stCmpRows(deps, by) {
+  const ssum = (x, y) => x < DATA0 ? null : R.reduce((t, r) => t + (deps.includes(r.dep) && r.d >= iso(x) && r.d <= iso(y) ? r.s : 0), 0);
   const cmpRows = [];
-  if (STC === 'w') for (let i = 0; i < 6; i++) { const a = addD(monday(ASOF), -7 * i), b0 = addD(a, 6), b = b0 > ASOF ? ASOF : b0;
+  if (by === 'w') for (let i = 0; i < 6; i++) { const a = addD(monday(ASOF), -7 * i), b0 = addD(a, 6), b = b0 > ASOF ? ASOF : b0;
     cmpRows.push({l: dm(a) + '–' + dm(b0), part: b0 > ASOF, v: ssum(a, b), m: ssum(addD(a, -28), addD(b, -28)), y: ssum(addD(a, -364), addD(b, -364))}); }
   else for (let i = 0; i < 6; i++) { const a = new Date(ASOF.getFullYear(), ASOF.getMonth() - i, 1), e0 = new Date(a.getFullYear(), a.getMonth() + 1, 0), b = e0 > ASOF ? ASOF : e0, n = b.getDate();
     const pm = new Date(a.getFullYear(), a.getMonth() - 1, 1), pmE = new Date(pm.getFullYear(), pm.getMonth(), Math.min(n, new Date(pm.getFullYear(), pm.getMonth() + 1, 0).getDate()));
     const py = new Date(a.getFullYear() - 1, a.getMonth(), 1), pyE = new Date(py.getFullYear(), py.getMonth(), Math.min(n, new Date(py.getFullYear(), py.getMonth() + 1, 0).getDate()));
     cmpRows.push({l: MONF[a.getMonth()] + (a.getFullYear() !== ASOF.getFullYear() ? ' ' + a.getFullYear() : ''), part: e0 > ASOF, v: ssum(a, b), m: ssum(pm, pmE), y: ssum(py, pyE)}); }
-  const hasY = cmpRows.some(r => r.y != null);
-  const dl = (v, p) => p == null ? '<span class="sub">—</span>' : (NOCMP ? '' : '') + (() => { if (!p) return v ? '<span class="delta up">нове</span>' : '<span class="delta flat">—</span>'; const x = (v - p) / p * 100, c = Math.abs(x) < 0.5 ? 'flat' : x > 0 ? 'up' : 'down'; return '<span class="delta ' + c + '">' + (x > 0 ? '↑ +' : x < 0 ? '↓ −' : '') + Math.abs(x).toFixed(0) + '%</span>'; })();
-  // топ магазину
-  const by = {}, byP = {}; cur.forEach(r => { const o = by[r.a] || (by[r.a] = {s: 0, q: 0}); o.s += r.s; o.q += r.q; }); prv.forEach(r => { byP[r.a] = (byP[r.a] || 0) + r.s; });
-  const TOP = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 6);
+  return cmpRows;
+}
+// матриця залу і переміщення для магазину si (окремо — щоб «Роздріб» брав ті самі списки для обох магазинів)
+function stMoves(si) {
+  const dep = DEPS[si], other = DEPS[1 - si], X = stStats(), H = X[dep] || {}, O = X[other] || {}, AL = X.all;
   // матриця в цьому залі — кожна позиція: що зробити, щоб вона стояла
   const MX = (D.matrix || []).map(m => { const it = D.items[m.a] || {}, set = isSet(it), here = si ? m.s2 : m.s1, oth = si ? m.s1 : m.s2; let act, cls, q = 0;
     if (here > 0) { act = 'стоїть · ' + here + ' шт' + (set && here < SET ? ' (не комплект)' : ''); cls = 'ok'; }
@@ -1553,10 +1693,6 @@ function renderStore(si, P) {
     else if (m.v > 0) { act = 'замовити у Vetro'; cls = 'no'; }
     else { act = oth > 0 ? 'немає у Vetro · є в ' + other + ' ' + oth : 'немає ніде'; cls = 'wt'; }
     return {m, it, set, here, oth, act, cls, q}; });
-  const cnt = c => MX.filter(x => x.cls === c).length, mOk = cnt('ok'), mAll = MX.length || 1;
-  const order = {mv: 0, rt: 1, cs: 2, no: 3, wt: 4, ok: 5};
-  const MXL = MX.filter(x => STMX === 'all' ? true : STMX === 'miss' ? x.cls !== 'ok' : x.cls === STMX).sort((a, b) => order[a.cls] - order[b.cls] || fullName(a.m.a).localeCompare(fullName(b.m.a)));
-  const mxSub = x => 'етап: ' + esc(x.m.stage || '—') + ' · ' + esc(dep) + ' ' + x.here + ' · ' + esc(other) + ' ' + x.oth + ' · склад ' + (x.m.sk || 0) + ' · Vetro ' + (x.m.v || 0);
   // що перемістити (з урахуванням комплектів: обідні стільці — по 4, не по одному)
   const inMx = new Set((D.matrix || []).map(m => m.a));
   const bring = [], give = [], cons = [], seen = new Set();
@@ -1580,22 +1716,45 @@ function renderStore(si, P) {
       else cons.push({a, how: 'до 4 шт', q: 'склад ' + sk, why: 'продано тут ' + h0.q + ' шт за 90 днів, у залі 0, на складі лише ' + sk, c: 'cs'});
       return; }
     if (!(here > 0)) return;
-    const ds = daysSince(h0 && h0.last), idle = !h0 || !h0.last || ds >= 90;
+    const ds = daysSince(h0 && h0.last), idle = staleKind(a, it, h0, [si]) === 'stale';
     if (!idle) return;
     const idleT = h0 && h0.last ? ds + ' дн. без продажу тут' : 'тут не продавався';
     // не продається тут, а в іншому магазині продається — перевезти туди (комплектні — лише цілим комплектом)
     if (o0 && o0.q >= (set ? SET : 1) && (set ? here >= SET && oth < SET : oth === 0)) { give.push({a, how: dep + ' → ' + other, q: here + ' шт', why: idleT + ' · у ' + other + ' продали ' + o0.q + ' шт за 90 днів', c: 'rt'}); return; }
     if (!inMx.has(a) && !(AL[a] && daysSince(AL[a].last) < 120)) give.push({a, how: dep + ' → склад', q: here + ' шт', why: 'не в матриці · ' + (AL[a] && AL[a].last ? daysSince(AL[a].last) + ' дн. без продажу в компанії' : 'продажів не було'), c: 'mv'}); });
-  // залишок у залі
-  const G = {}, noP = []; let sq = 0, sv = 0, stale = [];
-  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const q = stHere(it, si); if (!(q > 0)) return; const val = q * stPrice(it);
-    if (!stPrice(it)) noP.push(a);
-    sq += q; sv += val; const g = G[it.g] || (G[it.g] = {q: 0, v: 0, sold: 0}); g.q += q; g.v += val;
-    const h = H[a], ds = daysSince(h && h.last); if (!h || !h.last || ds >= 90) stale.push({a, q, val, ds}); });
-  Object.keys(H).forEach(a => { const it = D.items[a]; if (it && G[it.g]) G[it.g].sold += H[a].s; });
-  const sold90 = Object.values(H).reduce((t, o) => t + o.s, 0), mos = v => { const per = v.sold / 3; return per > 0 ? (v.v / per).toFixed(1).replace('.', ',') + ' міс' : '—'; };
+  [bring, give, cons].forEach(L => L.forEach(x => { x.st = dep; }));
+  return {MX, bring, give, cons};
+}
+function renderStore(si, P) {
+  const dep = DEPS[si], other = DEPS[1 - si], name = stName(si), X = stStats(), H = X[dep] || {}, O = X[other] || {}, AL = X.all;
+  const cur = R.filter(r => r.dep === dep && inR(r, P.from, P.to)), prv = R.filter(r => r.dep === dep && inR(r, P.pf, P.pt)), A = agg(cur), B = agg(prv);
+  const tot = agg(R.filter(r => inR(r, P.from, P.to))).s || 1;
+  const kpi = (lbl, val, f, prev, extra, cls) => '<div class="card kpi ' + (cls || '') + '"><span class="k">' + lbl + '</span><b class="num">' + f(val) + '</b><span class="s">' + delta(val, prev) + '<span>' + (NOCMP ? '' : 'було ' + f(prev)) + '</span></span>' + (extra || '') + '</div>';
+  // менеджери магазину
+  const mg = {}; cur.forEach(r => { const o = mg[r.m] || (mg[r.m] = {s: 0, o: new Set()}); o.s += r.s; o.o.add(r.o); });
+  const mp = {}; prv.forEach(r => { mp[r.m] = (mp[r.m] || 0) + r.s; });
+  const ML = Object.keys(mg).map(m => ({m, s: mg[m].s, o: mg[m].o.size, p: mp[m] || 0})).sort((a, b) => b.s - a.s), mtop = ML.length ? ML[0].s : 1;
+  // дні тижня (за період; для короткого — останні 90 днів)
+  const wdFrom = P.span >= 28 ? P.from : addD(ASOF, -89), wdTo = P.span >= 28 ? P.to : ASOF, wS = new Array(7).fill(0), wN = new Array(7).fill(0);
+  for (let d = new Date(wdFrom); d <= wdTo; d = addD(d, 1)) wN[d.getDay()]++;
+  R.forEach(r => { if (r.dep === dep && inR(r, wdFrom, wdTo)) wS[pd(r.d).getDay()] += r.s; });
+  const ord = [1, 2, 3, 4, 5, 6, 0], wAvg = ord.map(i => wN[i] ? wS[i] / wN[i] : 0), wMx = Math.max(1, ...wAvg), best = wAvg.indexOf(Math.max(...wAvg)), worst = wAvg.indexOf(Math.min(...wAvg));
+  const wdSvg = '<svg viewBox="0 0 300 86" class="st-wd">' + wAvg.map((v, i) => '<rect x="' + (i * 43 + 4) + '" y="' + (66 - v / wMx * 56) + '" width="34" height="' + Math.max(2, v / wMx * 56) + '" rx="5" fill="' + (i === best ? 'var(--y)' : 'var(--bar)') + '"><title>' + WD[ord[i]] + ': ' + uah(v) + ' в середньому</title></rect><text x="' + (i * 43 + 21) + '" y="80" font-size="10.5" fill="var(--mut)" text-anchor="middle">' + WD[ord[i]] + '</text>').join('') + '</svg>';
+  // порівняння: місяць тому і рік тому (тижні або місяці; неповний поточний — ті самі дні)
+  const cmpRows = stCmpRows([dep], STC);
+  const hasY = cmpRows.some(r => r.y != null);
+  // топ магазину
+  const by = {}, byP = {}; cur.forEach(r => { const o = by[r.a] || (by[r.a] = {s: 0, q: 0}); o.s += r.s; o.q += r.q; }); prv.forEach(r => { byP[r.a] = (byP[r.a] || 0) + r.s; });
+  const TOP = Object.keys(by).sort((a, b) => by[b].s - by[a].s).slice(0, 6);
+  const {MX, bring, give, cons} = stMoves(si);
+  const cnt = c => MX.filter(x => x.cls === c).length, mOk = cnt('ok'), mAll = MX.length || 1;
+  const order = {mv: 0, rt: 1, cs: 2, no: 3, wt: 4, ok: 5};
+  const MXL = MX.filter(x => STMX === 'all' ? true : STMX === 'miss' ? x.cls !== 'ok' : x.cls === STMX).sort((a, b) => order[a.cls] - order[b.cls] || fullName(a.m.a).localeCompare(fullName(b.m.a)));
+  const mxSub = x => 'етап: ' + esc(x.m.stage || '—') + ' · ' + esc(dep) + ' ' + x.here + ' · ' + esc(other) + ' ' + x.oth + ' · склад ' + (x.m.sk || 0) + ' · Vetro ' + (x.m.v || 0);
+  // залишок у залі і застій (одне правило застою — див. staleKind)
+  const SK = stStock(si), {G, noP, sq, sv, stale, nos, sold90, frozen} = SK, N = SCFG().days;
+  const mos = v => { const per = v.sold / 3; return per > 0 ? (v.v / per).toFixed(1).replace('.', ',') + ' міс' : '—'; };
   const GL = Object.keys(G).sort((a, b) => G[b].v - G[a].v), gMx = Math.max(1, ...GL.map(g => G[g].v));
-  stale.sort((a, b) => b.val - a.val); const frozen = stale.reduce((t, x) => t + x.val, 0);
   // продається в іншому магазині, а тут немає
   const OPP = Object.keys(O).filter(a => O[a].q >= 2 && D.items[a] && !(stHere(D.items[a], si) > 0)).sort((a, b) => O[b].q - O[a].q).slice(0, 6).map(a => { const it = D.items[a];
     return {a, why: other + ' продав ' + O[a].q + ' шт за 90 днів', where: it.sk > 0 ? ['на складі ' + it.sk, 'mv'] : (it.v > 0 ? ['у Vetro ' + it.v, 'ok'] : ['ніде немає', 'wt'])}; });
@@ -1618,7 +1777,7 @@ function renderStore(si, P) {
         '<div class="st-sub">Дні тижня · ' + (P.span >= 28 ? 'за період' : 'останні 90 днів') + '</div>' + wdSvg + '<div class="sub">Найсильніший день — <b style="color:var(--ink)">' + ['понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота', 'неділя'][best] + '</b>, найслабший — ' + ['понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота', 'неділя'][worst] + '</div></div></div>' +
     '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Порівняння: місяць тому і рік тому</h3><div class="seg-s" id="stCmp">' + [['w', 'Тижні'], ['m', 'Місяці']].map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (STC === o[0]) + '">' + o[1] + '</button>').join('') + '</div></div>' +
         '<div class="tbl"><table class="st-wk"><thead><tr><th>' + (STC === 'w' ? 'Тиждень' : 'Місяць') + '</th><th class="n">' + esc(dep) + '</th><th class="n">' + (STC === 'w' ? '4 тижні тому' : 'Попередній місяць') + '</th><th class="n">Зміна</th><th class="n">Рік тому</th><th class="n">Зміна</th></tr></thead><tbody>' +
-        cmpRows.map(w => '<tr' + (w.part ? ' class="cur"' : '') + '><td>' + esc(w.l) + (w.part ? ' · неповний' : '') + '</td><td class="n"><b>' + short(w.v || 0) + '</b></td><td class="n">' + (w.m == null ? '—' : short(w.m)) + '</td><td class="n">' + dl(w.v, w.m) + '</td><td class="n">' + (w.y == null ? '—' : short(w.y)) + '</td><td class="n">' + dl(w.v, w.y) + '</td></tr>').join('') + '</tbody></table></div>' +
+        cmpRows.map(w => '<tr' + (w.part ? ' class="cur"' : '') + '><td>' + esc(w.l) + (w.part ? ' · неповний' : '') + '</td><td class="n"><b>' + short(w.v || 0) + '</b></td><td class="n">' + (w.m == null ? '—' : short(w.m)) + '</td><td class="n">' + stDl(w.v, w.m) + '</td><td class="n">' + (w.y == null ? '—' : short(w.y)) + '</td><td class="n">' + stDl(w.v, w.y) + '</td></tr>').join('') + '</tbody></table></div>' +
         '<div class="sub">' + (STC === 'w' ? 'Тиждень порівнюється з тим самим тижнем 4 тижні тому' : 'Місяць порівнюється з попереднім місяцем') + '; неповний поточний — з тими самими днями.' + (hasY ? '' : ' «Рік тому» з’явиться, коли накопичиться рік даних.') + '</div></div>' +
       '<div class="card"><div class="ch"><h3>Топ магазину</h3><span class="sub">' + esc(P.label) + ', за виручкою</span></div><div class="list">' +
         (TOP.map(a => row(a, '<b>' + short(by[a].s) + '</b>' + delta(by[a].s, byP[a] || 0), (D.items[a] || {}).g + ' · ' + by[a].q + ' шт')).join('') || '<div class="empty">Продажів немає</div>') + '</div></div></div>' +
@@ -1636,9 +1795,12 @@ function renderStore(si, P) {
         GL.map(g => '<div class="r"><span>' + esc(g) + '</span><div class="st-meter"><i style="width:' + (G[g].v / gMx * 100) + '%;background:var(--ink)"></i></div><b>' + (G[g].v ? short(G[g].v) : '<span class="sub">без ціни</span>') + ' · ' + G[g].q + ' шт</b></div>').join('') + '</div>' +
         (noP.length ? '<div class="sub">' + noP.length + ' позиці' + (noP.length === 1 ? 'я' : noP.length < 5 ? 'ї' : 'й') + ' (' + noP.reduce((t, a) => t + stHere(D.items[a], si), 0) + ' шт) без ціни в таблиці «📊 Загальна» — їх вартість не врахована: ' + noP.slice(0, 4).map(a => '<a data-art="' + esc(a) + '">' + esc(shortName((D.items[a] || {}).n || a)) + '</a>').join(', ') + (noP.length > 4 ? '…' : '') + '</div>' : '') +
         '<div class="st-sub">Оборот залу</div><div class="sub">За 90 днів магазин продав на <b style="color:var(--ink)">' + short(sold90) + ' ₴</b>' + (sold90 > 0 ? ' — залишку в залі вистачить приблизно на <b style="color:var(--ink)">' + (sv / (sold90 / 3)).toFixed(1).replace('.', ',') + ' міс</b>. ' + GL.slice(0, 3).map(g => esc(g) + ' — ' + mos(G[g])).join(', ') + '.' : '.') + '</div></div>' +
-      '<div class="card"><div class="ch"><h3>💤 Застій у залі</h3><span class="sub">90+ днів без продажу тут</span></div><div class="list">' +
-        (stale.slice(0, 7).map(x => row(x.a, x.val ? '<b>' + short(x.val) + ' ₴</b>' : '<span class="sub">без ціни</span>', (x.ds != null ? x.ds + ' дн. без продажу' : 'тут не продавався') + ' · ' + x.q + ' шт')).join('') || '<div class="empty">Застою немає</div>') + '</div>' +
-        (stale.length ? '<div class="sub">Разом заморожено <b style="color:var(--ink)">' + short(frozen) + ' ₴</b> у ' + stale.length + ' позиціях — кандидати на акцію, переставлення або переміщення</div>' : '') + '</div></div>' +
+      '<div class="card"><div class="ch"><h3>💤 Застій у залі</h3><span class="sub">0 продажів тут ' + N + '+ дн · не новинка · у залі ' + SCFG().min + '+ дн</span></div>' +
+        (stale.length ? '<div class="st-tot"><b>' + stale.length + ' позиці' + (stale.length === 1 ? 'я' : stale.length < 5 ? 'ї' : 'й') + '</b><b>' + SK.staleQ + ' шт</b><b>' + short(frozen) + ' ₴</b><span class="sub">заморожено — кандидати на акцію, переставлення або переміщення</span></div>' : '') +
+        '<div class="list">' + (showAll('st' + si, stale, 8, x => row(x.a, x.val ? '<b>' + short(x.val) + ' ₴</b>' : '<span class="sub">без ціни</span>', staleSub(x))) || '<div class="empty">Застою немає</div>') + '</div>' +
+        '<div class="st-sub" style="margin-top:12px">🆕 Новинки в залі ще без продажів · ' + nos.length + '</div><div class="list">' +
+        (showAll('sn' + si, nos, 5, x => row(x.a, chipS(x.k === 'new' ? 'новинка' : 'щойно приїхала', x.sc.days >= 30 ? 'wt' : 'cs'), nosSub(x))) || '<div class="empty">Таких немає</div>') + '</div>' +
+        '<div class="sub">Новинки й товар, що в залі менше ' + SCFG().min + ' днів, у застій не рахуються — їм дають час. Оранжеве — вже 30+ днів без жодного продажу.</div></div></div>' +
     '<div class="g2 stack1"><div class="card"><div class="ch"><h3 id="stOppT">🔎 Продається в ' + esc(other) + ', а в ' + esc(dep) + ' немає</h3><span class="sub">за 90 днів</span></div><div class="list">' +
         (OPP.map(x => row(x.a, chipS(x.where[0], x.where[1]), x.why)).join('') || '<div class="empty">Таких позицій немає</div>') + '</div></div>' +
       '<div class="card"><div class="ch"><h3>Новинки й акції в залі</h3></div>' +
@@ -1650,6 +1812,100 @@ function renderStore(si, P) {
   $('stBy').onclick = e => { const b = e.target.closest('button'); if (b) { STB = b.dataset.v; LAST[tab] = null; render(); } };
   $('stCmp').onclick = e => { const b = e.target.closest('button'); if (b) { STC = b.dataset.v; LAST[tab] = null; render(); } };
 }
+// ===== РОЗДРІБ: обидва магазини разом і поруч (для керівника роздрібу) =====
+function rtChartSvg(W, a, b) {
+  const H = 240, top = 30, base = H - 22, n = a.v.length, x0 = 36, grp = (W - x0) / n, gap = Math.max(2, grp * .18), bw = Math.max(3, (grp - gap) / 2 - 1);
+  const mx = Math.max(1, ...a.v, ...b.v);
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" height="' + H + '" role="img" aria-label="Продажі двох магазинів">';
+  [0, .5, 1].forEach(f => { const yy = base - f * (base - top); s += '<line x1="' + x0 + '" x2="' + W + '" y1="' + yy + '" y2="' + yy + '" stroke="var(--line)"/><text x="' + (x0 - 5) + '" y="' + (yy + 3) + '" font-size="10" fill="var(--mut)" text-anchor="end">' + (f ? kf(mx * f) : '0') + '</text>'; });
+  const step = Math.ceil(n / Math.max(1, (W - x0) / 46));
+  a.v.forEach((v1, i) => { const v2 = b.v[i], gx = x0 + i * grp + gap / 2;
+    [[v1, 'var(--zd)', DEPS[0]], [v2, 'var(--rt)', DEPS[1]]].forEach((z, j) => { const h = Math.max(z[0] ? 3 : 1, z[0] / mx * (base - top)), x = gx + j * (bw + 2);
+      s += '<rect x="' + x.toFixed(1) + '" y="' + (base - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="' + Math.min(4, bw / 2) + '" fill="' + z[1] + '" stroke="' + (j === 0 ? 'var(--line)' : 'none') + '"><title>' + esc(a.B[i].l) + ' · ' + esc(z[2]) + ': ' + uah(z[0]) + '</title></rect>';
+      if (z[0] && bw >= 13) s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (base - h - 4).toFixed(1) + '" font-size="' + (bw >= 22 ? 9.5 : 8) + '" font-weight="700" fill="var(--ink)" text-anchor="middle">' + kf(z[0]) + '</text>'; });
+    if (i % step === 0 || i === n - 1) s += '<text x="' + (gx + bw + 1).toFixed(1) + '" y="' + (H - 6) + '" font-size="10" fill="var(--mut)" text-anchor="middle">' + esc(a.B[i].l) + '</text>'; });
+  return s + '</svg>';
+}
+function renderRetail(P) {
+  const Z = [DEPS[0], DEPS[1]], X = stStats(), tot = agg(R.filter(r => inR(r, P.from, P.to))).s || 1;
+  const cur = R.filter(r => Z.includes(r.dep) && inR(r, P.from, P.to)), prv = R.filter(r => Z.includes(r.dep) && inR(r, P.pf, P.pt));
+  const kcard = (title, deps, si, cls) => { const c = cur.filter(r => deps.includes(r.dep)), p = prv.filter(r => deps.includes(r.dep)), A = agg(c), B = agg(p);
+    return '<div class="card kpi ' + (cls || '') + '"><span class="k">' + title + '</span><b class="num">' + uah(A.s) + '</b><span class="s">' + delta(A.s, B.s) + '<span>' + (NOCMP ? '' : 'було ' + short(B.s)) + '</span></span>' +
+      '<div class="rt-kl"><span><b>' + fmt(A.o) + '</b> замовл.</span><span>чек <b>' + short(A.chk) + '</b></span><span><b>' + fmt(A.q) + '</b> шт</span></div>' + stPlan(si) + '</div>'; };
+  // менеджери роздробу з відміткою магазину
+  const mg = {}; cur.forEach(r => { const o = mg[r.m] || (mg[r.m] = {s: 0, o: new Set(), by: {}}); o.s += r.s; o.o.add(r.o); o.by[r.dep] = (o.by[r.dep] || 0) + r.s; });
+  const mp = {}; prv.forEach(r => { mp[r.m] = (mp[r.m] || 0) + r.s; });
+  const ML = Object.keys(mg).map(m => { const o = mg[m], d = Object.keys(o.by).sort((a, b) => o.by[b] - o.by[a]); return {m, s: o.s, o: o.o.size, p: mp[m] || 0, d}; }).sort((a, b) => b.s - a.s), mtop = ML.length ? ML[0].s : 1;
+  // дні тижня обох магазинів
+  const wdFrom = P.span >= 28 ? P.from : addD(ASOF, -89), wdTo = P.span >= 28 ? P.to : ASOF, wN = new Array(7).fill(0), wS = Z.map(() => new Array(7).fill(0));
+  for (let d = new Date(wdFrom); d <= wdTo; d = addD(d, 1)) wN[d.getDay()]++;
+  R.forEach(r => { const i = Z.indexOf(r.dep); if (i >= 0 && inR(r, wdFrom, wdTo)) wS[i][pd(r.d).getDay()] += r.s; });
+  const ord = [1, 2, 3, 4, 5, 6, 0], wA = wS.map(S => ord.map(i => wN[i] ? S[i] / wN[i] : 0)), wMx = Math.max(1, ...wA[0], ...wA[1]);
+  const wdSvg = '<svg viewBox="0 0 300 92" class="st-wd">' + ord.map((d, i) => wA.map((A, j) => { const h = Math.max(2, A[i] / wMx * 60); return '<rect x="' + (i * 43 + 4 + j * 18) + '" y="' + (70 - h) + '" width="16" height="' + h + '" rx="4" fill="' + (j ? 'var(--rt)' : 'var(--zd)') + '" stroke="' + (j ? 'none' : 'var(--line)') + '"><title>' + WD[d] + ' · ' + esc(Z[j]) + ': ' + uah(A[i]) + ' в середньому</title></rect>'; }).join('') + '<text x="' + (i * 43 + 21) + '" y="86" font-size="10.5" fill="var(--mut)" text-anchor="middle">' + WD[d] + '</text>').join('') + '</svg>';
+  const bestOf = A => ['понеділок', 'вівторок', 'середа', 'четвер', 'пʼятниця', 'субота', 'неділя'][A.indexOf(Math.max(...A))];
+  // порівняння
+  const C = Z.map(d => stCmpRows([d], RTC)), CT = stCmpRows(Z, RTC);
+  // матриця обох залів
+  const MV = [stMoves(0), stMoves(1)], cov = MV.map(m => { const ok = m.MX.filter(x => x.cls === 'ok').length; return {ok, n: m.MX.length, p: m.MX.length ? Math.round(ok / m.MX.length * 100) : 0}; });
+  const BOTH = (D.matrix || []).filter(m => !(m.s1 > 0) && !(m.s2 > 0)).map(m => { const it = D.items[m.a] || {}, set = isSet(it);
+    const w = m.sk > 0 ? [set && m.sk < SET ? 'розглянути: на складі ' + m.sk + ' шт' : 'на складі ' + m.sk + ' — виставити', set && m.sk < SET ? 'cs' : 'mv'] : m.r > 0 ? ['в дорозі' + (m.arr ? ' · ' + m.arr : ''), 'wt'] : /бронь|затвердж/i.test(m.ap || '') ? [/бронь/i.test(m.ap) ? 'у броні' : 'замовлено', 'wt'] : m.v > 0 ? ['замовити у Vetro', 'no'] : ['немає ніде', 'wt'];
+    return {m, w}; }).sort((a, b) => ({mv: 0, cs: 1, no: 2, wt: 3})[a.w[1]] - ({mv: 0, cs: 1, no: 2, wt: 3})[b.w[1]]);
+  // усі переміщення одним списком (без дублів: «ЗД → РТ» з обох сторінок — один рядок)
+  const seen = new Set(), uniq = (L, k) => L.filter(x => { const key = k(x); if (seen.has(key)) return false; seen.add(key); return true; });
+  const allMv = uniq([].concat(MV[0].bring, MV[1].bring, MV[0].give, MV[1].give), x => x.a + '|' + x.how);
+  const fromSk = allMv.filter(x => /^склад/.test(x.how)), between = allMv.filter(x => Z.some(z => x.how === Z[0] + ' → ' + Z[1] || x.how === Z[1] + ' → ' + Z[0])), toSk = allMv.filter(x => / → склад$/.test(x.how));
+  const consAll = uniq([].concat(MV[0].cons, MV[1].cons), x => x.a + '|' + x.st);
+  const mvRow = x => prodRow(x.a, chipS(x.how, x.c) + '<span class="sub">' + esc(x.q) + '</span>', esc(x.why));
+  const consRow = x => prodRow(x.a, chipS(x.st + ' · ' + x.how, 'cs') + '<span class="sub">' + esc(x.q) + '</span>', esc(x.why));
+  const mvBlock = (t, L, id) => '<div><div class="st-sub">' + t + ' · ' + L.length + '</div><div class="list">' + (showAll(id, L, 8, mvRow) || '<div class="empty">Нічого</div>') + '</div></div>';
+  // залишок і застій обох залів
+  const SK = [stStock(0), stStock(1)], stAll = SK[0].stale.concat(SK[1].stale).sort((a, b) => b.val - a.val), nosAll = SK[0].nos.concat(SK[1].nos).sort((a, b) => (b.sc.days || 0) - (a.sc.days || 0));
+  const stkCol = (i) => { const k = SK[i]; return '<div class="rt-stk"><div class="rt-h">' + pill(Z[i]) + '</div><div class="st-big"><b>' + fmt(k.sq) + ' шт</b><b>' + short(k.sv) + ' ₴</b></div>' +
+    '<div class="sub">оборот: ' + (k.sold90 > 0 ? 'залишку вистачить на <b style="color:var(--ink)">' + (k.sv / (k.sold90 / 3)).toFixed(1).replace('.', ',') + ' міс</b>' : 'продажів за 90 днів немає') + '</div>' +
+    '<div class="sub">💤 застій: <b style="color:var(--bad)">' + k.stale.length + ' поз. · ' + short(k.frozen) + ' ₴</b> · 🆕 ще без продажів: <b style="color:var(--ink)">' + k.nos.length + '</b></div></div>'; };
+  // продається в одному магазині, а в іншому немає — в обидва боки
+  const opp = si => { const O = X[Z[1 - si]] || {}; return Object.keys(O).filter(a => O[a].q >= 2 && D.items[a] && !(stHere(D.items[a], si) > 0)).sort((a, b) => O[b].q - O[a].q).slice(0, 8).map(a => { const it = D.items[a];
+    const w = it.sk > 0 ? ['на складі ' + it.sk, 'mv'] : stHere(it, 1 - si) > (isSet(it) ? SET : 1) ? ['взяти з ' + Z[1 - si], 'rt'] : it.v > 0 ? ['у Vetro ' + it.v, 'ok'] : ['ніде немає', 'wt'];
+    return prodRow(a, chipS(w[0], w[1]), esc(Z[1 - si] + ' продав ' + O[a].q + ' шт за 90 днів · у ' + Z[si] + ' 0')); }).join('') || '<div class="empty">Таких позицій немає</div>'; };
+  const seg = (id, v, opts) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (v === o[0]) + '">' + o[1] + '</button>').join('') + '</div>';
+  const legZ = '<div class="leg"><span><i class="dot" style="background:var(--zd);box-shadow:0 0 0 1px var(--line)"></i>' + esc(Z[0]) + '</span><span><i class="dot" style="background:var(--rt)"></i>' + esc(Z[1]) + '</span></div>';
+  const cv = (v, p) => (p == null ? '' : stDl(v, p));
+
+  $('retailBox').innerHTML =
+    '<div class="st-head"><p class="sub">Роздріб: ' + esc(stName(0)) + ' і ' + esc(stName(1)) + ' разом і поруч · ' + (D.me && D.me.n ? 'ви увійшли як ' + esc(D.me.n) : 'без Онлайну') + '</p>' +
+      '<div class="seg-s st-sw"><button data-t="s1">' + esc(Z[0]) + ' →</button><button data-t="s2">' + esc(Z[1]) + ' →</button></div></div>' +
+    '<div class="g4 st-kp">' + kcard('Роздріб разом', Z, [0, 1], 'acc') + kcard(esc(stName(0)), [Z[0]], 0) + kcard(esc(stName(1)), [Z[1]], 1) +
+      '<div class="card kpi"><span class="k">Частка роздробу</span><b class="num">' + Math.round(agg(cur).s / tot * 100) + '%</b><span class="s"><span>від усієї виручки за ' + esc(P.label) + '</span></span>' +
+      '<div class="rt-kl"><span>' + esc(Z[0]) + ' <b>' + Math.round(agg(cur.filter(r => r.dep === Z[0])).s / tot * 100) + '%</b></span><span>' + esc(Z[1]) + ' <b>' + Math.round(agg(cur.filter(r => r.dep === Z[1])).s / tot * 100) + '%</b></span></div></div></div>' +
+    '<div class="g21"><div class="card"><div class="ch"><h3>Продажі двох магазинів</h3>' + seg('rtBy', RTB, [['d', 'Дні'], ['w', 'Тижні'], ['m', 'Місяці']]) + '</div>' + legZ + '<div id="rtChart" class="st-chart"></div></div>' +
+      '<div class="card"><div class="ch"><h3>Менеджери роздробу</h3><span class="sub">' + esc(P.label) + '</span></div><div class="list rt-ml">' +
+        (ML.map((x, i) => '<div class="mrow" style="grid-template-columns:22px 38px minmax(0,1fr) auto" data-mgr="' + esc(x.m) + '"><span class="num1' + (i < 3 ? ' t' : '') + '" style="font-size:12px">' + (i + 1) + '</span><span class="av" style="' + avStyle(x.d[0]) + '">' + esc(initials(x.m)) + '</span><div style="min-width:0;display:grid;gap:4px"><b style="font-size:13px">' + esc(x.m) + ' ' + x.d.map(pill).join(' ') + '</b><div class="bar" style="--c:' + DC[x.d[0]] + '"><i style="width:' + (x.s / mtop * 100) + '%"></i></div><span class="sub">' + x.o + ' замовл. · чек ' + short(x.s / Math.max(1, x.o)) + '</span></div><div class="rt"><b>' + short(x.s) + '</b>' + delta(x.s, x.p) + '</div></div>').join('') || '<div class="empty">Продажів немає</div>') + '</div>' +
+        '<div class="st-sub">Дні тижня · ' + (P.span >= 28 ? 'за період' : 'останні 90 днів') + '</div>' + legZ + wdSvg + '<div class="sub">Найсильніший день: ' + esc(Z[0]) + ' — <b style="color:var(--ink)">' + bestOf(wA[0]) + '</b>, ' + esc(Z[1]) + ' — <b style="color:var(--ink)">' + bestOf(wA[1]) + '</b></div></div></div>' +
+    '<div class="card"><div class="ch"><h3>Порівняння магазинів: місяць тому і рік тому</h3>' + seg('rtCmp', RTC, [['w', 'Тижні'], ['m', 'Місяці']]) + '</div>' +
+      '<div class="tbl"><table class="st-wk rt-wk"><thead><tr><th rowspan="2">' + (RTC === 'w' ? 'Тиждень' : 'Місяць') + '</th>' + Z.map(z => '<th colspan="3" class="n rt-g">' + esc(z) + '</th>').join('') + '<th colspan="2" class="n rt-g">Разом</th></tr><tr>' +
+        Z.map(() => '<th class="n">Виручка</th><th class="n">' + (RTC === 'w' ? '4 тиж. тому' : 'міс. тому') + '</th><th class="n">рік тому</th>').join('') + '<th class="n">Виручка</th><th class="n">рік тому</th></tr></thead><tbody>' +
+        CT.map((w, i) => '<tr' + (w.part ? ' class="cur"' : '') + '><td>' + esc(w.l) + (w.part ? ' · неповний' : '') + '</td>' + C.map(c => '<td class="n"><b>' + short(c[i].v || 0) + '</b></td><td class="n">' + (c[i].m == null ? '—' : stDl(c[i].v, c[i].m)) + '</td><td class="n">' + (c[i].y == null ? '—' : stDl(c[i].v, c[i].y)) + '</td>').join('') +
+          '<td class="n"><b>' + short(w.v || 0) + '</b></td><td class="n">' + (w.y == null ? '—' : stDl(w.v, w.y)) + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<div class="sub">Відсоток — зміна проти ' + (RTC === 'w' ? 'того самого тижня 4 тижні тому' : 'попереднього місяця') + ' і проти року тому; неповний поточний — з тими самими днями.' + (CT.some(r => r.y != null) ? '' : ' «Рік тому» з’явиться, коли накопичиться рік даних.') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>Матриця в обох залах</h3><span class="sub">' + (D.matrix || []).length + ' позицій матриці</span></div>' +
+      '<div class="rt-cov">' + cov.map((c, i) => '<button class="rt-cv" data-t="s' + (i + 1) + '"><b>' + c.p + '%</b><span>' + pill(Z[i]) + ' ' + c.ok + ' з ' + c.n + ' стоять у залі</span><div class="st-meter"><i style="width:' + c.p + '%;background:var(--good)"></i></div></button>').join('') +
+        '<div class="rt-cv"><b style="color:' + (BOTH.length ? 'var(--bad)' : 'var(--good)') + '">' + BOTH.length + '</b><span>немає в жодному залі</span></div></div>' +
+      '<div class="st-sub">Чого бракує в обох залах · ' + BOTH.length + '</div><div class="list st-mxl">' + (showAll('rtb', BOTH, 10, x => prodRow(x.m.a, chipS(x.w[0], x.w[1]), esc('етап: ' + (x.m.stage || '—') + ' · склад ' + (x.m.sk || 0) + ' · Vetro ' + (x.m.v || 0)))) || '<div class="empty">Усі позиції матриці стоять хоча б в одному залі</div>') + '</div></div>' +
+    '<div class="card st-move"><div class="ch"><h3>Усі переміщення</h3><span class="sub">один список для логіста · ' + (allMv.length + consAll.length) + '</span></div>' +
+      '<div class="st-mv2 rt-mv3">' + mvBlock('Склад → магазини', fromSk, 'rm1') + mvBlock('Між магазинами', between, 'rm2') + mvBlock('Із залу на склад', toSk, 'rm3') + '</div>' +
+      (consAll.length ? '<div class="st-cons"><div class="st-sub">Розглянути: доповнити обідні стільці до комплекту 4 шт · ' + consAll.length + '</div><div class="list">' + showAll('rm4', consAll, 8, consRow) + '</div></div>' : '') + '</div>' +
+    '<div class="g2 stack1"><div class="card"><div class="ch"><h3>Залишок і застій у залах</h3><span class="sub">за ціною з таблиці</span></div><div class="rt-two">' + stkCol(0) + stkCol(1) + '</div>' +
+        '<div class="st-sub" style="margin-top:10px">💤 Застій обох залів · ' + stAll.length + ' поз. · ' + short(stAll.reduce((t, x) => t + x.val, 0)) + ' ₴</div><div class="list">' +
+        (showAll('rts', stAll, 8, x => prodRow(x.a, pill(x.st) + (x.val ? ' <b>' + short(x.val) + ' ₴</b>' : ' <span class="sub">без ціни</span>'), esc(staleSub(x)))) || '<div class="empty">Застою немає</div>') + '</div>' +
+        '<div class="st-sub" style="margin-top:10px">🆕 Новинки в залах ще без продажів · ' + nosAll.length + '</div><div class="list">' + (showAll('rtn', nosAll, 5, x => prodRow(x.a, pill(x.st) + ' ' + chipS(x.k === 'new' ? 'новинка' : 'щойно приїхала', x.sc.days >= 30 ? 'wt' : 'cs'), esc(nosSub(x)))) || '<div class="empty">Таких немає</div>') + '</div></div>' +
+      '<div class="card"><div class="ch"><h3>Продається в одному, а в іншому немає</h3><span class="sub">за 90 днів</span></div>' +
+        '<div class="st-sub">Є попит у ' + esc(Z[1]) + ' → немає в ' + esc(Z[0]) + '</div><div class="list">' + opp(0) + '</div>' +
+        '<div class="st-sub" style="margin-top:12px">Є попит у ' + esc(Z[0]) + ' → немає в ' + esc(Z[1]) + '</div><div class="list">' + opp(1) + '</div></div></div>';
+  const a = stChart(0, RTB), b = stChart(1, RTB);
+  svgDraw('rtChart', W => rtChartSvg(W, a, b));
+  $('rtBy').onclick = e => { const x = e.target.closest('button'); if (x) { RTB = x.dataset.v; LAST[tab] = null; render(); } };
+  $('rtCmp').onclick = e => { const x = e.target.closest('button'); if (x) { RTC = x.dataset.v; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); } };
+}
 // стартова вкладка за особистим посиланням (колонка «Стартова вкладка» на аркуші доступу)
 function startTabOf(txt) {
   const t = String(txt || '').trim().toLowerCase(); if (!t) return '';
@@ -1657,9 +1913,9 @@ function startTabOf(txt) {
   if (DEPS[1] && t === DEPS[1].toLowerCase() || (D.stores && D.stores[1] && t === D.stores[1].toLowerCase())) return 's2';
   const f = TABS.find(x => x[1].toLowerCase() === t); return f ? f[0] : '';
 }
-document.addEventListener('click', e => { const b = e.target.closest('.st-sw [data-t]'); if (b) { e.stopPropagation(); goTab(b.dataset.t); return; }
+document.addEventListener('click', e => { const b = e.target.closest('.st-sw [data-t],.rt-cv[data-t]'); if (b) { e.stopPropagation(); goTab(b.dataset.t); return; }
+  const sa = e.target.closest('[data-stall]'); if (sa) { e.stopPropagation(); STSHOW[sa.dataset.stall] = !STSHOW[sa.dataset.stall]; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); return; }
   const f = e.target.closest('[data-stmx]'); if (f) { e.stopPropagation(); STMX = STMX === f.dataset.stmx && f.dataset.stmx !== 'all' ? 'all' : f.dataset.stmx; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); } }, true);
-
 // ===== КАТАЛОГ VETRO і ДОВІДКА (дані — окремим запитом, лише коли їх відкрили) =====
 let CAT = null, CATP = null, CATV = -1;
 const LAT = {'а': 'a', 'в': 'b', 'е': 'e', 'і': 'i', 'к': 'k', 'м': 'm', 'н': 'h', 'о': 'o', 'р': 'p', 'с': 'c', 'т': 't', 'у': 'y', 'х': 'x'};
@@ -2206,11 +2462,10 @@ document.addEventListener('input', e => {
     clearTimeout(cvT); cvT = setTimeout(() => { CF.lim = 48; cvResults(); }, 150); }
 });
 document.addEventListener('change', e => { if (e.target.id === 'cvSort') { CF.sort = e.target.value; cvResults(); } });
-
 // ===== оболонка: меню, періоди, вкладки =====
 const MODES = [['day','Сьогодні'],['week','Тиждень'],['month','Місяць'],['year','Рік'],['all','Весь час'],['custom','Період']];
 const navBtn = t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + esc(t[1]) + '</button>';
-const STORES = ['s1', 's2'];
+const STORES = ['retail', 's1', 's2'];
 function buildNav() {
   $('tabs').innerHTML = '<div class="logo">' + LOGO + '<span>VETRO у D2</span></div>' + TABS.filter(t => TBAR.includes(t[0])).map(navBtn).join('') +
     '<div class="navsep">Магазини</div>' + TABS.filter(t => STORES.includes(t[0])).map(navBtn).join('') +
@@ -2244,7 +2499,9 @@ function render() {
   const key = [VER, mode, offset, cFrom && +cFrom, cTo && +cTo, document.documentElement.className].join('|');
   if (LAST[tab] !== key) {
     LAST[tab] = key;
-    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp, s1: P0 => renderStore(0, P0), s2: P0 => renderStore(1, P0)})[tab](P);
+    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp, retail: renderRetail, s1: P0 => renderStore(0, P0), s2: P0 => renderStore(1, P0)})[tab](P);
+    // обидва магазини малюються в одне місце: після одного інший треба перемалювати, інакше покаже чужі дані
+    if (sec === 'store') LAST[tab === 's1' ? 's2' : 's1'] = null;
   }
   addHints();
   const cb = $('cvCmp'); if (cb) cb.hidden = !(tab === 'catalog' && CF.cmp.length);
@@ -2269,6 +2526,8 @@ $('vsA').onchange = $('vsB').onchange = () => renderVs(period(offset));
 $('salesBy').onclick = e => { const b = e.target.closest('button'); if (b) { salesBy = b.dataset.v; const P = period(offset); renderSales(P, R.filter(r => inR(r, P.from, P.to))); } };
 $('salesM').onclick = e => { const b = e.target.closest('button'); if (b) { salesM = b.dataset.v; const P = period(offset); renderSales(P, R.filter(r => inR(r, P.from, P.to))); } };
 $('yearSel').onclick = e => { const b = e.target.closest('button'); if (b) { YEAR = +b.dataset.y; renderYear(); } };
+$('asSort').onclick = e => { const b = e.target.closest('button'); if (b) { asSort = b.dataset.v; renderAssort(); } };
+$('asTbl').addEventListener('click', e => { const h = e.target.closest('[data-asort]'); if (h) { e.stopPropagation(); asSort = h.dataset.asort; renderAssort(); } }, true);
 $('asDays').onclick = e => { const b = e.target.closest('button'); if (b) { asDays = +b.dataset.d; renderAssort(); } };
 ['cFrom', 'cTo'].forEach(id => $(id).onchange = () => { const f = $('cFrom').value, t = $('cTo').value; cFrom = f ? pd(f) : null; cTo = t ? pd(t) : null; render(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); $('more').hidden = true; const hp = $('hintPop'); if (hp) hp.hidden = true; const cf = $('cvF'); if (cf && CF.open) { CF.open = false; cf.classList.remove('open'); document.body.style.overflow = ''; } } });
