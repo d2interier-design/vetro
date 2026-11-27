@@ -590,11 +590,18 @@ s{opacity:.7}
   .mt-add{grid-template-columns:1fr 1fr}.mt-add input:first-child{grid-column:1/-1}.mt-task{grid-template-columns:1fr}.mt-res{justify-content:flex-start}
   .mt-cmp .cr{grid-template-columns:minmax(0,1fr) 72px 72px 62px;font-size:12px}.mt-gr{grid-template-columns:100px minmax(0,1fr) 54px 60px}
 }
-/* друк / PDF: лише вкладка «Збори» */
+/* попередній перегляд повідомлення і підключення гілки */
+.mt-pre{white-space:pre-wrap;font:13px/1.5 var(--f);background:var(--soft);border-radius:12px;padding:14px 16px;margin:0;max-height:55vh;overflow:auto}
+.mt-ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px}
+#mtPrintBox{display:none}
+/* друк / PDF: лише задачі зборів */
 @media print{
-  body.pm #tabs,body.pm #tabbar,body.pm .top,body.pm .mhead,body.pm #more,body.pm #modal,body.pm .mt-acts,body.pm .mt-add,body.pm .mt-res button[data-td],body.pm .mt-res button[data-tc],body.pm .mt-oth,body.pm .mt-bar,body.pm .hq{display:none!important}
-  body.pm .app{display:block;background:none}body.pm main{padding:0}body.pm .card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
-  body.pm .mt-dl{max-height:none;overflow:visible}body.pm .mt-weeks{grid-template-columns:repeat(6,1fr)}body.pm .mt-deps{grid-template-columns:repeat(2,1fr)}
+  body.pm>*:not(#mtPrintBox){display:none!important}
+  html:has(body.pm),body.pm{background:#fff!important}
+  body.pm #mtPrintBox{display:block;color:#000;font:13px/1.45 Roboto,Arial,sans-serif;padding:0 4mm}
+  #mtPrintBox h1{font-size:22px;margin:0 0 2px}#mtPrintBox p{margin:0 0 14px;color:#555}#mtPrintBox h2{font-size:14px;margin:16px 0 6px;border-bottom:1px solid #ccc;padding-bottom:4px}
+  #mtPrintBox ul{list-style:none;margin:0;padding:0}#mtPrintBox li{display:grid;grid-template-columns:24px 1fr;gap:6px;padding:6px 0;border-bottom:1px dotted #ccc;break-inside:avoid}
+  #mtPrintBox .pm-m{font-size:15px}#mtPrintBox small{display:block;color:#555}
 }
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
@@ -1980,7 +1987,7 @@ document.addEventListener('click', e => { const b = e.target.closest('.st-sw [da
   const sa = e.target.closest('[data-stall]'); if (sa) { e.stopPropagation(); STSHOW[sa.dataset.stall] = !STSHOW[sa.dataset.stall]; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); return; }
   const f = e.target.closest('[data-stmx]'); if (f) { e.stopPropagation(); STMX = STMX === f.dataset.stmx && f.dataset.stmx !== 'all' ? 'all' : f.dataset.stmx; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); } }, true);
 // ===== ЗБОРИ: тиждень для зборів (пн–нд) + задачі зборів =====
-let MTW = null, MTCMP = 'prev', MTDEP = 'all', MTDT = {}, MTEXP = new Set(), MTASK = null, MTERR = '', MBUSY = false;
+let MTW = null, MTCMP = 'prev', MTDEP = 'all', MTDT = {}, MTEXP = new Set(), MTASK = null, MTERR = '', MBUSY = false, MTG = {tg: false, tgToken: false};
 const MTDAYS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'];
 const mWeek = a => { const b0 = addD(a, 6), b = b0 > ASOF ? ASOF : b0; return {a, b, n: Math.round((b - a) / 864e5) + 1, part: b0 > ASOF, l: wkLabel(a)}; };
 const wkLabel = a => { const b = addD(a, 6); return a.getMonth() === b.getMonth() ? a.getDate() + '–' + dm(b).replace(/^0/, '') : dm(a).replace(/^0/, '') + '–' + dm(b).replace(/^0/, ''); };
@@ -2131,7 +2138,7 @@ function mtApi(op) {
 }
 function mtLoad(op) {
   MBUSY = true; MTERR = ''; mtTasksDraw();
-  return mtApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); MTASK = j.tasks || []; })
+  return mtApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); MTASK = j.tasks || []; MTG = {tg: !!j.tg, tgToken: !!j.tgToken}; })
     .catch(e => { MTERR = String(e && e.message || e); if (MTASK === null) MTASK = null; })
     .then(() => { MBUSY = false; mtTasksDraw(); });
 }
@@ -2147,7 +2154,7 @@ function mtTasksDraw() {
       '<button data-tc="' + esc(t.id) + '" title="Коментар">💬</button><button data-td="' + esc(t.id) + '" title="Видалити">×</button></div></div>';
   const names = [...new Set((D.mgrs || []).concat(T.map(t => t.r)).filter(Boolean))].sort();
   const nf = addD(sel, 11);
-  box.innerHTML = '<div class="ch"><h3>Задачі зборів</h3><div class="mt-acts"><a class="btn-s" id="mtTg" target="_blank" rel="noopener">✈ Надіслати в Telegram</a><button class="btn-s" id="mtCopy">Скопіювати текст</button><button class="btn-s" id="mtPrint">⬇ PDF / друк</button></div></div>' +
+  box.innerHTML = '<div class="ch"><h3>Задачі зборів</h3><div class="mt-acts">' + (MTG.tg ? '<button class="btn-s" id="mtTg">✈ Надіслати в гілку «Збори»</button>' : MTG.tgToken ? '<button class="btn-s" id="mtTgC">✈ Підключити гілку Telegram</button>' : '<a class="btn-s" id="mtShare" target="_blank" rel="noopener">✈ Поділитися в Telegram</a>') + '<button class="btn-s" id="mtCopy">Скопіювати текст</button><button class="btn-s" id="mtPrint">⬇ PDF / друк</button></div></div>' +
     (MTERR ? '<div class="mt-err">Не вдалося: ' + esc(MTERR) + ' <button class="btn-s" id="mtRetry">Ще раз</button></div>' : '') +
     (MTASK === null ? '<div class="empty">' + (MBUSY ? 'Завантажую задачі…' : 'Задачі не завантажились') + '</div>' :
     '<div class="st-sub">Підсумок задач з минулих зборів (' + wkLabel(addD(sel, -7)) + ')</div>' +
@@ -2159,10 +2166,20 @@ function mtTasksDraw() {
     '<div class="mt-tl">' + (now.map(t => row(t, false)).join('') || '<div class="empty">Ще немає — додайте задачі, які поставили на зборах</div>') + '</div>' +
     '<div class="sub">Задачі зберігаються в таблиці (прихований аркуш «📝 Збори») — їх бачать усі. Наступного тижня вони з’являться вгорі блоку: на зборах відмічаєте ✅ / ❌ / ↪.</div>');
   const txt = mtText(sel, prev, older, now);
-  const tg = $('mtTg'); if (tg) tg.href = 'https://t.me/share/url?url=' + encodeURIComponent('Збори D2 · ' + wkLabel(sel)) + '&text=' + encodeURIComponent(txt);
   const on = (id, f) => { const el = $(id); if (el) el.onclick = f; };
+  const sh = $('mtShare'); if (sh) sh.href = 'https://t.me/share/url?url=' + encodeURIComponent('Задачі зборів D2 · ' + wkLabel(sel)) + '&text=' + encodeURIComponent(txt);
+  on('mtTg', () => openModal(() => ({html: mhead('<h2>Надіслати в гілку «Збори»</h2><div class="sub">Так виглядатиме повідомлення в Telegram</div>') + '<pre class="mt-pre">' + esc(txt) + '</pre><div class="mt-acts"><button class="btn-y" id="mtSend">Надіслати</button><span class="sub" id="mtSendS"></span></div>',
+    after: () => { $('mtSend').onclick = () => { const b = $('mtSend'); b.disabled = true; $('mtSendS').textContent = 'Надсилаю…';
+      mtApi({a: 'tg', text: txt}).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); $('mtSendS').textContent = '✅ Надіслано в гілку'; b.textContent = 'Надіслано'; })
+        .catch(e => { b.disabled = false; $('mtSendS').textContent = 'Не вдалося: ' + (e && e.message || e); }); }; }})));
+  on('mtTgC', () => openModal(() => ({html: mhead('<h2>Підключити гілку для задач зборів</h2>') + '<ol class="mt-ol"><li>Відкрийте в Telegram групу, де вже є бот Vetro.</li><li>Зайдіть у гілку, куди мають приходити задачі зборів (або створіть її).</li><li>Напишіть у цій гілці: <b>/zbory</b></li><li>Протягом кількох хвилин натисніть кнопку нижче.</li></ol>' +
+    '<div class="mt-acts"><button class="btn-y" id="mtConn">Підключити</button><span class="sub" id="mtConnS"></span></div><div class="sub">Сповіщення про матрицю й залишки так і йдуть у свою гілку — це окремо.</div>',
+    after: () => { $('mtConn').onclick = () => { const b = $('mtConn'); b.disabled = true; $('mtConnS').textContent = 'Шукаю гілку…';
+      mtApi({a: 'tgconnect'}).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); $('mtConnS').textContent = '✅ Підключено' + (j.title ? ': «' + j.title + '»' : '') + '. У гілку надіслано тестове повідомлення.'; MTG.tg = true; mtTasksDraw(); })
+        .catch(e => { b.disabled = false; $('mtConnS').textContent = 'Не вдалося: ' + (e && e.message || e); }); }; }})));
   on('mtCopy', () => { try { navigator.clipboard.writeText(txt).then(() => { $('mtCopy').textContent = 'Скопійовано ✓'; }, () => { $('mtCopy').textContent = 'Не вдалося'; }); } catch (e) {} });
-  on('mtPrint', () => { document.body.classList.add('pm'); setTimeout(() => { window.print(); setTimeout(() => document.body.classList.remove('pm'), 500); }, 50); });
+  on('mtPrint', () => { let pb = $('mtPrintBox'); if (!pb) { pb = document.createElement('div'); pb.id = 'mtPrintBox'; document.body.appendChild(pb); }
+    pb.innerHTML = mtPrintHtml(sel, prev, older, now); document.body.classList.add('pm'); setTimeout(() => { window.print(); setTimeout(() => document.body.classList.remove('pm'), 500); }, 50); });
   on('mtRetry', () => mtLoad());
   const f = $('mtAdd'); if (f) f.onsubmit = e => { e.preventDefault(); const t = $('mtT').value.trim(); if (!t || MBUSY) return; mtLoad({a: 'add', w: wS, t, r: $('mtR').value.trim(), d: $('mtD').value}); };
   box.querySelectorAll('[data-ts]').forEach(b => b.onclick = () => { if (MBUSY) return; const t = T.find(x => x.id === b.dataset.id), s = t && t.s === b.dataset.ts ? '' : b.dataset.ts; if (t) t.s = s; mtTasksDraw(); mtLoad({a: 'set', id: b.dataset.id, s}); });
@@ -2174,12 +2191,22 @@ function mtTasksDraw() {
     const fm = row.querySelector('.mt-cm'); fm.querySelector('input').focus(); fm.onsubmit = e => { e.preventDefault(); mtLoad({a: 'set', id: t.id, c: fm.querySelector('input').value.trim()}); }; });
 }
 function mtText(sel, prev, older, now) {
-  const W = mWeek(sel), A = agg(mRows(W.a, W.b)), mark = {ok: '✅', no: '❌', mv: '↪'};
-  return '📋 Збори D2 · тиждень ' + wkLabel(sel) + (W.part ? ' (' + MTDAYS[0] + '–' + MTDAYS[W.n - 1] + ')' : '') + '\n' +
-    'Виручка ' + short(A.s) + ' ₴ · замовлень ' + A.o + ' · чек ' + short(A.chk) + '\n' + DEPS.map(d => d + ' ' + short(agg(mRows(W.a, W.b, d)).s)).join(' · ') +
-    (prev.length ? '\n\nЗадачі минулих зборів: ✅ ' + prev.filter(t => t.s === 'ok').length + ' · ❌ ' + prev.filter(t => t.s === 'no').length + ' · ↪ ' + prev.filter(t => t.s === 'mv').length + '\n' + prev.map(t => (mark[t.s] || '⏳') + ' ' + t.t + (t.r ? ' — ' + t.r : '')).join('\n') : '') +
-    (older.length ? '\n\nЩе відкриті:\n' + older.map(t => '⏳ ' + t.t + (t.r ? ' — ' + t.r : '') + (t.d ? ', до ' + dm(pd(t.d)) : '')).join('\n') : '') +
-    (now.length ? '\n\nНові задачі:\n' + now.map((t, i) => (i + 1) + '. ' + t.t + (t.r ? ' — ' + t.r : '') + (t.d ? ', до ' + dm(pd(t.d)) : '')).join('\n') : '');
+  const mark = {ok: '✅', no: '❌', mv: '↪'}, who = t => (t.r ? ' — ' + t.r : ''), till = t => (t.d ? ', до ' + dm(pd(t.d)) : ''), late = t => t.d && t.d < iso(ASOF) ? ' ⚠️ прострочено' : '';
+  const n = s => prev.filter(t => (t.s || '') === s).length;
+  let out = '📋 Задачі зборів D2 · тиждень ' + wkLabel(sel);
+  if (prev.length) out += '\n\nПідсумок минулих зборів (' + wkLabel(addD(sel, -7)) + '): ✅ ' + n('ok') + ' · ❌ ' + n('no') + ' · ↪ ' + n('mv') + (n('') ? ' · ⏳ ' + n('') : '') + ' — виконано ' + Math.round(n('ok') / prev.length * 100) + '%\n' +
+    prev.map(t => (mark[t.s] || '⏳') + ' ' + t.t + who(t) + (t.c ? '\n   💬 ' + t.c : '')).join('\n');
+  if (older.length) out += '\n\n⏳ Ще відкриті з попередніх зборів:\n' + older.map(t => '• ' + t.t + who(t) + till(t) + late(t) + (t.c ? '\n   💬 ' + t.c : '')).join('\n');
+  out += '\n\n🆕 Нові задачі на тиждень:\n' + (now.length ? now.map((t, i) => (i + 1) + '. ' + t.t + who(t) + till(t)).join('\n') : '— немає');
+  return out;
+}
+function mtPrintHtml(sel, prev, older, now) {
+  const mark = {ok: '✅', no: '❌', mv: '↪'}, n = s => prev.filter(t => (t.s || '') === s).length;
+  const li = (t, m) => '<li><span class="pm-m">' + m + '</span><div><b>' + esc(t.t) + '</b><small>' + esc(t.r || '—') + (t.d ? ' · до ' + dm(pd(t.d)) : '') + (t.c ? ' · 💬 ' + esc(t.c) : '') + '</small></div></li>';
+  return '<h1>Задачі зборів D2</h1><p>Тиждень ' + wkLabel(sel) + ' · надруковано ' + dm(new Date()) + '</p>' +
+    (prev.length ? '<h2>Підсумок минулих зборів (' + wkLabel(addD(sel, -7)) + ') — ✅ ' + n('ok') + ' · ❌ ' + n('no') + ' · ↪ ' + n('mv') + ' · виконано ' + Math.round(n('ok') / prev.length * 100) + '%</h2><ul>' + prev.map(t => li(t, mark[t.s] || '⏳')).join('') + '</ul>' : '') +
+    (older.length ? '<h2>Ще відкриті з попередніх зборів</h2><ul>' + older.map(t => li(t, '⏳')).join('') + '</ul>' : '') +
+    '<h2>Нові задачі на тиждень</h2><ul>' + (now.map(t => li(t, '☐')).join('') || '<li>—</li>') + '</ul>';
 }
 // ===== КАТАЛОГ VETRO і ДОВІДКА (дані — окремим запитом, лише коли їх відкрили) =====
 let CAT = null, CATP = null, CATV = -1;
