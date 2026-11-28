@@ -629,6 +629,20 @@ s{opacity:.7}
 @media (max-width:760px){.rh-g5{grid-template-columns:1fr 1fr}.rh-g5>.acc{grid-column:1/-1}.rh-flt{max-width:100%}.rh-flt .seg-s{overflow-x:auto;flex-wrap:nowrap;max-width:100%}
   .rh-mch{gap:4px;height:200px}.rh-mch .bars em{display:none}.rh-bt{grid-template-columns:1fr}.pn2{min-width:0}}
 .rh-flt>.seg-s{max-width:100%;overflow-x:auto;flex-wrap:nowrap}.rh-flt>.seg-s button{white-space:nowrap}
+.rh-sh.over b{color:var(--bad)}.rh-tag.pre{background:var(--y2);color:var(--yInk)}
+.rh-mx{min-width:0;width:max-content;max-width:100%}.rh-mx .mh2{display:flex;gap:10px;font-size:10.5px;color:var(--mut);align-self:end}.rh-mx .mh2 i{font-style:normal}
+.rh-mr{display:flex;gap:8px;align-items:center}.rh-mr img,.rh-mr .ph{width:28px;height:28px;flex:none}
+.rh-c{grid-template-rows:9px 9px 14px}.rh-c em{font-size:10px;white-space:nowrap}
+[data-rh]{cursor:pointer}
+.rh-hs{display:flex;gap:6px 16px;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}.rh-hs b{font-size:18px;font-weight:900}
+.rh-ht tr.k-in td{background:var(--good2)}.rh-ht tr.k-out td:nth-child(4){color:var(--bad);font-weight:700}.rh-ht tr.k-res td,.rh-ht tr.k-gone td{color:var(--mut)}.rh-ht tr.ord td{background:var(--y2)}
+.rh-sh.over b{color:var(--bad)}.rh-tag.pre{background:var(--y2);color:var(--yInk)}
+.rh-mx{width:max-content;max-width:none}.rh-mx .mh2{display:flex;gap:10px;font-size:10.5px;color:var(--mut);align-self:end}.rh-mx .mh2 i{font-style:normal}
+.rh-mr{display:flex;gap:8px;align-items:center}.rh-mr img,.rh-mr .ph{width:28px;height:28px;flex:none}
+.rh-c{grid-template-rows:9px 9px 14px}.rh-c em{font-size:10px;white-space:nowrap}
+[data-rh]{cursor:pointer}
+.rh-hs{display:flex;gap:6px 16px;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}.rh-hs b{font-size:18px;font-weight:900}
+.rh-ht tr.k-in td{background:var(--good2)}.rh-ht tr.k-out td:nth-child(4){color:var(--bad);font-weight:700}.rh-ht tr.k-res td,.rh-ht tr.k-gone td{color:var(--mut)}.rh-ht tr.ord td{background:var(--y2)}
 /* ===== вкладка «План залу» ===== */
 .pl-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;align-items:center}.pl-top p{margin:0}
 .pl-stats{display:flex;gap:8px;flex-wrap:wrap}.pl-stat{background:var(--card);border-radius:12px;padding:8px 12px;font-size:12px;color:var(--mut);box-shadow:var(--sh)}.pl-stat b{display:block;font-size:17px;color:var(--ink)}.pl-stat.warn b{color:var(--bad)}
@@ -661,6 +675,10 @@ s{opacity:.7}
 .sv{font-size:11px;color:var(--mut)}.sv.ok{color:var(--good)}.sv.bad{color:var(--bad);font-weight:700}
 @media (max-width:1200px){.pl-wrap{grid-template-columns:230px minmax(0,1fr)}.pl-right{grid-column:1/-1;position:static;max-height:none}}
 @media (max-width:760px){.pl-wrap{grid-template-columns:minmax(0,1fr)}.pl-side{position:static;max-height:none}.pl-wrap>.pl-side:first-child{order:3}.pl-stats{display:grid;grid-template-columns:1fr 1fr}.pl-pop{left:8px!important;right:8px;width:auto}}
+.pl-ms{flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 20px);padding:6px 8px;gap:5px;font-size:12px}.pl-ms button{border:0;font:inherit;font-size:12px;font-weight:700;border-radius:9px;padding:6px 9px;background:rgba(255,255,255,.14);color:inherit;cursor:pointer}.pl-ms button:first-of-type{background:var(--y);color:#111}.pl-ms button.bad{background:var(--bad);color:#fff}
+.pl-toast{position:absolute;z-index:7;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:var(--card);border-radius:12px;padding:9px 14px;font-size:13px;font-weight:700;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}.pl-toast .lnk{color:var(--y);font-weight:800}
+.pl-svgw .pl-rh{cursor:grab}.pl-it.el .ph{display:grid;place-items:center;font-size:20px;background:var(--card);border-radius:8px}
+.pl-src{flex-wrap:wrap}.pl-src button{min-width:30%}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -2293,7 +2311,7 @@ function mtPrintHtml(sel, prev, older, now) {
     '<h2>Нові задачі на тиждень</h2><ul>' + (now.map(t => li(t, '☐')).join('') || '<li>—</li>') + '</ul>';
 }
 // ===== РУХ VETRO: що приїхало до постачальника, що пішло від нього, скільки взяли ми і продали; наявність по місяцях =====
-let RUH = null, RUHERR = '', RUHBUSY = false, RUHN = 6, RUHCAT = 'Усі', RUHSORT = 'out', RUHLOST = false;
+let RUH = null, RUHERR = '', RUHBUSY = false, RUHN = 6, RUHCAT = 'Усі', RUHSORT = 'in', RUHMX = 'ours';
 function ruhLoad(force) {
   RUHBUSY = true; RUHERR = '';
   const p = window.__DEMO_RUH__ ? Promise.resolve(window.__DEMO_RUH__)
@@ -2331,24 +2349,30 @@ function renderRuh() {
   const G = {}; act.forEach(x => { const o = G[x.g] || (G[x.g] = {inn: 0, out: 0, took: 0, sold: 0, vq: 0}); o.inn += x.inn; o.out += x.out; o.took += x.took; o.sold += x.sold; o.vq += x.vq; });
   const GL = GROUPS.filter(g => G[g]);
   // позиції
-  const key = {out: x => x.out, sh: x => x.out ? x.took / x.out : -1, miss: x => (x.took ? -1e6 : 0) + x.out}[RUHSORT];
-  const PL = act.slice().sort((a, b) => key(b) - key(a) || b.out - a.out);
-  const shBar = v => v == null ? '<span class="sub">—</span>' : '<span class="rh-sh"><span class="mb"><i style="width:' + Math.min(100, v) + '%"></i></span><b>' + v + '%</b></span>';
+  const key = ({in: x => x.inn, sh: x => x.inn ? x.took / x.inn : (x.took ? 9 : -1), miss: x => (x.took ? -1e6 : 0) + x.out})[RUHSORT] || (x => x.inn);
+  const PL = act.slice().sort((a, b) => key(b) - key(a) || b.inn - a.inn);
+  const shBar = v => v == null ? '<span class="sub">—</span>' : '<span class="rh-sh' + (v > 100 ? ' over' : '') + '"' + (v > 100 ? ' title="Взяли більше, ніж видно в приходах: частину приходу Vetro, ймовірно, одразу віддав під передзамовлення, або списав пізніше. Клікніть рядок — історія по датах."' : '') + '><span class="mb"><i style="width:' + Math.min(100, v) + '%"></i></span><b>' + (v > 100 ? '⚠ ' : '') + v + '%</b></span>';
   const nm = x => '<div class="pn2">' + phA(x.a) + '<div><b>' + esc(shortName(x.n)) + '</b><span class="sub">' + esc(x.g) + (!x.took && x.out ? ' · <b style="color:var(--bad)">ми не брали, а Vetro відвантажив ' + x.out + ' шт</b>' : '') + '</span></div></div>';
   // партії в межах періоду
   const pFrom = M[from] + '-01';
   const BAT = []; rows.forEach(x => (x.h.b || []).forEach((b, i, arr) => { if (b[0] < pFrom) return; const to = arr[i + 1] ? arr[i + 1][0] : '9999';
-    const took = ((ORD[x.k] || {}).L || []).filter(o => o[0] >= b[0] && o[0] < to).reduce((t, o) => t + o[1], 0);
-    const days = Math.round(((b[2] ? pd(b[2]) : today) - pd(b[0])) / 864e5); BAT.push({x, d: b[0], q: b[1], end: b[2], went: b[3], took, days}); }));
+    const from45 = iso(addD(pd(b[0]), -45)), OL = ((ORD[x.k] || {}).L || []).filter(o => o[0] >= from45 && o[0] < to && (o[0] >= b[0] || !(arr[i - 1] && o[0] < arr[i - 1][0])));
+    const took = OL.reduce((t, o) => t + o[1], 0), pre = OL.filter(o => o[0] < b[0]).reduce((t, o) => t + o[1], 0);
+    const days = Math.round(((b[2] ? pd(b[2]) : today) - pd(b[0])) / 864e5); BAT.push({x, d: b[0], q: b[1], end: b[2], went: b[3], took, pre, days}); }));
   BAT.sort((a, b) => b.d < a.d ? -1 : 1);
   // матриця наявності
+  // «наші» позиції: у матриці, продавали за 12 міс, є або була на залишку
+  const MXA = new Set((D.matrix || []).map(m => nk(m.a))), y12 = iso(addD(ASOF, -365)), S12 = new Set(R.filter(r => r.d >= y12).map(r => nk(r.a)));
+  const isOurs = x => MXA.has(x.k) || S12.has(x.k) || x.oq > 0 || (x.h.u || []).some(v => v > 0);
   const cell = (x, i, m) => { const dv = x.h.d[i] || 0, n = dim(m), vc = dv >= n * .9 ? 'full' : dv > 0 ? 'part' : 'none';
     const exact = m >= ourM, ud = x.h.u ? (x.h.u[i] || 0) : 0, sold = (SAL[x.k] || {})[m] || 0, ours = exact ? ud > 0 : sold > 0;
-    const lost = vc !== 'none' && !ours && (x.h.o[i] || 0) > 0;
+    const lost = x.ours && vc !== 'none' && !ours && (x.h.o[i] || 0) > 0;
     return {vc, ours, exact, sold, lost, dv, ud, n}; };
-  const MXL = PL.filter(x => !RUHLOST || mIdx.some((i, j) => cell(x, i, MI[j]).lost));
-  const mxRow = x => '<span class="rh-mr" data-art="' + esc(x.a) + '"><b>' + esc(shortName(x.n)) + '</b></span>' + mIdx.map((i, j) => { const c = cell(x, i, MI[j]);
-    return '<span class="rh-c' + (c.lost ? ' lost' : '') + '" title="' + esc(ml(MI[j]) + ': Vetro — ' + (c.vc === 'full' ? 'весь місяць' : c.vc === 'part' ? c.dv + ' дн з ' + c.n : 'не було') + ', у нас — ' + (c.ours ? 'було' : 'не було') + (c.exact ? (c.ours ? ' (' + c.ud + ' дн)' : '') : ' (приблизно, за продажами)') + (c.sold ? ', продали ' + c.sold + ' шт' : '') + (c.lost ? ' · ВТРАЧЕНИЙ МІСЯЦЬ' : '')) + '"><i class="hv ' + c.vc + '"></i><i class="hv ' + (c.ours ? 'ours' + (c.exact ? '' : ' apx') : 'none') + '"></i><em>' + (c.sold ? c.sold + ' шт' : '') + '</em></span>'; }).join('');
+  PL.forEach(x => { x.ours = isOurs(x); });
+  const MXL = PL.filter(x => RUHMX === 'all' ? true : RUHMX === 'ours' ? x.ours : RUHMX === 'opp' ? !x.ours && x.out > 0 : x.ours && mIdx.some((i, j) => cell(x, i, MI[j]).lost))
+    .sort((a, b) => RUHMX === 'opp' ? b.out - a.out : 0);
+  const mxRow = x => '<span class="rh-mr" data-rh="' + esc(x.a) + '">' + phA(x.a) + '<b>' + esc(shortName(x.n)) + '</b></span>' + mIdx.map((i, j) => { const c = cell(x, i, MI[j]);
+    return '<span class="rh-c' + (c.lost ? ' lost' : '') + '" title="' + esc(ml(MI[j]) + ': Vetro — ' + (c.vc === 'full' ? 'весь місяць' : c.vc === 'part' ? c.dv + ' дн з ' + c.n : 'не було') + ', у нас — ' + (c.ours ? 'було' : 'не було') + (c.exact ? (c.ours ? ' (' + c.ud + ' дн)' : '') : ' (приблизно, за продажами)') + (c.sold ? ', продали ' + c.sold + ' шт' : '') + (c.lost ? ' · ВТРАЧЕНИЙ МІСЯЦЬ' : '')) + '"><i class="hv ' + c.vc + '"></i><i class="hv ' + (c.ours ? 'ours' + (c.exact ? '' : ' apx') : 'none') + '"></i><em>' + [c.sold ? c.sold + ' шт' : '', c.exact && c.ours && c.ud < c.n ? c.ud + ' дн' : ''].filter(Boolean).join(' · ') + '</em></span>'; }).join('');
   const seg = (id, v, opts) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (String(v) === String(o[0])) + '">' + o[1] + '</button>').join('') + '</div>';
   const sum$ = f => short(act.reduce((t, x) => t + f(x) * x.p, 0));
 
@@ -2359,34 +2383,53 @@ function renderRuh() {
     '<div class="rh-g5">' +
       '<div class="card kpi"><span class="k">Приїхало до Vetro</span><b class="num">' + fmt(tIn) + ' шт</b><span class="sub">≈ ' + sum$(x => x.inn) + ' ₴ за РРЦ</span></div>' +
       '<div class="card kpi"><span class="k">Пішло від Vetro</span><b class="num">' + fmt(tOut) + ' шт</b><span class="sub">≈ ' + sum$(x => x.out) + ' ₴ · усім клієнтам Vetro</span></div>' +
-      '<div class="card kpi acc"><span class="k">Взяли ми</span><b class="num">' + fmt(tTook) + ' шт</b><span class="sub">наша частка ' + (share(tTook, tOut) ?? '—') + '% від того, що пішло</span></div>' +
+      '<div class="card kpi acc"><span class="k">Взяли ми</span><b class="num">' + fmt(tTook) + ' шт</b><span class="sub">наша частка ' + (share(tTook, tIn) ?? '—') + '% від того, що приїхало</span></div>' +
       '<div class="card kpi"><span class="k">Продали ми клієнтам</span><b class="num">' + fmt(tSold) + ' шт</b><span class="sub">≈ ' + sum$(x => x.sold) + ' ₴</span></div>' +
       '<div class="card kpi"><span class="k">Залишок у Vetro зараз</span><b class="num">' + fmt(rows.reduce((t, x) => t + Math.max(0, x.vq), 0)) + ' шт</b><span class="sub">у нас ' + fmt(rows.reduce((t, x) => t + x.oq, 0)) + ' шт</span></div></div>' +
     '<div class="card"><div class="ch"><h3>Рух по місяцях</h3><span class="sub">приїхало до Vetro · пішло від Vetro · з них взяли ми</span></div>' +
-      '<div class="leg"><span><i class="dot" style="background:var(--good)"></i>приїхало до Vetro</span><span><i class="dot" style="background:var(--mut)"></i>пішло від Vetro</span><span><i class="dot" style="background:var(--y)"></i>взяли ми</span><span>% — наша частка</span></div>' +
+      '<div class="leg"><span><i class="dot" style="background:var(--good)"></i>приїхало до Vetro</span><span><i class="dot" style="background:var(--mut)"></i>пішло від Vetro</span><span><i class="dot" style="background:var(--y)"></i>взяли ми</span><span>% — наша частка від приходу</span></div>' +
       '<div class="rh-mch" style="grid-template-columns:repeat(' + byM.length + ',minmax(0,1fr))">' + byM.map(x => '<div class="mc"><div class="bars">' + [[x.inn, 'var(--good)', 'приїхало'], [x.out, 'var(--mut)', 'пішло'], [x.took, 'var(--y)', 'взяли ми']].map(b => '<i style="height:' + Math.max(1, b[0] / mMx * 100) + '%;background:' + b[1] + '" title="' + esc(ml(x.m) + ' · ' + b[2] + ': ' + b[0] + ' шт') + '">' + (b[0] && byM.length <= 12 ? '<em>' + (b[0] < 1000 ? b[0] : (b[0] / 1000).toFixed(1).replace('.', ',') + 'т') + '</em>' : '') + '</i>').join('') + '</div>' +
-        '<b>' + (x.out ? Math.round(x.took / x.out * 100) + '%' : '—') + '</b><span>' + ml(x.m) + '</span></div>').join('') + '</div></div>' +
-    '<div class="card"><div class="ch"><h3>Рух по категоріях</h3><span class="sub">де ми сильні, а де Vetro продає іншим</span></div><div class="tbl"><table><thead><tr><th>Категорія</th><th class="n">Приїхало</th><th class="n">Пішло від Vetro</th><th class="n">Взяли ми</th><th class="n">Наша частка</th><th class="n">Продали ми</th><th class="n">Залишок Vetro</th></tr></thead><tbody>' +
-      (GL.map(g => { const o = G[g]; return '<tr><td><b>' + esc(g) + '</b></td><td class="n">' + fmt(o.inn) + '</td><td class="n">' + fmt(o.out) + '</td><td class="n"><b>' + fmt(o.took) + '</b></td><td class="n">' + shBar(share(o.took, o.out)) + '</td><td class="n">' + fmt(o.sold) + '</td><td class="n">' + fmt(Math.max(0, o.vq)) + '</td></tr>'; }).join('') || '<tr><td class="empty">Руху немає</td></tr>') + '</tbody></table></div></div>' +
-    '<div class="card"><div class="ch"><h3>Рух по позиціях</h3>' + seg('ruhS', RUHSORT, [['out', 'Пішло'], ['sh', 'Частка'], ['miss', 'Ми не брали']]) + '</div>' +
+        '<b>' + (x.inn ? Math.round(x.took / x.inn * 100) + '%' : '—') + '</b><span>' + ml(x.m) + '</span></div>').join('') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>Рух по категоріях</h3><span class="sub">де ми сильні, а де Vetro продає іншим</span></div><div class="tbl"><table><thead><tr><th>Категорія</th><th class="n">Приїхало</th><th class="n">Пішло від Vetro</th><th class="n">Взяли ми</th><th class="n">Частка від приходу</th><th class="n">Продали ми</th><th class="n">Залишок Vetro</th></tr></thead><tbody>' +
+      (GL.map(g => { const o = G[g]; return '<tr><td><b>' + esc(g) + '</b></td><td class="n">' + fmt(o.inn) + '</td><td class="n">' + fmt(o.out) + '</td><td class="n"><b>' + fmt(o.took) + '</b></td><td class="n">' + shBar(share(o.took, o.inn)) + '</td><td class="n">' + fmt(o.sold) + '</td><td class="n">' + fmt(Math.max(0, o.vq)) + '</td></tr>'; }).join('') || '<tr><td class="empty">Руху немає</td></tr>') + '</tbody></table></div></div>' +
+    '<div class="card"><div class="ch"><h3>Рух по позиціях</h3>' + seg('ruhS', RUHSORT, [['in', 'Приїхало'], ['sh', 'Частка'], ['miss', 'Ми не брали']]) + '</div>' +
       '<div class="tbl pc-only"><table class="rh-pt"><thead><tr><th>Позиція</th><th class="n">Приїхало</th><th class="n">Пішло від Vetro</th><th class="n">Взяли ми</th><th class="n">Частка</th><th class="n">Продали ми</th><th class="n">Vetro зараз</th><th class="n">У нас</th></tr></thead><tbody>' +
-        (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<tr' + (!x.took && x.out ? ' class="miss"' : '') + ' data-art="' + esc(x.a) + '"><td>' + nm(x) + '</td><td class="n">' + fmt(x.inn) + '</td><td class="n">' + fmt(x.out) + '</td><td class="n"><b>' + fmt(x.took) + '</b></td><td class="n">' + shBar(share(x.took, x.out)) + '</td><td class="n">' + fmt(x.sold) + '</td><td class="n">' + fmt(Math.max(0, x.vq)) + '</td><td class="n">' + fmt(x.oq) + '</td></tr>').join('') + '</tbody></table></div>' +
-      '<div class="list ph-only">' + (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<div class="pcard rh-pc" data-art="' + esc(x.a) + '">' + nm(x) + '<div class="rh-pcg"><span>Приїхало<b>' + fmt(x.inn) + '</b></span><span>Пішло<b>' + fmt(x.out) + '</b></span><span>Взяли ми<b>' + fmt(x.took) + '</b></span><span>Частка<b>' + (share(x.took, x.out) ?? '—') + (x.out ? '%' : '') + '</b></span></div><div class="sub">продали ми ' + x.sold + ' · Vetro зараз ' + Math.max(0, x.vq) + ' · у нас ' + x.oq + '</div></div>').join('') + '</div>' +
+        (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<tr' + (!x.took && x.out ? ' class="miss"' : '') + ' data-rh="' + esc(x.a) + '"><td>' + nm(x) + '</td><td class="n">' + fmt(x.inn) + '</td><td class="n">' + fmt(x.out) + '</td><td class="n"><b>' + fmt(x.took) + '</b></td><td class="n">' + shBar(share(x.took, x.inn)) + '</td><td class="n">' + fmt(x.sold) + '</td><td class="n">' + fmt(Math.max(0, x.vq)) + '</td><td class="n">' + fmt(x.oq) + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<div class="list ph-only">' + (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<div class="pcard rh-pc" data-rh="' + esc(x.a) + '">' + nm(x) + '<div class="rh-pcg"><span>Приїхало<b>' + fmt(x.inn) + '</b></span><span>Пішло<b>' + fmt(x.out) + '</b></span><span>Взяли ми<b>' + fmt(x.took) + '</b></span><span>Частка<b>' + (share(x.took, x.inn) ?? '—') + (x.inn ? '%' : '') + '</b></span></div><div class="sub">продали ми ' + x.sold + ' · Vetro зараз ' + Math.max(0, x.vq) + ' · у нас ' + x.oq + '</div></div>').join('') + '</div>' +
       (PL.length > 40 ? '<button class="st-more" data-stall="rhp">' + (STSHOW.rhp ? 'Згорнути' : 'Показати всі ' + PL.length) + '</button>' : '') + '</div>' +
     '<div class="card"><div class="ch"><h3>Партії: надходження до Vetro</h3><span class="sub">кожен прихід — як швидко розібрали і скільки взяли ми · ' + BAT.length + '</span></div><div class="mt-tl">' +
-      (showAll('rhb', BAT, 12, b => '<div class="rh-bt" data-art="' + esc(b.x.a) + '"><div class="pn2">' + phA(b.x.a) + '<div><b>' + esc(shortName(b.x.n)) + '</b><span class="sub">прихід ' + dm(pd(b.d)) + ' · <b style="color:var(--good)">+' + b.q + ' шт</b> · ' + (b.end ? 'закінчилась ' + dm(pd(b.end)) + ' — за ' + b.days + ' дн' : 'пішло ' + b.went + ' шт за ' + b.days + ' дн, у Vetro зараз ' + Math.max(0, b.x.vq)) + '</span></div></div>' +
-        '<div class="rh-bts"><span class="mb"><i style="width:' + Math.min(100, Math.round(b.took / b.q * 100)) + '%"></i></span><span>ми взяли <b>' + b.took + ' шт</b> (' + Math.round(b.took / b.q * 100) + '% партії)</span>' + (b.end ? '<span class="rh-tag">партія закінчилась</span>' : '') + '</div></div>') || '<div class="empty">Приходів за цей період немає</div>') + '</div></div>' +
-    '<div class="card"><div class="ch"><h3>Наявність по місяцях</h3><label class="rh-chk"><input type="checkbox" id="ruhLost"' + (RUHLOST ? ' checked' : '') + '> лише з втраченими місяцями</label></div>' +
+      (showAll('rhb', BAT, 12, b => '<div class="rh-bt" data-rh="' + esc(b.x.a) + '"><div class="pn2">' + phA(b.x.a) + '<div><b>' + esc(shortName(b.x.n)) + '</b><span class="sub">прихід ' + dm(pd(b.d)) + ' · <b style="color:var(--good)">+' + b.q + ' шт</b> · ' + (b.end ? 'закінчилась ' + dm(pd(b.end)) + ' — за ' + b.days + ' дн' : 'пішло ' + b.went + ' шт за ' + b.days + ' дн, у Vetro зараз ' + Math.max(0, b.x.vq)) + '</span></div></div>' +
+        '<div class="rh-bts"><span class="mb"><i style="width:' + Math.min(100, Math.round(b.took / b.q * 100)) + '%"></i></span><span>ми взяли <b>' + b.took + ' шт</b> (' + Math.round(b.took / b.q * 100) + '% партії)</span>' + (b.pre ? '<span class="rh-tag pre" title="Замовлення до приходу (до 45 днів). Частину приходу Vetro міг одразу віддати під нас — у фіді її не видно.">передзамовлення ' + b.pre + ' шт</span>' : '') + (b.end ? '<span class="rh-tag">партія закінчилась</span>' : '') + '</div></div>') || '<div class="empty">Приходів за цей період немає</div>') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>Наявність по місяцях</h3>' + seg('ruhMx', RUHMX, [['ours', 'Наші позиції'], ['lost', 'Втрачені місяці'], ['opp', 'Не беремо, а продається'], ['all', 'Усі']]) + '</div>' +
       '<div class="leg"><span><i class="hv full"></i>у Vetro весь місяць</span><span><i class="hv part"></i>частину місяця</span><span><i class="hv none"></i>не було</span><span><i class="hv ours"></i>у нас</span><span><i class="hv ours apx"></i>у нас (приблизно)</span><span><i class="hv lostk"></i>втрачений місяць</span></div>' +
-      '<div class="tbl"><div class="rh-mx" style="grid-template-columns:minmax(150px,1.6fr) repeat(' + MI.length + ',minmax(44px,1fr))"><span></span>' + MI.map(m => '<span class="mh">' + ml(m) + '</span>').join('') +
+      '<div class="tbl"><div class="rh-mx" style="grid-template-columns:minmax(200px,320px) repeat(' + MI.length + ',84px)"><span class="mh2"><i>верх — Vetro</i><i>низ — ми</i></span>' + MI.map(m => '<span class="mh">' + ml(m) + '</span>').join('') +
         ((STSHOW.rhm ? MXL : MXL.slice(0, 40)).map(mxRow).join('') || '<span class="empty" style="grid-column:1/-1">Немає позицій</span>') + '</div></div>' +
       (MXL.length > 40 ? '<button class="st-more" data-stall="rhm">' + (STSHOW.rhm ? 'Згорнути' : 'Показати всі ' + MXL.length) + '</button>' : '') +
-      '<div class="sub">Верхня смужка — Vetro, нижня — ми, під ними — скільки ми продали за місяць. Червона рамка — у Vetro товар був і від нього відвантажували, а в нас його не було. До ' + (RUH.ourStart ? dm(pd(RUH.ourStart)) : 'початку запису') + ' «у нас» — приблизно: був продаж у місяці.</div></div>';
+      '<div class="sub">Верхня смужка — Vetro, нижня — ми, під ними — скільки ми продали за місяць. Червона рамка — втрачений місяць: наша позиція (у матриці, продавали за рік або була на залишку), у Vetro була й продавалась, а в нас її не було. «Не беремо, а продається» — те, чого ми не тримаємо, а Vetro активно відвантажує: можливість, а не втрата. До ' + (RUH.ourStart ? dm(pd(RUH.ourStart)) : 'початку запису') + ' «у нас» — приблизно: був продаж у місяці.</div></div>';
   const on = (id, f) => { const el = $(id); if (el) el.onclick = f; };
   const pick = (id, f) => on(id, e => { const b = e.target.closest('button'); if (b) { f(b.dataset.v); LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); } });
-  pick('ruhN', v => { RUHN = +v; }); pick('ruhCat', v => { RUHCAT = v; }); pick('ruhS', v => { RUHSORT = v; });
+  pick('ruhN', v => { RUHN = +v; }); pick('ruhCat', v => { RUHCAT = v; }); pick('ruhS', v => { RUHSORT = v; }); pick('ruhMx', v => { RUHMX = v; });
   on('ruhRe', () => { RUH = null; ruhLoad(true); renderRuh(); });
-  const lc = $('ruhLost'); if (lc) lc.onchange = () => { RUHLOST = lc.checked; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); };
+  $('ruhBox').querySelectorAll('[data-rh]').forEach(el => el.onclick = e => { if (e.target.closest('[data-art]')) return; ruhHist(el.dataset.rh, ORD); });
+}
+// історія залишку однієї позиції — перевірити цифри очима
+const RHK = {first: ['перший запис', ''], new: ['з’явилась у фіді — новий товар', 'in'], in: ['прихід', 'in'], out: ['пішло', 'out'], res: ['повернувся резерв — зменшує «пішло»', 'res'], gone: ['зникла з фіду — не рух товару', 'gone'], back: ['повернулась у фід без змін', 'gone']};
+function ruhHist(a, ORD) {
+  const it = D.items[a] || {}, ords = ((ORD || {})[nk(a)] || {}).L || [];
+  openModal(() => ({html: mhead('<h2>' + esc(it.n || a) + '</h2><div class="sub">' + esc(a) + ' · історія залишку у Vetro і наші замовлення · <button class="lnk" data-art="' + esc(a) + '">картка товару</button></div>') + '<div id="rhHist" class="empty">Завантажую історію…</div>',
+    after: () => {
+      const p = window.__DEMO_RUHART__ ? Promise.resolve(window.__DEMO_RUHART__(a)) : IN_GAS ? new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashRuhArt(a))
+        : fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=ruh&a=' + encodeURIComponent(a) + '&t=' + Date.now(), {cache: 'no-store'}).then(r => r.text());
+      p.then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error);
+        const toIso = d => d.slice(6, 10) + '-' + d.slice(3, 5) + '-' + d.slice(0, 2);
+        const L = (j.ev || []).map(e => ({d: toIso(e[0]), t: e[0], was: e[1], q: e[2], k: e[3], dq: e[4], back: e[5]})).concat(ords.map(o => ({d: o[0], t: dm(pd(o[0])) + '.' + o[0].slice(0, 4), ord: o[1]}))).sort((x, y) => x.d < y.d ? -1 : x.d > y.d ? 1 : 0);
+        const sum = k => (j.ev || []).filter(e => e[3] === k).reduce((t, e) => t + Math.abs(e[4]), 0);
+        $('rhHist').className = ''; $('rhHist').innerHTML = '<div class="rh-hs"><span>приїхало <b>' + (sum('in') + sum('new')) + '</b></span><span>пішло <b>' + Math.max(0, sum('out') - sum('res')) + '</b></span><span>взяли ми <b>' + ords.reduce((t, o) => t + o[1], 0) + '</b></span><span class="sub">за всю історію</span></div>' +
+          '<div class="tbl"><table class="rh-ht"><thead><tr><th>Дата</th><th class="n">Було</th><th class="n">Стало</th><th class="n">Зміна</th><th>Як порахували</th></tr></thead><tbody>' +
+          L.map(e => e.ord ? '<tr class="ord"><td>' + esc(e.t) + '</td><td colspan="3" class="n"><b>+' + e.ord + ' шт</b></td><td>🛒 наше замовлення у Vetro (затверджено)</td></tr>'
+            : '<tr class="k-' + (RHK[e.k] || ['', ''])[1] + '"><td>' + esc(e.t) + '</td><td class="n">' + (e.was === '' ? '—' : e.was) + '</td><td class="n"><b>' + (e.k === 'gone' ? '— немає у фіді' : e.q) + '</b></td><td class="n">' + (e.dq ? (e.dq > 0 ? '+' : '') + e.dq : '') + '</td><td>' + esc((RHK[e.k] || [e.k])[0]) + (e.back && e.k !== 'back' ? ' (після повернення у фід)' : '') + '</td></tr>').join('') +
+          '</tbody></table></div><div class="sub">Рахується різниця між сусідніми записами фіду Vetro (оновлюється кілька разів на день). Зникнення позиції з фіду і повернення — не рух товару. Плюс до 3 шт (і менше 30% залишку) — повернення резерву.</div>'; })
+        .catch(e => { $('rhHist').textContent = 'Не вдалося завантажити: ' + (e && e.message || e); }); }}));
 }
 // ===== ПЛАН ЗАЛУ: розстановка товару в залах (ЗД / РТ), задачі з плану =====
 // кімнати з креслень (стіни, вхід, вітрини, ніші, шлях покупця) і розстановка з креслення — як підказка-«тінь»
@@ -2465,10 +2508,10 @@ function flip(p) { const fx = x => p.W - x, fy = y => p.H - y;
   p.path = p.path.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (m, x, y) => fx(+x) + ' ' + fy(+y));
   return p; }
   const R = {zd: zdPlan(), rt: flip(rtPlan())};
-  Object.values(R).forEach(p => { p.ghost = p.items.map(i => ({k: i.k, x: i.x, y: i.y, r: i.r, w: T[i.k][0], h: T[i.k][1]})); delete p.items; });
+  Object.values(R).forEach(p => { p.ghost = p.items.filter(i => i.k !== 'fx').map(i => ({k: i.k, x: i.x, y: i.y, r: i.r, w: T[i.k][0], h: T[i.k][1]})); p.fx = p.items.filter(i => i.k === 'fx').map(i => ({x: i.x, y: i.y, r: i.r})); delete p.items; });
   return R;
 })();
-let PLAN = null, PLINFO = {}, PLERR = '', PLBUSY = false, PLS = 'zd', PLOV = 'base', PLSRC = 'hall', PLZOOM = 1, PLSEL = null, PLMS = new Set(), PLGHOST = null, PLX = 2, PLFORM = null;
+let PLAN = null, PLINFO = {}, PLERR = '', PLBUSY = false, PLS = 'zd', PLOV = 'base', PLSRC = 'hall', PLZOOM = 1, PLSEL = null, PLMS = new Set(), PLGHOST = null, PLX = 2, PLFORM = null, PLGRID = (() => { try { return localStorage.getItem('plGrid') === '1'; } catch (e) { return false; } })();
 const PLSI = () => PLS === 'rt' ? 1 : 0;
 const plUid = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)).slice(0, 16);
 // ----- тип і розмір меблів з назви / групи (см) -----
@@ -2497,13 +2540,24 @@ const plColor = n => { n = String(n || ''); const q = /[«"][^»"]+[»"]\s*(.*)$
   const sh = plShort(n), m = plModel(n), rest = q ? q[1] : c ? n.slice(c.index + c[0].length) : (m.indexOf(sh) >= 0 ? m.slice(m.indexOf(sh) + sh.length) : m.split(/\s+/).slice(1).join(' '));
   return rest.split(/\s+/).filter(t => t && !/\d/.test(t)).join(' ').replace(/^[+\s]+/, ''); };
 const plFit = (t, wcm, px) => { const n = Math.floor(wcm / (px * PLX * .66)); if (n < 4) return ''; return t.length > n ? t.slice(0, n - 1) + '…' : t; };
-const plSz = it => { const v = ((it.r % 180) + 180) % 180, s = v > 45 && v < 135; return {w: s ? it.h : it.w, h: s ? it.w : it.h}; };
+// геометрія з урахуванням повороту на будь-який кут
+const plRad = r => (r || 0) * Math.PI / 180;
+const plSz = it => { const c = Math.abs(Math.cos(plRad(it.r))), s = Math.abs(Math.sin(plRad(it.r))); return {w: it.w * c + it.h * s, h: it.w * s + it.h * c}; };
 const plBox = it => { const s = plSz(it); return {x1: it.x - s.w / 2, y1: it.y - s.h / 2, x2: it.x + s.w / 2, y2: it.y + s.h / 2}; };
+const plPoly = it => { const c = Math.cos(plRad(it.r)), s = Math.sin(plRad(it.r)), w = it.w / 2, h = it.h / 2; return [[-w, -h], [w, -h], [w, h], [-w, h]].map(([x, y]) => [it.x + x * c - y * s, it.y + x * s + y * c]); };
+const plRot = (x, y, cx, cy, deg) => { const c = Math.cos(plRad(deg)), s = Math.sin(plRad(deg)), dx = x - cx, dy = y - cy; return [cx + dx * c - dy * s, cy + dx * s + dy * c]; };
+function plOverlap(P, Q) { for (const poly of [P, Q]) for (let i = 0; i < 4; i++) { const a = poly[i], b = poly[(i + 1) % 4], nx = b[1] - a[1], ny = a[0] - b[0];
+  const pr = L => L.map(p => p[0] * nx + p[1] * ny), A = pr(P), B = pr(Q); if (Math.max(...A) < Math.min(...B) || Math.max(...B) < Math.min(...A)) return false; } return true; }
+function plSeg(p, a, b) { const dx = b[0] - a[0], dy = b[1] - a[1], t = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy || 1))); return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy); }
+function plDist(P, Q) { if (plOverlap(P, Q)) return 0; let d = 1e9; for (const [X, Y] of [[P, Q], [Q, P]]) X.forEach(p => { for (let i = 0; i < 4; i++) d = Math.min(d, plSeg(p, Y[i], Y[(i + 1) % 4])); }); return d; }
+// елементи залу (не товар): ресепшн, колона, перегородка, стелаж, декор, зона
+const PLEL = {fx: [80, 170, 'Ресепшн'], cl: [40, 40, 'Колона'], wl: [200, 12, 'Перегородка'], sh: [120, 40, 'Стелаж / вітрина'], dc: [50, 50, 'Декор (рослина, лампа)'], zn: [200, 150, 'Зона / підсобка']};
+const plIsEl = i => !i.a && PLEL[i.k];
 const plItems = () => (PLAN && PLAN[PLS]) || (PLAN ? (PLAN[PLS] = []) : []);
 // ----- залишки: що в залі, що на складі, що продано з плану -----
 function plStock() {
   const si = PLSI(), L = plItems(), by = {};
-  L.forEach(i => { const o = by[i.a] || (by[i.a] = {on: [], mv: []}); (i.mv ? o.mv : o.on).push(i); });
+  L.forEach(i => { if (!i.a) return; const o = by[i.a] || (by[i.a] = {on: [], mv: []}); (i.mv ? o.mv : o.on).push(i); });
   const sold = new Set(), conv = [];
   Object.keys(by).forEach(a => { const it = D.items[a] || {}, hall = Math.max(0, (si ? it.s2 : it.s1) || 0), o = by[a];
     o.mv.forEach(i => { if (o.on.length < hall) { i.mv = 0; o.on.push(i); conv.push(i); } });             // приїхало зі складу — вже не «чекає»
@@ -2548,16 +2602,19 @@ function renderPlan() {
     const r = $('plRe'); if (r) r.onclick = () => { plLoad(); renderPlan(); }; if (!PLBUSY && !PLERR) plLoad(); return; }
   if (MTASK === null && !MBUSY) mtLoad();
   if (!MTDRAW.includes(plTasks)) MTDRAW.push(plTasks);
-  if (PLGHOST === null) PLGHOST = !plItems().length;
+  if (PLGHOST === null) PLGHOST = !plItems().filter(i => i.a).length;
+  // ресепшн з креслення — рухомий предмет; ставиться один раз, далі як збережено
+  if (!plItems().some(i => i.k === 'fx') && !PLAN['_fx_' + PLS]) { const add = (PLROOM[PLS].fx || []).map(f => ({id: 'fx' + plUid(), a: '', k: 'fx', w: 80, h: 170, x: f.x, y: f.y, r: f.r || 0, g: '', mv: 0})); PLAN['_fx_' + PLS] = 1; if (add.length) { plItems().push(...add); plQueue(add); } }
+  plKeys();
   const seg = (id, v, opts) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (v === o[0]) + '">' + o[1] + '</button>').join('') + '</div>';
   box.innerHTML =
-    '<div class="pl-top"><p class="sub">Перетягуйте товар зі списку на план · клік по меблях — дії · Shift + клік по кількох — об’єднати в комплект · клітинка = 20 см</p>' + seg('plStore', PLS, [['zd', esc(stName(0))], ['rt', esc(stName(1))]]) + '</div>' +
+    '<div class="pl-top"><p class="sub">Перетягуйте товар на план · клік — дії · кружечок над предметом — поворот · Shift + клік або рамка мишкою — вибрати кілька · Ctrl+Z — скасувати · клітинка = 20 см</p>' + seg('plStore', PLS, [['zd', esc(stName(0))], ['rt', esc(stName(1))]]) + '</div>' +
     '<div class="pl-stats" id="plStats"></div>' +
-    '<div class="pl-wrap"><div class="pl-side"><div class="card"><div class="pl-src" id="plSrc"><button data-v="hall" aria-pressed="' + (PLSRC === 'hall') + '">У залі, не на плані</button><button data-v="sk" aria-pressed="' + (PLSRC === 'sk') + '">На складі</button></div>' +
+    '<div class="pl-wrap"><div class="pl-side"><div class="card"><div class="pl-src" id="plSrc"><button data-v="hall" aria-pressed="' + (PLSRC === 'hall') + '">У залі, не на плані</button><button data-v="sk" aria-pressed="' + (PLSRC === 'sk') + '">На складі</button><button data-v="el" aria-pressed="' + (PLSRC === 'el') + '">Елементи залу</button></div>' +
         '<input id="plQ" class="pl-in" placeholder="Пошук товару"><div id="plList" class="pl-list"></div><div class="sub" id="plSrcNote"></div></div></div>' +
-      '<div class="pl-board" id="plBoard"><div class="pl-pop" id="plPop" hidden></div><div class="pl-gap" id="plGap" hidden></div><div class="pl-ms" id="plMs" hidden><span></span><button class="btn-y" id="plJoin">Об’єднати в комплект</button><button class="btn-s" id="plMsX">Скасувати</button></div>' +
+      '<div class="pl-board" id="plBoard"><div class="pl-pop" id="plPop" hidden></div><div class="pl-gap" id="plGap" hidden></div><div class="pl-ms" id="plMs" hidden><span></span><button data-m="join">Об’єднати в комплект</button><button data-m="rot">↻ 90°</button><button data-m="al" title="Вирівняти по лівому краю">⇤ ліво</button><button data-m="at" title="Вирівняти по верху">⤒ верх</button><button data-m="ah" title="В один ряд по горизонталі">═ ряд</button><button data-m="av" title="В одну колонку по вертикалі">║ колонка</button><button data-m="dh" title="Рівний крок по горизонталі">↔ крок</button><button data-m="dv" title="Рівний крок по вертикалі">↕ крок</button><button data-m="task">+ Задача</button><button data-m="off" class="bad">Прибрати</button><button data-m="x">✕</button></div><div class="pl-toast" id="plToast" hidden></div>' +
         '<div class="pl-tools">' + seg('plOv', PLOV, [['base', 'Звичайний'], ['sales', 'Продажі 30 дн'], ['stale', 'Застій'], ['new', 'Новинки']]) +
-          '<div class="pl-tr"><label class="pl-chk"><input type="checkbox" id="plGh"' + (PLGHOST ? ' checked' : '') + '> креслення</label><span class="sv" id="plSave"></span><div class="pl-zoom"><button id="plZo" title="Зменшити">−</button><button id="plZi" title="Збільшити">+</button></div></div></div>' +
+          '<div class="pl-tr"><label class="pl-chk"><input type="checkbox" id="plGh"' + (PLGHOST ? ' checked' : '') + '> креслення</label><label class="pl-chk" title="Тонкі лінії кожні 50 см, товстіші й підписи — кожен метр"><input type="checkbox" id="plGrid"' + (PLGRID ? ' checked' : '') + '> сітка 50 см</label><span class="sv" id="plSave"></span><div class="pl-zoom"><button id="plZo" title="Зменшити">−</button><button id="plZi" title="Збільшити">+</button></div></div></div>' +
         '<div class="pl-svgw" id="plWrap"><svg id="plSvg"></svg></div><div class="pl-legend" id="plLeg"></div><div class="sub" id="plInfo"></div></div>' +
       '<div class="pl-side pl-right"><div class="card"><div class="ch"><h3>Задачі залу</h3><span class="sub" id="plTN"></span></div><div id="plTasks" class="pl-tl"></div>' +
         '<form class="pl-form" id="plTf" hidden><div class="sub" id="plTfFor"></div><textarea id="plTt" maxlength="500"></textarea><div class="pl-f2"><input id="plTr" class="pl-in" list="plTrL" placeholder="Хто відповідає"><input id="plTd" class="pl-in" type="date"></div><datalist id="plTrL"></datalist>' +
@@ -2570,22 +2627,17 @@ function renderPlan() {
   pick('plOv', v => { PLOV = v; [...$('plOv').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); plDraw(); });
   pick('plSrc', v => { PLSRC = v; [...$('plSrc').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); plList(); });
   $('plQ').oninput = plList; $('plGh').onchange = e => { PLGHOST = e.target.checked; plDraw(); };
+  $('plGrid').onchange = e => { PLGRID = e.target.checked; try { localStorage.setItem('plGrid', PLGRID ? '1' : '0'); } catch (x) {} plDraw(); };
   on('plZi', () => { PLZOOM = Math.min(4, PLZOOM * 1.25); plDraw(); }); on('plZo', () => { PLZOOM = Math.max(.4, PLZOOM / 1.25); plDraw(); });
-  on('plJoin', plJoin); on('plMsX', () => { PLMS.clear(); plMsBar(); plDraw(); });
+  $('plMs').onclick = e => { const b = e.target.closest('[data-m]'); if (b) plMulti(b.dataset.m); };
   on('plTc', () => { $('plTf').hidden = true; PLFORM = null; });
   $('plTf').onsubmit = e => { e.preventDefault(); const t = $('plTt').value.trim(); if (!t) return; const f = PLFORM || {};
-    mtWrite({a: 'add', w: iso(monday(ASOF)), t, r: $('plTr').value.trim(), d: $('plTd').value, st: PLS, it: f.id || '', art: f.a || ''}); $('plTf').hidden = true; PLFORM = null; plDraw(); };
+    const ids = f.ids || [f.id || ''];
+    mtWrite({a: 'add', w: iso(monday(ASOF)), t, r: $('plTr').value.trim(), d: $('plTd').value, st: PLS, it: ids.join(',').slice(0, 30), art: f.a || ''}); $('plTf').hidden = true; PLFORM = null; plDraw(); };
   on('plTg', plTgSend); on('plCopy', () => { try { navigator.clipboard.writeText(plTaskText()).then(() => { $('plCopy').textContent = 'Скопійовано ✓'; }); } catch (e) {} });
   plBind(); plList(); plTasks(); plDraw(); plSaveSt();
   const ro = new ResizeObserver(() => { if (tab === 'plan') plDraw(); }); ro.observe($('plWrap'));
 }
-function plMsBar() { const b = $('plMs'); if (!b) return; b.hidden = PLMS.size < 2; b.querySelector('span').textContent = 'Вибрано ' + PLMS.size + ' предм.'; }
-function plJoin() { const L = plItems().filter(i => PLMS.has(i.id)); if (L.length < 2) return;
-  const lead = L.slice().sort((a, b) => (/^t/.test(b.k) - /^t/.test(a.k)) || b.w * b.h - a.w * a.h)[0], ch = [];
-  L.forEach(i => { if (i === lead) return; plItems().forEach(x => { if (x.g === i.id) { x.g = lead.id; ch.push(x); } }); i.g = lead.id; ch.push(i); });
-  if (lead.g) { lead.g = ''; ch.push(lead); }
-  PLMS.clear(); PLSEL = lead.id; plMsBar(); plQueue(ch); plDraw(); }
-// ----- стан предмета для кольору -----
 function plMeta() { const si = PLSI(), dep = DEPS[si], X = stStats(), H = X[dep] || {}, from = iso(addD(ASOF, -29)), s30 = {};
   R.forEach(r => { if (r.dep === dep && r.d >= from) s30[r.a] = (s30[r.a] || 0) + r.q; });
   return {H, s30, kind: a => { const it = D.items[a]; return it ? staleKind(a, it, H[a], [si]) : ''; }}; }
@@ -2596,66 +2648,7 @@ function plFill(i, M, sold) {
   if (PLOV === 'new') return isNovelty(it) ? ['var(--blue2,#e3ebff)', 'var(--on)'] : ['var(--card)', 'var(--line2,#c9c8c3)'];
   if (PLOV === 'sales') { const s = M.s30[i.a] || 0; return s ? ['color-mix(in srgb,var(--good) ' + Math.min(80, 20 + s * 12) + '%,var(--card))', 'var(--good)'] : ['var(--card)', 'var(--line2,#c9c8c3)']; }
   return ['var(--card)', 'var(--ink)']; }
-function plShapeSvg(i, M, sold, pins) {
-  const w = i.w, h = i.h, [f, s] = plFill(i, M, sold), dash = sold ? ' stroke-dasharray="' + 8 + ' ' + 6 + '"' : i.mv ? ' stroke-dasharray="10 5"' : '', fo = sold ? 'none' : f, sw = 1.6 * PLX;
-  const R = (x, y, ww, hh, rx, extra) => '<rect x="' + x + '" y="' + y + '" width="' + ww + '" height="' + hh + '" rx="' + rx + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + (extra || '') + '/>';
-  let g = '';
-  if (i.k === 'ch') g = R(-w / 2, -h / 2, w, h, 7) + '<rect x="' + (-w / 2 + 4) + '" y="' + (-h / 2 + 3) + '" width="' + (w - 8) + '" height="8" rx="3" fill="' + s + '" opacity=".5"/>';
-  else if (i.k === 'ar') g = R(-w / 2, -h / 2, w, h, 16) + '<path d="M' + (-w / 2 + 8) + ' ' + (-h / 2 + 14) + 'H' + (w / 2 - 8) + '" stroke="' + s + '" stroke-width="7" stroke-linecap="round" opacity=".45"/>';
-  else if (i.k === 'so') { g = R(-w / 2, -h / 2, w, h, 14) + '<rect x="' + (-w / 2 + 8) + '" y="' + (-h / 2 + 6) + '" width="' + (w - 16) + '" height="16" rx="6" fill="' + s + '" opacity=".3"/>'; }
-  else if (i.k === 'rd' || i.k === 'tr') g = '<ellipse rx="' + w / 2 + '" ry="' + h / 2 + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + '/>';
-  else g = R(-w / 2, -h / 2, w, h, 6);
-  const it = D.items[i.a] || {}, n = it.n || i.a, S = plSz(i), up = i.r % 360 ? ' transform="rotate(' + (-i.r) + ')"' : '';
-  const tx = (y, t, px, c, wg) => '<text' + up + ' text-anchor="middle" y="' + y + '" font-size="' + px * PLX + '" font-weight="' + (wg || 700) + '" fill="' + c + '">' + esc(t) + '</text>';
-  let lab = '';
-  if (sold) lab = tx(3 * PLX, S.w < 60 ? 'прод.' : 'продано', S.w < 60 ? 7 : 9, 'var(--bad)', 800);
-  else if (i.k === 'tb' || i.k === 'tr') { const L = [[plFit(plShort(n) + ' ' + i.w + ' см', S.w - 6, 9), 9, 'var(--ink)', 800], [plFit(plColor(n), S.w - 6, 8), 8, 'var(--mut)', 600]];
-    if (PLOV === 'sales' && M.s30[i.a]) L.push([M.s30[i.a] + ' шт за 30 дн', 8, 'var(--good)', 800]);
-    const rows = L.filter((r, k) => r[0] && (S.h - 4) >= (k + 1) * 9 * PLX * 1.2), y0 = -(rows.length - 1) * 9 * PLX * .6;
-    lab = rows.map((r, k) => tx(y0 + k * 9 * PLX * 1.2 + r[1] * PLX * .35, r[0], r[1], r[2], r[3])).join(''); }
-  else if (i.k === 'ch') { const t = plFit(plShort(n), S.w - 4, 7); if (t) lab = tx(7 * PLX * .9, t, 7, 'var(--ink)', 700); }
-  else { const t = plFit(i.k === 'so' ? plModel(n) : plShort(n), S.w - 6, 8); if (t) lab = tx(i.k === 'so' ? 8 * PLX * 1.2 : 8 * PLX * .35, t, 8, 'var(--ink)', 700); }
-  if (PLOV === 'sales' && M.s30[i.a] && !/^t/.test(i.k)) lab += '<circle r="' + 8 * PLX + '" fill="var(--good)"/>' + tx(3 * PLX, String(M.s30[i.a]), 9, '#fff', 800);
-  const pin = pins[i.id] ? '<g transform="rotate(' + (-i.r) + ') translate(' + (S.w / 2 - 2) + ',' + (-S.h / 2 - 2) + ')"><circle r="' + 9 * PLX + '" fill="var(--bad)"/><text text-anchor="middle" y="' + 3.5 * PLX + '" font-size="' + 10 * PLX + '" font-weight="800" fill="#fff">' + pins[i.id] + '</text></g>' : '';
-  return '<g class="it' + (PLSEL === i.id || PLMS.has(i.id) ? ' sel' : '') + '" data-id="' + esc(i.id) + '" transform="translate(' + i.x + ',' + i.y + ') rotate(' + i.r + ')"><title>' + esc(n + ' · ' + i.w + '×' + i.h + ' см' + (sold ? ' · продано' : i.mv ? ' · чекає зі складу' : '')) + '</title>' + g + lab + pin + '</g>';
-}
 function plTaskList() { return (MTASK || []).filter(t => t.st === PLS && t.s !== 'ok' && t.s !== 'no'); }
-function plDraw() {
-  const svg = $('plSvg'), wrap = $('plWrap'); if (!svg || !wrap) return;
-  const p = PLROOM[PLS], pad = 40, W = p.W + pad * 2, H = p.H + pad * 2, fitW = Math.max(.1, (wrap.clientWidth - 16) / W), sc = fitW * PLZOOM;
-  PLX = 1 / sc; wrap.style.height = Math.round(Math.min(H * fitW + 16, 2400)) + 'px';
-  svg.setAttribute('viewBox', (-pad) + ' ' + (-pad) + ' ' + W + ' ' + H); svg.setAttribute('width', W * sc); svg.setAttribute('height', H * sc);
-  const L = plItems(), ST = plStock(), M = plMeta(), TL = plTaskList(), pins = {};
-  TL.forEach((t, k) => { if (t.it && !pins[t.it]) pins[t.it] = k + 1; });
-  let s = '<defs><pattern id="plHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--ink)" stroke-width="2"/></pattern></defs>' +
-    '<rect x="0" y="0" width="' + p.W + '" height="' + p.H + '" fill="var(--card)"/>' + '<path d="' + p.path + '" fill="none" stroke="#c98a5b" stroke-width="' + 1.6 * PLX + '" stroke-dasharray="' + 8 * PLX + ' ' + 6 * PLX + '" opacity=".6"/>';
-  p.ghost.filter(gh => gh.k === 'fx').forEach(gh => { s += '<g transform="translate(' + gh.x + ',' + gh.y + ') rotate(' + gh.r + ')"><rect x="' + (-gh.w / 2) + '" y="' + (-gh.h / 2) + '" width="' + gh.w + '" height="' + gh.h + '" rx="4" fill="var(--bar)" stroke="var(--mut)" stroke-width="' + 1.5 * PLX + '"/><text transform="rotate(' + (-gh.r) + ')" text-anchor="middle" y="' + 3 * PLX + '" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--mut)">ресепшн</text></g>'; });
-  if (PLGHOST) s += p.ghost.filter(gh => gh.k !== 'fx').map(gh => { const S = gh.k === 'ch' ? 7 : 6; return '<g transform="translate(' + gh.x + ',' + gh.y + ') rotate(' + gh.r + ')" opacity=".35">' + (gh.k === 'rd' ? '<ellipse rx="' + gh.w / 2 + '" ry="' + gh.h / 2 + '"' : '<rect x="' + (-gh.w / 2) + '" y="' + (-gh.h / 2) + '" width="' + gh.w + '" height="' + gh.h + '" rx="' + S + '"') + ' fill="none" stroke="var(--mut)" stroke-width="' + PLX + '" stroke-dasharray="' + 4 * PLX + ' ' + 3 * PLX + '"/></g>'; }).join('');
-  p.cols.forEach(c => { s += '<rect x="' + c[0] + '" y="' + c[1] + '" width="' + c[2] + '" height="' + c[3] + '" fill="url(#plHatch)" stroke="var(--ink)" stroke-width="2"/>'; });
-  p.walls.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="var(--ink)" stroke-width="16" stroke-linecap="square"/>'; });
-  p.glass.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="#8fb7d9" stroke-width="7"/>'; });
-  p.door.forEach(d => { s += '<line x1="' + d[0] + '" y1="' + d[1] + '" x2="' + d[2] + '" y2="' + d[3] + '" stroke="var(--y)" stroke-width="6" stroke-dasharray="10 6"/><text x="' + (d[0] + d[2]) / 2 + '" y="' + (d[1] - 8 * PLX) + '" text-anchor="middle" font-size="' + 10 * PLX + '" font-weight="800" fill="var(--ink)">вхід</text>'; });
-  s += '<g transform="translate(' + (p.W - 105) + ',' + (p.H + 24) + ')"><path d="M0 -5V5M0 0H100M100 -5V5" stroke="var(--ink)" stroke-width="' + 1.5 * PLX + '" fill="none"/><text x="50" y="' + (-4 * PLX) + '" text-anchor="middle" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--ink)">1 м</text></g>';
-  L.forEach(i => { s += plShapeSvg(i, M, ST.sold.has(i.id), pins); });
-  // рамка комплекту
-  const lead = PLSEL && L.find(i => i.id === PLSEL), gid = lead && (lead.g || (L.some(i => i.g === lead.id) ? lead.id : ''));
-  if (gid) { const G = L.filter(i => i.id === gid || i.g === gid).map(plBox), x1 = Math.min(...G.map(b => b.x1)) - 8, y1 = Math.min(...G.map(b => b.y1)) - 8, x2 = Math.max(...G.map(b => b.x2)) + 8, y2 = Math.max(...G.map(b => b.y2)) + 8;
-    s += '<rect x="' + x1 + '" y="' + y1 + '" width="' + (x2 - x1) + '" height="' + (y2 - y1) + '" rx="' + 8 * PLX + '" fill="none" stroke="var(--y)" stroke-width="' + 2 * PLX + '" stroke-dasharray="' + 6 * PLX + ' ' + 4 * PLX + '" pointer-events="none"/><text x="' + x1 + '" y="' + (y1 - 4 * PLX) + '" font-size="' + 9 * PLX + '" font-weight="800" fill="var(--yInk)">комплект · ' + G.length + ' предм.</text>'; }
-  svg.innerHTML = s;
-  // цифри і легенда
-  const real = L.filter(i => !ST.sold.has(i.id) && !i.mv), stale = real.filter(i => M.kind(i.a) === 'stale').length;
-  $('plStats').innerHTML = [['На плані', real.length + ' од.', ''], ['У залі, не на плані', ST.hall.reduce((t, x) => t + x[1], 0), ST.hall.length ? 'warn' : ''], ['Продано — місце порожнє', ST.sold.size, ST.sold.size ? 'warn' : ''], ['Чекає зі складу', L.filter(i => i.mv).length, ''], ['Застій на плані', stale, ''], ['Задачі залу відкриті', TL.length, '']]
-    .map(x => '<div class="pl-stat ' + x[2] + '">' + x[0] + '<b>' + x[1] + '</b></div>').join('');
-  $('plLeg').innerHTML = ({base: '<span><i style="border-color:var(--ink)"></i>меблі в масштабі</span><span><i style="border-style:dashed;border-color:var(--bad)"></i>продано — місце порожнє</span><span><i style="background:var(--y2);border-color:var(--yInk);border-style:dashed"></i>чекає зі складу</span>' + (PLGHOST ? '<span><i style="border-style:dashed;opacity:.5"></i>креслення (підказка)</span>' : '') + '<span style="color:#c98a5b">- - шлях покупця</span>',
-    sales: '<span><i style="background:color-mix(in srgb,var(--good) 60%,white);border-color:var(--good)"></i>продано за 30 днів у цьому магазині (шт)</span>', stale: '<span><i style="background:var(--bad2);border-color:var(--bad)"></i>застій</span>', new: '<span><i style="background:#e3ebff;border-color:var(--on)"></i>новинки</span>'})[PLOV];
-  $('plInfo').textContent = PLINFO[PLS] ? 'Останні зміни плану: ' + PLINFO[PLS] : (L.length ? '' : 'План порожній: перетягніть товар зі списку. Пунктир — розстановка з креслення як підказка.');
-  plMsBar();
-}
-function plList() { const ST = plStock(), q = ($('plQ').value || '').toLowerCase(), src = PLSRC === 'sk' ? ST.sk : ST.hall;
-  const L = src.filter(x => { const it = D.items[x[0]] || {}; return !q || (it.n || x[0]).toLowerCase().includes(q) || x[0].toLowerCase().includes(q); }).sort((a, b) => GROUPS.indexOf((D.items[a[0]] || {}).g) - GROUPS.indexOf((D.items[b[0]] || {}).g) || b[1] - a[1]);
-  $('plList').innerHTML = L.slice(0, 150).map(x => { const it = D.items[x[0]] || {}, sh = plShape(x[0]);
-    return '<div class="pl-it' + (PLSRC === 'sk' ? ' sk' : '') + '" data-a="' + esc(x[0]) + '">' + phA(x[0]) + '<span><b>' + esc(shortName(it.n || x[0])) + '</b><small>' + esc(x[0]) + ' · ' + sh.w + '×' + sh.h + ' см</small></span><span class="q">' + x[1] + ' шт</span></div>'; }).join('') || '<div class="sub">' + (PLSRC === 'sk' ? 'На складі нічого' : 'Усе з залу вже на плані ✓') + '</div>';
-  $('plSrcNote').textContent = PLSRC === 'sk' ? 'Перетягнете зі складу на план — товар стане жовтим пунктиром і створиться задача «привезти зі складу і поставити сюди».' : 'Товар, що є на залишку цього залу за 1С, але ще не на плані.'; }
 function plTasks() { const box = $('plTasks'); if (!box) return; const TL = plTaskList();
   $('plTN').textContent = MTASK === null ? '' : TL.length + ' відкриті';
   box.innerHTML = MTASK === null ? '<div class="sub">Завантажую…</div>' : TL.map((t, k) => '<div class="pl-task"><span class="n">' + (k + 1) + '</span><div><b>' + esc(t.t) + '</b><small>' + esc(t.r || '—') + (t.d ? ' · до ' + dm(pd(t.d)) : '') + mtSv(t) + '</small></div><button data-tok="' + esc(t.id) + '" title="Зроблено">✓</button></div>').join('') || '<div class="sub">Задач немає. Клікніть меблі на плані → «+ Задача».</div>';
@@ -2665,36 +2658,183 @@ function plTaskText() { const TL = plTaskList(); return '📍 План залу 
 function plTgSend() { const txt = plTaskText();
   if (!MTG.tg) { try { navigator.clipboard.writeText(txt); } catch (e) {} $('plTg').textContent = 'Гілку не підключено — текст скопійовано'; return; }
   const b = $('plTg'); b.textContent = 'Надсилаю…'; mtApi({a: 'tg', text: txt}).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message); b.textContent = '✅ Надіслано в гілку'; }).catch(e => { b.textContent = 'Не вдалося: ' + (e && e.message || e); }); }
-// ----- миша / палець -----
 function plPt(e) { const svg = $('plSvg'), p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
-function plGap(it) { const b = plBox(it), p = PLROOM[PLS]; let best = Math.min(b.x1, b.y1, p.W - b.x2, p.H - b.y2);
-  plItems().forEach(o => { if (o === it || (it.g && (o.g === it.g || o.id === it.g)) || o.g === it.id) return; const c = plBox(o);
-    const dx = Math.max(0, c.x1 - b.x2, b.x1 - c.x2), dy = Math.max(0, c.y1 - b.y2, b.y1 - c.y2); if (dx > 0 && dy > 0) return; best = Math.min(best, Math.max(dx, dy)); });
+// ----- кілька предметів: панель дій -----
+function plMsBar() { const b = $('plMs'); if (!b) return; b.hidden = PLMS.size < 2; b.querySelector('span').textContent = 'Вибрано ' + PLMS.size + ' предм.'; }
+const plKids = i => plItems().filter(x => x.g === i.id);
+function plJoin(L) { if (L.length < 2) return; plSnap();
+  const lead = L.slice().sort((a, b) => (/^t/.test(b.k) - /^t/.test(a.k)) || b.w * b.h - a.w * a.h)[0], ch = [];
+  L.forEach(i => { if (i === lead) return; plItems().forEach(x => { if (x.g === i.id) { x.g = lead.id; ch.push(x); } }); i.g = lead.id; ch.push(i); });
+  if (lead.g) { lead.g = ''; ch.push(lead); }
+  PLMS.clear(); PLSEL = lead.id; plQueue(ch); plDraw(); }
+function plRotate(i, deg, kidsToo) { const ch = [i]; i.r = ((i.r + deg) % 360 + 360) % 360;
+  if (kidsToo !== false) plKids(i).forEach(c => { const [x, y] = plRot(c.x, c.y, i.x, i.y, deg); c.x = Math.round(x); c.y = Math.round(y); c.r = ((c.r + deg) % 360 + 360) % 360; ch.push(c); });
+  return ch; }
+function plMulti(m) { const L = plItems().filter(i => PLMS.has(i.id)); if (m === 'x') { PLMS.clear(); plDraw(); return; } if (!L.length) return;
+  if (m === 'join') return plJoin(L);
+  if (m === 'task') { PLFORM = {ids: L.map(i => i.id), a: ''}; $('plTf').hidden = false; $('plTfFor').textContent = '📍 ' + L.length + ' предм. на плані'; $('plTt').value = ''; $('plTd').value = iso(addD(ASOF, 3)); $('plTt').focus(); return; }
+  plSnap();
+  if (m === 'off') { const gone = new Set(L.map(i => i.id)), kids = plItems().filter(x => !gone.has(x.id) && gone.has(x.g)); kids.forEach(c => { c.g = ''; });
+    PLAN[PLS] = plItems().filter(x => !gone.has(x.id)); PLMS.clear(); plQueue(kids, L); plToast('Прибрано з плану ' + L.length + ' предм.'); plList(); plDraw(); return; }
+  let ch = [];
+  if (m === 'rot') L.forEach(i => { ch = ch.concat(plRotate(i, 90, !L.some(o => o.id === i.g))); });
+  const B = L.map(plBox), move = (i, dx, dy) => { i.x += dx; i.y += dy; ch.push(i); plKids(i).filter(c => !PLMS.has(c.id)).forEach(c => { c.x += dx; c.y += dy; ch.push(c); }); };
+  if (m === 'al') { const x0 = Math.min(...B.map(b => b.x1)); L.forEach((i, k) => move(i, x0 - B[k].x1, 0)); }
+  if (m === 'at') { const y0 = Math.min(...B.map(b => b.y1)); L.forEach((i, k) => move(i, 0, y0 - B[k].y1)); }
+  if (m === 'ah') { const yc = L.reduce((t, i) => t + i.y, 0) / L.length; L.forEach(i => move(i, 0, Math.round(yc - i.y))); }
+  if (m === 'av') { const xc = L.reduce((t, i) => t + i.x, 0) / L.length; L.forEach(i => move(i, Math.round(xc - i.x), 0)); }
+  if (m === 'dh' || m === 'dv') { const ax = m === 'dh' ? 'x' : 'y', S = L.slice().sort((a, b) => a[ax] - b[ax]); if (S.length > 2) { const st = (S[S.length - 1][ax] - S[0][ax]) / (S.length - 1); S.forEach((i, k) => { const t = Math.round(S[0][ax] + st * k) - i[ax]; move(i, ax === 'x' ? t : 0, ax === 'y' ? t : 0); }); } }
+  plQueue(ch); plDraw(); }
+// ----- скасування (Ctrl+Z) -----
+const PLUNDO = {zd: [], rt: []};
+function plSnap() { const U = PLUNDO[PLS]; U.push(JSON.stringify(plItems())); if (U.length > 30) U.shift(); }
+function plUndo() { const U = PLUNDO[PLS], snap = U.pop(); if (!snap) { plToast('Нема що скасовувати'); return; }
+  const prev = JSON.parse(snap), cur = plItems(), pm = new Map(prev.map(i => [i.id, i])), del = cur.filter(i => !pm.has(i.id)), up = prev.filter(i => { const c = cur.find(x => x.id === i.id); return !c || JSON.stringify(c) !== JSON.stringify(i); });
+  PLAN[PLS] = prev; PLSEL = null; PLMS.clear(); plQueue(up, del); plToast('Скасовано', true); plList(); plDraw(); }
+function plToast(t, noUndo) { const el = $('plToast'); if (!el) return; el.hidden = false; el.innerHTML = esc(t) + (noUndo ? '' : ' · <button class="lnk" id="plUndoB">Скасувати</button>');
+  const b = $('plUndoB'); if (b) b.onclick = plUndo; clearTimeout(plToast.t); plToast.t = setTimeout(() => { el.hidden = true; }, 10000); }
+function plKeys() { if (plKeys.on) return; plKeys.on = 1;
+  document.addEventListener('keydown', e => { if (tab !== 'plan' || /INPUT|TEXTAREA|SELECT/.test((e.target.tagName || ''))) return;
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); plUndo(); return; }
+    const L = PLMS.size ? plItems().filter(i => PLMS.has(i.id)) : plItems().filter(i => i.id === PLSEL); if (!L.length) return;
+    if (e.key === 'Escape') { PLSEL = null; PLMS.clear(); plClosePop(); plDraw(); return; }
+    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); PLMS.clear(); L.forEach(i => PLMS.add(i.id)); plMulti('off'); return; }
+    if (e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'к') { e.preventDefault(); plSnap(); let ch = []; L.forEach(i => { ch = ch.concat(plRotate(i, e.shiftKey ? 15 : 90, !L.some(o => o.id === i.g))); }); plQueue(ch); plDraw(); return; }
+    const d = {ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1]}[e.key]; if (!d) return; e.preventDefault();
+    const st = e.shiftKey ? 1 : 5, ch = []; if (!plKeys.mv) plSnap(); clearTimeout(plKeys.mv); plKeys.mv = setTimeout(() => { plKeys.mv = 0; }, 800);
+    L.forEach(i => { i.x += d[0] * st; i.y += d[1] * st; ch.push(i); plKids(i).filter(c => !L.includes(c)).forEach(c => { c.x += d[0] * st; c.y += d[1] * st; ch.push(c); }); }); plQueue(ch); plDraw(); }); }
+// ----- малювання -----
+function plShapeSvg(i, M, sold, pins) {
+  const w = i.w, h = i.h, sw = 1.6 * PLX;
+  if (plIsEl(i)) { const lab = {fx: 'ресепшн', sh: 'стелаж', zn: 'зона', wl: '', cl: '', dc: ''}[i.k], up = i.r ? ' transform="rotate(' + (-i.r) + ')"' : '';
+    let g = i.k === 'cl' ? '<rect x="' + (-w / 2) + '" y="' + (-h / 2) + '" width="' + w + '" height="' + h + '" fill="url(#plHatch)" stroke="var(--ink)" stroke-width="' + sw + '"/>'
+      : i.k === 'wl' ? '<rect x="' + (-w / 2) + '" y="' + (-h / 2) + '" width="' + w + '" height="' + h + '" fill="var(--ink)"/>'
+      : i.k === 'dc' ? '<circle r="' + w / 2 + '" fill="color-mix(in srgb,var(--good) 25%,var(--card))" stroke="var(--good)" stroke-width="' + sw + '"/><path d="M0 ' + (h / 4) + 'V' + (-h / 5) + 'M0 0c-8-10-16-8-18-4M0 -6c8-10 16-8 18-4" stroke="var(--good)" stroke-width="' + sw + '" fill="none"/>'
+      : i.k === 'zn' ? '<rect x="' + (-w / 2) + '" y="' + (-h / 2) + '" width="' + w + '" height="' + h + '" rx="6" fill="rgba(127,127,127,.08)" stroke="var(--mut)" stroke-width="' + sw + '" stroke-dasharray="' + 8 * PLX + ' ' + 5 * PLX + '"/>'
+      : '<rect x="' + (-w / 2) + '" y="' + (-h / 2) + '" width="' + w + '" height="' + h + '" rx="5" fill="var(--bar)" stroke="var(--mut)" stroke-width="' + sw + '"/>';
+    if (lab) g += '<text' + up + ' text-anchor="middle" y="' + 3 * PLX + '" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--mut)">' + lab + '</text>';
+    return '<g class="it el' + (PLSEL === i.id || PLMS.has(i.id) ? ' sel' : '') + '" data-id="' + esc(i.id) + '" transform="translate(' + i.x + ',' + i.y + ') rotate(' + i.r + ')"><title>' + esc(PLEL[i.k][2] + ' · ' + w + '×' + h + ' см') + '</title>' + g + '</g>'; }
+  const [f, s] = plFill(i, M, sold), dash = sold ? ' stroke-dasharray="8 6"' : i.mv ? ' stroke-dasharray="10 5"' : '', fo = sold ? 'none' : f;
+  const Rr = (x, y, ww, hh, rx) => '<rect x="' + x + '" y="' + y + '" width="' + ww + '" height="' + hh + '" rx="' + rx + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + '/>';
+  let g = '';
+  if (i.k === 'ch') g = Rr(-w / 2, -h / 2, w, h, 7) + '<rect x="' + (-w / 2 + 4) + '" y="' + (-h / 2 + 3) + '" width="' + (w - 8) + '" height="8" rx="3" fill="' + s + '" opacity=".5"/>';
+  else if (i.k === 'ar') g = Rr(-w / 2, -h / 2, w, h, 16) + '<path d="M' + (-w / 2 + 8) + ' ' + (-h / 2 + 14) + 'H' + (w / 2 - 8) + '" stroke="' + s + '" stroke-width="7" stroke-linecap="round" opacity=".45"/>';
+  else if (i.k === 'so') g = Rr(-w / 2, -h / 2, w, h, 14) + '<rect x="' + (-w / 2 + 8) + '" y="' + (-h / 2 + 6) + '" width="' + (w - 16) + '" height="16" rx="6" fill="' + s + '" opacity=".3"/>';
+  else if (i.k === 'rd' || i.k === 'tr') g = '<ellipse rx="' + w / 2 + '" ry="' + h / 2 + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + '/>';
+  else g = Rr(-w / 2, -h / 2, w, h, 6);
+  const it = D.items[i.a] || {}, n = it.n || i.a, S = plSz(i), up = i.r ? ' transform="rotate(' + (-i.r) + ')"' : '';
+  const tx = (y, t, px, c, wg) => '<text' + up + ' text-anchor="middle" y="' + y + '" font-size="' + px * PLX + '" font-weight="' + (wg || 700) + '" fill="' + c + '">' + esc(t) + '</text>';
+  const fw = Math.min(S.w, i.r % 90 ? Math.min(i.w, i.h) * 1.2 : S.w);
+  let lab = '';
+  if (sold) lab = tx(3 * PLX, fw < 60 ? 'прод.' : 'продано', fw < 60 ? 7 : 9, 'var(--bad)', 800);
+  else if (i.k === 'tb' || i.k === 'tr') { const L = [[plFit(plShort(n) + ' ' + i.w + ' см', fw - 6, 9), 9, 'var(--ink)', 800], [plFit(plColor(n), fw - 6, 8), 8, 'var(--mut)', 600]];
+    if (PLOV === 'sales' && M.s30[i.a]) L.push([M.s30[i.a] + ' шт за 30 дн', 8, 'var(--good)', 800]);
+    const hh = i.r % 90 ? Math.min(i.w, i.h) : S.h, rows = L.filter((r, k) => r[0] && (hh - 4) >= (k + 1) * 9 * PLX * 1.2), y0 = -(rows.length - 1) * 9 * PLX * .6;
+    lab = rows.map((r, k) => tx(y0 + k * 9 * PLX * 1.2 + r[1] * PLX * .35, r[0], r[1], r[2], r[3])).join(''); }
+  else if (i.k === 'ch') { const t = plFit(plShort(n), fw - 4, 7); if (t) lab = tx(7 * PLX * .9, t, 7, 'var(--ink)', 700); }
+  else { const t = plFit(i.k === 'so' ? plModel(n) : plShort(n), fw - 6, 8); if (t) lab = tx(i.k === 'so' ? 8 * PLX * 1.2 : 8 * PLX * .35, t, 8, 'var(--ink)', 700); }
+  if (PLOV === 'sales' && M.s30[i.a] && !/^t/.test(i.k)) lab += '<circle r="' + 8 * PLX + '" fill="var(--good)"/>' + tx(3 * PLX, String(M.s30[i.a]), 9, '#fff', 800);
+  const pin = pins[i.id] ? '<g transform="rotate(' + (-i.r) + ') translate(' + (S.w / 2 - 2) + ',' + (-S.h / 2 - 2) + ')"><circle r="' + 9 * PLX + '" fill="var(--bad)"/><text text-anchor="middle" y="' + 3.5 * PLX + '" font-size="' + 10 * PLX + '" font-weight="800" fill="#fff">' + pins[i.id] + '</text></g>' : '';
+  return '<g class="it' + (PLSEL === i.id || PLMS.has(i.id) ? ' sel' : '') + '" data-id="' + esc(i.id) + '" transform="translate(' + i.x + ',' + i.y + ') rotate(' + i.r + ')"><title>' + esc(n + ' · ' + i.w + '×' + i.h + ' см' + (sold ? ' · продано' : i.mv ? ' · чекає зі складу' : '')) + '</title>' + g + lab + pin + '</g>';
+}
+function plGridSvg(p) {
+  if (!PLGRID) return '';
+  let a = '', b = '', t = '';
+  const fs = 8 * PLX;
+  for (let x = 50; x < p.W; x += 50) { if (x % 100) a += 'M' + x + ' 0V' + p.H; else b += 'M' + x + ' 0V' + p.H; }
+  for (let y = 50; y < p.H; y += 50) { if (y % 100) a += 'M0 ' + y + 'H' + p.W; else b += 'M0 ' + y + 'H' + p.W; }
+  for (let x = 100; x < p.W; x += 100) t += '<text x="' + x + '" y="' + (-5 * PLX) + '" text-anchor="middle" font-size="' + fs + '" fill="var(--mut)">' + x / 100 + '</text>';
+  for (let y = 100; y < p.H; y += 100) t += '<text x="' + (-5 * PLX) + '" y="' + (y + fs * .35) + '" text-anchor="end" font-size="' + fs + '" fill="var(--mut)">' + y / 100 + '</text>';
+  t += '<text x="' + (-5 * PLX) + '" y="' + (-5 * PLX) + '" text-anchor="end" font-size="' + fs + '" font-weight="700" fill="var(--mut)">м</text>';
+  return '<g pointer-events="none"><path d="' + a + '" stroke="var(--line)" stroke-width="' + .6 * PLX + '" fill="none"/><path d="' + b + '" stroke="var(--mut)" stroke-opacity=".45" stroke-width="' + .9 * PLX + '" fill="none"/>' + t + '</g>';
+}
+function plDraw() {
+  const svg = $('plSvg'), wrap = $('plWrap'); if (!svg || !wrap) return;
+  const p = PLROOM[PLS], pad = 40, W = p.W + pad * 2, H = p.H + pad * 2, fitW = Math.max(.1, (wrap.clientWidth - 16) / W), sc = fitW * PLZOOM;
+  PLX = 1 / sc; wrap.style.height = Math.round(Math.min(H * fitW + 16, 2400)) + 'px';
+  svg.setAttribute('viewBox', (-pad) + ' ' + (-pad) + ' ' + W + ' ' + H); svg.setAttribute('width', W * sc); svg.setAttribute('height', H * sc);
+  const L = plItems(), ST = plStock(), M = plMeta(), TL = plTaskList(), pins = {};
+  TL.forEach((t, k) => String(t.it || '').split(',').forEach(id => { if (id && !pins[id]) pins[id] = k + 1; }));
+  let s = '<defs><pattern id="plHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--ink)" stroke-width="2"/></pattern></defs>' +
+    '<rect x="0" y="0" width="' + p.W + '" height="' + p.H + '" fill="var(--card)"/>' + plGridSvg(p) + '<path d="' + p.path + '" fill="none" stroke="#c98a5b" stroke-width="' + 1.6 * PLX + '" stroke-dasharray="' + 8 * PLX + ' ' + 6 * PLX + '" opacity=".6"/>';
+  if (PLGHOST) s += p.ghost.map(gh => '<g transform="translate(' + gh.x + ',' + gh.y + ') rotate(' + gh.r + ')" opacity=".35">' + (gh.k === 'rd' ? '<ellipse rx="' + gh.w / 2 + '" ry="' + gh.h / 2 + '"' : '<rect x="' + (-gh.w / 2) + '" y="' + (-gh.h / 2) + '" width="' + gh.w + '" height="' + gh.h + '" rx="6"') + ' fill="none" stroke="var(--mut)" stroke-width="' + PLX + '" stroke-dasharray="' + 4 * PLX + ' ' + 3 * PLX + '"/></g>').join('');
+  p.cols.forEach(c => { s += '<rect x="' + c[0] + '" y="' + c[1] + '" width="' + c[2] + '" height="' + c[3] + '" fill="url(#plHatch)" stroke="var(--ink)" stroke-width="2"/>'; });
+  p.walls.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="var(--ink)" stroke-width="16" stroke-linecap="square"/>'; });
+  p.glass.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="#8fb7d9" stroke-width="7"/>'; });
+  p.door.forEach(d => { s += '<line x1="' + d[0] + '" y1="' + d[1] + '" x2="' + d[2] + '" y2="' + d[3] + '" stroke="var(--y)" stroke-width="6" stroke-dasharray="10 6"/><text x="' + (d[0] + d[2]) / 2 + '" y="' + (d[1] - 8 * PLX) + '" text-anchor="middle" font-size="' + 10 * PLX + '" font-weight="800" fill="var(--ink)">вхід</text>'; });
+  s += '<g transform="translate(' + (p.W - 105) + ',' + (p.H + 24) + ')"><path d="M0 -5V5M0 0H100M100 -5V5" stroke="var(--ink)" stroke-width="' + 1.5 * PLX + '" fill="none"/><text x="50" y="' + (-4 * PLX) + '" text-anchor="middle" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--ink)">1 м</text></g>';
+  L.filter(plIsEl).forEach(i => { s += plShapeSvg(i, M, false, pins); });
+  L.filter(i => !plIsEl(i)).forEach(i => { s += plShapeSvg(i, M, ST.sold.has(i.id), pins); });
+  const lead = PLSEL && L.find(i => i.id === PLSEL), gid = lead && (lead.g || (L.some(i => i.g === lead.id) ? lead.id : ''));
+  if (gid) { const G = L.filter(i => i.id === gid || i.g === gid).map(plBox), x1 = Math.min(...G.map(b => b.x1)) - 8, y1 = Math.min(...G.map(b => b.y1)) - 8, x2 = Math.max(...G.map(b => b.x2)) + 8, y2 = Math.max(...G.map(b => b.y2)) + 8;
+    s += '<rect x="' + x1 + '" y="' + y1 + '" width="' + (x2 - x1) + '" height="' + (y2 - y1) + '" rx="' + 8 * PLX + '" fill="none" stroke="var(--y)" stroke-width="' + 2 * PLX + '" stroke-dasharray="' + 6 * PLX + ' ' + 4 * PLX + '" pointer-events="none"/><text x="' + x1 + '" y="' + (y1 - 4 * PLX) + '" font-size="' + 9 * PLX + '" font-weight="800" fill="var(--yInk)">комплект · ' + G.length + ' предм.</text>'; }
+  // ручка повороту вибраного предмета
+  if (lead && !PLMS.size) { const d = lead.h / 2 + 22 * PLX, [hx, hy] = plRot(lead.x, lead.y - d, lead.x, lead.y, lead.r), [bx, by] = plRot(lead.x, lead.y - lead.h / 2, lead.x, lead.y, lead.r);
+    s += '<line x1="' + bx + '" y1="' + by + '" x2="' + hx + '" y2="' + hy + '" stroke="var(--y)" stroke-width="' + 1.5 * PLX + '" pointer-events="none"/><circle class="pl-rh" cx="' + hx + '" cy="' + hy + '" r="' + 8 * PLX + '" fill="var(--y)" stroke="var(--ink)" stroke-width="' + 1.2 * PLX + '"><title>Тягніть по колу — поворот (крок 15°, з Shift — будь-який кут)</title></circle>'; }
+  s += '<rect id="plBand" fill="rgba(255,198,26,.15)" stroke="var(--y)" stroke-width="' + 1.5 * PLX + '" stroke-dasharray="' + 5 * PLX + ' ' + 3 * PLX + '" visibility="hidden"/>';
+  svg.innerHTML = s;
+  const real = L.filter(i => i.a && !ST.sold.has(i.id) && !i.mv), stale = real.filter(i => M.kind(i.a) === 'stale').length;
+  $('plStats').innerHTML = [['На плані', real.length + ' од.', ''], ['У залі, не на плані', ST.hall.reduce((t, x) => t + x[1], 0), ST.hall.length ? 'warn' : ''], ['Продано — місце порожнє', ST.sold.size, ST.sold.size ? 'warn' : ''], ['Чекає зі складу', L.filter(i => i.mv).length, ''], ['Застій на плані', stale, ''], ['Задачі залу відкриті', TL.length, '']]
+    .map(x => '<div class="pl-stat ' + x[2] + '">' + x[0] + '<b>' + x[1] + '</b></div>').join('');
+  $('plLeg').innerHTML = ({base: '<span><i style="border-color:var(--ink)"></i>меблі в масштабі</span><span><i style="border-style:dashed;border-color:var(--bad)"></i>продано — місце порожнє</span><span><i style="background:var(--y2);border-color:var(--yInk);border-style:dashed"></i>чекає зі складу</span>' + (PLGHOST ? '<span><i style="border-style:dashed;opacity:.5"></i>креслення (підказка)</span>' : '') + '<span style="color:#c98a5b">- - шлях покупця</span>',
+    sales: '<span><i style="background:color-mix(in srgb,var(--good) 60%,white);border-color:var(--good)"></i>продано за 30 днів у цьому магазині (шт)</span>', stale: '<span><i style="background:var(--bad2);border-color:var(--bad)"></i>застій</span>', new: '<span><i style="background:#e3ebff;border-color:var(--on)"></i>новинки</span>'})[PLOV];
+  $('plInfo').textContent = PLINFO[PLS] ? 'Останні зміни плану: ' + PLINFO[PLS] : (real.length ? '' : 'План порожній: перетягніть товар зі списку. Пунктир — розстановка з креслення як підказка.');
+  plMsBar();
+}
+function plList() { const ST = plStock(), q = ($('plQ').value || '').toLowerCase();
+  if (PLSRC === 'el') { $('plList').innerHTML = Object.keys(PLEL).map(k => '<div class="pl-it el" data-el="' + k + '"><span class="ph">' + {fx: '🛎', cl: '▦', wl: '▬', sh: '🗄', dc: '🪴', zn: '⬚'}[k] + '</span><span><b>' + PLEL[k][2] + '</b><small>' + PLEL[k][0] + '×' + PLEL[k][1] + ' см · розмір можна змінити</small></span><span></span></div>').join('');
+    $('plSrcNote').textContent = 'Не товар: на залишки й продажі не впливає, але враховується в перевірці проходів.'; return; }
+  const src = PLSRC === 'sk' ? ST.sk : ST.hall;
+  const L = src.filter(x => { const it = D.items[x[0]] || {}; return !q || (it.n || x[0]).toLowerCase().includes(q) || x[0].toLowerCase().includes(q); }).sort((a, b) => GROUPS.indexOf((D.items[a[0]] || {}).g) - GROUPS.indexOf((D.items[b[0]] || {}).g) || b[1] - a[1]);
+  $('plList').innerHTML = L.slice(0, 150).map(x => { const it = D.items[x[0]] || {}, sh = plShape(x[0]);
+    return '<div class="pl-it' + (PLSRC === 'sk' ? ' sk' : '') + '" data-a="' + esc(x[0]) + '">' + phA(x[0]) + '<span><b>' + esc(shortName(it.n || x[0])) + '</b><small>' + esc(x[0]) + ' · ' + sh.w + '×' + sh.h + ' см</small></span><span class="q">' + x[1] + ' шт</span></div>'; }).join('') || '<div class="sub">' + (PLSRC === 'sk' ? 'На складі нічого' : 'Усе з залу вже на плані ✓') + '</div>';
+  $('plSrcNote').textContent = PLSRC === 'sk' ? 'Перетягнете зі складу на план — товар стане жовтим пунктиром і створиться задача «привезти зі складу і поставити сюди».' : 'Товар, що є на залишку цього залу за 1С, але ще не на плані.'; }
+// ----- миша / палець -----
+function plGap(it, skip) { const P = plPoly(it), R0 = PLROOM[PLS]; let best = Math.min(...P.map(p => Math.min(p[0], p[1], R0.W - p[0], R0.H - p[1])));
+  plItems().forEach(o => { if (o === it || (skip && skip.has(o.id)) || (it.g && (o.g === it.g || o.id === it.g)) || o.g === it.id) return; best = Math.min(best, plDist(P, plPoly(o))); });
   return best; }
 let PLDRAG = null;
 function plBind() {
   const svg = $('plSvg');
-  svg.addEventListener('pointerdown', e => { const g = e.target.closest('.it'); plClosePop(); if (!g) { if (PLSEL) { PLSEL = null; plDraw(); } return; }
+  svg.addEventListener('pointerdown', e => {
+    if (e.target.closest('.pl-rh')) { const it = plItems().find(x => x.id === PLSEL); if (!it) return; plSnap(); PLDRAG = {rot: it, r0: it.r, kids: plKids(it).map(c => ({c, x: c.x, y: c.y, r: c.r}))}; try { svg.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); return; }
+    const g = e.target.closest('.it'); plClosePop();
+    if (!g) { if (e.pointerType === 'mouse') { const p0 = plPt(e); PLDRAG = {band: p0, add: e.shiftKey}; try { svg.setPointerCapture(e.pointerId); } catch (x) {} }
+      if (!e.shiftKey && (PLSEL || PLMS.size)) { PLSEL = null; PLMS.clear(); plDraw(); } return; }
     const it = plItems().find(x => x.id === g.dataset.id); if (!it) return;
     if (e.shiftKey || e.ctrlKey || e.metaKey) { PLMS.has(it.id) ? PLMS.delete(it.id) : PLMS.add(it.id); if (PLSEL) { PLMS.add(PLSEL); PLSEL = null; } plDraw(); return; }
-    PLMS.clear(); PLSEL = it.id; const p0 = plPt(e), grp = plItems().filter(x => x.g === it.id);
-    PLDRAG = {it, ox: p0.x - it.x, oy: p0.y - it.y, grp: grp.map(c => ({c, dx: c.x - it.x, dy: c.y - it.y})), moved: false, sx: e.clientX, sy: e.clientY};
-    try { svg.setPointerCapture(e.pointerId); } catch (x) {} plDraw(); });
-  svg.addEventListener('pointermove', e => { const d = PLDRAG; if (!d) return; if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 5) d.moved = true; if (!d.moved) return;
-    const p = plPt(e), it = d.it, P = PLROOM[PLS]; it.x = Math.max(0, Math.min(P.W, Math.round((p.x - d.ox) / 5) * 5)); it.y = Math.max(0, Math.min(P.H, Math.round((p.y - d.oy) / 5) * 5));
-    d.grp.forEach(g => { g.c.x = it.x + g.dx; g.c.y = it.y + g.dy; }); plDraw();
-    const gp = plGap(it), lb = $('plGap'), br = $('plBoard').getBoundingClientRect(); lb.hidden = false; lb.className = 'pl-gap' + (gp < 80 ? ' bad' : '');
+    const multi = PLMS.size > 1 && PLMS.has(it.id), L = multi ? plItems().filter(i => PLMS.has(i.id)) : [it], set = new Set(L.map(i => i.id));
+    plItems().forEach(x => { if (set.has(x.g)) set.add(x.id); });
+    const all = plItems().filter(x => set.has(x.id)); if (!multi) { PLMS.clear(); PLSEL = it.id; }
+    const p0 = plPt(e); PLDRAG = {it, all: all.map(c => ({c, x: c.x, y: c.y})), p0, moved: false, sx: e.clientX, sy: e.clientY, set};
+    try { svg.setPointerCapture(e.pointerId); } catch (x) {} if (!multi) plDraw(); });
+  svg.addEventListener('pointermove', e => { const d = PLDRAG; if (!d) return; const p = plPt(e);
+    if (d.band) { const b = $('plBand'), x = Math.min(d.band.x, p.x), y = Math.min(d.band.y, p.y); b.setAttribute('x', x); b.setAttribute('y', y); b.setAttribute('width', Math.abs(p.x - d.band.x)); b.setAttribute('height', Math.abs(p.y - d.band.y)); b.setAttribute('visibility', 'visible'); d.p = p; return; }
+    if (d.rot) { const it = d.rot; let a = Math.atan2(p.y - it.y, p.x - it.x) * 180 / Math.PI + 90; a = e.shiftKey ? Math.round(a) : Math.round(a / 15) * 15; a = (a % 360 + 360) % 360; const da = a - d.r0;
+      it.r = a; d.kids.forEach(k => { const [x, y] = plRot(k.x, k.y, it.x, it.y, da); k.c.x = Math.round(x); k.c.y = Math.round(y); k.c.r = ((k.r + da) % 360 + 360) % 360; }); plDraw();
+      const lb = $('plGap'), br = $('plBoard').getBoundingClientRect(); lb.hidden = false; lb.className = 'pl-gap'; lb.textContent = a + '°'; lb.style.left = (e.clientX - br.left + 14) + 'px'; lb.style.top = (e.clientY - br.top - 34) + 'px'; return; }
+    if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 5) { if (!d.moved) plSnap(); d.moved = true; } if (!d.moved) return;
+    const R0 = PLROOM[PLS], dx = Math.round((p.x - d.p0.x) / 5) * 5, dy = Math.round((p.y - d.p0.y) / 5) * 5;
+    d.all.forEach(k => { k.c.x = Math.max(0, Math.min(R0.W, k.x + dx)); k.c.y = Math.max(0, Math.min(R0.H, k.y + dy)); }); plDraw();
+    const gp = Math.min(...d.all.filter(k => !k.c.g || !d.set.has(k.c.g)).map(k => plGap(k.c, d.set))), lb = $('plGap'), br = $('plBoard').getBoundingClientRect(); lb.hidden = false; lb.className = 'pl-gap' + (gp < 80 ? ' bad' : '');
     lb.textContent = gp <= 0 ? 'накладається на інші меблі' : gp > 900 ? 'вільно' : 'прохід ' + Math.round(gp) + ' см' + (gp < 80 ? ' — замало' : ''); lb.style.left = (e.clientX - br.left + 14) + 'px'; lb.style.top = (e.clientY - br.top - 34) + 'px'; });
-  const up = e => { const d = PLDRAG; if (!d) return; PLDRAG = null; $('plGap').hidden = true; if (d.moved) plQueue([d.it].concat(d.grp.map(g => g.c))); else plPop(d.it, e); };
+  const up = e => { const d = PLDRAG; if (!d) return; PLDRAG = null; $('plGap').hidden = true;
+    if (d.band) { $('plBand').setAttribute('visibility', 'hidden'); if (!d.p) return; const x1 = Math.min(d.band.x, d.p.x), x2 = Math.max(d.band.x, d.p.x), y1 = Math.min(d.band.y, d.p.y), y2 = Math.max(d.band.y, d.p.y);
+      if (x2 - x1 < 10 && y2 - y1 < 10) return; if (!d.add) PLMS.clear(); plItems().forEach(i => { if (i.x >= x1 && i.x <= x2 && i.y >= y1 && i.y <= y2) PLMS.add(i.id); }); PLSEL = null;
+      if (PLMS.size === 1) { PLSEL = [...PLMS][0]; PLMS.clear(); } plDraw(); return; }
+    if (d.rot) { plQueue([d.rot].concat(d.kids.map(k => k.c))); return; }
+    if (d.moved) plQueue(d.all.map(k => k.c)); else if (PLMS.size < 2) plPop(d.it, e); };
   svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
   // перетягування зі списку
-  $('plList').addEventListener('pointerdown', e => { const r = e.target.closest('.pl-it'); if (!r) return; e.preventDefault(); const a = r.dataset.a, fromSk = PLSRC === 'sk';
-    const ghost = document.createElement('div'); ghost.className = 'pl-gap pl-ghost'; ghost.textContent = '＋ ' + shortName((D.items[a] || {}).n || a); document.body.appendChild(ghost);
+  $('plList').addEventListener('pointerdown', e => { const r = e.target.closest('.pl-it'); if (!r) return; e.preventDefault(); const a = r.dataset.a, el = r.dataset.el, fromSk = PLSRC === 'sk';
+    const ghost = document.createElement('div'); ghost.className = 'pl-gap pl-ghost'; ghost.textContent = '＋ ' + (el ? PLEL[el][2] : shortName((D.items[a] || {}).n || a)); document.body.appendChild(ghost);
     const mv = ev => { ghost.style.left = ev.clientX + 10 + 'px'; ghost.style.top = ev.clientY + 10 + 'px'; };
     const fin = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', fin); ghost.remove();
       const wr = $('plWrap').getBoundingClientRect(); if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) return;
+      const p = plPt(ev); plSnap();
+      if (el) { const it = {id: el + plUid(), a: '', k: el, w: PLEL[el][0], h: PLEL[el][1], x: Math.round(p.x / 5) * 5, y: Math.round(p.y / 5) * 5, r: 0, g: '', mv: 0}; plItems().push(it); PLSEL = it.id; plQueue([it]); plDraw(); return; }
       const inHall = plStock().hall.some(x => x[0] === a), mvIt = fromSk && !inHall;                     // якщо такий самий є в залі — ставимо з залу, без переміщення
-      const p = plPt(ev), sh = plShape(a), it = {id: plUid(), a, k: sh.k, w: sh.w, h: sh.h, x: Math.round(p.x / 5) * 5, y: Math.round(p.y / 5) * 5, r: 0, g: '', mv: mvIt ? 1 : 0};
+      const sh = plShape(a), it = {id: plUid(), a, k: sh.k, w: sh.w, h: sh.h, x: Math.round(p.x / 5) * 5, y: Math.round(p.y / 5) * 5, r: 0, g: '', mv: mvIt ? 1 : 0};
       plItems().push(it); PLSEL = it.id; plQueue([it]);
       if (mvIt) mtWrite({a: 'add', w: iso(monday(ASOF)), t: 'Привезти зі складу в ' + stName(PLSI()) + ': ' + ((D.items[a] || {}).n || a) + ' — поставити на позначене місце', r: '', d: iso(addD(ASOF, 3)), st: PLS, it: it.id, art: a});
       plList(); plDraw(); };
@@ -2702,30 +2842,32 @@ function plBind() {
 }
 function plClosePop() { const p = $('plPop'); if (p) p.hidden = true; }
 function plPop(i, e) {
-  const pp = $('plPop'), br = $('plBoard').getBoundingClientRect(), it = D.items[i.a] || {}, si = PLSI(), dep = DEPS[si], M = plMeta(), h = M.H[i.a], ST = plStock();
-  const kids = plItems().filter(x => x.g === i.id), sold = ST.sold.has(i.id), ds = daysSince(h && h.last);
+  const pp = $('plPop'), br = $('plBoard').getBoundingClientRect(), it = D.items[i.a] || {}, si = PLSI(), M = plMeta(), h = M.H[i.a], ST = plStock();
+  const kids = plKids(i), sold = ST.sold.has(i.id), ds = daysSince(h && h.last), el = plIsEl(i);
   const chairs = /^t/.test(i.k) ? ST.hall.concat(ST.sk.map(x => [x[0], x[1], 1])).filter(x => plShape(x[0]).k === 'ch').slice(0, 4) : [];
-  pp.innerHTML = '<div><h4>' + esc(it.n || i.a) + '</h4><div class="sub">' + esc(i.a) + (kids.length ? ' · комплект: ' + (kids.length + 1) + ' предм.' : '') + '</div></div>' +
+  pp.innerHTML = '<div><h4>' + esc(el ? PLEL[i.k][2] : it.n || i.a) + '</h4><div class="sub">' + (el ? 'елемент залу, не товар' : esc(i.a)) + (kids.length ? ' · комплект: ' + (kids.length + 1) + ' предм.' : '') + '</div></div>' +
     (sold ? '<div class="kv bad"><b>Продано</b>на плані більше, ніж є в залі — місце порожнє, поставте інше або приберіть</div>' : '') + (i.mv ? '<div class="kv yel"><b>Чекає переміщення зі складу</b>задача створена</div>' : '') +
-    '<div class="row2"><div class="kv">У залі<b>' + ((si ? it.s2 : it.s1) || 0) + ' шт</b></div><div class="kv">На складі<b>' + (it.sk || 0) + ' шт</b></div><div class="kv">Продано тут за 30 дн<b>' + (M.s30[i.a] || 0) + ' шт</b></div><div class="kv">Останній продаж тут<b>' + (h && h.last ? ds + ' дн тому' : 'не було') + '</b></div></div>' +
-    '<div class="pl-size">Розмір, см <input id="plW" type="number" min="20" max="400" value="' + i.w + '"> × <input id="plH" type="number" min="20" max="300" value="' + i.h + '"></div>' +
+    (el ? '' : '<div class="row2"><div class="kv">У залі<b>' + ((si ? it.s2 : it.s1) || 0) + ' шт</b></div><div class="kv">На складі<b>' + (it.sk || 0) + ' шт</b></div><div class="kv">Продано тут за 30 дн<b>' + (M.s30[i.a] || 0) + ' шт</b></div><div class="kv">Останній продаж тут<b>' + (h && h.last ? ds + ' дн тому' : 'не було') + '</b></div></div>') +
+    '<div class="pl-size">Розмір, см <input id="plW" type="number" min="10" max="600" value="' + i.w + '"> × <input id="plH" type="number" min="5" max="400" value="' + i.h + '"> · ' + i.r + '°</div>' +
     (chairs.length ? '<div class="sub">Поставити стільці до стола:</div><div class="acts">' + chairs.map(x => '<button data-ch="' + esc(x[0]) + '|' + (x[2] ? 1 : 0) + '">' + esc(plShort((D.items[x[0]] || {}).n || x[0])) + ' · ' + x[1] + (x[2] ? ' склад' : ' зал') + '</button>').join('') + '</div>' : '') +
-    '<div class="acts"><button data-a="rot">↻ Повернути</button>' + (kids.length ? '<button data-a="ungrp">Розгрупувати</button>' : '') + (i.g ? '<button data-a="leave">Вийти з комплекту</button>' : '') + '<button data-a="off">Прибрати з плану</button><button class="y" data-a="task">+ Задача</button></div>';
-  pp.hidden = false; pp.style.left = Math.min(br.width - 270, Math.max(8, e.clientX - br.left + 12)) + 'px'; pp.style.top = Math.max(48, Math.min(e.clientY - br.top - 20, br.height - pp.offsetHeight - 8)) + 'px';
-  const resize = () => { const w = Math.max(20, +$('plW').value || i.w), hh = Math.max(20, +$('plH').value || i.h); if (w !== i.w || hh !== i.h) { i.w = w; i.h = hh; plQueue([i]); plDraw(); } };
+    '<div class="acts"><button data-a="rl" title="Повернути вліво">↺ 90°</button><button data-a="rr" title="Повернути вправо">↻ 90°</button><button data-a="r45">↻ 45°</button>' + (kids.length ? '<button data-a="ungrp">Розгрупувати</button>' : '') + (i.g ? '<button data-a="leave">Вийти з комплекту</button>' : '') + '</div>' +
+    '<div class="acts"><button data-a="off">' + (i.k === 'fx' ? 'Прибрати ресепшн' : 'Прибрати з плану') + '</button>' + (el ? '' : '<button class="y" data-a="task">+ Задача</button>') + '</div>';
+  pp.hidden = false; pp.style.left = Math.min(br.width - 280, Math.max(8, e.clientX - br.left + 12)) + 'px'; pp.style.top = Math.max(48, Math.min(e.clientY - br.top - 20, br.height - pp.offsetHeight - 8)) + 'px';
+  const resize = () => { const w = Math.max(5, +$('plW').value || i.w), hh = Math.max(5, +$('plH').value || i.h); if (w !== i.w || hh !== i.h) { plSnap(); i.w = w; i.h = hh; plQueue([i]); plDraw(); } };
   $('plW').onchange = resize; $('plH').onchange = resize;
   pp.onclick = ev => { const b = ev.target.closest('[data-a],[data-ch]'); if (!b) return; const L = plItems();
-    if (b.dataset.ch) { const [a, sk] = b.dataset.ch.split('|'), src = (sk === '1' ? ST.sk : ST.hall).find(x => x[0] === a), n = Math.min(src ? src[1] : 0, i.w >= 200 ? 6 : i.w >= 140 ? 4 : 2), S = plSz(i), per = Math.ceil(n / 2), add = [];
-      for (let k = 0; k < n; k++) { const top = k < per, c = top ? per : n - per, j = top ? k : k - per;
-        add.push({id: plUid(), a, k: 'ch', w: 46, h: 52, x: Math.round(i.x - S.w / 2 + S.w * (j + .5) / c), y: Math.round(top ? i.y - S.h / 2 - 22 : i.y + S.h / 2 + 22), r: top ? 0 : 180, g: i.id, mv: sk === '1' ? 1 : 0}); }
+    if (b.dataset.ch) { plSnap(); const [a, sk] = b.dataset.ch.split('|'), src = (sk === '1' ? ST.sk : ST.hall).find(x => x[0] === a), n = Math.min(src ? src[1] : 0, i.w >= 200 ? 6 : i.w >= 140 ? 4 : 2), per = Math.ceil(n / 2), add = [];
+      for (let k = 0; k < n; k++) { const top = k < per, c = top ? per : n - per, j = top ? k : k - per, lx = -i.w / 2 + i.w * (j + .5) / c, ly = top ? -i.h / 2 - 22 : i.h / 2 + 22, [x, y] = plRot(i.x + lx, i.y + ly, i.x, i.y, i.r);
+        add.push({id: plUid(), a, k: 'ch', w: 46, h: 52, x: Math.round(x), y: Math.round(y), r: ((top ? 0 : 180) + i.r) % 360, g: i.id, mv: sk === '1' ? 1 : 0}); }
       L.push(...add); plQueue(add);
       if (sk === '1' && add.length) mtWrite({a: 'add', w: iso(monday(ASOF)), t: 'Привезти зі складу в ' + stName(si) + ': ' + ((D.items[a] || {}).n || a) + ' × ' + add.length + ' — до стола ' + plShort(it.n || i.a), r: '', d: iso(addD(ASOF, 3)), st: PLS, it: i.id, art: a});
       plClosePop(); plList(); plDraw(); return; }
     const act = b.dataset.a;
-    if (act === 'rot') { i.r = (i.r + 90) % 360; kids.forEach(c => { const dx = c.x - i.x, dy = c.y - i.y; c.x = i.x - dy; c.y = i.y + dx; c.r = (c.r + 90) % 360; }); plQueue([i].concat(kids)); }
-    if (act === 'ungrp') { kids.forEach(c => { c.g = ''; }); plQueue(kids); }
-    if (act === 'leave') { i.g = ''; plQueue([i]); }
-    if (act === 'off') { const gone = [i]; PLAN[PLS] = L.filter(x => x !== i); kids.forEach(c => { c.g = ''; }); plQueue(kids, gone); plClosePop(); PLSEL = null; plList(); }
+    if (act === 'rl' || act === 'rr' || act === 'r45') { plSnap(); plQueue(plRotate(i, act === 'rl' ? -90 : act === 'rr' ? 90 : 45)); plDraw(); plPop(i, e); return; }
+    if (act === 'ungrp') { plSnap(); kids.forEach(c => { c.g = ''; }); plQueue(kids); }
+    if (act === 'leave') { plSnap(); i.g = ''; plQueue([i]); }
+    if (act === 'off') { if (i.k === 'fx' && !b.dataset.sure) { b.dataset.sure = 1; b.textContent = 'Точно прибрати ресепшн?'; b.classList.add('y'); return; }
+      plSnap(); PLAN[PLS] = L.filter(x => x !== i); kids.forEach(c => { c.g = ''; }); plQueue(kids, [i]); plClosePop(); PLSEL = null; plList(); plToast('Прибрано: ' + (el ? PLEL[i.k][2] : plShort(it.n || i.a))); }
     if (act === 'task') { PLFORM = i; $('plTf').hidden = false; $('plTfFor').textContent = '📍 ' + (it.n || i.a); $('plTt').value = sold ? 'Поставити новий товар на місце проданого: ' + (it.n || i.a) : 'Переставити ' + (it.n || i.a) + ' '; $('plTd').value = iso(addD(ASOF, 3)); $('plTt').focus(); plClosePop(); }
     plDraw(); };
 }
