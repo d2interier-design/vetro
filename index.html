@@ -603,6 +603,64 @@ s{opacity:.7}
   #mtPrintBox ul{list-style:none;margin:0;padding:0}#mtPrintBox li{display:grid;grid-template-columns:24px 1fr;gap:6px;padding:6px 0;border-bottom:1px dotted #ccc;break-inside:avoid}
   #mtPrintBox .pm-m{font-size:15px}#mtPrintBox small{display:block;color:#555}
 }
+/* ===== вкладка «Рух Vetro» ===== */
+.rh-top{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}.rh-top>*{min-width:0}.rh-top p{margin:0 0 6px}
+.rh-flt{display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center}.rh-note{justify-self:start;font-size:12px;color:var(--yInk);background:var(--y2);border-radius:10px;padding:7px 12px}
+.lnk{border:0;background:none;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+.rh-g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.rh-mch{display:grid;gap:10px;height:230px;align-items:end}.rh-mch .mc{display:grid;grid-template-rows:1fr auto auto;height:100%;gap:4px;justify-items:center}
+.rh-mch .bars{display:flex;gap:3px;align-items:end;height:100%;width:100%;justify-content:center;padding-top:16px}.rh-mch .bars i{width:26%;max-width:28px;border-radius:5px 5px 2px 2px;position:relative}
+.rh-mch .bars em{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+.rh-mch .mc>b{font-size:11.5px;color:var(--yInk);background:var(--y2);border-radius:6px;padding:1px 6px}.rh-mch .mc>span{font-size:11px;color:var(--mut)}
+.rh-sh{display:inline-grid;grid-template-columns:56px 40px;gap:6px;align-items:center}.rh-sh .mb,.rh-bts .mb{height:6px;border-radius:4px;background:var(--bar);overflow:hidden;display:block}.rh-sh i,.rh-bts i{display:block;height:100%;background:var(--y)}
+.rh-pt tr.miss td{background:var(--bad2)}.rh-pt tr{cursor:pointer}
+.pn2{display:flex;gap:10px;align-items:center;min-width:220px}.pn2 b{font-size:13px;display:block}.pn2 .sub{font-size:11.5px}
+.rh-pc{display:grid;gap:8px}.rh-pcg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:10.5px;color:var(--mut)}.rh-pcg b{display:block;font-size:15px;color:var(--ink)}
+.rh-bt{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--soft);cursor:pointer}
+.rh-bts{display:flex;gap:6px 12px;align-items:center;flex-wrap:wrap;font-size:12.5px}.rh-bts .mb{width:110px;height:8px}.rh-tag{font-size:11px;font-weight:700;background:var(--bad2);color:var(--bad);border-radius:6px;padding:2px 7px}
+.rh-chk{font-size:12.5px;color:var(--mut);display:flex;gap:6px;align-items:center;cursor:pointer}
+.rh-mx{display:grid;gap:4px;font-size:12px;align-items:center;min-width:560px}.rh-mx .mh{text-align:center;color:var(--mut);font-weight:700;font-size:11px}
+.rh-mr{cursor:pointer}.rh-mr b{font-weight:600;font-size:12.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25}
+.rh-c{display:grid;grid-template-rows:7px 7px 14px;gap:2px;border-radius:7px;padding:4px;background:var(--soft)}.rh-c em{font-style:normal;font-weight:800;font-size:10.5px;text-align:center;line-height:14px}
+.hv{display:block;border-radius:4px;height:100%}.leg .hv{display:inline-block;width:14px;height:8px;margin-right:6px;vertical-align:0}
+.hv.full{background:var(--good)}.hv.part{background:repeating-linear-gradient(45deg,var(--good) 0 3px,var(--good2) 3px 6px)}.hv.none{background:var(--bar)}.hv.ours{background:var(--ink)}.hv.ours.apx{background:repeating-linear-gradient(90deg,var(--ink) 0 4px,var(--mut) 4px 6px);opacity:.7}
+.rh-c.lost{outline:2px solid var(--bad);background:var(--bad2)}.hv.lostk{background:var(--bad2);outline:2px solid var(--bad)}
+@media (max-width:1100px){.rh-g5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.rh-g5{grid-template-columns:1fr 1fr}.rh-g5>.acc{grid-column:1/-1}.rh-flt{max-width:100%}.rh-flt .seg-s{overflow-x:auto;flex-wrap:nowrap;max-width:100%}
+  .rh-mch{gap:4px;height:200px}.rh-mch .bars em{display:none}.rh-bt{grid-template-columns:1fr}.pn2{min-width:0}}
+.rh-flt>.seg-s{max-width:100%;overflow-x:auto;flex-wrap:nowrap}.rh-flt>.seg-s button{white-space:nowrap}
+/* ===== вкладка «План залу» ===== */
+.pl-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;align-items:center}.pl-top p{margin:0}
+.pl-stats{display:flex;gap:8px;flex-wrap:wrap}.pl-stat{background:var(--card);border-radius:12px;padding:8px 12px;font-size:12px;color:var(--mut);box-shadow:var(--sh)}.pl-stat b{display:block;font-size:17px;color:var(--ink)}.pl-stat.warn b{color:var(--bad)}
+.pl-wrap{display:grid;grid-template-columns:260px minmax(0,1fr) 270px;gap:12px;align-items:start}
+.pl-side{display:grid;gap:10px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}.pl-side .card{padding:12px;gap:8px}
+.pl-src{display:flex;gap:4px}.pl-src button{flex:1;border:0;font:inherit;border-radius:9px;padding:7px 4px;font-weight:700;font-size:12px;background:var(--soft);color:var(--mut);cursor:pointer}.pl-src button[aria-pressed=true]{background:var(--ink);color:var(--card)}
+.pl-in{font:inherit;font-size:13px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-width:0}
+.pl-list{display:grid;gap:6px}
+.pl-it{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px;border-radius:10px;background:var(--soft);cursor:grab;touch-action:none;user-select:none}.pl-it img,.pl-it .ph{width:34px;height:34px}
+.pl-it b{font-size:12.5px;font-weight:700;display:block;line-height:1.25}.pl-it small{font-size:11px;color:var(--mut)}.pl-it .q{font-size:11px;font-weight:800;background:var(--card);border-radius:7px;padding:2px 7px;white-space:nowrap}
+.pl-it.sk{background:var(--y2)}.pl-it.sk .q{background:var(--y);color:#111}
+.pl-board{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:10px;display:grid;gap:8px;position:relative;min-width:0}
+.pl-tools{display:flex;gap:6px 10px;flex-wrap:wrap;align-items:center;justify-content:space-between}.pl-tr{display:flex;gap:10px;align-items:center}
+.pl-chk{font-size:12px;color:var(--mut);display:flex;gap:5px;align-items:center;cursor:pointer}
+.pl-zoom{display:flex;gap:4px}.pl-zoom button{border:0;background:var(--soft);color:var(--ink);border-radius:9px;width:32px;height:32px;font-weight:800;font-size:15px;cursor:pointer}
+.pl-svgw{overflow:auto;border-radius:12px;background:repeating-linear-gradient(0deg,transparent 0 19px,rgba(127,127,127,.08) 19px 20px),repeating-linear-gradient(90deg,transparent 0 19px,rgba(127,127,127,.08) 19px 20px),var(--soft);touch-action:pan-x pan-y}
+.pl-svgw svg{display:block;margin:auto}.pl-svgw .it{cursor:grab;touch-action:none}.pl-svgw .it.sel>rect:first-of-type,.pl-svgw .it.sel>ellipse{stroke:var(--y)!important;stroke-width:4}
+.pl-legend{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut)}.pl-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px;border:1.5px solid var(--line)}
+.pl-pop{position:absolute;z-index:6;width:270px;background:var(--card);border-radius:14px;box-shadow:0 18px 40px -10px rgba(0,0,0,.35);padding:12px;display:grid;gap:8px;font-size:12.5px}
+.pl-pop h4{margin:0;font-size:14px}.pl-pop .row2{display:grid;grid-template-columns:1fr 1fr;gap:6px}.pl-pop .kv{background:var(--soft);border-radius:9px;padding:6px 8px;font-size:11px;color:var(--mut)}.pl-pop .kv b{display:block;color:var(--ink);font-size:13px}
+.pl-pop .kv.bad{background:var(--bad2);color:var(--bad)}.pl-pop .kv.bad b{color:var(--bad)}.pl-pop .kv.yel{background:var(--y2)}
+.pl-pop .acts{display:flex;gap:6px;flex-wrap:wrap}.pl-pop .acts button{border:0;font:inherit;border-radius:9px;padding:7px 9px;font-weight:700;font-size:12px;background:var(--soft);color:var(--ink);cursor:pointer}.pl-pop .acts .y{background:var(--y);color:#111}
+.pl-size{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--mut)}.pl-size input{width:64px;font:inherit;font-size:13px;padding:5px 7px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.pl-gap{position:absolute;pointer-events:none;background:var(--ink);color:var(--card);font-size:11.5px;font-weight:800;border-radius:8px;padding:4px 8px;z-index:7;white-space:nowrap}.pl-gap.bad{background:var(--bad);color:#fff}.pl-ghost{position:fixed;z-index:99}
+.pl-ms{position:absolute;z-index:6;left:50%;transform:translateX(-50%);top:52px;background:var(--ink);color:var(--card);border-radius:14px;padding:8px 10px;display:flex;gap:8px;align-items:center;font-size:12.5px;font-weight:700;box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+.pl-tl{display:grid;gap:6px}.pl-task{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px;border-radius:10px;background:var(--soft);font-size:12.5px}
+.pl-task .n{width:22px;height:22px;border-radius:50%;background:var(--bad);color:#fff;font-weight:800;font-size:11px;display:grid;place-items:center}.pl-task b{font-weight:700}.pl-task small{display:block;color:var(--mut);font-size:11px}
+.pl-task button{border:0;font:inherit;background:var(--card);color:var(--ink);border-radius:8px;padding:4px 8px;font-size:12px;font-weight:800;cursor:pointer}
+.pl-form{display:grid;gap:6px}.pl-form textarea{font:inherit;font-size:13px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);min-height:60px;resize:vertical}.pl-f2{display:grid;grid-template-columns:1fr 130px;gap:6px}
+.sv{font-size:11px;color:var(--mut)}.sv.ok{color:var(--good)}.sv.bad{color:var(--bad);font-weight:700}
+@media (max-width:1200px){.pl-wrap{grid-template-columns:230px minmax(0,1fr)}.pl-right{grid-column:1/-1;position:static;max-height:none}}
+@media (max-width:760px){.pl-wrap{grid-template-columns:minmax(0,1fr)}.pl-side{position:static;max-height:none}.pl-wrap>.pl-side:first-child{order:3}.pl-stats{display:grid;grid-template-columns:1fr 1fr}.pl-pop{left:8px!important;right:8px;width:auto}}
 /* нижня панель і «Ще» — лише на телефоні */
 .tabbar,.mhead,.chips{display:none}
 .sheet{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:flex;align-items:flex-end}
@@ -787,6 +845,12 @@ s{opacity:.7}
     <!-- МАГАЗИН (одна сторінка для обох: s1 / s2) -->
     <section data-p="store" hidden><div id="storeBox" style="display:grid;gap:14px"></div></section>
 
+    <!-- ПЛАН ЗАЛУ (розстановка товару в ЗД і РТ) -->
+    <section data-p="plan" hidden><div id="planBox" style="display:grid;gap:12px"></div></section>
+
+    <!-- РУХ VETRO (постачальник: приїхало / пішло / взяли ми; наявність по місяцях) -->
+    <section data-p="ruh" hidden><div id="ruhBox" style="display:grid;gap:14px"></div></section>
+
     <!-- ЗБОРИ (тиждень пн–нд + задачі зборів) -->
     <section data-p="meet" hidden><div id="meetBox" style="display:grid;gap:14px"></div></section>
 
@@ -823,6 +887,8 @@ const IC = {
   people: '<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 13.6c2.5.2 4 1.7 4.5 4.4"/>',
   cats: '<path d="M3 9h18M5 9v10M19 9v10M8 9v5h8V9"/>',
   matrix: '<path d="M4 4h4v4H4zM10 4h4v4h-4zM16 4h4v4h-4zM4 10h4v4H4zM10 10h4v4h-4zM4 16h4v4H4z"/>',
+  plan: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 10h7v11M14 3v7h7M14 15h3v3h-3z"/>',
+  ruh: '<path d="M3 17l5-5 4 3 8-8M15 7h5v5"/>',
   buy: '<path d="M3 4h2.5l2.2 10.5h10.6L21 7H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>',
   assort: '<path d="M5 5h3v3H5zM10.5 5h3v3h-3zM16 5h3v3h-3zM5 10.5h3v3H5zM10.5 10.5h3v3h-3zM16 10.5h3v3h-3zM5 16h3v3H5zM10.5 16h3v3h-3z"/>',
   promo: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.4"/>',
@@ -851,7 +917,7 @@ const GICON = {
   'Журнальні та консолі':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18M6 10v8M18 10v8M6 14h12"/></svg>',
   'Інше':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 12h16"/></svg>'
 };
-const TABS = [['overview','Огляд'],['meet','Збори'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['retail','Роздріб'],['s1','Магазин 1'],['s2','Магазин 2'],['buy','Закупка'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
+const TABS = [['overview','Огляд'],['meet','Збори'],['people','Менеджери'],['matrix','Матриця'],['cats','Категорії'],['retail','Роздріб'],['s1','Магазин 1'],['s2','Магазин 2'],['plan','План залу'],['buy','Закупка'],['ruh','Рух Vetro'],['assort','Асортимент'],['promo','Акції'],['catalog','Каталог Vetro'],['help','Довідка']];
 // головні розділи — на нижній панелі телефона і вгорі бокового меню; решта — у «Ще»
 const TBAR = ['overview','people','matrix','cats'];
 const NAVMAIN = ['overview','meet','people','matrix','cats'];   // основна група бокового меню на ПК («Збори» — лише тут і в «Ще» на телефоні)
@@ -2087,7 +2153,7 @@ function renderMeet() {
   // що вирішити на зборах — що змінилось за тиждень в інших вкладках
   const ops = [];
   const vo = (D.orders || []).filter(o => o[1] >= iso(W.a) && o[1] <= iso(addD(W.a, 6)) && o[6] > 0);
-  if (vo.length) ops.push(['y', '📦', 'buy', '<b>Замовлено у Vetro за тиждень:</b> ' + vo.length + ' поз. · ' + vo.reduce((t, o) => t + o[6], 0) + ' шт' + (vo.some(o => o[8]) ? ' · $' + fmt(Math.round(vo.reduce((t, o) => t + (o[8] || 0), 0))) : '')]);
+  if (vo.length) ops.push(['y', '📦', 'buy', '<b>Замовлено у Vetro за тиждень:</b> ' + vo.length + ' поз. · ' + vo.reduce((t, o) => t + o[6], 0) + ' шт' + (vo.some(o => o[7]) ? ' · $' + fmt(Math.round(vo.reduce((t, o) => t + (o[7] || 0), 0))) : '')]);
   const pend = (D.purchase || []).filter(x => /затвердження/i.test(x.st || ''));
   if (pend.length) ops.push(['y', '🛒', 'buy', '<b>Чекає затвердження закупки:</b> ' + pend.length + ' поз. · $' + fmt(Math.round(pend.reduce((t, x) => t + (x.sUsd || (x.ap || x.q) * x.usd || 0), 0)))]);
   try { const MV = [stMoves(0), stMoves(1)], seen = new Set(), all = [].concat(MV[0].bring, MV[1].bring, MV[0].give, MV[1].give).filter(x => { const k = x.a + '|' + x.how; if (seen.has(k)) return false; seen.add(k); return true; }), cons = MV[0].cons.length + MV[1].cons.length;
@@ -2138,17 +2204,35 @@ function mtApi(op) {
 }
 function mtLoad(op) {
   MBUSY = true; MTERR = ''; mtTasksDraw();
-  return mtApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); MTASK = j.tasks || []; MTG = {tg: !!j.tg, tgToken: !!j.tgToken}; })
+  return mtApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); if (!MTQ.length) MTASK = j.tasks || []; MTG = {tg: !!j.tg, tgToken: !!j.tgToken}; })
     .catch(e => { MTERR = String(e && e.message || e); if (MTASK === null) MTASK = null; })
-    .then(() => { MBUSY = false; mtTasksDraw(); });
+    .then(() => { MBUSY = false; mtRedraw(); });
 }
+// запис задач: одразу на екрані, у таблицю — у фоні по черзі (не чекаємо Google)
+const MTQ = []; let MTQRUN = false, MTDRAW = [];
+const mtUid = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).slice(0, 16);
+function mtWrite(op) {
+  if (MTASK === null) MTASK = [];
+  if (op.a === 'add') { op.id = op.id || mtUid(); MTASK.push({id: op.id, w: op.w, t: op.t, r: op.r || '', d: op.d || '', s: '', c: '', by: (D.me && D.me.n) || '', ch: '', chBy: '', st: op.st || '', it: op.it || '', art: op.art || '', sv: 1}); }
+  else { const t = MTASK.find(x => x.id === op.id); if (t) { if (op.a === 'del') MTASK.splice(MTASK.indexOf(t), 1); else { if ('s' in op) t.s = op.s; if ('c' in op) t.c = op.c; t.sv = 1; } } }
+  MTQ.push(op); mtRedraw(); mtRun();
+}
+function mtRun() {
+  if (MTQRUN || !MTQ.length) return; MTQRUN = true; const op = MTQ[0];
+  mtApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error);
+      MTQ.shift(); MTERR = ''; if (!MTQ.length && j.tasks) { MTASK = j.tasks; MTG = {tg: !!j.tg, tgToken: !!j.tgToken}; } else { const x = MTASK.find(y => y.id === op.id); if (x) x.sv = 0; } })
+    .catch(e => { MTERR = 'не збереглось: ' + String(e && e.message || e); const x = MTASK.find(y => y.id === op.id); if (x) x.sv = 2; })
+    .then(() => { MTQRUN = false; mtRedraw(); if (!MTERR) mtRun(); });
+}
+const mtRedraw = () => { mtTasksDraw(); MTDRAW.forEach(f => { try { f(); } catch (e) {} }); };
+const mtSv = t => t.sv === 1 ? ' · <span class="sub">зберігаю…</span>' : t.sv === 2 ? ' · <b style="color:var(--bad)">не збереглось</b>' : '';
 function mtTasksDraw() {
   const box = $('mtTasks'); if (!box) return;
   const cur = monday(ASOF), sel = MTW || cur, wS = iso(sel), wP = iso(addD(sel, -7)), T = MTASK || [];
   const prev = T.filter(t => t.w === wP), older = T.filter(t => t.w < wP && (!t.s || t.s === 'mv')), now = T.filter(t => t.w === wS);
   const cnt = s => prev.filter(t => (t.s || '') === s).length, done = cnt('ok');
   const late = t => t.d && t.d < iso(ASOF) && (!t.s || t.s === 'mv');
-  const row = (t, review) => '<div class="mt-task' + (late(t) ? ' late' : '') + '"><div><div class="t">' + esc(t.t) + '</div><div class="sub">' + esc(t.r || 'без відповідального') + (t.d ? ' · до ' + dm(pd(t.d)) : '') + (t.w !== wS && t.w !== wP ? ' · зі зборів ' + wkLabel(pd(t.w)) : '') + (late(t) ? ' · <b style="color:var(--bad)">прострочено</b>' : '') + (t.chBy && t.s ? ' · відмітив(ла) ' + esc(t.chBy) + ' ' + esc(t.ch) : '') + '</div>' +
+  const row = (t, review) => '<div class="mt-task' + (late(t) ? ' late' : '') + '"><div><div class="t">' + esc(t.t) + '</div><div class="sub">' + esc(t.r || 'без відповідального') + (t.d ? ' · до ' + dm(pd(t.d)) : '') + (t.w !== wS && t.w !== wP ? ' · зі зборів ' + wkLabel(pd(t.w)) : '') + (late(t) ? ' · <b style="color:var(--bad)">прострочено</b>' : '') + (t.chBy && t.s ? ' · відмітив(ла) ' + esc(t.chBy) + ' ' + esc(t.ch) : '') + (t.st ? ' · 📍 план ' + esc(t.st === 'rt' ? DEPS[1] : DEPS[0]) : '') + mtSv(t) + '</div>' +
       (t.c ? '<div class="sub">💬 ' + esc(t.c) + '</div>' : '') + '</div><div class="mt-res">' +
       (review ? [['ok', '✅ Зроблено'], ['no', '❌ Ні'], ['mv', '↪ Перенести']].map(b => '<button data-ts="' + b[0] + '" data-id="' + esc(t.id) + '" class="' + b[0] + '" aria-pressed="' + (t.s === b[0]) + '">' + b[1] + '</button>').join('') : '<span class="sub">' + ({ok: '✅ зроблено', no: '❌ не зроблено', mv: '↪ перенесено'}[t.s] || 'нова') + '</span>') +
       '<button data-tc="' + esc(t.id) + '" title="Коментар">💬</button><button data-td="' + esc(t.id) + '" title="Видалити">×</button></div></div>';
@@ -2162,7 +2246,7 @@ function mtTasksDraw() {
     '<div class="mt-tl">' + (prev.map(t => row(t, true)).join('') || '<div class="empty">На минулих зборах задач не ставили</div>') + '</div>' +
     (older.length ? '<div class="st-sub">Ще відкриті зі старших зборів · ' + older.length + '</div><div class="mt-tl">' + older.map(t => row(t, true)).join('') + '</div>' : '') +
     '<div class="st-sub" style="margin-top:6px">Нові задачі на тиждень ' + wkLabel(sel) + '</div>' +
-    '<form class="mt-add" id="mtAdd"><input id="mtT" placeholder="Що зробити" maxlength="500" required><input id="mtR" list="mtRL" placeholder="Хто відповідає"><datalist id="mtRL">' + names.map(n => '<option value="' + esc(n) + '">').join('') + '</datalist><input id="mtD" type="date" value="' + iso(nf) + '"><button class="btn-y"' + (MBUSY ? ' disabled' : '') + '>' + (MBUSY ? 'Зберігаю…' : '+ Додати') + '</button></form>' +
+    '<form class="mt-add" id="mtAdd"><input id="mtT" placeholder="Що зробити" maxlength="500" required><input id="mtR" list="mtRL" placeholder="Хто відповідає"><datalist id="mtRL">' + names.map(n => '<option value="' + esc(n) + '">').join('') + '</datalist><input id="mtD" type="date" value="' + iso(nf) + '"><button class="btn-y">+ Додати</button></form>' +
     '<div class="mt-tl">' + (now.map(t => row(t, false)).join('') || '<div class="empty">Ще немає — додайте задачі, які поставили на зборах</div>') + '</div>' +
     '<div class="sub">Задачі зберігаються в таблиці (прихований аркуш «📝 Збори») — їх бачать усі. Наступного тижня вони з’являться вгорі блоку: на зборах відмічаєте ✅ / ❌ / ↪.</div>');
   const txt = mtText(sel, prev, older, now);
@@ -2180,15 +2264,15 @@ function mtTasksDraw() {
   on('mtCopy', () => { try { navigator.clipboard.writeText(txt).then(() => { $('mtCopy').textContent = 'Скопійовано ✓'; }, () => { $('mtCopy').textContent = 'Не вдалося'; }); } catch (e) {} });
   on('mtPrint', () => { let pb = $('mtPrintBox'); if (!pb) { pb = document.createElement('div'); pb.id = 'mtPrintBox'; document.body.appendChild(pb); }
     pb.innerHTML = mtPrintHtml(sel, prev, older, now); document.body.classList.add('pm'); setTimeout(() => { window.print(); setTimeout(() => document.body.classList.remove('pm'), 500); }, 50); });
-  on('mtRetry', () => mtLoad());
-  const f = $('mtAdd'); if (f) f.onsubmit = e => { e.preventDefault(); const t = $('mtT').value.trim(); if (!t || MBUSY) return; mtLoad({a: 'add', w: wS, t, r: $('mtR').value.trim(), d: $('mtD').value}); };
-  box.querySelectorAll('[data-ts]').forEach(b => b.onclick = () => { if (MBUSY) return; const t = T.find(x => x.id === b.dataset.id), s = t && t.s === b.dataset.ts ? '' : b.dataset.ts; if (t) t.s = s; mtTasksDraw(); mtLoad({a: 'set', id: b.dataset.id, s}); });
-  box.querySelectorAll('[data-td]').forEach(b => b.onclick = () => { if (MBUSY) return; const t = T.find(x => x.id === b.dataset.td); if (!t) return; const row = b.closest('.mt-task');
+  on('mtRetry', () => { MTERR = ''; MTQ.length ? mtRun() : mtLoad(); });
+  const f = $('mtAdd'); if (f) f.onsubmit = e => { e.preventDefault(); const t = $('mtT').value.trim(); if (!t) return; mtWrite({a: 'add', w: wS, t, r: $('mtR').value.trim(), d: $('mtD').value}); $('mtT').value = ''; $('mtT').focus(); };
+  box.querySelectorAll('[data-ts]').forEach(b => b.onclick = () => { const t = T.find(x => x.id === b.dataset.id), s = t && t.s === b.dataset.ts ? '' : b.dataset.ts; mtWrite({a: 'set', id: b.dataset.id, s}); });
+  box.querySelectorAll('[data-td]').forEach(b => b.onclick = () => { const t = T.find(x => x.id === b.dataset.td); if (!t) return; const row = b.closest('.mt-task');
     if (!row.classList.contains('ask')) { row.classList.add('ask'); b.textContent = 'Видалити?'; setTimeout(() => { if (row.isConnected) { row.classList.remove('ask'); b.textContent = '×'; } }, 3000); return; }
-    mtLoad({a: 'del', id: t.id}); });
+    mtWrite({a: 'del', id: t.id}); });
   box.querySelectorAll('[data-tc]').forEach(b => b.onclick = () => { const t = T.find(x => x.id === b.dataset.tc); if (!t) return; const row = b.closest('.mt-task'); if (row.querySelector('.mt-cm')) return;
     row.insertAdjacentHTML('beforeend', '<form class="mt-cm"><input value="' + esc(t.c || '') + '" placeholder="Коментар: що зроблено, чому ні…" maxlength="500"><button class="btn-y">Зберегти</button></form>');
-    const fm = row.querySelector('.mt-cm'); fm.querySelector('input').focus(); fm.onsubmit = e => { e.preventDefault(); mtLoad({a: 'set', id: t.id, c: fm.querySelector('input').value.trim()}); }; });
+    const fm = row.querySelector('.mt-cm'); fm.querySelector('input').focus(); fm.onsubmit = e => { e.preventDefault(); mtWrite({a: 'set', id: t.id, c: fm.querySelector('input').value.trim()}); }; });
 }
 function mtText(sel, prev, older, now) {
   const mark = {ok: '✅', no: '❌', mv: '↪'}, who = t => (t.r ? ' — ' + t.r : ''), till = t => (t.d ? ', до ' + dm(pd(t.d)) : ''), late = t => t.d && t.d < iso(ASOF) ? ' ⚠️ прострочено' : '';
@@ -2207,6 +2291,443 @@ function mtPrintHtml(sel, prev, older, now) {
     (prev.length ? '<h2>Підсумок минулих зборів (' + wkLabel(addD(sel, -7)) + ') — ✅ ' + n('ok') + ' · ❌ ' + n('no') + ' · ↪ ' + n('mv') + ' · виконано ' + Math.round(n('ok') / prev.length * 100) + '%</h2><ul>' + prev.map(t => li(t, mark[t.s] || '⏳')).join('') + '</ul>' : '') +
     (older.length ? '<h2>Ще відкриті з попередніх зборів</h2><ul>' + older.map(t => li(t, '⏳')).join('') + '</ul>' : '') +
     '<h2>Нові задачі на тиждень</h2><ul>' + (now.map(t => li(t, '☐')).join('') || '<li>—</li>') + '</ul>';
+}
+// ===== РУХ VETRO: що приїхало до постачальника, що пішло від нього, скільки взяли ми і продали; наявність по місяцях =====
+let RUH = null, RUHERR = '', RUHBUSY = false, RUHN = 6, RUHCAT = 'Усі', RUHSORT = 'out', RUHLOST = false;
+function ruhLoad(force) {
+  RUHBUSY = true; RUHERR = '';
+  const p = window.__DEMO_RUH__ ? Promise.resolve(window.__DEMO_RUH__)
+    : IN_GAS ? new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashRuh(!!force))
+    : fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=ruh' + (force ? '&f=1' : '') + '&t=' + Date.now(), {cache: 'no-store'}).then(r => r.text());
+  return p.then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); RUH = j; })
+    .catch(e => { RUHERR = String(e && e.message || e); })
+    .then(() => { RUHBUSY = false; if (tab === 'ruh') { LAST[tab] = null; render(); } });
+}
+function renderRuh() {
+  const box = $('ruhBox');
+  if (!RUH) { box.innerHTML = '<div class="card"><div class="empty">' + (RUHERR ? 'Не вдалося завантажити: ' + esc(RUHERR) + ' <button class="btn-s" id="ruhRetry">Ще раз</button>' : 'Рахую рух товару Vetro за всю історію… (перший раз до хвилини)') + '</div></div>';
+    const r = $('ruhRetry'); if (r) r.onclick = () => { ruhLoad(true); renderRuh(); };
+    if (!RUHBUSY && !RUHERR) ruhLoad(); return; }
+  const M = RUH.months, nM = M.length, from = RUHN ? Math.max(0, nM - RUHN) : 0, MI = M.slice(from), mIdx = MI.map((_, i) => from + i);
+  const MONS = ['січ', 'лют', 'бер', 'квіт', 'трав', 'черв', 'лип', 'серп', 'вер', 'жовт', 'лист', 'груд'], ml = m => MONS[+m.slice(5) - 1] + (m.slice(0, 4) !== iso(ASOF).slice(0, 4) ? ' ' + m.slice(2, 4) : '');
+  const today = pd(RUH.today), dim = m => { const y = +m.slice(0, 4), mo = +m.slice(5); const n = new Date(y, mo, 0).getDate(); return m === iso(today).slice(0, 7) ? today.getDate() : n; };
+  const ourM = RUH.ourStart ? RUH.ourStart.slice(0, 7) : '9999';
+  // відповідність артикулів: історія постачальника → наші позиції
+  const AK = {}; (D.assort || []).forEach(a => { AK[nk(a)] = a; }); Object.keys(D.items || {}).forEach(a => { AK[nk(a)] = AK[nk(a)] || a; });
+  const ORD = {}; (D.orders || []).forEach(o => { if (!(o[6] > 0) || !o[1]) return; const k = nk(o[2]), m = String(o[1]).slice(0, 7); (ORD[k] = ORD[k] || {})[m] = (ORD[k][m] || 0) + o[6]; (ORD[k].L = ORD[k].L || []).push([o[1], o[6]]); });
+  const SAL = {}; R.forEach(r => { const k = nk(r.a), m = r.d.slice(0, 7); (SAL[k] = SAL[k] || {})[m] = (SAL[k][m] || 0) + r.q; });
+  const rows = Object.keys(RUH.a).map(art => { const h = RUH.a[art], k = nk(art), a = AK[k] || art, it = D.items[a] || {};
+    const g = it.g || 'Інше', p = stPrice(it) || 0, sum = arr => mIdx.reduce((t, i) => t + (arr[i] || 0), 0);
+    const took = MI.reduce((t, m) => t + ((ORD[k] || {})[m] || 0), 0), sold = MI.reduce((t, m) => t + ((SAL[k] || {})[m] || 0), 0);
+    return {a, k, h, it, n: it.n || art, g, p, inn: sum(h.i), out: sum(h.o), took, sold, vq: h.q, oq: (it.s1 || 0) + (it.s2 || 0) + (it.sk || 0)}; })
+    .filter(x => RUHCAT === 'Усі' || x.g === RUHCAT);
+  const act = rows.filter(x => x.inn || x.out || x.took || x.sold);
+  const S = f => act.reduce((t, x) => t + f(x), 0), share = (t, o) => o ? Math.round(t / o * 100) : null;
+  const tIn = S(x => x.inn), tOut = S(x => x.out), tTook = S(x => x.took), tSold = S(x => x.sold);
+  // по місяцях
+  const byM = mIdx.map((i, j) => { const m = MI[j]; return {m, inn: rows.reduce((t, x) => t + (x.h.i[i] || 0), 0), out: rows.reduce((t, x) => t + (x.h.o[i] || 0), 0), took: rows.reduce((t, x) => t + ((ORD[x.k] || {})[m] || 0), 0)}; });
+  const mMx = Math.max(1, ...byM.flatMap(x => [x.inn, x.out, x.took]));
+  // по категоріях
+  const G = {}; act.forEach(x => { const o = G[x.g] || (G[x.g] = {inn: 0, out: 0, took: 0, sold: 0, vq: 0}); o.inn += x.inn; o.out += x.out; o.took += x.took; o.sold += x.sold; o.vq += x.vq; });
+  const GL = GROUPS.filter(g => G[g]);
+  // позиції
+  const key = {out: x => x.out, sh: x => x.out ? x.took / x.out : -1, miss: x => (x.took ? -1e6 : 0) + x.out}[RUHSORT];
+  const PL = act.slice().sort((a, b) => key(b) - key(a) || b.out - a.out);
+  const shBar = v => v == null ? '<span class="sub">—</span>' : '<span class="rh-sh"><span class="mb"><i style="width:' + Math.min(100, v) + '%"></i></span><b>' + v + '%</b></span>';
+  const nm = x => '<div class="pn2">' + phA(x.a) + '<div><b>' + esc(shortName(x.n)) + '</b><span class="sub">' + esc(x.g) + (!x.took && x.out ? ' · <b style="color:var(--bad)">ми не брали, а Vetro відвантажив ' + x.out + ' шт</b>' : '') + '</span></div></div>';
+  // партії в межах періоду
+  const pFrom = M[from] + '-01';
+  const BAT = []; rows.forEach(x => (x.h.b || []).forEach((b, i, arr) => { if (b[0] < pFrom) return; const to = arr[i + 1] ? arr[i + 1][0] : '9999';
+    const took = ((ORD[x.k] || {}).L || []).filter(o => o[0] >= b[0] && o[0] < to).reduce((t, o) => t + o[1], 0);
+    const days = Math.round(((b[2] ? pd(b[2]) : today) - pd(b[0])) / 864e5); BAT.push({x, d: b[0], q: b[1], end: b[2], went: b[3], took, days}); }));
+  BAT.sort((a, b) => b.d < a.d ? -1 : 1);
+  // матриця наявності
+  const cell = (x, i, m) => { const dv = x.h.d[i] || 0, n = dim(m), vc = dv >= n * .9 ? 'full' : dv > 0 ? 'part' : 'none';
+    const exact = m >= ourM, ud = x.h.u ? (x.h.u[i] || 0) : 0, sold = (SAL[x.k] || {})[m] || 0, ours = exact ? ud > 0 : sold > 0;
+    const lost = vc !== 'none' && !ours && (x.h.o[i] || 0) > 0;
+    return {vc, ours, exact, sold, lost, dv, ud, n}; };
+  const MXL = PL.filter(x => !RUHLOST || mIdx.some((i, j) => cell(x, i, MI[j]).lost));
+  const mxRow = x => '<span class="rh-mr" data-art="' + esc(x.a) + '"><b>' + esc(shortName(x.n)) + '</b></span>' + mIdx.map((i, j) => { const c = cell(x, i, MI[j]);
+    return '<span class="rh-c' + (c.lost ? ' lost' : '') + '" title="' + esc(ml(MI[j]) + ': Vetro — ' + (c.vc === 'full' ? 'весь місяць' : c.vc === 'part' ? c.dv + ' дн з ' + c.n : 'не було') + ', у нас — ' + (c.ours ? 'було' : 'не було') + (c.exact ? (c.ours ? ' (' + c.ud + ' дн)' : '') : ' (приблизно, за продажами)') + (c.sold ? ', продали ' + c.sold + ' шт' : '') + (c.lost ? ' · ВТРАЧЕНИЙ МІСЯЦЬ' : '')) + '"><i class="hv ' + c.vc + '"></i><i class="hv ' + (c.ours ? 'ours' + (c.exact ? '' : ' apx') : 'none') + '"></i><em>' + (c.sold ? c.sold + ' шт' : '') + '</em></span>'; }).join('');
+  const seg = (id, v, opts) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (String(v) === String(o[0])) + '">' + o[1] + '</button>').join('') + '</div>';
+  const sum$ = f => short(act.reduce((t, x) => t + f(x) * x.p, 0));
+
+  box.innerHTML =
+    '<div class="rh-top"><div><p class="sub">Скільки товару приїхало до Vetro, скільки пішло від нього, скільки з цього взяли ми і скільки продали клієнтам</p>' +
+      '<div class="rh-note">Історія постачальника — з ' + dm(pd(RUH.start)) + '.' + RUH.start.slice(0, 4) + ' · наш залишок по днях — ' + (RUH.ourStart ? 'з ' + dm(pd(RUH.ourStart)) + '.' + RUH.ourStart.slice(0, 4) + ', раніше — приблизно за продажами' : 'ще не записується') + ' · <button class="lnk" id="ruhRe">перерахувати</button></div></div>' +
+      '<div class="rh-flt">' + seg('ruhN', RUHN, [[3, '3 міс'], [6, '6 міс'], [12, '12 міс'], [0, 'Весь час']]) + seg('ruhCat', RUHCAT, [['Усі', 'Усі']].concat(GROUPS.map(g => [g, g]))) + '</div></div>' +
+    '<div class="rh-g5">' +
+      '<div class="card kpi"><span class="k">Приїхало до Vetro</span><b class="num">' + fmt(tIn) + ' шт</b><span class="sub">≈ ' + sum$(x => x.inn) + ' ₴ за РРЦ</span></div>' +
+      '<div class="card kpi"><span class="k">Пішло від Vetro</span><b class="num">' + fmt(tOut) + ' шт</b><span class="sub">≈ ' + sum$(x => x.out) + ' ₴ · усім клієнтам Vetro</span></div>' +
+      '<div class="card kpi acc"><span class="k">Взяли ми</span><b class="num">' + fmt(tTook) + ' шт</b><span class="sub">наша частка ' + (share(tTook, tOut) ?? '—') + '% від того, що пішло</span></div>' +
+      '<div class="card kpi"><span class="k">Продали ми клієнтам</span><b class="num">' + fmt(tSold) + ' шт</b><span class="sub">≈ ' + sum$(x => x.sold) + ' ₴</span></div>' +
+      '<div class="card kpi"><span class="k">Залишок у Vetro зараз</span><b class="num">' + fmt(rows.reduce((t, x) => t + Math.max(0, x.vq), 0)) + ' шт</b><span class="sub">у нас ' + fmt(rows.reduce((t, x) => t + x.oq, 0)) + ' шт</span></div></div>' +
+    '<div class="card"><div class="ch"><h3>Рух по місяцях</h3><span class="sub">приїхало до Vetro · пішло від Vetro · з них взяли ми</span></div>' +
+      '<div class="leg"><span><i class="dot" style="background:var(--good)"></i>приїхало до Vetro</span><span><i class="dot" style="background:var(--mut)"></i>пішло від Vetro</span><span><i class="dot" style="background:var(--y)"></i>взяли ми</span><span>% — наша частка</span></div>' +
+      '<div class="rh-mch" style="grid-template-columns:repeat(' + byM.length + ',minmax(0,1fr))">' + byM.map(x => '<div class="mc"><div class="bars">' + [[x.inn, 'var(--good)', 'приїхало'], [x.out, 'var(--mut)', 'пішло'], [x.took, 'var(--y)', 'взяли ми']].map(b => '<i style="height:' + Math.max(1, b[0] / mMx * 100) + '%;background:' + b[1] + '" title="' + esc(ml(x.m) + ' · ' + b[2] + ': ' + b[0] + ' шт') + '">' + (b[0] && byM.length <= 12 ? '<em>' + (b[0] < 1000 ? b[0] : (b[0] / 1000).toFixed(1).replace('.', ',') + 'т') + '</em>' : '') + '</i>').join('') + '</div>' +
+        '<b>' + (x.out ? Math.round(x.took / x.out * 100) + '%' : '—') + '</b><span>' + ml(x.m) + '</span></div>').join('') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>Рух по категоріях</h3><span class="sub">де ми сильні, а де Vetro продає іншим</span></div><div class="tbl"><table><thead><tr><th>Категорія</th><th class="n">Приїхало</th><th class="n">Пішло від Vetro</th><th class="n">Взяли ми</th><th class="n">Наша частка</th><th class="n">Продали ми</th><th class="n">Залишок Vetro</th></tr></thead><tbody>' +
+      (GL.map(g => { const o = G[g]; return '<tr><td><b>' + esc(g) + '</b></td><td class="n">' + fmt(o.inn) + '</td><td class="n">' + fmt(o.out) + '</td><td class="n"><b>' + fmt(o.took) + '</b></td><td class="n">' + shBar(share(o.took, o.out)) + '</td><td class="n">' + fmt(o.sold) + '</td><td class="n">' + fmt(Math.max(0, o.vq)) + '</td></tr>'; }).join('') || '<tr><td class="empty">Руху немає</td></tr>') + '</tbody></table></div></div>' +
+    '<div class="card"><div class="ch"><h3>Рух по позиціях</h3>' + seg('ruhS', RUHSORT, [['out', 'Пішло'], ['sh', 'Частка'], ['miss', 'Ми не брали']]) + '</div>' +
+      '<div class="tbl pc-only"><table class="rh-pt"><thead><tr><th>Позиція</th><th class="n">Приїхало</th><th class="n">Пішло від Vetro</th><th class="n">Взяли ми</th><th class="n">Частка</th><th class="n">Продали ми</th><th class="n">Vetro зараз</th><th class="n">У нас</th></tr></thead><tbody>' +
+        (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<tr' + (!x.took && x.out ? ' class="miss"' : '') + ' data-art="' + esc(x.a) + '"><td>' + nm(x) + '</td><td class="n">' + fmt(x.inn) + '</td><td class="n">' + fmt(x.out) + '</td><td class="n"><b>' + fmt(x.took) + '</b></td><td class="n">' + shBar(share(x.took, x.out)) + '</td><td class="n">' + fmt(x.sold) + '</td><td class="n">' + fmt(Math.max(0, x.vq)) + '</td><td class="n">' + fmt(x.oq) + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<div class="list ph-only">' + (STSHOW.rhp ? PL : PL.slice(0, 40)).map(x => '<div class="pcard rh-pc" data-art="' + esc(x.a) + '">' + nm(x) + '<div class="rh-pcg"><span>Приїхало<b>' + fmt(x.inn) + '</b></span><span>Пішло<b>' + fmt(x.out) + '</b></span><span>Взяли ми<b>' + fmt(x.took) + '</b></span><span>Частка<b>' + (share(x.took, x.out) ?? '—') + (x.out ? '%' : '') + '</b></span></div><div class="sub">продали ми ' + x.sold + ' · Vetro зараз ' + Math.max(0, x.vq) + ' · у нас ' + x.oq + '</div></div>').join('') + '</div>' +
+      (PL.length > 40 ? '<button class="st-more" data-stall="rhp">' + (STSHOW.rhp ? 'Згорнути' : 'Показати всі ' + PL.length) + '</button>' : '') + '</div>' +
+    '<div class="card"><div class="ch"><h3>Партії: надходження до Vetro</h3><span class="sub">кожен прихід — як швидко розібрали і скільки взяли ми · ' + BAT.length + '</span></div><div class="mt-tl">' +
+      (showAll('rhb', BAT, 12, b => '<div class="rh-bt" data-art="' + esc(b.x.a) + '"><div class="pn2">' + phA(b.x.a) + '<div><b>' + esc(shortName(b.x.n)) + '</b><span class="sub">прихід ' + dm(pd(b.d)) + ' · <b style="color:var(--good)">+' + b.q + ' шт</b> · ' + (b.end ? 'закінчилась ' + dm(pd(b.end)) + ' — за ' + b.days + ' дн' : 'пішло ' + b.went + ' шт за ' + b.days + ' дн, у Vetro зараз ' + Math.max(0, b.x.vq)) + '</span></div></div>' +
+        '<div class="rh-bts"><span class="mb"><i style="width:' + Math.min(100, Math.round(b.took / b.q * 100)) + '%"></i></span><span>ми взяли <b>' + b.took + ' шт</b> (' + Math.round(b.took / b.q * 100) + '% партії)</span>' + (b.end ? '<span class="rh-tag">партія закінчилась</span>' : '') + '</div></div>') || '<div class="empty">Приходів за цей період немає</div>') + '</div></div>' +
+    '<div class="card"><div class="ch"><h3>Наявність по місяцях</h3><label class="rh-chk"><input type="checkbox" id="ruhLost"' + (RUHLOST ? ' checked' : '') + '> лише з втраченими місяцями</label></div>' +
+      '<div class="leg"><span><i class="hv full"></i>у Vetro весь місяць</span><span><i class="hv part"></i>частину місяця</span><span><i class="hv none"></i>не було</span><span><i class="hv ours"></i>у нас</span><span><i class="hv ours apx"></i>у нас (приблизно)</span><span><i class="hv lostk"></i>втрачений місяць</span></div>' +
+      '<div class="tbl"><div class="rh-mx" style="grid-template-columns:minmax(150px,1.6fr) repeat(' + MI.length + ',minmax(44px,1fr))"><span></span>' + MI.map(m => '<span class="mh">' + ml(m) + '</span>').join('') +
+        ((STSHOW.rhm ? MXL : MXL.slice(0, 40)).map(mxRow).join('') || '<span class="empty" style="grid-column:1/-1">Немає позицій</span>') + '</div></div>' +
+      (MXL.length > 40 ? '<button class="st-more" data-stall="rhm">' + (STSHOW.rhm ? 'Згорнути' : 'Показати всі ' + MXL.length) + '</button>' : '') +
+      '<div class="sub">Верхня смужка — Vetro, нижня — ми, під ними — скільки ми продали за місяць. Червона рамка — у Vetro товар був і від нього відвантажували, а в нас його не було. До ' + (RUH.ourStart ? dm(pd(RUH.ourStart)) : 'початку запису') + ' «у нас» — приблизно: був продаж у місяці.</div></div>';
+  const on = (id, f) => { const el = $(id); if (el) el.onclick = f; };
+  const pick = (id, f) => on(id, e => { const b = e.target.closest('button'); if (b) { f(b.dataset.v); LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); } });
+  pick('ruhN', v => { RUHN = +v; }); pick('ruhCat', v => { RUHCAT = v; }); pick('ruhS', v => { RUHSORT = v; });
+  on('ruhRe', () => { RUH = null; ruhLoad(true); renderRuh(); });
+  const lc = $('ruhLost'); if (lc) lc.onchange = () => { RUHLOST = lc.checked; LAST[tab] = null; const y = scrollY; render(); scrollTo(0, y); };
+}
+// ===== ПЛАН ЗАЛУ: розстановка товару в залах (ЗД / РТ), задачі з плану =====
+// кімнати з креслень (стіни, вхід, вітрини, ніші, шлях покупця) і розстановка з креслення — як підказка-«тінь»
+const PLROOM = (() => {
+const T = {t80: [80, 80, 'Стіл 80'], t120: [120, 80, 'Стіл 120'], t160: [160, 90, 'Стіл 160'], t200: [200, 100, 'Стіл 200'], t260: [260, 100, 'Стіл 260'],
+  ch: [46, 52, 'Стілець'], ar: [76, 80, 'Крісло'], so: [220, 92, 'Диван'], ct: [110, 60, 'Журнальний стіл'], rd: [55, 55, 'Приставний'], fx: [80, 170, 'Ресепшн']};
+const N = {t80: 'Стіл TM-80 бетон', t120: 'Стіл Піно TML-1200 п\'єр блек', t160: 'Стіл TM-89 калакатта', t200: 'Стіл Ларіо TML-1370', t260: 'Стіл Сорренто TML-2600 голден вайт',
+  ch: 'Стілець M-65 капучино', ar: 'Крісло «Тіно» айворі', so: 'Диван «Орегон» сірий', ct: 'Журнальний стіл CT-35', rd: 'Приставний столик «Етна»', fx: 'Ресепшн (не товар)'};
+let uid = 1;
+const mk = (k, x, y, r, o) => Object.assign({id: uid++, k, x, y, r: r || 0, n: N[k], a: k.toUpperCase() + '-' + (100 + uid), st: 'ok', s30: 0}, o || {});
+// стільці навколо стола: n зверху і n знизу (або з боків)
+function set4(t, top, bot, side) { const L = [], w = T[t.k][0], h = T[t.k][1], W = t.r ? h : w, H = t.r ? w : h;
+  const place = (cnt, fx) => { for (let i = 0; i < cnt; i++) L.push(fx(i, cnt)); };
+  place(top, (i, c) => mk('ch', t.x - W / 2 + W * (i + .5) / c, t.y - H / 2 - 22, 0, {grp: t.id, n: t.chN || N.ch, st: t.st, s30: t.s30}));
+  place(bot, (i, c) => mk('ch', t.x - W / 2 + W * (i + .5) / c, t.y + H / 2 + 22, 180, {grp: t.id, n: t.chN || N.ch, st: t.st, s30: t.s30}));
+  if (side) { L.push(mk('ch', t.x - W / 2 - 22, t.y, 270, {grp: t.id, n: t.chN || N.ch, st: t.st})); L.push(mk('ch', t.x + W / 2 + 22, t.y, 90, {grp: t.id, n: t.chN || N.ch, st: t.st})); }
+  return [t].concat(L); }
+// ===== Ретровіль: 9,1 × 12,8 м (з креслення) =====
+function rtPlan() { const P = [];
+  const add = (...a) => a.forEach(x => P.push(...[].concat(x)));
+  add(set4(mk('t80', 85, 135, 90, {st: 'stale'}), 0, 0).concat([mk('ch', 85, 75, 0, {grp: -1}), mk('ch', 85, 196, 180, {grp: -1})]));
+  add(set4(mk('t120', 95, 300, 0, {s30: 2}), 2, 2));
+  add(mk('fx', 165, 540, 0, {fixed: 1}));
+  add(set4(mk('t260', 175, 790, 0, {n: 'Стіл Сорренто TML-2600 голден вайт', s30: 1}), 3, 3));
+  add(set4(mk('t160', 125, 960, 0, {st: 'new'}), 2, 2));
+  add(mk('so', 365, 35, 0, {s30: 1}), mk('ct', 365, 110, 0), mk('ar', 330, 195, 30, {st: 'stale'}));
+  add(set4(mk('t160', 450, 110, 90, {n: 'Стіл Аскон 1400 бетон', st: 'stale'}), 0, 0, 1).slice(0, 1).concat([mk('ch', 418, 50, 270), mk('ch', 418, 160, 270), mk('ch', 482, 50, 90), mk('ch', 482, 160, 90)]));
+  add(set4(mk('t120', 665, 100, 90, {s30: 3}), 0, 0).concat([mk('ch', 630, 60, 270), mk('ch', 630, 140, 270), mk('ch', 700, 60, 90), mk('ch', 700, 140, 90)]));
+  add(set4(mk('t80', 400, 300, 0), 0, 0).concat([mk('ch', 465, 300, 90)]));
+  add(set4(mk('t80', 600, 300, 0, {s30: 2}), 0, 0, 1));
+  add(set4(mk('t160', 800, 300, 0, {s30: 4}), 2, 2));
+  add(set4(mk('t80', 545, 460, 0), 1, 1), set4(mk('t80', 655, 460, 0, {st: 'new'}), 1, 1), set4(mk('t160', 800, 460, 0), 2, 2));
+  add(set4(mk('t80', 545, 615, 0, {sold: 1}), 0, 0), set4(mk('t80', 655, 615, 0), 1, 1), set4(mk('t160', 800, 615, 0, {s30: 1}), 2, 2));
+  add(set4(mk('t260', 760, 820, 0, {s30: 1}), 3, 3));
+  add(set4(mk('t80', 530, 790, 0), 0, 0).concat([mk('ch', 595, 790, 90)]), set4(mk('t80', 530, 890, 0, {st: 'stale'}), 0, 0).concat([mk('ch', 595, 890, 90)]));
+  add(mk('ar', 640, 960, -25), mk('rd', 735, 1005, 0), mk('so', 865, 1100, 90, {st: 'new'}), mk('ar', 700, 1180, 0));
+  return {W: 910, H: 1280, walls: [[0, 0, 110, 0], [250, 0, 910, 0], [910, 0, 910, 1280], [0, 0, 0, 1280]], door: [[110, 0, 250, 0]], glass: [[0, 1280, 910, 1280]],
+    cols: [[0, 545, 45, 210], [0, 850, 45, 260]], path: 'M140 10 C 260 300, 330 600, 260 900 S 320 1200, 330 1290 M300 10 C 380 250, 470 500, 420 700 S 480 1100, 470 1290', items: P}; }
+// ===== Здолбунівська: 5,6 × 27,8 м (18,6 + 9,225), вхід знизу =====
+function zdPlan() { const P = [], add = (...a) => a.forEach(x => P.push(...[].concat(x)));
+  // ліва стіна: м'які зони, стільці біля стіни, столи
+  add(mk('so', 52, 100, 90, {s30: 1}), mk('ct', 150, 100, 90), mk('ar', 250, 50, 25));
+  add(mk('so', 52, 320, 90, {st: 'stale'}), mk('ct', 155, 320, 90), mk('ar', 160, 420, 0));
+  add(mk('ch', 35, 470, 90), mk('ch', 35, 525, 90), mk('ch', 35, 580, 90, {st: 'new'}), mk('ch', 35, 635, 90));
+  add(mk('rd', 125, 495, 0), mk('rd', 125, 555, 0), mk('rd', 125, 615, 0, {s30: 2}));
+  add(mk('ar', 165, 700, 0), mk('so', 52, 810, 90, {s30: 1}), mk('ct', 160, 810, 90), mk('ar', 165, 925, 180));
+  add(set4(mk('t160', 95, 1090, 0, {s30: 2}), 2, 2), set4(mk('t160', 95, 1250, 0), 2, 2), set4(mk('t160', 95, 1410, 0, {st: 'stale'}), 2, 2));
+  add(mk('so', 52, 1610, 90, {st: 'new'}), mk('ct', 160, 1610, 90), mk('ar', 165, 1715, 180));
+  add(mk('ch', 35, 1800, 0), mk('ch', 88, 1800, 0), mk('ch', 141, 1800, 0));
+  // права стіна
+  add(set4(mk('t120', 505, 85, 90, {s30: 3}), 0, 0).concat([mk('ch', 438, 50, 270), mk('ch', 438, 120, 270)]));
+  add(set4(mk('t80', 380, 215, 0), 0, 0, 1));
+  add(set4(mk('t120', 505, 340, 90), 0, 0).concat([mk('ch', 438, 305, 270), mk('ch', 438, 375, 270)]));
+  add(mk('ar', 395, 460, 0), mk('ct', 395, 560, 90), mk('so', 510, 560, 270, {s30: 1}));
+  add(mk('ch', 525, 710, 270), mk('ch', 525, 765, 270, {sold: 1}), mk('ch', 525, 820, 270));
+  add(mk('rd', 455, 895, 0), mk('ar', 405, 960, 0), mk('ar', 505, 960, 0, {st: 'stale'}));
+  add(mk('so', 460, 1060, 0, {s30: 2}), mk('ct', 460, 1135, 0), mk('ar', 405, 1205, 180), mk('ar', 515, 1205, 180), mk('rd', 460, 1285, 0));
+  add(mk('fx', 425, 1480, 0, {fixed: 1}));
+  add(set4(mk('t160', 470, 1665, 0, {s30: 1}), 2, 2));
+  add(mk('rd', 390, 1805, 0), mk('rd', 450, 1805, 0), mk('rd', 510, 1805, 0));
+  // креслення 18,4 → реальні 27,8 м: розтягуємо розстановку по довжині (стільці лишаються біля своїх столів)
+  const K = 2783 / 1840, tables = P.filter(i => /^t/.test(i.k)), oy = new Map(P.map(i => [i, i.y]));
+  P.forEach(i => { if (/^t/.test(i.k)) i.y = Math.round(oy.get(i) * K); });
+  P.forEach(i => { if (/^t/.test(i.k)) return; let t = i.grp ? tables.find(x => x.id === i.grp) : null;
+    if (!t && i.k === 'ch') t = tables.find(x => Math.abs(x.x - i.x) < 110 && Math.abs(oy.get(x) - oy.get(i)) < 90);
+    i.y = t ? t.y + (oy.get(i) - oy.get(t)) : Math.round(oy.get(i) * K); });
+  const H = 2783;
+  return {W: 560, H, walls: [[0, 0, 560, 0], [560, 0, 560, H], [0, 0, 0, H], [0, H, 185, H], [340, H, 560, H]], door: [[185, H, 340, H]], glass: [[0, H, 185, H], [340, H, 560, H]], cols: [],
+    path: 'M265 2778 C 250 2300, 300 1800, 280 1400 S 270 600, 290 120', items: P}; }
+// обидва зали однаково: вхід знизу. Ретровіль на кресленні — входом угору, тож повертаємо на 180°
+function flip(p) { const fx = x => p.W - x, fy = y => p.H - y;
+  p.items.forEach(i => { i.x = fx(i.x); i.y = fy(i.y); i.r = (i.r + 180) % 360; });
+  const L = a => [fx(a[0]), fy(a[1]), fx(a[2]), fy(a[3])];
+  p.walls = p.walls.map(L); p.door = p.door.map(L); p.glass = p.glass.map(L);
+  p.cols = p.cols.map(c => [p.W - c[0] - c[2], p.H - c[1] - c[3], c[2], c[3]]);
+  p.path = p.path.replace(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g, (m, x, y) => fx(+x) + ' ' + fy(+y));
+  return p; }
+  const R = {zd: zdPlan(), rt: flip(rtPlan())};
+  Object.values(R).forEach(p => { p.ghost = p.items.map(i => ({k: i.k, x: i.x, y: i.y, r: i.r, w: T[i.k][0], h: T[i.k][1]})); delete p.items; });
+  return R;
+})();
+let PLAN = null, PLINFO = {}, PLERR = '', PLBUSY = false, PLS = 'zd', PLOV = 'base', PLSRC = 'hall', PLZOOM = 1, PLSEL = null, PLMS = new Set(), PLGHOST = null, PLX = 2, PLFORM = null;
+const PLSI = () => PLS === 'rt' ? 1 : 0;
+const plUid = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)).slice(0, 16);
+// ----- тип і розмір меблів з назви / групи (см) -----
+function plShape(a) {
+  const it = D.items[a] || {}, n = String(it.n || a).toLowerCase(), g = it.g || '';
+  const big = (n.match(/\d{4}/g) || []).map(Number).find(v => v >= 700 && v <= 3200);
+  if (/диван/.test(n)) return /кутов/.test(n) ? {k: 'so', w: 260, h: 160} : {k: 'so', w: 220, h: 92};
+  if (/пуф/.test(n)) return {k: 'rd', w: 50, h: 50};
+  if (/крісл/.test(n) && !/стіл/.test(n)) return {k: 'ar', w: 76, h: 80};
+  if (/консол/.test(n)) return {k: 'ct', w: 120, h: 40};
+  if (/тумб/.test(n)) return {k: 'ct', w: 160, h: 45};
+  if (/журнал|кавов|придиван|приставн/.test(n)) return /кругл/.test(n) ? {k: 'rd', w: 60, h: 60} : {k: 'ct', w: 110, h: 60};
+  if (/стілець|стільц|табурет/.test(n) || g === 'Стільці') return {k: 'ch', w: 46, h: 52};
+  if (/стіл/.test(n) || g === 'Столи') { if (/кругл|круг\b|d\s?\d/.test(n)) { const d = big ? Math.round(big / 10) : 110; return {k: 'tr', w: d, h: d}; }
+    const L = big ? Math.round(big / 10) : 160; return {k: 'tb', w: L, h: L <= 90 ? L : L >= 200 ? 100 : 90}; }
+  if (g === 'Крісла і дивани') return {k: 'ar', w: 76, h: 80};
+  if (g === 'Журнальні та консолі') return {k: 'ct', w: 110, h: 60};
+  return {k: 'ot', w: 60, h: 60};
+}
+const plModel = n => String(n || '').replace(/^(Журнальний стіл|Приставний столик|Поворотне крісло|Барний стілець|Стілець|Стіл|Крісло|Диван|Консоль|Тумба)\s+/i, '').replace(/[«»"]/g, '');
+// коротка модель: назва в лапках («Тіно»), інакше код моделі (TM-235, TML-1200-1, M-65), інакше перше слово з великої
+const PLCODE = /(^|\s)([A-ZА-ЯІЇЄ]{1,4}[- ]?\d[\w\-\/]*)/;
+const plShort = n => { n = String(n || ''); const q = /[«"]([^»"]+)[»"]/.exec(n); if (q) return q[1];
+  const c = PLCODE.exec(n); if (c) return c[2]; const w = plModel(n).split(/\s+/).find(t => /^[A-ZА-ЯІЇЄ]/.test(t)); return w || plModel(n).split(/\s+/)[0] || ''; };
+const plColor = n => { n = String(n || ''); const q = /[«"][^»"]+[»"]\s*(.*)$/.exec(n), c = PLCODE.exec(n);
+  const sh = plShort(n), m = plModel(n), rest = q ? q[1] : c ? n.slice(c.index + c[0].length) : (m.indexOf(sh) >= 0 ? m.slice(m.indexOf(sh) + sh.length) : m.split(/\s+/).slice(1).join(' '));
+  return rest.split(/\s+/).filter(t => t && !/\d/.test(t)).join(' ').replace(/^[+\s]+/, ''); };
+const plFit = (t, wcm, px) => { const n = Math.floor(wcm / (px * PLX * .66)); if (n < 4) return ''; return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+const plSz = it => { const v = ((it.r % 180) + 180) % 180, s = v > 45 && v < 135; return {w: s ? it.h : it.w, h: s ? it.w : it.h}; };
+const plBox = it => { const s = plSz(it); return {x1: it.x - s.w / 2, y1: it.y - s.h / 2, x2: it.x + s.w / 2, y2: it.y + s.h / 2}; };
+const plItems = () => (PLAN && PLAN[PLS]) || (PLAN ? (PLAN[PLS] = []) : []);
+// ----- залишки: що в залі, що на складі, що продано з плану -----
+function plStock() {
+  const si = PLSI(), L = plItems(), by = {};
+  L.forEach(i => { const o = by[i.a] || (by[i.a] = {on: [], mv: []}); (i.mv ? o.mv : o.on).push(i); });
+  const sold = new Set(), conv = [];
+  Object.keys(by).forEach(a => { const it = D.items[a] || {}, hall = Math.max(0, (si ? it.s2 : it.s1) || 0), o = by[a];
+    o.mv.forEach(i => { if (o.on.length < hall) { i.mv = 0; o.on.push(i); conv.push(i); } });             // приїхало зі складу — вже не «чекає»
+    o.on.slice(hall).forEach(i => sold.add(i.id)); });                                                         // на плані більше, ніж у залі → продано
+  if (conv.length) plQueue(conv);
+  const hall = [], sk = [];
+  (D.assort || []).forEach(a => { const it = D.items[a]; if (!it) return; const o = by[a] || {on: [], mv: []}, h = ((si ? it.s2 : it.s1) || 0) - o.on.length, s = (it.sk || 0) - o.mv.length;
+    if (h > 0) hall.push([a, h]); if (s > 0) sk.push([a, s]); });
+  return {sold, hall, sk};
+}
+// ----- збереження: одразу на екрані, у таблицю — у фоні пачками -----
+const PLQ = {up: new Map(), del: new Set()}; let PLQT = null, PLQRUN = false, PLSAVE = 'ok';
+function plQueue(items, del) { (items || []).forEach(i => PLQ.up.set(PLS + '|' + i.id, [PLS, i])); (del || []).forEach(i => { PLQ.up.delete(PLS + '|' + i.id); PLQ.del.add(PLS + '|' + i.id); });
+  PLSAVE = 'saving'; plSaveSt(); clearTimeout(PLQT); PLQT = setTimeout(plFlush, 700); }
+function plApi(op) {
+  if (window.__DEMO_PLANAPI__) return Promise.resolve(window.__DEMO_PLANAPI__(op));
+  if (IN_GAS) return new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no).dashPlan(op || null, ''));
+  return fetch('https://script.google.com/macros/s/' + encodeURIComponent(DEP) + '/exec?k=' + encodeURIComponent(KEY) + '&x=plan' + (op ? '&op=' + encodeURIComponent(JSON.stringify(op)) : '') + '&t=' + Date.now(), {cache: 'no-store'}).then(r => r.text());
+}
+function plFlush() {
+  if (PLQRUN) return; const ops = [];
+  [...PLQ.del].forEach(k => { const [s, id] = k.split('|'); let o = ops.find(x => x.a === 'del' && x.s === s); if (!o) ops.push(o = {a: 'del', s, ids: []}); o.ids.push(id); });
+  [...PLQ.up.values()].forEach(([s, i]) => { let o = ops.find(x => x.a === 'up' && x.s === s && x.items.length < 12); if (!o) ops.push(o = {a: 'up', s, items: []});
+    o.items.push({id: i.id, a: i.a, k: i.k, w: i.w, h: i.h, x: Math.round(i.x), y: Math.round(i.y), r: i.r, g: i.g || '', mv: i.mv ? 1 : 0}); });
+  PLQ.up.clear(); PLQ.del.clear(); if (!ops.length) { PLSAVE = 'ok'; plSaveSt(); return; }
+  PLQRUN = true;
+  const next = () => { const op = ops.shift(); if (!op) { PLQRUN = false; PLSAVE = PLQ.up.size || PLQ.del.size ? 'saving' : 'ok'; plSaveSt(); if (PLSAVE === 'saving') plFlush(); return; }
+    plApi(op).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); next(); })
+      .catch(e => { PLQRUN = false; PLSAVE = 'err'; PLERR = String(e && e.message || e); (op.items || []).forEach(i => { const it = (PLAN[op.s] || []).find(x => x.id === i.id); if (it) PLQ.up.set(op.s + '|' + it.id, [op.s, it]); }); (op.ids || []).forEach(id => PLQ.del.add(op.s + '|' + id)); plSaveSt(); }); };
+  next();
+}
+function plSaveSt() { const el = $('plSave'); if (!el) return; el.className = 'sv' + (PLSAVE === 'ok' ? ' ok' : PLSAVE === 'err' ? ' bad' : '');
+  el.innerHTML = PLSAVE === 'ok' ? '✓ збережено' : PLSAVE === 'err' ? '⚠ не збереглось · <button class="lnk" id="plRetry">ще раз</button>' : 'зберігаю…';
+  const r = $('plRetry'); if (r) r.onclick = () => { PLSAVE = 'saving'; plSaveSt(); plFlush(); }; }
+function plLoad() { PLBUSY = true; PLERR = '';
+  return plApi(null).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message || j.error); PLAN = j.plan || {}; PLINFO = j.info || {}; })
+    .catch(e => { PLERR = String(e && e.message || e); }).then(() => { PLBUSY = false; if (tab === 'plan') { LAST[tab] = null; render(); } }); }
+// ----- вкладка -----
+function renderPlan() {
+  const box = $('planBox');
+  if (!PLAN) { box.innerHTML = '<div class="card"><div class="empty">' + (PLERR ? 'Не вдалося завантажити план: ' + esc(PLERR) + ' <button class="btn-s" id="plRe">Ще раз</button>' : 'Завантажую план залу…') + '</div></div>';
+    const r = $('plRe'); if (r) r.onclick = () => { plLoad(); renderPlan(); }; if (!PLBUSY && !PLERR) plLoad(); return; }
+  if (MTASK === null && !MBUSY) mtLoad();
+  if (!MTDRAW.includes(plTasks)) MTDRAW.push(plTasks);
+  if (PLGHOST === null) PLGHOST = !plItems().length;
+  const seg = (id, v, opts) => '<div class="seg-s" id="' + id + '">' + opts.map(o => '<button data-v="' + o[0] + '" aria-pressed="' + (v === o[0]) + '">' + o[1] + '</button>').join('') + '</div>';
+  box.innerHTML =
+    '<div class="pl-top"><p class="sub">Перетягуйте товар зі списку на план · клік по меблях — дії · Shift + клік по кількох — об’єднати в комплект · клітинка = 20 см</p>' + seg('plStore', PLS, [['zd', esc(stName(0))], ['rt', esc(stName(1))]]) + '</div>' +
+    '<div class="pl-stats" id="plStats"></div>' +
+    '<div class="pl-wrap"><div class="pl-side"><div class="card"><div class="pl-src" id="plSrc"><button data-v="hall" aria-pressed="' + (PLSRC === 'hall') + '">У залі, не на плані</button><button data-v="sk" aria-pressed="' + (PLSRC === 'sk') + '">На складі</button></div>' +
+        '<input id="plQ" class="pl-in" placeholder="Пошук товару"><div id="plList" class="pl-list"></div><div class="sub" id="plSrcNote"></div></div></div>' +
+      '<div class="pl-board" id="plBoard"><div class="pl-pop" id="plPop" hidden></div><div class="pl-gap" id="plGap" hidden></div><div class="pl-ms" id="plMs" hidden><span></span><button class="btn-y" id="plJoin">Об’єднати в комплект</button><button class="btn-s" id="plMsX">Скасувати</button></div>' +
+        '<div class="pl-tools">' + seg('plOv', PLOV, [['base', 'Звичайний'], ['sales', 'Продажі 30 дн'], ['stale', 'Застій'], ['new', 'Новинки']]) +
+          '<div class="pl-tr"><label class="pl-chk"><input type="checkbox" id="plGh"' + (PLGHOST ? ' checked' : '') + '> креслення</label><span class="sv" id="plSave"></span><div class="pl-zoom"><button id="plZo" title="Зменшити">−</button><button id="plZi" title="Збільшити">+</button></div></div></div>' +
+        '<div class="pl-svgw" id="plWrap"><svg id="plSvg"></svg></div><div class="pl-legend" id="plLeg"></div><div class="sub" id="plInfo"></div></div>' +
+      '<div class="pl-side pl-right"><div class="card"><div class="ch"><h3>Задачі залу</h3><span class="sub" id="plTN"></span></div><div id="plTasks" class="pl-tl"></div>' +
+        '<form class="pl-form" id="plTf" hidden><div class="sub" id="plTfFor"></div><textarea id="plTt" maxlength="500"></textarea><div class="pl-f2"><input id="plTr" class="pl-in" list="plTrL" placeholder="Хто відповідає"><input id="plTd" class="pl-in" type="date"></div><datalist id="plTrL"></datalist>' +
+          '<div class="mt-acts"><button class="btn-y">Додати задачу</button><button type="button" class="btn-s" id="plTc">Скасувати</button></div></form>' +
+        '<div class="mt-acts"><button class="btn-s" id="plTg">✈ Надіслати задачі залу</button><button class="btn-s" id="plCopy">Скопіювати</button></div>' +
+        '<div class="sub">Задачі з плану — у спільному списку «Зборів» і в тій самій гілці Telegram. Номер задачі — значок на меблях.</div></div></div></div>';
+  const on = (id, f) => { const el = $(id); if (el) el.onclick = f; };
+  const pick = (id, f) => on(id, e => { const b = e.target.closest('button'); if (b) f(b.dataset.v); });
+  pick('plStore', v => { PLS = v; PLSEL = null; PLMS.clear(); PLZOOM = 1; PLGHOST = !plItems().length; LAST[tab] = null; render(); });
+  pick('plOv', v => { PLOV = v; [...$('plOv').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); plDraw(); });
+  pick('plSrc', v => { PLSRC = v; [...$('plSrc').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); plList(); });
+  $('plQ').oninput = plList; $('plGh').onchange = e => { PLGHOST = e.target.checked; plDraw(); };
+  on('plZi', () => { PLZOOM = Math.min(4, PLZOOM * 1.25); plDraw(); }); on('plZo', () => { PLZOOM = Math.max(.4, PLZOOM / 1.25); plDraw(); });
+  on('plJoin', plJoin); on('plMsX', () => { PLMS.clear(); plMsBar(); plDraw(); });
+  on('plTc', () => { $('plTf').hidden = true; PLFORM = null; });
+  $('plTf').onsubmit = e => { e.preventDefault(); const t = $('plTt').value.trim(); if (!t) return; const f = PLFORM || {};
+    mtWrite({a: 'add', w: iso(monday(ASOF)), t, r: $('plTr').value.trim(), d: $('plTd').value, st: PLS, it: f.id || '', art: f.a || ''}); $('plTf').hidden = true; PLFORM = null; plDraw(); };
+  on('plTg', plTgSend); on('plCopy', () => { try { navigator.clipboard.writeText(plTaskText()).then(() => { $('plCopy').textContent = 'Скопійовано ✓'; }); } catch (e) {} });
+  plBind(); plList(); plTasks(); plDraw(); plSaveSt();
+  const ro = new ResizeObserver(() => { if (tab === 'plan') plDraw(); }); ro.observe($('plWrap'));
+}
+function plMsBar() { const b = $('plMs'); if (!b) return; b.hidden = PLMS.size < 2; b.querySelector('span').textContent = 'Вибрано ' + PLMS.size + ' предм.'; }
+function plJoin() { const L = plItems().filter(i => PLMS.has(i.id)); if (L.length < 2) return;
+  const lead = L.slice().sort((a, b) => (/^t/.test(b.k) - /^t/.test(a.k)) || b.w * b.h - a.w * a.h)[0], ch = [];
+  L.forEach(i => { if (i === lead) return; plItems().forEach(x => { if (x.g === i.id) { x.g = lead.id; ch.push(x); } }); i.g = lead.id; ch.push(i); });
+  if (lead.g) { lead.g = ''; ch.push(lead); }
+  PLMS.clear(); PLSEL = lead.id; plMsBar(); plQueue(ch); plDraw(); }
+// ----- стан предмета для кольору -----
+function plMeta() { const si = PLSI(), dep = DEPS[si], X = stStats(), H = X[dep] || {}, from = iso(addD(ASOF, -29)), s30 = {};
+  R.forEach(r => { if (r.dep === dep && r.d >= from) s30[r.a] = (s30[r.a] || 0) + r.q; });
+  return {H, s30, kind: a => { const it = D.items[a]; return it ? staleKind(a, it, H[a], [si]) : ''; }}; }
+function plFill(i, M, sold) {
+  if (i.mv) return ['var(--y2)', 'var(--yInk)'];
+  const it = D.items[i.a] || {};
+  if (PLOV === 'stale') return M.kind(i.a) === 'stale' ? ['var(--bad2)', 'var(--bad)'] : ['var(--card)', 'var(--line2,#c9c8c3)'];
+  if (PLOV === 'new') return isNovelty(it) ? ['var(--blue2,#e3ebff)', 'var(--on)'] : ['var(--card)', 'var(--line2,#c9c8c3)'];
+  if (PLOV === 'sales') { const s = M.s30[i.a] || 0; return s ? ['color-mix(in srgb,var(--good) ' + Math.min(80, 20 + s * 12) + '%,var(--card))', 'var(--good)'] : ['var(--card)', 'var(--line2,#c9c8c3)']; }
+  return ['var(--card)', 'var(--ink)']; }
+function plShapeSvg(i, M, sold, pins) {
+  const w = i.w, h = i.h, [f, s] = plFill(i, M, sold), dash = sold ? ' stroke-dasharray="' + 8 + ' ' + 6 + '"' : i.mv ? ' stroke-dasharray="10 5"' : '', fo = sold ? 'none' : f, sw = 1.6 * PLX;
+  const R = (x, y, ww, hh, rx, extra) => '<rect x="' + x + '" y="' + y + '" width="' + ww + '" height="' + hh + '" rx="' + rx + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + (extra || '') + '/>';
+  let g = '';
+  if (i.k === 'ch') g = R(-w / 2, -h / 2, w, h, 7) + '<rect x="' + (-w / 2 + 4) + '" y="' + (-h / 2 + 3) + '" width="' + (w - 8) + '" height="8" rx="3" fill="' + s + '" opacity=".5"/>';
+  else if (i.k === 'ar') g = R(-w / 2, -h / 2, w, h, 16) + '<path d="M' + (-w / 2 + 8) + ' ' + (-h / 2 + 14) + 'H' + (w / 2 - 8) + '" stroke="' + s + '" stroke-width="7" stroke-linecap="round" opacity=".45"/>';
+  else if (i.k === 'so') { g = R(-w / 2, -h / 2, w, h, 14) + '<rect x="' + (-w / 2 + 8) + '" y="' + (-h / 2 + 6) + '" width="' + (w - 16) + '" height="16" rx="6" fill="' + s + '" opacity=".3"/>'; }
+  else if (i.k === 'rd' || i.k === 'tr') g = '<ellipse rx="' + w / 2 + '" ry="' + h / 2 + '" fill="' + fo + '" stroke="' + s + '" stroke-width="' + sw + '"' + dash + '/>';
+  else g = R(-w / 2, -h / 2, w, h, 6);
+  const it = D.items[i.a] || {}, n = it.n || i.a, S = plSz(i), up = i.r % 360 ? ' transform="rotate(' + (-i.r) + ')"' : '';
+  const tx = (y, t, px, c, wg) => '<text' + up + ' text-anchor="middle" y="' + y + '" font-size="' + px * PLX + '" font-weight="' + (wg || 700) + '" fill="' + c + '">' + esc(t) + '</text>';
+  let lab = '';
+  if (sold) lab = tx(3 * PLX, S.w < 60 ? 'прод.' : 'продано', S.w < 60 ? 7 : 9, 'var(--bad)', 800);
+  else if (i.k === 'tb' || i.k === 'tr') { const L = [[plFit(plShort(n) + ' ' + i.w + ' см', S.w - 6, 9), 9, 'var(--ink)', 800], [plFit(plColor(n), S.w - 6, 8), 8, 'var(--mut)', 600]];
+    if (PLOV === 'sales' && M.s30[i.a]) L.push([M.s30[i.a] + ' шт за 30 дн', 8, 'var(--good)', 800]);
+    const rows = L.filter((r, k) => r[0] && (S.h - 4) >= (k + 1) * 9 * PLX * 1.2), y0 = -(rows.length - 1) * 9 * PLX * .6;
+    lab = rows.map((r, k) => tx(y0 + k * 9 * PLX * 1.2 + r[1] * PLX * .35, r[0], r[1], r[2], r[3])).join(''); }
+  else if (i.k === 'ch') { const t = plFit(plShort(n), S.w - 4, 7); if (t) lab = tx(7 * PLX * .9, t, 7, 'var(--ink)', 700); }
+  else { const t = plFit(i.k === 'so' ? plModel(n) : plShort(n), S.w - 6, 8); if (t) lab = tx(i.k === 'so' ? 8 * PLX * 1.2 : 8 * PLX * .35, t, 8, 'var(--ink)', 700); }
+  if (PLOV === 'sales' && M.s30[i.a] && !/^t/.test(i.k)) lab += '<circle r="' + 8 * PLX + '" fill="var(--good)"/>' + tx(3 * PLX, String(M.s30[i.a]), 9, '#fff', 800);
+  const pin = pins[i.id] ? '<g transform="rotate(' + (-i.r) + ') translate(' + (S.w / 2 - 2) + ',' + (-S.h / 2 - 2) + ')"><circle r="' + 9 * PLX + '" fill="var(--bad)"/><text text-anchor="middle" y="' + 3.5 * PLX + '" font-size="' + 10 * PLX + '" font-weight="800" fill="#fff">' + pins[i.id] + '</text></g>' : '';
+  return '<g class="it' + (PLSEL === i.id || PLMS.has(i.id) ? ' sel' : '') + '" data-id="' + esc(i.id) + '" transform="translate(' + i.x + ',' + i.y + ') rotate(' + i.r + ')"><title>' + esc(n + ' · ' + i.w + '×' + i.h + ' см' + (sold ? ' · продано' : i.mv ? ' · чекає зі складу' : '')) + '</title>' + g + lab + pin + '</g>';
+}
+function plTaskList() { return (MTASK || []).filter(t => t.st === PLS && t.s !== 'ok' && t.s !== 'no'); }
+function plDraw() {
+  const svg = $('plSvg'), wrap = $('plWrap'); if (!svg || !wrap) return;
+  const p = PLROOM[PLS], pad = 40, W = p.W + pad * 2, H = p.H + pad * 2, fitW = Math.max(.1, (wrap.clientWidth - 16) / W), sc = fitW * PLZOOM;
+  PLX = 1 / sc; wrap.style.height = Math.round(Math.min(H * fitW + 16, 2400)) + 'px';
+  svg.setAttribute('viewBox', (-pad) + ' ' + (-pad) + ' ' + W + ' ' + H); svg.setAttribute('width', W * sc); svg.setAttribute('height', H * sc);
+  const L = plItems(), ST = plStock(), M = plMeta(), TL = plTaskList(), pins = {};
+  TL.forEach((t, k) => { if (t.it && !pins[t.it]) pins[t.it] = k + 1; });
+  let s = '<defs><pattern id="plHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="var(--ink)" stroke-width="2"/></pattern></defs>' +
+    '<rect x="0" y="0" width="' + p.W + '" height="' + p.H + '" fill="var(--card)"/>' + '<path d="' + p.path + '" fill="none" stroke="#c98a5b" stroke-width="' + 1.6 * PLX + '" stroke-dasharray="' + 8 * PLX + ' ' + 6 * PLX + '" opacity=".6"/>';
+  p.ghost.filter(gh => gh.k === 'fx').forEach(gh => { s += '<g transform="translate(' + gh.x + ',' + gh.y + ') rotate(' + gh.r + ')"><rect x="' + (-gh.w / 2) + '" y="' + (-gh.h / 2) + '" width="' + gh.w + '" height="' + gh.h + '" rx="4" fill="var(--bar)" stroke="var(--mut)" stroke-width="' + 1.5 * PLX + '"/><text transform="rotate(' + (-gh.r) + ')" text-anchor="middle" y="' + 3 * PLX + '" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--mut)">ресепшн</text></g>'; });
+  if (PLGHOST) s += p.ghost.filter(gh => gh.k !== 'fx').map(gh => { const S = gh.k === 'ch' ? 7 : 6; return '<g transform="translate(' + gh.x + ',' + gh.y + ') rotate(' + gh.r + ')" opacity=".35">' + (gh.k === 'rd' ? '<ellipse rx="' + gh.w / 2 + '" ry="' + gh.h / 2 + '"' : '<rect x="' + (-gh.w / 2) + '" y="' + (-gh.h / 2) + '" width="' + gh.w + '" height="' + gh.h + '" rx="' + S + '"') + ' fill="none" stroke="var(--mut)" stroke-width="' + PLX + '" stroke-dasharray="' + 4 * PLX + ' ' + 3 * PLX + '"/></g>'; }).join('');
+  p.cols.forEach(c => { s += '<rect x="' + c[0] + '" y="' + c[1] + '" width="' + c[2] + '" height="' + c[3] + '" fill="url(#plHatch)" stroke="var(--ink)" stroke-width="2"/>'; });
+  p.walls.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="var(--ink)" stroke-width="16" stroke-linecap="square"/>'; });
+  p.glass.forEach(w => { s += '<line x1="' + w[0] + '" y1="' + w[1] + '" x2="' + w[2] + '" y2="' + w[3] + '" stroke="#8fb7d9" stroke-width="7"/>'; });
+  p.door.forEach(d => { s += '<line x1="' + d[0] + '" y1="' + d[1] + '" x2="' + d[2] + '" y2="' + d[3] + '" stroke="var(--y)" stroke-width="6" stroke-dasharray="10 6"/><text x="' + (d[0] + d[2]) / 2 + '" y="' + (d[1] - 8 * PLX) + '" text-anchor="middle" font-size="' + 10 * PLX + '" font-weight="800" fill="var(--ink)">вхід</text>'; });
+  s += '<g transform="translate(' + (p.W - 105) + ',' + (p.H + 24) + ')"><path d="M0 -5V5M0 0H100M100 -5V5" stroke="var(--ink)" stroke-width="' + 1.5 * PLX + '" fill="none"/><text x="50" y="' + (-4 * PLX) + '" text-anchor="middle" font-size="' + 9 * PLX + '" font-weight="700" fill="var(--ink)">1 м</text></g>';
+  L.forEach(i => { s += plShapeSvg(i, M, ST.sold.has(i.id), pins); });
+  // рамка комплекту
+  const lead = PLSEL && L.find(i => i.id === PLSEL), gid = lead && (lead.g || (L.some(i => i.g === lead.id) ? lead.id : ''));
+  if (gid) { const G = L.filter(i => i.id === gid || i.g === gid).map(plBox), x1 = Math.min(...G.map(b => b.x1)) - 8, y1 = Math.min(...G.map(b => b.y1)) - 8, x2 = Math.max(...G.map(b => b.x2)) + 8, y2 = Math.max(...G.map(b => b.y2)) + 8;
+    s += '<rect x="' + x1 + '" y="' + y1 + '" width="' + (x2 - x1) + '" height="' + (y2 - y1) + '" rx="' + 8 * PLX + '" fill="none" stroke="var(--y)" stroke-width="' + 2 * PLX + '" stroke-dasharray="' + 6 * PLX + ' ' + 4 * PLX + '" pointer-events="none"/><text x="' + x1 + '" y="' + (y1 - 4 * PLX) + '" font-size="' + 9 * PLX + '" font-weight="800" fill="var(--yInk)">комплект · ' + G.length + ' предм.</text>'; }
+  svg.innerHTML = s;
+  // цифри і легенда
+  const real = L.filter(i => !ST.sold.has(i.id) && !i.mv), stale = real.filter(i => M.kind(i.a) === 'stale').length;
+  $('plStats').innerHTML = [['На плані', real.length + ' од.', ''], ['У залі, не на плані', ST.hall.reduce((t, x) => t + x[1], 0), ST.hall.length ? 'warn' : ''], ['Продано — місце порожнє', ST.sold.size, ST.sold.size ? 'warn' : ''], ['Чекає зі складу', L.filter(i => i.mv).length, ''], ['Застій на плані', stale, ''], ['Задачі залу відкриті', TL.length, '']]
+    .map(x => '<div class="pl-stat ' + x[2] + '">' + x[0] + '<b>' + x[1] + '</b></div>').join('');
+  $('plLeg').innerHTML = ({base: '<span><i style="border-color:var(--ink)"></i>меблі в масштабі</span><span><i style="border-style:dashed;border-color:var(--bad)"></i>продано — місце порожнє</span><span><i style="background:var(--y2);border-color:var(--yInk);border-style:dashed"></i>чекає зі складу</span>' + (PLGHOST ? '<span><i style="border-style:dashed;opacity:.5"></i>креслення (підказка)</span>' : '') + '<span style="color:#c98a5b">- - шлях покупця</span>',
+    sales: '<span><i style="background:color-mix(in srgb,var(--good) 60%,white);border-color:var(--good)"></i>продано за 30 днів у цьому магазині (шт)</span>', stale: '<span><i style="background:var(--bad2);border-color:var(--bad)"></i>застій</span>', new: '<span><i style="background:#e3ebff;border-color:var(--on)"></i>новинки</span>'})[PLOV];
+  $('plInfo').textContent = PLINFO[PLS] ? 'Останні зміни плану: ' + PLINFO[PLS] : (L.length ? '' : 'План порожній: перетягніть товар зі списку. Пунктир — розстановка з креслення як підказка.');
+  plMsBar();
+}
+function plList() { const ST = plStock(), q = ($('plQ').value || '').toLowerCase(), src = PLSRC === 'sk' ? ST.sk : ST.hall;
+  const L = src.filter(x => { const it = D.items[x[0]] || {}; return !q || (it.n || x[0]).toLowerCase().includes(q) || x[0].toLowerCase().includes(q); }).sort((a, b) => GROUPS.indexOf((D.items[a[0]] || {}).g) - GROUPS.indexOf((D.items[b[0]] || {}).g) || b[1] - a[1]);
+  $('plList').innerHTML = L.slice(0, 150).map(x => { const it = D.items[x[0]] || {}, sh = plShape(x[0]);
+    return '<div class="pl-it' + (PLSRC === 'sk' ? ' sk' : '') + '" data-a="' + esc(x[0]) + '">' + phA(x[0]) + '<span><b>' + esc(shortName(it.n || x[0])) + '</b><small>' + esc(x[0]) + ' · ' + sh.w + '×' + sh.h + ' см</small></span><span class="q">' + x[1] + ' шт</span></div>'; }).join('') || '<div class="sub">' + (PLSRC === 'sk' ? 'На складі нічого' : 'Усе з залу вже на плані ✓') + '</div>';
+  $('plSrcNote').textContent = PLSRC === 'sk' ? 'Перетягнете зі складу на план — товар стане жовтим пунктиром і створиться задача «привезти зі складу і поставити сюди».' : 'Товар, що є на залишку цього залу за 1С, але ще не на плані.'; }
+function plTasks() { const box = $('plTasks'); if (!box) return; const TL = plTaskList();
+  $('plTN').textContent = MTASK === null ? '' : TL.length + ' відкриті';
+  box.innerHTML = MTASK === null ? '<div class="sub">Завантажую…</div>' : TL.map((t, k) => '<div class="pl-task"><span class="n">' + (k + 1) + '</span><div><b>' + esc(t.t) + '</b><small>' + esc(t.r || '—') + (t.d ? ' · до ' + dm(pd(t.d)) : '') + mtSv(t) + '</small></div><button data-tok="' + esc(t.id) + '" title="Зроблено">✓</button></div>').join('') || '<div class="sub">Задач немає. Клікніть меблі на плані → «+ Задача».</div>';
+  box.querySelectorAll('[data-tok]').forEach(b => b.onclick = () => { mtWrite({a: 'set', id: b.dataset.tok, s: 'ok'}); plDraw(); });
+  const dl = $('plTrL'); if (dl) dl.innerHTML = [...new Set((D.mgrs || []).concat((MTASK || []).map(t => t.r)).filter(Boolean))].map(n => '<option value="' + esc(n) + '">').join(''); }
+function plTaskText() { const TL = plTaskList(); return '📍 План залу · ' + stName(PLSI()) + ' — задачі\n' + (TL.map((t, k) => (k + 1) + '. ' + t.t + (t.r ? ' — ' + t.r : '') + (t.d ? ', до ' + dm(pd(t.d)) : '')).join('\n') || '— немає'); }
+function plTgSend() { const txt = plTaskText();
+  if (!MTG.tg) { try { navigator.clipboard.writeText(txt); } catch (e) {} $('plTg').textContent = 'Гілку не підключено — текст скопійовано'; return; }
+  const b = $('plTg'); b.textContent = 'Надсилаю…'; mtApi({a: 'tg', text: txt}).then(t => { const j = typeof t === 'string' ? JSON.parse(t) : t; if (j.error) throw new Error(j.message); b.textContent = '✅ Надіслано в гілку'; }).catch(e => { b.textContent = 'Не вдалося: ' + (e && e.message || e); }); }
+// ----- миша / палець -----
+function plPt(e) { const svg = $('plSvg'), p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+function plGap(it) { const b = plBox(it), p = PLROOM[PLS]; let best = Math.min(b.x1, b.y1, p.W - b.x2, p.H - b.y2);
+  plItems().forEach(o => { if (o === it || (it.g && (o.g === it.g || o.id === it.g)) || o.g === it.id) return; const c = plBox(o);
+    const dx = Math.max(0, c.x1 - b.x2, b.x1 - c.x2), dy = Math.max(0, c.y1 - b.y2, b.y1 - c.y2); if (dx > 0 && dy > 0) return; best = Math.min(best, Math.max(dx, dy)); });
+  return best; }
+let PLDRAG = null;
+function plBind() {
+  const svg = $('plSvg');
+  svg.addEventListener('pointerdown', e => { const g = e.target.closest('.it'); plClosePop(); if (!g) { if (PLSEL) { PLSEL = null; plDraw(); } return; }
+    const it = plItems().find(x => x.id === g.dataset.id); if (!it) return;
+    if (e.shiftKey || e.ctrlKey || e.metaKey) { PLMS.has(it.id) ? PLMS.delete(it.id) : PLMS.add(it.id); if (PLSEL) { PLMS.add(PLSEL); PLSEL = null; } plDraw(); return; }
+    PLMS.clear(); PLSEL = it.id; const p0 = plPt(e), grp = plItems().filter(x => x.g === it.id);
+    PLDRAG = {it, ox: p0.x - it.x, oy: p0.y - it.y, grp: grp.map(c => ({c, dx: c.x - it.x, dy: c.y - it.y})), moved: false, sx: e.clientX, sy: e.clientY};
+    try { svg.setPointerCapture(e.pointerId); } catch (x) {} plDraw(); });
+  svg.addEventListener('pointermove', e => { const d = PLDRAG; if (!d) return; if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 5) d.moved = true; if (!d.moved) return;
+    const p = plPt(e), it = d.it, P = PLROOM[PLS]; it.x = Math.max(0, Math.min(P.W, Math.round((p.x - d.ox) / 5) * 5)); it.y = Math.max(0, Math.min(P.H, Math.round((p.y - d.oy) / 5) * 5));
+    d.grp.forEach(g => { g.c.x = it.x + g.dx; g.c.y = it.y + g.dy; }); plDraw();
+    const gp = plGap(it), lb = $('plGap'), br = $('plBoard').getBoundingClientRect(); lb.hidden = false; lb.className = 'pl-gap' + (gp < 80 ? ' bad' : '');
+    lb.textContent = gp <= 0 ? 'накладається на інші меблі' : gp > 900 ? 'вільно' : 'прохід ' + Math.round(gp) + ' см' + (gp < 80 ? ' — замало' : ''); lb.style.left = (e.clientX - br.left + 14) + 'px'; lb.style.top = (e.clientY - br.top - 34) + 'px'; });
+  const up = e => { const d = PLDRAG; if (!d) return; PLDRAG = null; $('plGap').hidden = true; if (d.moved) plQueue([d.it].concat(d.grp.map(g => g.c))); else plPop(d.it, e); };
+  svg.addEventListener('pointerup', up); svg.addEventListener('pointercancel', up);
+  // перетягування зі списку
+  $('plList').addEventListener('pointerdown', e => { const r = e.target.closest('.pl-it'); if (!r) return; e.preventDefault(); const a = r.dataset.a, fromSk = PLSRC === 'sk';
+    const ghost = document.createElement('div'); ghost.className = 'pl-gap pl-ghost'; ghost.textContent = '＋ ' + shortName((D.items[a] || {}).n || a); document.body.appendChild(ghost);
+    const mv = ev => { ghost.style.left = ev.clientX + 10 + 'px'; ghost.style.top = ev.clientY + 10 + 'px'; };
+    const fin = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', fin); ghost.remove();
+      const wr = $('plWrap').getBoundingClientRect(); if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) return;
+      const inHall = plStock().hall.some(x => x[0] === a), mvIt = fromSk && !inHall;                     // якщо такий самий є в залі — ставимо з залу, без переміщення
+      const p = plPt(ev), sh = plShape(a), it = {id: plUid(), a, k: sh.k, w: sh.w, h: sh.h, x: Math.round(p.x / 5) * 5, y: Math.round(p.y / 5) * 5, r: 0, g: '', mv: mvIt ? 1 : 0};
+      plItems().push(it); PLSEL = it.id; plQueue([it]);
+      if (mvIt) mtWrite({a: 'add', w: iso(monday(ASOF)), t: 'Привезти зі складу в ' + stName(PLSI()) + ': ' + ((D.items[a] || {}).n || a) + ' — поставити на позначене місце', r: '', d: iso(addD(ASOF, 3)), st: PLS, it: it.id, art: a});
+      plList(); plDraw(); };
+    mv(e); document.addEventListener('pointermove', mv); document.addEventListener('pointerup', fin); });
+}
+function plClosePop() { const p = $('plPop'); if (p) p.hidden = true; }
+function plPop(i, e) {
+  const pp = $('plPop'), br = $('plBoard').getBoundingClientRect(), it = D.items[i.a] || {}, si = PLSI(), dep = DEPS[si], M = plMeta(), h = M.H[i.a], ST = plStock();
+  const kids = plItems().filter(x => x.g === i.id), sold = ST.sold.has(i.id), ds = daysSince(h && h.last);
+  const chairs = /^t/.test(i.k) ? ST.hall.concat(ST.sk.map(x => [x[0], x[1], 1])).filter(x => plShape(x[0]).k === 'ch').slice(0, 4) : [];
+  pp.innerHTML = '<div><h4>' + esc(it.n || i.a) + '</h4><div class="sub">' + esc(i.a) + (kids.length ? ' · комплект: ' + (kids.length + 1) + ' предм.' : '') + '</div></div>' +
+    (sold ? '<div class="kv bad"><b>Продано</b>на плані більше, ніж є в залі — місце порожнє, поставте інше або приберіть</div>' : '') + (i.mv ? '<div class="kv yel"><b>Чекає переміщення зі складу</b>задача створена</div>' : '') +
+    '<div class="row2"><div class="kv">У залі<b>' + ((si ? it.s2 : it.s1) || 0) + ' шт</b></div><div class="kv">На складі<b>' + (it.sk || 0) + ' шт</b></div><div class="kv">Продано тут за 30 дн<b>' + (M.s30[i.a] || 0) + ' шт</b></div><div class="kv">Останній продаж тут<b>' + (h && h.last ? ds + ' дн тому' : 'не було') + '</b></div></div>' +
+    '<div class="pl-size">Розмір, см <input id="plW" type="number" min="20" max="400" value="' + i.w + '"> × <input id="plH" type="number" min="20" max="300" value="' + i.h + '"></div>' +
+    (chairs.length ? '<div class="sub">Поставити стільці до стола:</div><div class="acts">' + chairs.map(x => '<button data-ch="' + esc(x[0]) + '|' + (x[2] ? 1 : 0) + '">' + esc(plShort((D.items[x[0]] || {}).n || x[0])) + ' · ' + x[1] + (x[2] ? ' склад' : ' зал') + '</button>').join('') + '</div>' : '') +
+    '<div class="acts"><button data-a="rot">↻ Повернути</button>' + (kids.length ? '<button data-a="ungrp">Розгрупувати</button>' : '') + (i.g ? '<button data-a="leave">Вийти з комплекту</button>' : '') + '<button data-a="off">Прибрати з плану</button><button class="y" data-a="task">+ Задача</button></div>';
+  pp.hidden = false; pp.style.left = Math.min(br.width - 270, Math.max(8, e.clientX - br.left + 12)) + 'px'; pp.style.top = Math.max(48, Math.min(e.clientY - br.top - 20, br.height - pp.offsetHeight - 8)) + 'px';
+  const resize = () => { const w = Math.max(20, +$('plW').value || i.w), hh = Math.max(20, +$('plH').value || i.h); if (w !== i.w || hh !== i.h) { i.w = w; i.h = hh; plQueue([i]); plDraw(); } };
+  $('plW').onchange = resize; $('plH').onchange = resize;
+  pp.onclick = ev => { const b = ev.target.closest('[data-a],[data-ch]'); if (!b) return; const L = plItems();
+    if (b.dataset.ch) { const [a, sk] = b.dataset.ch.split('|'), src = (sk === '1' ? ST.sk : ST.hall).find(x => x[0] === a), n = Math.min(src ? src[1] : 0, i.w >= 200 ? 6 : i.w >= 140 ? 4 : 2), S = plSz(i), per = Math.ceil(n / 2), add = [];
+      for (let k = 0; k < n; k++) { const top = k < per, c = top ? per : n - per, j = top ? k : k - per;
+        add.push({id: plUid(), a, k: 'ch', w: 46, h: 52, x: Math.round(i.x - S.w / 2 + S.w * (j + .5) / c), y: Math.round(top ? i.y - S.h / 2 - 22 : i.y + S.h / 2 + 22), r: top ? 0 : 180, g: i.id, mv: sk === '1' ? 1 : 0}); }
+      L.push(...add); plQueue(add);
+      if (sk === '1' && add.length) mtWrite({a: 'add', w: iso(monday(ASOF)), t: 'Привезти зі складу в ' + stName(si) + ': ' + ((D.items[a] || {}).n || a) + ' × ' + add.length + ' — до стола ' + plShort(it.n || i.a), r: '', d: iso(addD(ASOF, 3)), st: PLS, it: i.id, art: a});
+      plClosePop(); plList(); plDraw(); return; }
+    const act = b.dataset.a;
+    if (act === 'rot') { i.r = (i.r + 90) % 360; kids.forEach(c => { const dx = c.x - i.x, dy = c.y - i.y; c.x = i.x - dy; c.y = i.y + dx; c.r = (c.r + 90) % 360; }); plQueue([i].concat(kids)); }
+    if (act === 'ungrp') { kids.forEach(c => { c.g = ''; }); plQueue(kids); }
+    if (act === 'leave') { i.g = ''; plQueue([i]); }
+    if (act === 'off') { const gone = [i]; PLAN[PLS] = L.filter(x => x !== i); kids.forEach(c => { c.g = ''; }); plQueue(kids, gone); plClosePop(); PLSEL = null; plList(); }
+    if (act === 'task') { PLFORM = i; $('plTf').hidden = false; $('plTfFor').textContent = '📍 ' + (it.n || i.a); $('plTt').value = sold ? 'Поставити новий товар на місце проданого: ' + (it.n || i.a) : 'Переставити ' + (it.n || i.a) + ' '; $('plTd').value = iso(addD(ASOF, 3)); $('plTt').focus(); plClosePop(); }
+    plDraw(); };
 }
 // ===== КАТАЛОГ VETRO і ДОВІДКА (дані — окремим запитом, лише коли їх відкрили) =====
 let CAT = null, CATP = null, CATV = -1;
@@ -2695,7 +3216,8 @@ const HINT_H3 = {'Продажі': 'ov.sales', 'Відділи': 'ov.deps', 'Т�
   'Продажі магазину': 'st.sales', 'Менеджери магазину': 'st.mgr', 'Порівняння: місяць тому і рік тому': 'st.weeks', 'Топ магазину': 'st.top', 'Матриця в цьому залі': 'st.mx', 'Що перемістити': 'st.move', 'Залишок у залі': 'st.stock', '💤 Застій у залі': 'st.stale', 'Новинки й акції в залі': 'st.new',
   'Курси Vetro': 'buy.rates', '⏳ Новинки ще без продажів': 'as.nos', 'Продажі двох магазинів': 'rt.sales', 'Менеджери роздробу': 'rt.mgr', 'Порівняння магазинів: місяць тому і рік тому': 'rt.cmp',
   'Матриця в обох залах': 'rt.mx', 'Усі переміщення': 'rt.move', 'Залишок і застій у залах': 'rt.stock', 'Продається в одному, а в іншому немає': 'rt.opp',
-  'Головне за тиждень': 'mt.ins', 'Як було': 'mt.cmp', 'Календар тижня': 'mt.cal', 'Менеджери тижня': 'mt.mgr', 'Топ позицій тижня': 'mt.top', 'Замовлення тижня': 'mt.ord', 'Що вирішити на зборах': 'mt.ops', 'Задачі зборів': 'mt.tasks'};
+  'Головне за тиждень': 'mt.ins', 'Як було': 'mt.cmp', 'Календар тижня': 'mt.cal', 'Менеджери тижня': 'mt.mgr', 'Топ позицій тижня': 'mt.top', 'Замовлення тижня': 'mt.ord', 'Що вирішити на зборах': 'mt.ops', 'Задачі зборів': 'mt.tasks',
+  'Рух по місяцях': 'ruh.m', 'Рух по категоріях': 'ruh.cat', 'Рух по позиціях': 'ruh.pos', 'Партії: надходження до Vetro': 'ruh.bat', 'Наявність по місяцях': 'ruh.mx', 'Задачі залу': 'plan.tasks'};
 function addHints() {
   const put = (el, key) => { if (el && !el.querySelector('.hq')) el.insertAdjacentHTML('beforeend', '<button class="hq" data-hq="' + key + '" aria-label="Що це?">?</button>'); };
   HINTS.forEach(([sel, key]) => put(document.querySelector(sel), key));
@@ -2760,7 +3282,7 @@ document.addEventListener('change', e => { if (e.target.id === 'cvSort') { CF.so
 // ===== оболонка: меню, періоди, вкладки =====
 const MODES = [['day','Сьогодні'],['week','Тиждень'],['month','Місяць'],['year','Рік'],['all','Весь час'],['custom','Період']];
 const navBtn = t => '<button class="nav" role="tab" data-t="' + t[0] + '" aria-selected="false">' + ic(t[0]) + esc(t[1]) + '</button>';
-const STORES = ['retail', 's1', 's2'];
+const STORES = ['retail', 's1', 's2', 'plan'];
 function buildNav() {
   $('tabs').innerHTML = '<div class="logo">' + LOGO + '<span>VETRO у D2</span></div>' + TABS.filter(t => NAVMAIN.includes(t[0])).map(navBtn).join('') +
     '<div class="navsep">Магазини</div>' + TABS.filter(t => STORES.includes(t[0])).map(navBtn).join('') +
@@ -2789,12 +3311,12 @@ function render() {
   const moreSel = !TBAR.includes(tab); document.querySelector('#tabbar [data-more]').setAttribute('aria-selected', moreSel);
   const sec = tab === 's1' || tab === 's2' ? 'store' : tab;
   document.querySelectorAll('main section[data-p]').forEach(s => s.hidden = s.dataset.p !== sec);
-  $('periodBox').hidden = tab === 'meet' || tab === 'matrix' || tab === 'assort' || tab === 'catalog' || tab === 'help';
+  $('periodBox').hidden = tab === 'plan' || tab === 'ruh' || tab === 'meet' || tab === 'matrix' || tab === 'assort' || tab === 'catalog' || tab === 'help';
   // вкладка перемальовується лише тоді, коли змінився період або дані — перемикання між вкладками миттєве
   const key = [VER, mode, offset, cFrom && +cFrom, cTo && +cTo, document.documentElement.className].join('|');
   if (LAST[tab] !== key) {
     LAST[tab] = key;
-    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp, meet: renderMeet, retail: renderRetail, s1: P0 => renderStore(0, P0), s2: P0 => renderStore(1, P0)})[tab](P);
+    ({overview: renderOverview, people: renderPeople, cats: renderCats, buy: renderBuy, promo: renderPromo, assort: renderAssort, matrix: renderMatrix, catalog: renderCatalog, help: renderHelp, meet: renderMeet, ruh: renderRuh, plan: renderPlan, retail: renderRetail, s1: P0 => renderStore(0, P0), s2: P0 => renderStore(1, P0)})[tab](P);
     // обидва магазини малюються в одне місце: після одного інший треба перемалювати, інакше покаже чужі дані
     if (sec === 'store') LAST[tab === 's1' ? 's2' : 's1'] = null;
   }
